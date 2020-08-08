@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftUIFlux
 
 @main
 struct timetrackerApp: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        store.dispatch(action: InitFlux())
+        return WindowGroup {
+            StoreProvider(store: store) {
+                ContentView()
+            }
         }
     }
 }
