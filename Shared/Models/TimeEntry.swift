@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct TimeEntry: Identifiable {
+struct TimeEntry: Identifiable, Hashable {
     private (set) var id = UUID()
-    private (set) var start: Date
-    private (set) var end: Date?
+    var start: Date
+    var end: Date?
 
     init(start: Date = Date(timeIntervalSinceNow: 0), end: Date? = nil) {
         self.start = start

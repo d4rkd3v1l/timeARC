@@ -24,19 +24,11 @@ struct TimerView: ConnectedView {
         VStack {
             Spacer()
             Spacer()
-            ZStack {
-                ArcView(color: Color.accentColor, progress: (Double(self.duration) / Double(28800)))
-                Text("\(self.duration / 288)%")
-                    .font(.system(size: 60)).bold()
-
-                Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
-                    .font(.system(size: 28)).bold()
-                    .offset(x: 0, y: 100)
-            }
-            .frame(width: 250, height: 250)
-            .onReceive(self.timer) { _ in
-                self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
-            }
+            ArcViewFull(duration: self.$duration)
+                .frame(width: 250, height: 250)
+                .onReceive(self.timer) { _ in
+                    self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
+                }
             Spacer()
             Button(action: {
                 store.dispatch(action: ToggleTimer())
@@ -50,6 +42,24 @@ struct TimerView: ConnectedView {
             }
             Spacer()
             Spacer()
+        }
+    }
+}
+
+struct ArcViewFull: View {
+    @Binding var duration: Int
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                ArcView(color: Color.accentColor, progress: (Double(self.duration) / Double(28800)))
+                Text("\(self.duration / 288)%")
+                    .font(.system(size: geometry.size.width / 4)).bold()
+
+                Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
+                    .font(.system(size: geometry.size.width / 9)).bold()
+                    .offset(x: 0, y: geometry.size.height / 2.5)
+            }
         }
     }
 }

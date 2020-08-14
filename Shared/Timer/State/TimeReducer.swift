@@ -12,18 +12,31 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
 
     switch action {
     case _ as ToggleTimer:
-        var stoppedTimer = false
+        var didStopTimer = false
         for index in 0..<state.timeEntries.count {
             if state.timeEntries[index].isRunning {
                 state.timeEntries[index].stop()
-                stoppedTimer = true
+                didStopTimer = true
                 break
             }
         }
 
-        if !stoppedTimer {
+        if !didStopTimer {
             state.timeEntries.append(TimeEntry())
         }
+
+    case let action as AddTimeEntry:
+        let entry = TimeEntry(start: action.start, end: action.end)
+        state.timeEntries.append(entry)
+
+    case let action as UpdateTimeEntry:
+        guard let index = state.timeEntries.firstIndex(where: { $0.id == action.id }) else { break }
+        state.timeEntries[index].start = action.start
+        state.timeEntries[index].end = action.end
+
+    case let action as DeleteTimeEntry:
+        guard let index = state.timeEntries.firstIndex(where: { $0.id == action.id }) else { break }
+        state.timeEntries.remove(at: index)
 
     default:
         break

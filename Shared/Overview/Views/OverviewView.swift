@@ -39,7 +39,7 @@ struct OverviewView: ConnectedView {
                                 .font(.system(size: 18)).bold()
                                 .foregroundColor(.black)
 
-                            Text("\(Int.random(in: -10...30))")
+                            Text("\(Int(props.timeEntries.totalDurationInSeconds(on: date)) / 3600 - 480)")
                                 .font(.system(size: 10)).bold()
                                 .foregroundColor(Color.accentColor)
                                 .offset(x: 0, y: 17)
