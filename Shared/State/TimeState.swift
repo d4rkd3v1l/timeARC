@@ -5,9 +5,8 @@
 //  Created by d4Rk on 20.07.20.
 //
 
-import Foundation
 import SwiftUIFlux
 
-struct TimeState: FluxState {
+struct TimeState: FluxState, Codable {
     var timeEntries: [TimeEntry] = []
 }

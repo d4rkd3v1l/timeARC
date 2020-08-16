@@ -7,26 +7,31 @@
 
 import WidgetKit
 import SwiftUI
-import Intents
 
-struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+struct Provider: TimelineProvider {
+    func placeholder(in context: Context) -> WidgetEntry {
+        WidgetEntry(date: Date(),
+                    timeEntries: [],
+                    workingHoursPerDay: 8)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+    func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> ()) {
+        let entry = WidgetEntry(date: Date(),
+                                timeEntries: [],
+                                workingHoursPerDay: 8)
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        var entries: [WidgetEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
+            let entry = WidgetEntry(date: entryDate,
+                                    timeEntries: [],
+                                    workingHoursPerDay: 8)
             entries.append(entry)
         }
 
@@ -35,35 +40,81 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationIntent
+struct WidgetEntry: TimelineEntry {
+    var date: Date
+
+    let timeEntries: [TimeEntry]
+    let workingHoursPerDay: Int
 }
 
-struct widgetEntryView : View {
-    var entry: Provider.Entry
+struct WidgetEntryView: View {
+    @Environment(\.widgetFamily) private var widgetFamily
+
+    var entry: WidgetEntry
+    @State var duration: Int = 0
+    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
 
     var body: some View {
-        Text(entry.date, style: .time)
+        switch self.widgetFamily {
+        case .systemSmall:
+            ArcViewFull(duration: self.$duration, workingHoursPerDay: self.entry.workingHoursPerDay)
+            .padding(20)
+            .onReceive(self.timer) { _ in
+                self.duration = self.entry.timeEntries.totalDurationInSeconds(on: Date())
+            }
+
+        case .systemMedium:
+            Text("Medium")
+
+        case .systemLarge:
+            Text("Large")
+
+        @unknown default:
+            fatalError()
+        }
     }
 }
 
 @main
-struct widget: Widget {
+struct TimerWidget: Widget {
     let kind: String = "widget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            widgetEntryView(entry: entry)
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            WidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName(LocalizedStringKey("TimeTracker"))
+        .description(LocalizedStringKey("Have your time tracker always in sight."))
+//        .supportedFamilies([.systemSmall])
     }
 }
 
-struct widget_Previews: PreviewProvider {
+struct widgetSmall_Previews: PreviewProvider {
     static var previews: some View {
-        widgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        let entry = WidgetEntry(date: Date(),
+                                timeEntries: [],
+                                workingHoursPerDay: 8)
+        WidgetEntryView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+
+struct widgetMedium_Previews: PreviewProvider {
+    static var previews: some View {
+        let entry = WidgetEntry(date: Date(),
+                                timeEntries: [],
+                                workingHoursPerDay: 8)
+        WidgetEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+    }
+}
+
+struct widgetLarge_Previews: PreviewProvider {
+    static var previews: some View {
+        let entry = WidgetEntry(date: Date(),
+                                timeEntries: [],
+                                workingHoursPerDay: 8)
+        WidgetEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

@@ -9,10 +9,7 @@ import SwiftUI
 
 struct PlaygroundView: View {
     var body: some View {
-        Text("Hello, world!")
-            .popover(isPresented: .constant(true), content: {
-                Text("bla")
-            })
+        Text(Date().addingTimeInterval(-100), style: .timer)
     }
 }
 

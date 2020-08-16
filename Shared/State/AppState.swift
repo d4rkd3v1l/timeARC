@@ -11,13 +11,13 @@ import SwiftUIFlux
 // MARK: - Store
 
 let store = Store<AppState>(reducer: appStateReducer,
-                            middleware: [timeMiddleware],
+                            middleware: [globalMiddleware],
                             state: AppState())
 struct InitFlux: Action {}
 
 // MARK: - AppState
 
-struct AppState: FluxState {
+struct AppState: FluxState, Codable {
     var timeState: TimeState = TimeState()
     var settingsState: SettingsState = SettingsState()
 }

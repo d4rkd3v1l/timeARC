@@ -48,25 +48,6 @@ struct TimerView: ConnectedView {
     }
 }
 
-struct ArcViewFull: View {
-    @Binding var duration: Int
-    var workingHoursPerDay: Int
-
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ArcView(color: Color.accentColor, progress: (Double(self.duration) / Double(self.workingHoursPerDay * 3600)))
-                Text("\(self.duration / (self.workingHoursPerDay * 36))%")
-                    .font(.system(size: geometry.size.width / 4)).bold()
-
-                Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
-                    .font(.system(size: geometry.size.width / 9)).bold()
-                    .offset(x: 0, y: geometry.size.height / 2.5)
-            }
-        }
-    }
-}
-
 // MARK: - Preview
 
 struct TimerView_Previews: PreviewProvider {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimeEntry: Identifiable, Hashable {
+struct TimeEntry: Identifiable, Hashable, Codable {
     private (set) var id = UUID()
     var start: Date
     var end: Date?

@@ -26,8 +26,6 @@ struct EntryDetailsView: ConnectedView {
     @State var duration: Int = 0
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
 
-    @State var bla: String = "blub"
-
     func body(props: Props) -> some View {
         VStack {
             Spacer(minLength: 30)

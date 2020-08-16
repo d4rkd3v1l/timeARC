@@ -7,7 +7,7 @@
 
 import SwiftUIFlux
 
-struct SettingsState: FluxState {
+struct SettingsState: FluxState, Codable {
     var workingWeekDays: [WeekDay] = [.monday,
                                       .tuesday,
                                       .wednesday,
