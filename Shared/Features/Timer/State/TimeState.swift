@@ -9,5 +9,5 @@ import Foundation
 import SwiftUIFlux
 
 struct TimeState: FluxState {
-    var timeEntries: [TimeEntry] = [TimeEntry(start: Date(timeIntervalSinceNow: -20000), end: nil)]
+    var timeEntries: [TimeEntry] = []
 }

@@ -11,26 +11,32 @@ import SwiftUIFlux
 struct EntryDetailsView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
+        let workingHoursPerDay: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: state.timeState.timeEntries.filter({ timeEntry in
-            timeEntry.isRelevant(for: self.selectedDate)
-        }))
+        return Props(timeEntries: state.timeState.timeEntries
+                        .filter { $0.isRelevant(for: self.selectedDate) }
+                        .sorted(by: { $0.start < $1.start }),
+                     workingHoursPerDay: state.settingsState.workingHoursPerDay
+        )
     }
-    
+
     @State var selectedDate: Date
     @State var duration: Int = 0
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
-    
+
+    @State var bla: String = "blub"
+
     func body(props: Props) -> some View {
         VStack {
-            ArcViewFull(duration: self.$duration)
+            Spacer(minLength: 30)
+            ArcViewFull(duration: self.$duration, workingHoursPerDay: props.workingHoursPerDay)
                 .frame(width: 200, height: 200)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: self.selectedDate)
                 }
-                .padding(.vertical, 30)
+            Spacer(minLength: 30)
             Form {
                 ForEach(props.timeEntries, id: \.self) { timeEntry in
                     HStack {
@@ -85,6 +91,7 @@ struct TimeEntryPicker: View {
         if let rangeFrom = self.rangeFrom {
             DatePicker("", selection: self.$selection, in: rangeFrom, displayedComponents: .hourAndMinute)
                 .onChange(of: self.selection) { self.onChange?($0) }
+
         } else if let rangeThrough = self.rangeThrough {
             DatePicker("", selection: self.$selection, in: rangeThrough, displayedComponents: .hourAndMinute)
                 .onChange(of: self.selection) { self.onChange?($0) }
@@ -104,4 +111,3 @@ struct EntryDetailsView_Previews: PreviewProvider {
         }
     }
 }
-

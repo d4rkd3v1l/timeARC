@@ -11,10 +11,12 @@ import SwiftUIFlux
 struct TimerView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
+        let workingHoursPerDay: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: state.timeState.timeEntries)
+        return Props(timeEntries: state.timeState.timeEntries,
+                     workingHoursPerDay: state.settingsState.workingHoursPerDay)
     }
 
     @State var duration: Int = 0
@@ -24,7 +26,7 @@ struct TimerView: ConnectedView {
         VStack {
             Spacer()
             Spacer()
-            ArcViewFull(duration: self.$duration)
+            ArcViewFull(duration: self.$duration, workingHoursPerDay: props.workingHoursPerDay)
                 .frame(width: 250, height: 250)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
@@ -48,12 +50,13 @@ struct TimerView: ConnectedView {
 
 struct ArcViewFull: View {
     @Binding var duration: Int
+    var workingHoursPerDay: Int
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ArcView(color: Color.accentColor, progress: (Double(self.duration) / Double(28800)))
-                Text("\(self.duration / 288)%")
+                ArcView(color: Color.accentColor, progress: (Double(self.duration) / Double(self.workingHoursPerDay * 3600)))
+                Text("\(self.duration / (self.workingHoursPerDay * 36))%")
                     .font(.system(size: geometry.size.width / 4)).bold()
 
                 Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
