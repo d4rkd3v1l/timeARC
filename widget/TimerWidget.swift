@@ -34,7 +34,7 @@ struct Provider: TimelineProvider {
 
         if isRunning {
             var entries: [WidgetEntry] = []
-            for index in 0..<1440 { // 24h should be sufficient?! -> check if policy acutally works, then this time could be reduced
+            for index in 0..<1440 { // 24h should be sufficient?! -> check if Timeline.policy acutally works, then this time could be reduced. Trigger first update now, and every following one to the full minute? This would increase precision between Widget and App.
                 let nextMinute = index * 60
                 let entry = WidgetEntry(date: Date().addingTimeInterval(TimeInterval(nextMinute)),
                                         duration: duration + nextMinute,

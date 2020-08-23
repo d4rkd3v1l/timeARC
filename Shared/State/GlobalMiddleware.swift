@@ -11,7 +11,11 @@ import SwiftUIFlux
 let globalMiddleware: Middleware<AppState> = { dispatch, getState in
     return { next in
         return { action in
-            return next(action)
+            next(action)
+
+            if let state = getState() as? AppState {
+                saveAppState(state) // TODO: optimize, don't do this for any action?
+            }
         }
     }
 }
