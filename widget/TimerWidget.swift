@@ -26,11 +26,11 @@ struct Provider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         guard let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker"),
-              let decodedState = userDefaults.data(forKey: "appState"),
-              let appState = try? JSONDecoder().decode(AppState.self, from: decodedState) else { return }
+              let decodedWidgetData = userDefaults.data(forKey: "widgetData"),
+              let widgetData = try? JSONDecoder().decode(WidgetData.self, from: decodedWidgetData) else { return }
 
-        let isRunning = appState.timeState.timeEntries.contains(where: { $0.end == nil })
-        let duration = appState.timeState.timeEntries.totalDurationInSeconds(on: Date())
+        let isRunning = widgetData.timeEntries.contains(where: { $0.end == nil })
+        let duration = widgetData.timeEntries.totalDurationInSeconds(on: Date())
 
         if isRunning {
             var entries: [WidgetEntry] = []
@@ -38,7 +38,7 @@ struct Provider: TimelineProvider {
                 let nextMinute = index * 60
                 let entry = WidgetEntry(date: Date().addingTimeInterval(TimeInterval(nextMinute)),
                                         duration: duration + nextMinute,
-                                        maxDuration: appState.settingsState.workingHoursPerDay * 3600,
+                                        maxDuration: widgetData.workingHoursPerDay * 3600,
                                         isRunning: true)
                 entries.append(entry)
             }
@@ -48,7 +48,7 @@ struct Provider: TimelineProvider {
         } else {
             let entry = WidgetEntry(date: Date(),
                                     duration: duration,
-                                    maxDuration: appState.settingsState.workingHoursPerDay * 3600,
+                                    maxDuration: widgetData.workingHoursPerDay * 3600,
                                     isRunning: false)
 
             let timeline = Timeline(entries: [entry], policy: .never)

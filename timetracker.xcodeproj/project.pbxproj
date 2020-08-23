@@ -18,7 +18,6 @@
 		8121750E24C54DDA00A2983B /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750D24C54DDA00A2983B /* Date+.swift */; };
 		8121750F24C54DDA00A2983B /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750D24C54DDA00A2983B /* Date+.swift */; };
 		8126A27224E967650038A4C0 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA994124E6CECA000457CE /* WeekDay.swift */; };
-		8126A27324E967650038A4C0 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA994124E6CECA000457CE /* WeekDay.swift */; };
 		8126A27624E968700038A4C0 /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993A24E6CC8F000457CE /* SettingsActions.swift */; };
 		8126A27724E968700038A4C0 /* TimeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC54E24C6031F00245E73 /* TimeState.swift */; };
 		8126A27824E968700038A4C0 /* TimeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55124C6032700245E73 /* TimeReducer.swift */; };
@@ -30,14 +29,6 @@
 		8126A27E24E969F60038A4C0 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
 		8126A27F24E969F60038A4C0 /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDD0224E81FEE000164FE /* DateTextField.swift */; };
 		8126A28324E997D90038A4C0 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8126A28224E997D90038A4C0 /* SwiftUIFlux */; };
-		8126A28424E998D40038A4C0 /* TimeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC54E24C6031F00245E73 /* TimeState.swift */; };
-		8126A28524E998D40038A4C0 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108114524C2ED2A005D7C85 /* AppState.swift */; };
-		8126A28624E998D40038A4C0 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993624E6CC81000457CE /* SettingsState.swift */; };
-		8126A28724E999CB0038A4C0 /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993A24E6CC8F000457CE /* SettingsActions.swift */; };
-		8126A28824E999CB0038A4C0 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993824E6CC88000457CE /* SettingsReducer.swift */; };
-		8126A28924E999CB0038A4C0 /* TimeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55124C6032700245E73 /* TimeReducer.swift */; };
-		8126A28A24E999CB0038A4C0 /* GlobalMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55724C6036700245E73 /* GlobalMiddleware.swift */; };
-		8126A28B24E999CB0038A4C0 /* TimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55424C6032F00245E73 /* TimeActions.swift */; };
 		812FDD0324E81FEE000164FE /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDD0224E81FEE000164FE /* DateTextField.swift */; };
 		8163530924E8FAD7003BC688 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816352F024E8F8FA003BC688 /* WidgetKit.framework */; };
 		8163530A24E8FAD7003BC688 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816352F224E8F8FA003BC688 /* SwiftUI.framework */; };
@@ -49,6 +40,8 @@
 		8163531C24E8FCD3003BC688 /* TimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC53C24C55BFF00245E73 /* TimeEntry.swift */; };
 		816833E124C821A400DE7CCC /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816833E024C821A400DE7CCC /* Calendar.swift */; };
 		81A3DD2A24C77FBF00D992E2 /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DD2924C77FBF00D992E2 /* EntryDetailsView.swift */; };
+		81C057CA24F29B2B0010DAA1 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057C924F29B2B0010DAA1 /* WidgetData.swift */; };
+		81C057CB24F29B350010DAA1 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057C924F29B2B0010DAA1 /* WidgetData.swift */; };
 		81DD520424C2F3A40039C792 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 81DD520324C2F3A40039C792 /* SwiftUIFlux */; };
 		81EA993724E6CC81000457CE /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993624E6CC81000457CE /* SettingsState.swift */; };
 		81EA993924E6CC88000457CE /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993824E6CC88000457CE /* SettingsReducer.swift */; };
@@ -141,6 +134,7 @@
 		8163531724E8FAFB003BC688 /* TimerWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWidget.swift; sourceTree = "<group>"; };
 		816833E024C821A400DE7CCC /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		81A3DD2924C77FBF00D992E2 /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
+		81C057C924F29B2B0010DAA1 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
 		81EA993624E6CC81000457CE /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
 		81EA993824E6CC88000457CE /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
 		81EA993A24E6CC8F000457CE /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
@@ -339,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				8163531724E8FAFB003BC688 /* TimerWidget.swift */,
+				81C057C924F29B2B0010DAA1 /* WidgetData.swift */,
 				8163530E24E8FAD8003BC688 /* Assets.xcassets */,
 				8163531024E8FAD8003BC688 /* Info.plist */,
 			);
@@ -621,6 +616,7 @@
 				81EFC55824C6036700245E73 /* GlobalMiddleware.swift in Sources */,
 				81EFC54524C58E7A00245E73 /* TimerView.swift in Sources */,
 				81FA384124C83522004AF914 /* Playground.swift in Sources */,
+				81C057CA24F29B2B0010DAA1 /* WidgetData.swift in Sources */,
 				81EFC53D24C55BFF00245E73 /* TimeEntry.swift in Sources */,
 				812FDD0324E81FEE000164FE /* DateTextField.swift in Sources */,
 				81FA384424C87CCC004AF914 /* ArcView.swift in Sources */,
@@ -683,19 +679,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8126A28A24E999CB0038A4C0 /* GlobalMiddleware.swift in Sources */,
-				8126A28724E999CB0038A4C0 /* SettingsActions.swift in Sources */,
-				8126A28924E999CB0038A4C0 /* TimeReducer.swift in Sources */,
-				8126A28624E998D40038A4C0 /* SettingsState.swift in Sources */,
+				81C057CB24F29B350010DAA1 /* WidgetData.swift in Sources */,
 				8163531B24E8FCC5003BC688 /* Date+.swift in Sources */,
 				8163531824E8FAFB003BC688 /* TimerWidget.swift in Sources */,
-				8126A28524E998D40038A4C0 /* AppState.swift in Sources */,
-				8126A28424E998D40038A4C0 /* TimeState.swift in Sources */,
-				8126A27324E967650038A4C0 /* WeekDay.swift in Sources */,
 				8163531924E8FBE7003BC688 /* ArcView.swift in Sources */,
 				8163531C24E8FCD3003BC688 /* TimeEntry.swift in Sources */,
-				8126A28824E999CB0038A4C0 /* SettingsReducer.swift in Sources */,
-				8126A28B24E999CB0038A4C0 /* TimeActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

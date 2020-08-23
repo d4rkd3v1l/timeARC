@@ -9,7 +9,6 @@ import UIKit
 import SwiftUI
 
 // https://diamantidis.github.io/2020/06/21/keyboard-options-for-swiftui-fields
-
 class DateTextField: UITextField {
     // MARK: - Public properties
     @Binding var date: Date?

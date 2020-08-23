@@ -50,27 +50,18 @@ struct ArcViewFull: View {
     var maxDuration: Int
     var color: Color = Color.accentColor
     var allowedUnits: NSCalendar.Unit = [.hour, .minute, .second]
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 ArcView(color: self.color, progress: (Double(self.duration) / Double(self.maxDuration)))
-
+                
                 Text("\(Int(Double(self.duration) / Double(self.maxDuration) * 100.0))%")
                     .font(.system(size: geometry.size.width / 4)).bold()
-
-//                HStack(spacing: geometry.size.width / 50) {
-//                    Text("•")
-//                        .font(.system(size: geometry.size.width / 5)).bold()
-//                        .foregroundColor(self.isRunning ? .accentColor : .gray)
-//                        .alignmentGuide(VerticalAlignment.center, computeValue: { dimension in
-//                            return dimension[VerticalAlignment.center] + geometry.size.width / 100
-//                        })
-
-                    Text(self.duration.formatted(allowedUnits: self.allowedUnits) ?? "")
-                        .font(.system(size: geometry.size.width / 9)).bold()
-//                }
-                .offset(x: 0, y: geometry.size.height / 2.5)
+                
+                Text(self.duration.formatted(allowedUnits: self.allowedUnits) ?? "")
+                    .font(.system(size: geometry.size.width / 9)).bold()
+                    .offset(x: 0, y: geometry.size.height / 2.5)
             }
         }
     }
