@@ -11,14 +11,16 @@ import WidgetKit
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> WidgetEntry {
         WidgetEntry(date: Date(),
-                    timeEntries: [],
-                    workingHoursPerDay: 8)
+                    duration: 2520,
+                    maxDuration: 28800,
+                    isRunning: true)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> ()) {
         let entry = WidgetEntry(date: Date(),
-                                timeEntries: [],
-                                workingHoursPerDay: 8)
+                                duration: 2520,
+                                maxDuration: 28800,
+                                isRunning: true)
         completion(entry)
     }
 
@@ -27,38 +29,55 @@ struct Provider: TimelineProvider {
               let decodedState = userDefaults.data(forKey: "appState"),
               let appState = try? JSONDecoder().decode(AppState.self, from: decodedState) else { return }
 
-        let widgetEntry = WidgetEntry(date: Date(),
-                                      timeEntries: appState.timeState.timeEntries,
-                                      workingHoursPerDay: appState.settingsState.workingHoursPerDay)
+        let isRunning = appState.timeState.timeEntries.contains(where: { $0.end == nil })
+        let duration = appState.timeState.timeEntries.totalDurationInSeconds(on: Date())
 
-        let timeline = Timeline(entries: [widgetEntry], policy: .after(Date().addingTimeInterval(10)))
-        completion(timeline)
+        if isRunning {
+            var entries: [WidgetEntry] = []
+            for index in 0..<1440 { // 24h should be sufficient?! -> check if policy acutally works, then this time could be reduced
+                let nextMinute = index * 60
+                let entry = WidgetEntry(date: Date().addingTimeInterval(TimeInterval(nextMinute)),
+                                        duration: duration + nextMinute,
+                                        maxDuration: appState.settingsState.workingHoursPerDay * 3600,
+                                        isRunning: true)
+                entries.append(entry)
+            }
+
+            let timeline = Timeline(entries: entries, policy: .after(entries.last!.date))
+            completion(timeline)
+        } else {
+            let entry = WidgetEntry(date: Date(),
+                                    duration: duration,
+                                    maxDuration: appState.settingsState.workingHoursPerDay * 3600,
+                                    isRunning: false)
+
+            let timeline = Timeline(entries: [entry], policy: .never)
+            completion(timeline)
+        }
     }
 }
 
 struct WidgetEntry: TimelineEntry {
     var date: Date
 
-    let timeEntries: [TimeEntry]
-    let workingHoursPerDay: Int
+    let duration: Int
+    let maxDuration: Int
+    let isRunning: Bool
 }
 
 struct WidgetEntryView: View {
     @Environment(\.widgetFamily) private var widgetFamily
-
     var entry: WidgetEntry
-    @State var duration: Int
-    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
 
     var body: some View {
 //        switch self.widgetFamily {
 //        case .systemSmall:
-        return VStack {
-            ArcViewFull(duration: self.$duration, workingHoursPerDay: self.entry.workingHoursPerDay)
+        return ZStack {
+            ArcViewFull(duration: self.entry.duration,
+                        maxDuration: self.entry.maxDuration,
+                        color: self.entry.isRunning ? .accentColor : .gray,
+                        allowedUnits: [.hour, .minute])
             .padding(20)
-            .onReceive(self.timer) { _ in
-                self.duration = self.entry.timeEntries.totalDurationInSeconds(on: Date())
-            }
         }
 //
 //        case .systemMedium:
@@ -79,46 +98,51 @@ struct TimerWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            WidgetEntryView(entry: entry, duration: entry.timeEntries.totalDurationInSeconds(on: Date()))
+            WidgetEntryView(entry: entry)
         }
         .configurationDisplayName(LocalizedStringKey("TimeTracker"))
         .description(LocalizedStringKey("Have your time tracker always in sight."))
-//        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall])
     }
 }
 
 // MARK: - Previews
-//
-//struct TimerWidgetSmall_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let entry = WidgetEntry(date: Date(),
-//                                timeEntries: [],
-//                                workingHoursPerDay: 8)
-//
-//        return WidgetEntryView(entry: entry)
-//            .previewContext(WidgetPreviewContext(family: .systemSmall))
-//            .accentColor(.green)
-//    }
-//}
-//
-//struct TimerWidgetMedium_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let entry = WidgetEntry(date: Date(),
-//                                timeEntries: [],
-//                                workingHoursPerDay: 8)
-//        return WidgetEntryView(entry: entry)
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
-//            .accentColor(.green)
-//    }
-//}
-//
-//struct TimerWidgetLarge_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let entry = WidgetEntry(date: Date(),
-//                                timeEntries: [],
-//                                workingHoursPerDay: 8)
-//        return WidgetEntryView(entry: entry)
-//            .previewContext(WidgetPreviewContext(family: .systemLarge))
-//            .accentColor(.green)
-//    }
-//}
+
+struct TimerWidgetSmall_Previews: PreviewProvider {
+    static var previews: some View {
+        let entry = WidgetEntry(date: Date(),
+                                duration: 2520,
+                                maxDuration: 28800,
+                                isRunning: true)
+
+        return WidgetEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .accentColor(.green)
+    }
+}
+
+struct TimerWidgetMedium_Previews: PreviewProvider {
+    static var previews: some View {
+        let entry = WidgetEntry(date: Date(),
+                                duration: 2520,
+                                maxDuration: 28800,
+                                isRunning: true)
+
+        return WidgetEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            .accentColor(.green)
+    }
+}
+
+struct TimerWidgetLarge_Previews: PreviewProvider {
+    static var previews: some View {
+        let entry = WidgetEntry(date: Date(),
+                                duration: 2520,
+                                maxDuration: 28800,
+                                isRunning: true)
+
+        return WidgetEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .accentColor(.green)
+    }
+}

@@ -26,7 +26,8 @@ struct TimerView: ConnectedView {
         VStack {
             Spacer()
             Spacer()
-            ArcViewFull(duration: self.$duration, workingHoursPerDay: props.workingHoursPerDay)
+            ArcViewFull(duration: self.duration,
+                        maxDuration: props.workingHoursPerDay * 3600)
                 .frame(width: 250, height: 250)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: Date())

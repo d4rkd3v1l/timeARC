@@ -29,7 +29,7 @@ struct EntryDetailsView: ConnectedView {
     func body(props: Props) -> some View {
         VStack {
             Spacer(minLength: 30)
-            ArcViewFull(duration: self.$duration, workingHoursPerDay: props.workingHoursPerDay)
+            ArcViewFull(duration: self.duration, maxDuration: props.workingHoursPerDay * 3600)
                 .frame(width: 200, height: 200)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: self.selectedDate)

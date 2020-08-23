@@ -33,6 +33,9 @@ struct ContentView: View {
                 }
         }
         .accentColor(.green)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            persistStateToUserDefaults(store.state)
+        }
     }
 }
 

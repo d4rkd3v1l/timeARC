@@ -13,7 +13,7 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
     return { next in
         return { action in
             if let state = getState() as? AppState {
-                persistStateToUserDefaults(state)
+//                persistStateToUserDefaults(state)
             }
 
             return next(action)
@@ -21,7 +21,7 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
     }
 }
 
-private func persistStateToUserDefaults(_ state: AppState) {
+func persistStateToUserDefaults(_ state: AppState) {
     DispatchQueue.global().async {
         let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker")
         let encodedState = try? JSONEncoder().encode(state)

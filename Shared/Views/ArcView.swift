@@ -46,20 +46,45 @@ struct Arc: Shape {
 }
 
 struct ArcViewFull: View {
-    @Binding var duration: Int
-    var workingHoursPerDay: Int
+    var duration: Int
+    var maxDuration: Int
+    var color: Color = Color.accentColor
+    var allowedUnits: NSCalendar.Unit = [.hour, .minute, .second]
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ArcView(color: Color.accentColor, progress: (Double(self.duration) / Double(self.workingHoursPerDay * 3600)))
-                Text("\(self.duration / (self.workingHoursPerDay * 36))%")
+                ArcView(color: self.color, progress: (Double(self.duration) / Double(self.maxDuration)))
+
+                Text("\(Int(Double(self.duration) / Double(self.maxDuration) * 100.0))%")
                     .font(.system(size: geometry.size.width / 4)).bold()
 
-                Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
-                    .font(.system(size: geometry.size.width / 9)).bold()
-                    .offset(x: 0, y: geometry.size.height / 2.5)
+//                HStack(spacing: geometry.size.width / 50) {
+//                    Text("•")
+//                        .font(.system(size: geometry.size.width / 5)).bold()
+//                        .foregroundColor(self.isRunning ? .accentColor : .gray)
+//                        .alignmentGuide(VerticalAlignment.center, computeValue: { dimension in
+//                            return dimension[VerticalAlignment.center] + geometry.size.width / 100
+//                        })
+
+                    Text(self.duration.formatted(allowedUnits: self.allowedUnits) ?? "")
+                        .font(.system(size: geometry.size.width / 9)).bold()
+//                }
+                .offset(x: 0, y: geometry.size.height / 2.5)
             }
         }
+    }
+}
+
+// MARK: - Preview
+
+struct ArcViewFull_Previews: PreviewProvider {
+    @State static var duration: Int = 123
+    static var previews: some View {
+        ArcViewFull(duration: duration,
+                    maxDuration: 456,
+                    color: .pink,
+                    allowedUnits: [.hour, .minute])
+            .frame(width: 250, height: 250)
     }
 }
