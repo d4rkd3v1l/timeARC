@@ -38,7 +38,7 @@ struct Provider: TimelineProvider {
                 let nextMinute = index * 60
                 let entry = WidgetEntry(date: Date().addingTimeInterval(TimeInterval(nextMinute)),
                                         duration: duration + nextMinute,
-                                        maxDuration: widgetData.workingHoursPerDay * 3600,
+                                        maxDuration: widgetData.workingMinutesPerDay * 60,
                                         isRunning: true)
                 entries.append(entry)
             }
@@ -48,7 +48,7 @@ struct Provider: TimelineProvider {
         } else {
             let entry = WidgetEntry(date: Date(),
                                     duration: duration,
-                                    maxDuration: widgetData.workingHoursPerDay * 3600,
+                                    maxDuration: widgetData.workingMinutesPerDay * 60,
                                     isRunning: false)
 
             let timeline = Timeline(entries: [entry], policy: .never)
@@ -99,6 +99,7 @@ struct TimerWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WidgetEntryView(entry: entry)
+                .accentColor(.green)
         }
         .configurationDisplayName(LocalizedStringKey("TimeTracker"))
         .description(LocalizedStringKey("Have your time tracker always in sight."))

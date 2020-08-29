@@ -27,7 +27,7 @@ struct ContentView: View {
                     Image(systemName: "chart.bar.fill")
                     Text(LocalizedStringKey("Statistics"))
                 }
-            Text("Settings")
+            SettingsView()
                 .tabItem {
                     Image(systemName: "wrench.fill") // gear
                     Text(LocalizedStringKey("Settings"))
@@ -45,7 +45,7 @@ struct ContentView: View {
 
             let relevantTimeEntries = state.timeState.timeEntries.filter { $0.isRelevant(for: Date()) }
             let widgetData = WidgetData(timeEntries: relevantTimeEntries,
-                                        workingHoursPerDay: state.settingsState.workingHoursPerDay)
+                                        workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
 
             let encodedWidgetData = try? JSONEncoder().encode(widgetData)
             userDefaults?.setValue(encodedWidgetData, forKey: "widgetData")

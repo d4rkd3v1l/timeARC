@@ -12,13 +12,13 @@ struct OverviewView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
         let workingWeekDays: [WeekDay]
-        let workingHoursPerDay: Int
+        let workingMinutesPerDay: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeState.timeEntries,
                      workingWeekDays: state.settingsState.workingWeekDays,
-                     workingHoursPerDay: state.settingsState.workingHoursPerDay)
+                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
     }
 
     private var year: DateInterval {
@@ -26,7 +26,6 @@ struct OverviewView: ConnectedView {
     }
 
     @Environment(\.calendar) var calendar
-    @State(initialValue: "") var selectedDate: String
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -40,10 +39,10 @@ struct OverviewView: ConnectedView {
                             let weekday = Calendar.current.component(.weekday, from: date)
                             let isWorkingDay = props.workingWeekDays.contains(WeekDay(weekday)) && date.startOfDay < Date()
                             let duration = props.timeEntries.totalDurationInSeconds(on: date)
-                            let desiredWorkMinutes = isWorkingDay ? (props.workingHoursPerDay * 60) : 0
+                            let desiredWorkMinutes = isWorkingDay ? props.workingMinutesPerDay : 0
                             let overtime = duration / 60 - desiredWorkMinutes
                             ZStack {
-                                ArcView(color: isWorkingDay ? Color.accentColor : .gray, progress: Double(duration) / Double(props.workingHoursPerDay * 3600))
+                                ArcView(color: isWorkingDay ? Color.accentColor : .gray, progress: Double(duration) / Double(props.workingMinutesPerDay * 60))
                                 Text(String(self.calendar.component(.day, from: date)))
                                     .font(.system(size: 18)).bold()
                                     .foregroundColor(.primary)

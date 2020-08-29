@@ -7,5 +7,5 @@
 
 struct WidgetData: Codable {
     let timeEntries: [TimeEntry]
-    let workingHoursPerDay: Int
+    let workingMinutesPerDay: Int
 }

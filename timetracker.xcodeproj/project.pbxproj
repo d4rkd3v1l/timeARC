@@ -42,6 +42,19 @@
 		81A3DD2A24C77FBF00D992E2 /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DD2924C77FBF00D992E2 /* EntryDetailsView.swift */; };
 		81C057CA24F29B2B0010DAA1 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057C924F29B2B0010DAA1 /* WidgetData.swift */; };
 		81C057CB24F29B350010DAA1 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057C924F29B2B0010DAA1 /* WidgetData.swift */; };
+		81C057D124F2AE6E0010DAA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C057D024F2AE6E0010DAA1 /* Assets.xcassets */; };
+		81C057D824F2AE6E0010DAA1 /* watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 81C057D724F2AE6E0010DAA1 /* watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		81C057DD24F2AE6E0010DAA1 /* timetrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057DC24F2AE6E0010DAA1 /* timetrackerApp.swift */; };
+		81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057DE24F2AE6E0010DAA1 /* ContentView.swift */; };
+		81C057E124F2AE6E0010DAA1 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057E024F2AE6E0010DAA1 /* NotificationController.swift */; };
+		81C057E324F2AE6E0010DAA1 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057E224F2AE6E0010DAA1 /* NotificationView.swift */; };
+		81C057E524F2AE6E0010DAA1 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057E424F2AE6E0010DAA1 /* ComplicationController.swift */; };
+		81C057E724F2AE6F0010DAA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C057E624F2AE6F0010DAA1 /* Assets.xcassets */; };
+		81C057EA24F2AE6F0010DAA1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C057E924F2AE6F0010DAA1 /* Preview Assets.xcassets */; };
+		81C057EF24F2AE6F0010DAA1 /* watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 81C057CE24F2AE6D0010DAA1 /* watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		81C057F824F2B4640010DAA1 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
+		81C057F924F2B4770010DAA1 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750D24C54DDA00A2983B /* Date+.swift */; };
+		81C057FA24F2B4A40010DAA1 /* TimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC53C24C55BFF00245E73 /* TimeEntry.swift */; };
 		81DD520424C2F3A40039C792 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 81DD520324C2F3A40039C792 /* SwiftUIFlux */; };
 		81EA993724E6CC81000457CE /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993624E6CC81000457CE /* SettingsState.swift */; };
 		81EA993924E6CC88000457CE /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EA993824E6CC88000457CE /* SettingsReducer.swift */; };
@@ -62,7 +75,7 @@
 		81EFC55524C6032F00245E73 /* TimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55424C6032F00245E73 /* TimeActions.swift */; };
 		81EFC55824C6036700245E73 /* GlobalMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55724C6036700245E73 /* GlobalMiddleware.swift */; };
 		81EFC55C24C603EC00245E73 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55B24C603EC00245E73 /* OverviewView.swift */; };
-		81EFC56724C60AD200245E73 /* JTAppleCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 81EFC56624C60AD200245E73 /* JTAppleCalendar */; };
+		81F6E16C24F96423008EA1F3 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */; };
 		81FA384124C83522004AF914 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384024C83522004AF914 /* Playground.swift */; };
 		81FA384424C87CCC004AF914 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +102,20 @@
 			remoteGlobalIDString = 8163530724E8FAD7003BC688;
 			remoteInfo = widgetExtension;
 		};
+		81C057D924F2AE6E0010DAA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8108110024C2EB94005D7C85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81C057D624F2AE6E0010DAA1;
+			remoteInfo = "watch Extension";
+		};
+		81C057ED24F2AE6F0010DAA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8108110024C2EB94005D7C85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81C057CD24F2AE6D0010DAA1;
+			remoteInfo = watch;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -101,6 +128,28 @@
 				8163531324E8FAD8003BC688 /* widgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81C057F324F2AE6F0010DAA1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				81C057D824F2AE6E0010DAA1 /* watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81C057F724F2AE6F0010DAA1 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				81C057EF24F2AE6F0010DAA1 /* watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -135,6 +184,19 @@
 		816833E024C821A400DE7CCC /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		81A3DD2924C77FBF00D992E2 /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
 		81C057C924F29B2B0010DAA1 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
+		81C057CE24F2AE6D0010DAA1 /* watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81C057D024F2AE6E0010DAA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		81C057D224F2AE6E0010DAA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81C057D724F2AE6E0010DAA1 /* watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81C057DC24F2AE6E0010DAA1 /* timetrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timetrackerApp.swift; sourceTree = "<group>"; };
+		81C057DE24F2AE6E0010DAA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		81C057E024F2AE6E0010DAA1 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		81C057E224F2AE6E0010DAA1 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		81C057E424F2AE6E0010DAA1 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		81C057E624F2AE6F0010DAA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		81C057E924F2AE6F0010DAA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		81C057EB24F2AE6F0010DAA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81C057EC24F2AE6F0010DAA1 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		81EA993624E6CC81000457CE /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
 		81EA993824E6CC88000457CE /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
 		81EA993A24E6CC8F000457CE /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
@@ -149,6 +211,7 @@
 		81EFC55424C6032F00245E73 /* TimeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeActions.swift; sourceTree = "<group>"; };
 		81EFC55724C6036700245E73 /* GlobalMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMiddleware.swift; sourceTree = "<group>"; };
 		81EFC55B24C603EC00245E73 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
+		81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleValuesPickerView.swift; sourceTree = "<group>"; };
 		81FA384024C83522004AF914 /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		81FA384324C87CCC004AF914 /* ArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,7 +222,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				81DD520424C2F3A40039C792 /* SwiftUIFlux in Frameworks */,
-				81EFC56724C60AD200245E73 /* JTAppleCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +256,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81C057D424F2AE6E0010DAA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -210,6 +279,8 @@
 				8108111F24C2EB95005D7C85 /* Tests iOS */,
 				8108112A24C2EB95005D7C85 /* Tests macOS */,
 				8163530B24E8FAD7003BC688 /* widget */,
+				81C057CF24F2AE6D0010DAA1 /* watch */,
+				81C057DB24F2AE6E0010DAA1 /* watch Extension */,
 				816352EF24E8F8FA003BC688 /* Frameworks */,
 				8108110D24C2EB95005D7C85 /* Products */,
 			);
@@ -223,7 +294,6 @@
 				8121751024C54DDE00A2983B /* Extensions */,
 				81EFC55F24C6040500245E73 /* Models */,
 				8108110724C2EB95005D7C85 /* Assets.xcassets */,
-				81EFC54624C58FB900245E73 /* ContentView.swift */,
 				8108110524C2EB94005D7C85 /* App.swift */,
 			);
 			path = Shared;
@@ -237,6 +307,8 @@
 				8108111C24C2EB95005D7C85 /* Tests iOS.xctest */,
 				8108112724C2EB95005D7C85 /* Tests macOS.xctest */,
 				8163530824E8FAD7003BC688 /* widgetExtension.appex */,
+				81C057CE24F2AE6D0010DAA1 /* watch.app */,
+				81C057D724F2AE6E0010DAA1 /* watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,6 +319,7 @@
 				81EFC54B24C602EC00245E73 /* Timer */,
 				81EFC55A24C603B600245E73 /* Overview */,
 				81EA993424E6CC69000457CE /* Settings */,
+				81EFC54624C58FB900245E73 /* ContentView.swift */,
 				8108110F24C2EB95005D7C85 /* Info.plist */,
 			);
 			path = iOS;
@@ -340,6 +413,39 @@
 			path = widget;
 			sourceTree = "<group>";
 		};
+		81C057CF24F2AE6D0010DAA1 /* watch */ = {
+			isa = PBXGroup;
+			children = (
+				81C057D024F2AE6E0010DAA1 /* Assets.xcassets */,
+				81C057D224F2AE6E0010DAA1 /* Info.plist */,
+			);
+			path = watch;
+			sourceTree = "<group>";
+		};
+		81C057DB24F2AE6E0010DAA1 /* watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				81C057DC24F2AE6E0010DAA1 /* timetrackerApp.swift */,
+				81C057DE24F2AE6E0010DAA1 /* ContentView.swift */,
+				81C057E024F2AE6E0010DAA1 /* NotificationController.swift */,
+				81C057E224F2AE6E0010DAA1 /* NotificationView.swift */,
+				81C057E424F2AE6E0010DAA1 /* ComplicationController.swift */,
+				81C057E624F2AE6F0010DAA1 /* Assets.xcassets */,
+				81C057EB24F2AE6F0010DAA1 /* Info.plist */,
+				81C057EC24F2AE6F0010DAA1 /* PushNotificationPayload.apns */,
+				81C057E824F2AE6F0010DAA1 /* Preview Content */,
+			);
+			path = "watch Extension";
+			sourceTree = "<group>";
+		};
+		81C057E824F2AE6F0010DAA1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				81C057E924F2AE6F0010DAA1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		81EA993424E6CC69000457CE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +459,7 @@
 			children = (
 				81FA384324C87CCC004AF914 /* ArcView.swift */,
 				812FDD0224E81FEE000164FE /* DateTextField.swift */,
+				81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -419,16 +526,17 @@
 				8108110924C2EB95005D7C85 /* Frameworks */,
 				8108110A24C2EB95005D7C85 /* Resources */,
 				8163530024E8F8FC003BC688 /* Embed App Extensions */,
+				81C057F724F2AE6F0010DAA1 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				8163531224E8FAD8003BC688 /* PBXTargetDependency */,
+				81C057EE24F2AE6F0010DAA1 /* PBXTargetDependency */,
 			);
 			name = "timetracker (iOS)";
 			packageProductDependencies = (
 				81DD520324C2F3A40039C792 /* SwiftUIFlux */,
-				81EFC56624C60AD200245E73 /* JTAppleCalendar */,
 			);
 			productName = "timetracker (iOS)";
 			productReference = 8108110C24C2EB95005D7C85 /* timetracker.app */;
@@ -507,6 +615,40 @@
 			productReference = 8163530824E8FAD7003BC688 /* widgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		81C057CD24F2AE6D0010DAA1 /* watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81C057F424F2AE6F0010DAA1 /* Build configuration list for PBXNativeTarget "watch" */;
+			buildPhases = (
+				81C057CC24F2AE6D0010DAA1 /* Resources */,
+				81C057F324F2AE6F0010DAA1 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				81C057DA24F2AE6E0010DAA1 /* PBXTargetDependency */,
+			);
+			name = watch;
+			productName = watch;
+			productReference = 81C057CE24F2AE6D0010DAA1 /* watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		81C057D624F2AE6E0010DAA1 /* watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81C057F024F2AE6F0010DAA1 /* Build configuration list for PBXNativeTarget "watch Extension" */;
+			buildPhases = (
+				81C057D324F2AE6E0010DAA1 /* Sources */,
+				81C057D424F2AE6E0010DAA1 /* Frameworks */,
+				81C057D524F2AE6E0010DAA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "watch Extension";
+			productName = "watch Extension";
+			productReference = 81C057D724F2AE6E0010DAA1 /* watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -533,6 +675,12 @@
 					8163530724E8FAD7003BC688 = {
 						CreatedOnToolsVersion = 12.0;
 					};
+					81C057CD24F2AE6D0010DAA1 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					81C057D624F2AE6E0010DAA1 = {
+						CreatedOnToolsVersion = 12.0;
+					};
 				};
 			};
 			buildConfigurationList = 8108110324C2EB94005D7C85 /* Build configuration list for PBXProject "timetracker" */;
@@ -546,7 +694,6 @@
 			mainGroup = 810810FF24C2EB94005D7C85;
 			packageReferences = (
 				81DD520224C2F3A40039C792 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */,
-				81EFC56524C60AD200245E73 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */,
 			);
 			productRefGroup = 8108110D24C2EB95005D7C85 /* Products */;
 			projectDirPath = "";
@@ -557,6 +704,8 @@
 				8108111B24C2EB95005D7C85 /* Tests iOS */,
 				8108112624C2EB95005D7C85 /* Tests macOS */,
 				8163530724E8FAD7003BC688 /* widgetExtension */,
+				81C057CD24F2AE6D0010DAA1 /* watch */,
+				81C057D624F2AE6E0010DAA1 /* watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -600,6 +749,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81C057CC24F2AE6D0010DAA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81C057D124F2AE6E0010DAA1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81C057D524F2AE6E0010DAA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81C057EA24F2AE6F0010DAA1 /* Preview Assets.xcassets in Resources */,
+				81C057E724F2AE6F0010DAA1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -626,6 +792,7 @@
 				81EFC54F24C6031F00245E73 /* TimeState.swift in Sources */,
 				816833E124C821A400DE7CCC /* Calendar.swift in Sources */,
 				81EFC55524C6032F00245E73 /* TimeActions.swift in Sources */,
+				81F6E16C24F96423008EA1F3 /* MultipleValuesPickerView.swift in Sources */,
 				8121750E24C54DDA00A2983B /* Date+.swift in Sources */,
 				81EFC55C24C603EC00245E73 /* OverviewView.swift in Sources */,
 				81EA994024E6CDED000457CE /* SettingsView.swift in Sources */,
@@ -687,6 +854,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81C057D324F2AE6E0010DAA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81C057F924F2B4770010DAA1 /* Date+.swift in Sources */,
+				81C057E124F2AE6E0010DAA1 /* NotificationController.swift in Sources */,
+				81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */,
+				81C057FA24F2B4A40010DAA1 /* TimeEntry.swift in Sources */,
+				81C057E524F2AE6E0010DAA1 /* ComplicationController.swift in Sources */,
+				81C057F824F2B4640010DAA1 /* ArcView.swift in Sources */,
+				81C057DD24F2AE6E0010DAA1 /* timetrackerApp.swift in Sources */,
+				81C057E324F2AE6E0010DAA1 /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -704,6 +886,16 @@
 			isa = PBXTargetDependency;
 			target = 8163530724E8FAD7003BC688 /* widgetExtension */;
 			targetProxy = 8163531124E8FAD8003BC688 /* PBXContainerItemProxy */;
+		};
+		81C057DA24F2AE6E0010DAA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81C057D624F2AE6E0010DAA1 /* watch Extension */;
+			targetProxy = 81C057D924F2AE6E0010DAA1 /* PBXContainerItemProxy */;
+		};
+		81C057EE24F2AE6F0010DAA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81C057CD24F2AE6D0010DAA1 /* watch */;
+			targetProxy = 81C057ED24F2AE6F0010DAA1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -760,7 +952,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.16;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -815,7 +1007,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.16;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -878,6 +1070,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 455K6552B4;
@@ -902,6 +1095,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 455K6552B4;
@@ -1059,6 +1253,96 @@
 			};
 			name = Release;
 		};
+		81C057F124F2AE6F0010DAA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"watch Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 455K6552B4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		81C057F224F2AE6F0010DAA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"watch Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 455K6552B4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+		81C057F524F2AE6F0010DAA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 455K6552B4;
+				IBSC_MODULE = watch_Extension;
+				INFOPLIST_FILE = watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		81C057F624F2AE6F0010DAA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 455K6552B4;
+				IBSC_MODULE = watch_Extension;
+				INFOPLIST_FILE = watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1116,6 +1400,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		81C057F024F2AE6F0010DAA1 /* Build configuration list for PBXNativeTarget "watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81C057F124F2AE6F0010DAA1 /* Debug */,
+				81C057F224F2AE6F0010DAA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81C057F424F2AE6F0010DAA1 /* Build configuration list for PBXNativeTarget "watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81C057F524F2AE6F0010DAA1 /* Debug */,
+				81C057F624F2AE6F0010DAA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1125,14 +1427,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.5.1;
-			};
-		};
-		81EFC56524C60AD200245E73 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/patchthecode/JTAppleCalendar.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1147,11 +1441,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 81DD520224C2F3A40039C792 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */;
 			productName = SwiftUIFlux;
-		};
-		81EFC56624C60AD200245E73 /* JTAppleCalendar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 81EFC56524C60AD200245E73 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */;
-			productName = JTAppleCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

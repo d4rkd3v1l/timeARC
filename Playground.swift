@@ -7,18 +7,28 @@
 
 import SwiftUI
 
-struct PlaygroundView: View {
+struct TestDatePicker: View {
+
+    @State var date = Date()
+
     var body: some View {
-        Text(Date().addingTimeInterval(-100), style: .timer)
+            DatePicker(selection: Binding(get: {
+                self.date
+            }, set: { newVal in
+                self.date = newVal
+                self.doSomething(with: newVal)
+            })) {
+                Text("")
+            }
+    }
+
+    func doSomething(with: Date) {
+        print("-----> in doSomething")
     }
 }
 
-// MARK: - Preview
-
-struct PlaygroundView_Previews: PreviewProvider {
-    @State static var date = Date()
+struct TestDatePicker_Previews: PreviewProvider {
     static var previews: some View {
-        PlaygroundView()
+        TestDatePicker()
     }
 }
-

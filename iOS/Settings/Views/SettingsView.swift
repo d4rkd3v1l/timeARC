@@ -11,23 +11,37 @@ import SwiftUIFlux
 struct SettingsView: ConnectedView {
     struct Props {
         let workingWeekDays: [WeekDay]
-        let workingHoursPerDay: Int
+        let workingMinutesPerDay: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(workingWeekDays: state.settingsState.workingWeekDays,
-                     workingHoursPerDay: state.settingsState.workingHoursPerDay)
+                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
     }
 
-    @State var workingHoursPerDay: Int = 0
+    @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
 
     func body(props: Props) -> some View {
-        Form {
-            Picker(selection: self.$workingHoursPerDay, label: Text("Picker")) {
-                Text("1").tag(1)
-                Text("2").tag(2)
-                Text("3").tag(3)
+        NavigationView {
+            Form {
+                DatePicker("Working hours", selection: self.$workingHours, displayedComponents: .hourAndMinute)
+                NavigationLink(
+                    destination: MultipleValuesPickerView(title: "Week days",
+                                                          sectionHeader: "Choose your working days",
+                                                          initial: props.workingWeekDays)
+                        .onSelectionChange { newSelections in
+                            store.dispatch(action: UpdateWorkingWeekDays(workingWeekDays: newSelections))
+                        }
+                ) {
+                    HStack {
+                        Text("Week days")
+                        Spacer()
+                        Text("\(props.workingWeekDays.count)") // sorted().map { $0.shortSymbol }.joined(separator: ", ")
+                    }
+                    .onAppear {}
+                }
             }
+            .navigationBarTitle("Settings")
         }
     }
 }

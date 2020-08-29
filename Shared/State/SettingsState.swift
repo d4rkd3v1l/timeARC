@@ -13,5 +13,5 @@ struct SettingsState: FluxState, Codable {
                                       .wednesday,
                                       .thursday,
                                       .friday]
-    var workingHoursPerDay: Int = 8
+    var workingMinutesPerDay: Int = 480
 }

@@ -8,17 +8,23 @@
 import SwiftUI
 import SwiftUIFlux
 
+class TimeEntriesStorage {
+    var timeEntries: [TimeEntry] = []
+}
+
 struct EntryDetailsView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
-        let workingHoursPerDay: Int
+        let workingMinutesPerDay: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: state.timeState.timeEntries
-                        .filter { $0.isRelevant(for: self.selectedDate) }
-                        .sorted(by: { $0.start < $1.start }),
-                     workingHoursPerDay: state.settingsState.workingHoursPerDay
+        let timeEntries = state.timeState.timeEntries
+            .filter { $0.isRelevant(for: self.selectedDate) }
+            .sorted(by: { $0.start < $1.start })
+
+        return Props(timeEntries: timeEntries,
+                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay
         )
     }
 
@@ -29,7 +35,7 @@ struct EntryDetailsView: ConnectedView {
     func body(props: Props) -> some View {
         VStack {
             Spacer(minLength: 30)
-            ArcViewFull(duration: self.duration, maxDuration: props.workingHoursPerDay * 3600)
+            ArcViewFull(duration: self.duration, maxDuration: props.workingMinutesPerDay * 60)
                 .frame(width: 200, height: 200)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: self.selectedDate)
@@ -38,14 +44,14 @@ struct EntryDetailsView: ConnectedView {
             Form {
                 ForEach(props.timeEntries, id: \.self) { timeEntry in
                     HStack {
-                        TimeEntryPicker(selection: timeEntry.start,
+                        TimeEntryPicker(initialDate: timeEntry.start,
                                         rangeThrough: ...timeEntry.actualEnd) { start in
                             store.dispatch(action: UpdateTimeEntry(id: timeEntry.id,
-                                                                   start: start, end:
-                                                                    timeEntry.end))
+                                                                   start: start,
+                                                                   end: timeEntry.end))
                         }
                         Image(systemName: "arrow.right")
-                        TimeEntryPicker(selection: timeEntry.actualEnd,
+                        TimeEntryPicker(initialDate: timeEntry.actualEnd,
                                         rangeFrom: timeEntry.start...) { end in
                             store.dispatch(action: UpdateTimeEntry(id: timeEntry.id,
                                                                    start: timeEntry.start,
@@ -80,19 +86,26 @@ struct EntryDetailsView: ConnectedView {
 
 // TODO: "De-hack" this?
 struct TimeEntryPicker: View {
-    @State var selection: Date = Date()
+    var initialDate = Date()
+
+    @State private var selection: Date = Date()
     var rangeThrough: PartialRangeThrough<Date>?
     var rangeFrom: PartialRangeFrom<Date>?
     var onChange: ((Date) -> Void)?
-    
-    var body: some View {
-        if let rangeFrom = self.rangeFrom {
-            DatePicker("", selection: self.$selection, in: rangeFrom, displayedComponents: .hourAndMinute)
-                .onChange(of: self.selection) { self.onChange?($0) }
 
-        } else if let rangeThrough = self.rangeThrough {
-            DatePicker("", selection: self.$selection, in: rangeThrough, displayedComponents: .hourAndMinute)
-                .onChange(of: self.selection) { self.onChange?($0) }
+    var body: some View {
+        GeometryReader { geometry in
+            if let rangeFrom = self.rangeFrom {
+                DatePicker("", selection: self.$selection, in: rangeFrom, displayedComponents: .hourAndMinute)
+                    .onChange(of: self.selection) { self.onChange?($0) }
+
+            } else if let rangeThrough = self.rangeThrough {
+                DatePicker("", selection: self.$selection, in: rangeThrough, displayedComponents: .hourAndMinute)
+                    .onChange(of: self.selection) { self.onChange?($0) }
+            }
+        }
+        .onAppear {
+            self.selection = self.initialDate
         }
     }
 }

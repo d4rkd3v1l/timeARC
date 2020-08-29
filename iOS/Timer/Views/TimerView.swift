@@ -11,12 +11,12 @@ import SwiftUIFlux
 struct TimerView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
-        let workingHoursPerDay: Int
+        let workingMinutesPerDay: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeState.timeEntries,
-                     workingHoursPerDay: state.settingsState.workingHoursPerDay)
+                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
     }
 
     @State var duration: Int = 0
@@ -27,7 +27,7 @@ struct TimerView: ConnectedView {
             Spacer()
             Spacer()
             ArcViewFull(duration: self.duration,
-                        maxDuration: props.workingHoursPerDay * 3600)
+                        maxDuration: props.workingMinutesPerDay * 60)
                 .frame(width: 250, height: 250)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: Date())

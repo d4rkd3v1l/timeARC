@@ -14,8 +14,8 @@ func settingsReducer(state: SettingsState, action: Action) -> SettingsState {
     case let action as UpdateWorkingWeekDays:
         state.workingWeekDays = action.workingWeekDays
 
-    case let action as UpdateWorkingHoursPerDay:
-        state.workingHoursPerDay = action.workingHoursPerDay
+    case let action as UpdateWorkingMinutesPerDay:
+        state.workingMinutesPerDay = action.workingMinutesPerDay
 
     default:
         break
