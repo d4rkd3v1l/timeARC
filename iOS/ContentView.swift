@@ -35,24 +35,7 @@ struct ContentView: View {
         }
         .accentColor(.green)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            self.updateWidgetData(store.state)
-        }
-    }
-
-    private func updateWidgetData(_ state: AppState) {
-        DispatchQueue.global().async {
-            let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker")
-
-            let relevantTimeEntries = state.timeState.timeEntries.filter { $0.isRelevant(for: Date()) }
-            let widgetData = WidgetData(timeEntries: relevantTimeEntries,
-                                        workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
-
-            let encodedWidgetData = try? JSONEncoder().encode(widgetData)
-            userDefaults?.setValue(encodedWidgetData, forKey: "widgetData")
-
-            DispatchQueue.main.async {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
+            updateWidgetData(store.state)
         }
     }
 }

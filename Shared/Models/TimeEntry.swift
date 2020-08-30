@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimeEntry: Identifiable, Hashable, Codable {
+struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     private (set) var id = UUID()
     var start: Date
     var end: Date?
@@ -50,6 +50,10 @@ struct TimeEntry: Identifiable, Hashable, Codable {
         return Calendar.current
             .dateComponents([.second], from: start, to: end)
             .second
+    }
+
+    static func == (lhs: TimeEntry, rhs: TimeEntry) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

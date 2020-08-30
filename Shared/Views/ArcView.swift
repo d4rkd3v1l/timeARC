@@ -18,20 +18,21 @@ struct ArcView: View {
     var body: some View {
         GeometryReader { geometry in
             Arc(startAngle: .degrees(0), endAngle: .degrees(270), clockwise: true)
-                .stroke(self.color.opacity(0.2), style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
+                .strokeBorder(self.color.opacity(0.2), style: StrokeStyle(lineWidth: geometry.size.width / 9, lineCap: .round, lineJoin: .round))
                 .overlay(
                     Arc(startAngle: .degrees(0), endAngle: self.endAngle, clockwise: true)
-                        .stroke(self.color, style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
+                        .strokeBorder(self.color, style: StrokeStyle(lineWidth: geometry.size.width / 9, lineCap: .round, lineJoin: .round))
                 )
         }
     }
 }
 
-// https://www.hackingwithswift.com/books/ios-swiftui/paths-vs-shapes-in-swiftui
-struct Arc: Shape {
+// https://www.hackingwithswift.com/books/ios-swiftui/adding-strokeborder-support-with-insettableshape
+struct Arc: InsettableShape {
     var startAngle: Angle
     var endAngle: Angle
     var clockwise: Bool
+    var insetAmount: CGFloat = 0
 
     func path(in rect: CGRect) -> Path {
         let rotationAdjustment = Angle.degrees(225)
@@ -39,9 +40,15 @@ struct Arc: Shape {
         let modifiedEnd = endAngle - rotationAdjustment
 
         var path = Path()
-        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2, startAngle: modifiedStart, endAngle: modifiedEnd, clockwise: !clockwise)
+        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2 - insetAmount, startAngle: modifiedStart, endAngle: modifiedEnd, clockwise: !clockwise)
 
         return path
+    }
+
+    func inset(by amount: CGFloat) -> some InsettableShape {
+        var arc = self
+        arc.insetAmount += amount
+        return arc
     }
 }
 
@@ -50,6 +57,14 @@ struct ArcViewFull: View {
     var maxDuration: Int
     var color: Color = Color.accentColor
     var allowedUnits: NSCalendar.Unit = [.hour, .minute, .second]
+
+    func timeFontSize(for geometry: GeometryProxy) -> CGFloat {
+        if self.allowedUnits == [.hour, .minute, .second] {
+            return geometry.size.width / 10
+        }
+
+        return geometry.size.width / 7
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -60,8 +75,8 @@ struct ArcViewFull: View {
                     .font(.system(size: geometry.size.width / 4)).bold()
                 
                 Text(self.duration.formatted(allowedUnits: self.allowedUnits) ?? "")
-                    .font(.system(size: geometry.size.width / 9)).bold()
-                    .offset(x: 0, y: geometry.size.height / 2.5)
+                    .font(.system(size: self.timeFontSize(for: geometry))).bold()
+                    .offset(x: 0, y: geometry.size.height / 2.65)
             }
         }
     }
@@ -70,9 +85,8 @@ struct ArcViewFull: View {
 // MARK: - Preview
 
 struct ArcViewFull_Previews: PreviewProvider {
-    @State static var duration: Int = 123
     static var previews: some View {
-        ArcViewFull(duration: duration,
+        ArcViewFull(duration: 123,
                     maxDuration: 456,
                     color: .pink,
                     allowedUnits: [.hour, .minute])

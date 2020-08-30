@@ -32,8 +32,8 @@ struct OverviewView: ConnectedView {
             CalendarView(interval: year) { date in
                 Text("00")
                     .hidden()
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 16)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 14)
                     .overlay(
                         NavigationLink(destination: EntryDetailsView(selectedDate: date)) {
                             let weekday = Calendar.current.component(.weekday, from: date)

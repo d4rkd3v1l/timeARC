@@ -24,3 +24,7 @@ struct UpdateTimeEntry: Action {
 struct DeleteTimeEntry: Action {
     let id: UUID
 }
+
+struct SyncTimeEntriesFromWatch: Action {
+    let timeEntries: [TimeEntry]
+}

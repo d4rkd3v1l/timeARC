@@ -6,19 +6,37 @@
 //
 
 import SwiftUI
+import SwiftUIFlux
 
-struct ContentView: View {
-    var body: some View {
+struct ContentView: ConnectedView {
+    struct Props {
+        let timeEntries: [TimeEntry]
+        let workingMinutesPerDay: Int
+    }
+
+    func map(state: WatchState, dispatch: @escaping DispatchFunction) -> Props {
+        return Props(timeEntries: state.timeEntries,
+                     workingMinutesPerDay: state.workingMinutesPerDay)
+    }
+
+    @State var duration: Int = 0
+    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+
+    func body(props: Props) -> some View {
         VStack {
             Spacer()
-            ArcViewFull(duration: 42,
-                        maxDuration: 125)
+            ArcViewFull(duration: self.duration,
+                        maxDuration: props.workingMinutesPerDay * 60,
+                        color: props.timeEntries.isTimerRunning ? .accentColor : .gray)
                 .frame(width: self.arcSize, height: self.arcSize)
+                .onReceive(self.timer) { _ in
+                    self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
+                }
             Spacer()
             Button(action: {
-//                store.dispatch(action: ToggleTimer())
+                store.dispatch(action: ToggleTimer())
             }) {
-                Text(LocalizedStringKey("Start"))
+                Text(LocalizedStringKey(props.timeEntries.isTimerRunning ? "Stop" : "Start"))
                     .frame(maxWidth: .infinity)
                     .frame(height: WatchHelper.buttonHeight)
                     .font(Font.body.bold())
@@ -29,42 +47,13 @@ struct ContentView: View {
             .buttonStyle(PlainButtonStyle())
             Spacer()
         }
+        .accentColor(.green)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
     }
 
     private var arcSize: CGFloat {
         return WKInterfaceDevice.current().screenBounds.size.height * 0.53
-    }
-}
-
-enum WatchSize {
-    case unknown
-    case _38
-    case _42
-    case _40
-    case _44
-}
-
-struct WatchHelper {
-    static var watchSize: WatchSize {
-        switch WKInterfaceDevice.current().screenBounds.size.height {
-        case 170.0: return ._38
-        case 195.0: return ._42
-        case 197.0: return ._40
-        case 224.0: return ._44
-        default:    return .unknown
-        }
-    }
-
-    static var buttonHeight: CGFloat {
-        switch watchSize {
-        case .unknown:  return 40.0
-        case ._38:      return 38.0
-        case ._42:      return 40.0
-        case ._40:      return 40.0
-        case ._44:      return 44.0
-        }
     }
 }
 

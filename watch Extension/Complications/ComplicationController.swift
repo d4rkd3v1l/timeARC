@@ -8,6 +8,23 @@
 import ClockKit
 
 
+// CLKComplicationTemplate...
+
+//CLKComplicationTemplateGraphicRectangularFullView(GaugeSample())
+//    .previewContext()
+
+// CLKComplicationTimelineEntry
+//   date
+//   template
+
+// CLKComplicationServer
+//   reloadTimeline
+//   extendTimeline
+
+// CLKRelativeDateTextProvider
+// CLKTimeTextProvider
+// CLKTimeIntervalGaugeProvider
+
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Complication Configuration

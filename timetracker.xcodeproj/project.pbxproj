@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8106A01624FB948C009A1E84 /* WatchSizeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8106A01524FB948C009A1E84 /* WatchSizeHelper.swift */; };
+		8106A01A24FBAE42009A1E84 /* ComplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8106A01924FBAE42009A1E84 /* ComplicationView.swift */; };
 		8108112124C2EB95005D7C85 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108112024C2EB95005D7C85 /* Tests_iOS.swift */; };
 		8108112C24C2EB95005D7C85 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108112B24C2EB95005D7C85 /* Tests_macOS.swift */; };
 		8108112E24C2EB95005D7C85 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108110524C2EB94005D7C85 /* App.swift */; };
@@ -30,6 +32,8 @@
 		8126A27F24E969F60038A4C0 /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDD0224E81FEE000164FE /* DateTextField.swift */; };
 		8126A28324E997D90038A4C0 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8126A28224E997D90038A4C0 /* SwiftUIFlux */; };
 		812FDD0324E81FEE000164FE /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDD0224E81FEE000164FE /* DateTextField.swift */; };
+		81408CF624FA926000EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
+		81408CF724FA926700EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
 		8163530924E8FAD7003BC688 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816352F024E8F8FA003BC688 /* WidgetKit.framework */; };
 		8163530A24E8FAD7003BC688 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816352F224E8F8FA003BC688 /* SwiftUI.framework */; };
 		8163530F24E8FAD8003BC688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8163530E24E8FAD8003BC688 /* Assets.xcassets */; };
@@ -39,12 +43,17 @@
 		8163531B24E8FCC5003BC688 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750D24C54DDA00A2983B /* Date+.swift */; };
 		8163531C24E8FCD3003BC688 /* TimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC53C24C55BFF00245E73 /* TimeEntry.swift */; };
 		816833E124C821A400DE7CCC /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816833E024C821A400DE7CCC /* Calendar.swift */; };
+		8187C72724FA9F13008228AC /* WatchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8187C72624FA9F13008228AC /* WatchState.swift */; };
+		8187C72924FA9F69008228AC /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8187C72824FA9F69008228AC /* SwiftUIFlux */; };
+		8189E6C824FAA8AD008FEFF7 /* WatchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8189E6C724FAA8AD008FEFF7 /* WatchActions.swift */; };
+		8189E6CA24FAA8B7008FEFF7 /* WatchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8189E6C924FAA8B7008FEFF7 /* WatchMiddleware.swift */; };
+		8189E6CC24FAA8DE008FEFF7 /* WatchReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8189E6CB24FAA8DE008FEFF7 /* WatchReducer.swift */; };
 		81A3DD2A24C77FBF00D992E2 /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DD2924C77FBF00D992E2 /* EntryDetailsView.swift */; };
 		81C057CA24F29B2B0010DAA1 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057C924F29B2B0010DAA1 /* WidgetData.swift */; };
 		81C057CB24F29B350010DAA1 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057C924F29B2B0010DAA1 /* WidgetData.swift */; };
 		81C057D124F2AE6E0010DAA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C057D024F2AE6E0010DAA1 /* Assets.xcassets */; };
 		81C057D824F2AE6E0010DAA1 /* watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 81C057D724F2AE6E0010DAA1 /* watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		81C057DD24F2AE6E0010DAA1 /* timetrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057DC24F2AE6E0010DAA1 /* timetrackerApp.swift */; };
+		81C057DD24F2AE6E0010DAA1 /* WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057DC24F2AE6E0010DAA1 /* WatchApp.swift */; };
 		81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057DE24F2AE6E0010DAA1 /* ContentView.swift */; };
 		81C057E124F2AE6E0010DAA1 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057E024F2AE6E0010DAA1 /* NotificationController.swift */; };
 		81C057E324F2AE6E0010DAA1 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C057E224F2AE6E0010DAA1 /* NotificationView.swift */; };
@@ -155,6 +164,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8106A01524FB948C009A1E84 /* WatchSizeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSizeHelper.swift; sourceTree = "<group>"; };
+		8106A01924FBAE42009A1E84 /* ComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationView.swift; sourceTree = "<group>"; };
 		8108110524C2EB94005D7C85 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		8108110624C2EB94005D7C85 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8108110724C2EB95005D7C85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,6 +186,7 @@
 		8126A28024E96B440038A4C0 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		8126A28124E96B930038A4C0 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
 		812FDD0224E81FEE000164FE /* DateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTextField.swift; sourceTree = "<group>"; };
+		81408CF524FA926000EB76E5 /* AppToWatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToWatchData.swift; sourceTree = "<group>"; };
 		816352F024E8F8FA003BC688 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		816352F224E8F8FA003BC688 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		8163530824E8FAD7003BC688 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,13 +194,17 @@
 		8163531024E8FAD8003BC688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8163531724E8FAFB003BC688 /* TimerWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWidget.swift; sourceTree = "<group>"; };
 		816833E024C821A400DE7CCC /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		8187C72624FA9F13008228AC /* WatchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchState.swift; sourceTree = "<group>"; };
+		8189E6C724FAA8AD008FEFF7 /* WatchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchActions.swift; sourceTree = "<group>"; };
+		8189E6C924FAA8B7008FEFF7 /* WatchMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMiddleware.swift; sourceTree = "<group>"; };
+		8189E6CB24FAA8DE008FEFF7 /* WatchReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchReducer.swift; sourceTree = "<group>"; };
 		81A3DD2924C77FBF00D992E2 /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
 		81C057C924F29B2B0010DAA1 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
 		81C057CE24F2AE6D0010DAA1 /* watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C057D024F2AE6E0010DAA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81C057D224F2AE6E0010DAA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81C057D724F2AE6E0010DAA1 /* watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81C057DC24F2AE6E0010DAA1 /* timetrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timetrackerApp.swift; sourceTree = "<group>"; };
+		81C057DC24F2AE6E0010DAA1 /* WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
 		81C057DE24F2AE6E0010DAA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		81C057E024F2AE6E0010DAA1 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		81C057E224F2AE6E0010DAA1 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -260,12 +276,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8187C72924FA9F69008228AC /* SwiftUIFlux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8106A01424FB9478009A1E84 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8106A01524FB948C009A1E84 /* WatchSizeHelper.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8106A01724FB94BA009A1E84 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				81C057E024F2AE6E0010DAA1 /* NotificationController.swift */,
+				81C057E224F2AE6E0010DAA1 /* NotificationView.swift */,
+				81C057EC24F2AE6F0010DAA1 /* PushNotificationPayload.apns */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		8106A01824FB94C5009A1E84 /* Complications */ = {
+			isa = PBXGroup;
+			children = (
+				81C057E424F2AE6E0010DAA1 /* ComplicationController.swift */,
+				8106A01924FBAE42009A1E84 /* ComplicationView.swift */,
+			);
+			path = Complications;
+			sourceTree = "<group>";
+		};
 		810810FF24C2EB94005D7C85 = {
 			isa = PBXGroup;
 			children = (
@@ -293,8 +337,6 @@
 				81EA993E24E6CDD7000457CE /* Views */,
 				8121751024C54DDE00A2983B /* Extensions */,
 				81EFC55F24C6040500245E73 /* Models */,
-				8108110724C2EB95005D7C85 /* Assets.xcassets */,
-				8108110524C2EB94005D7C85 /* App.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -319,6 +361,8 @@
 				81EFC54B24C602EC00245E73 /* Timer */,
 				81EFC55A24C603B600245E73 /* Overview */,
 				81EA993424E6CC69000457CE /* Settings */,
+				8108110724C2EB95005D7C85 /* Assets.xcassets */,
+				8108110524C2EB94005D7C85 /* App.swift */,
 				81EFC54624C58FB900245E73 /* ContentView.swift */,
 				8108110F24C2EB95005D7C85 /* Info.plist */,
 			);
@@ -413,6 +457,17 @@
 			path = widget;
 			sourceTree = "<group>";
 		};
+		8187C72524FA9EFD008228AC /* State */ = {
+			isa = PBXGroup;
+			children = (
+				8189E6C724FAA8AD008FEFF7 /* WatchActions.swift */,
+				8189E6C924FAA8B7008FEFF7 /* WatchMiddleware.swift */,
+				8189E6CB24FAA8DE008FEFF7 /* WatchReducer.swift */,
+				8187C72624FA9F13008228AC /* WatchState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
 		81C057CF24F2AE6D0010DAA1 /* watch */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,14 +480,15 @@
 		81C057DB24F2AE6E0010DAA1 /* watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				81C057DC24F2AE6E0010DAA1 /* timetrackerApp.swift */,
-				81C057DE24F2AE6E0010DAA1 /* ContentView.swift */,
-				81C057E024F2AE6E0010DAA1 /* NotificationController.swift */,
-				81C057E224F2AE6E0010DAA1 /* NotificationView.swift */,
-				81C057E424F2AE6E0010DAA1 /* ComplicationController.swift */,
+				8106A01824FB94C5009A1E84 /* Complications */,
+				8106A01424FB9478009A1E84 /* Extensions */,
+				8106A01724FB94BA009A1E84 /* Notifications */,
+				8187C72524FA9EFD008228AC /* State */,
+				81408CF524FA926000EB76E5 /* AppToWatchData.swift */,
 				81C057E624F2AE6F0010DAA1 /* Assets.xcassets */,
+				81C057DE24F2AE6E0010DAA1 /* ContentView.swift */,
 				81C057EB24F2AE6F0010DAA1 /* Info.plist */,
-				81C057EC24F2AE6F0010DAA1 /* PushNotificationPayload.apns */,
+				81C057DC24F2AE6E0010DAA1 /* WatchApp.swift */,
 				81C057E824F2AE6F0010DAA1 /* Preview Content */,
 			);
 			path = "watch Extension";
@@ -645,6 +701,9 @@
 			dependencies = (
 			);
 			name = "watch Extension";
+			packageProductDependencies = (
+				8187C72824FA9F69008228AC /* SwiftUIFlux */,
+			);
 			productName = "watch Extension";
 			productReference = 81C057D724F2AE6E0010DAA1 /* watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -792,6 +851,7 @@
 				81EFC54F24C6031F00245E73 /* TimeState.swift in Sources */,
 				816833E124C821A400DE7CCC /* Calendar.swift in Sources */,
 				81EFC55524C6032F00245E73 /* TimeActions.swift in Sources */,
+				81408CF724FA926700EB76E5 /* AppToWatchData.swift in Sources */,
 				81F6E16C24F96423008EA1F3 /* MultipleValuesPickerView.swift in Sources */,
 				8121750E24C54DDA00A2983B /* Date+.swift in Sources */,
 				81EFC55C24C603EC00245E73 /* OverviewView.swift in Sources */,
@@ -859,12 +919,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				81C057F924F2B4770010DAA1 /* Date+.swift in Sources */,
+				81408CF624FA926000EB76E5 /* AppToWatchData.swift in Sources */,
 				81C057E124F2AE6E0010DAA1 /* NotificationController.swift in Sources */,
+				8189E6C824FAA8AD008FEFF7 /* WatchActions.swift in Sources */,
+				8106A01624FB948C009A1E84 /* WatchSizeHelper.swift in Sources */,
+				8106A01A24FBAE42009A1E84 /* ComplicationView.swift in Sources */,
+				8187C72724FA9F13008228AC /* WatchState.swift in Sources */,
 				81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */,
 				81C057FA24F2B4A40010DAA1 /* TimeEntry.swift in Sources */,
 				81C057E524F2AE6E0010DAA1 /* ComplicationController.swift in Sources */,
 				81C057F824F2B4640010DAA1 /* ArcView.swift in Sources */,
-				81C057DD24F2AE6E0010DAA1 /* timetrackerApp.swift in Sources */,
+				8189E6CA24FAA8B7008FEFF7 /* WatchMiddleware.swift in Sources */,
+				8189E6CC24FAA8DE008FEFF7 /* WatchReducer.swift in Sources */,
+				81C057DD24F2AE6E0010DAA1 /* WatchApp.swift in Sources */,
 				81C057E324F2AE6E0010DAA1 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1433,6 +1500,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		8126A28224E997D90038A4C0 /* SwiftUIFlux */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81DD520224C2F3A40039C792 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */;
+			productName = SwiftUIFlux;
+		};
+		8187C72824FA9F69008228AC /* SwiftUIFlux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 81DD520224C2F3A40039C792 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */;
 			productName = SwiftUIFlux;

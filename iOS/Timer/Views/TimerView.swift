@@ -27,12 +27,13 @@ struct TimerView: ConnectedView {
             Spacer()
             Spacer()
             ArcViewFull(duration: self.duration,
-                        maxDuration: props.workingMinutesPerDay * 60)
-                .frame(width: 250, height: 250)
+                        maxDuration: props.workingMinutesPerDay * 60,
+                        color: props.timeEntries.isTimerRunning ? .accentColor : .gray)
+                .aspectRatio(contentMode: .fit)
+                .padding(.all, 50)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
                 }
-            Spacer()
             Button(action: {
                 store.dispatch(action: ToggleTimer())
             }) {
