@@ -44,7 +44,8 @@ class AppCommunicator: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         if let decodedData = try? JSONDecoder().decode(AppToWatchData.self, from: messageData) {
             store.dispatch(action: SetWatchData(timeEntries: decodedData.timeEntries,
-                                                workingMinutesPerDay: decodedData.workingMinutesPerDay))
+                                                workingMinutesPerDay: decodedData.workingMinutesPerDay,
+                                                accentColor: decodedData.accentColor))
         }
     }
 }

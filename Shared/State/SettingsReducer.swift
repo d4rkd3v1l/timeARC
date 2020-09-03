@@ -17,6 +17,9 @@ func settingsReducer(state: SettingsState, action: Action) -> SettingsState {
     case let action as UpdateWorkingMinutesPerDay:
         state.workingMinutesPerDay = action.workingMinutesPerDay
 
+    case let action as UpdateAccentColor:
+        state.accentColor = CodableColor(action.color)
+
     default:
         break
     }

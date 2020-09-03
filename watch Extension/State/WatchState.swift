@@ -18,4 +18,5 @@ let store = Store<WatchState>(reducer: watchReducer,
 struct WatchState: FluxState, Codable {
     var timeEntries: [TimeEntry] = []
     var workingMinutesPerDay: Int = 480
+    var accentColor: CodableColor = .green
 }

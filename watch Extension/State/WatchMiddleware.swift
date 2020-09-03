@@ -7,6 +7,7 @@
 
 import SwiftUIFlux
 import WatchConnectivity
+import ClockKit
 
 let watchMiddleware: Middleware<WatchState> = { dispatch, getState in
     return { next in
@@ -17,6 +18,8 @@ let watchMiddleware: Middleware<WatchState> = { dispatch, getState in
                let state = getState() as? WatchState {
                 sendDataToApp(state)
             }
+
+            updateAllComplications()
         }
     }
 }
@@ -30,5 +33,12 @@ private func sendDataToApp(_ state: WatchState) {
                 WCSession.default.sendMessageData(encodedData, replyHandler: nil)
             }
         }
+    }
+}
+
+private func updateAllComplications() {
+    let complicationServer = CLKComplicationServer.sharedInstance()
+    complicationServer.activeComplications?.forEach { complication in
+        complicationServer.reloadTimeline(for: complication)
     }
 }

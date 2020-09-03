@@ -8,4 +8,5 @@
 struct WidgetData: Codable {
     let timeEntries: [TimeEntry]
     let workingMinutesPerDay: Int
+    let accentColor: CodableColor
 }

@@ -9,8 +9,16 @@ import SwiftUI
 import SwiftUIFlux
 import WidgetKit
 
-struct ContentView: View {
-    var body: some View {
+struct ContentView: ConnectedView {
+    struct Props {
+        let accentColor: Color
+    }
+
+    func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
+        return Props(accentColor: state.settingsState.accentColor.color)
+    }
+
+    func body(props: Props) -> some View {
         TabView {
             TimerView()
                 .tabItem {
@@ -33,7 +41,7 @@ struct ContentView: View {
                     Text(LocalizedStringKey("Settings"))
                 }
         }
-        .accentColor(.green)
+        .accentColor(props.accentColor)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             updateWidgetData(store.state)
         }

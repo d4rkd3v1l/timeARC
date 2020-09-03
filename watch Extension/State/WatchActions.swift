@@ -10,6 +10,7 @@ import SwiftUIFlux
 struct SetWatchData: Action {
     let timeEntries: [TimeEntry]
     let workingMinutesPerDay: Int
+    let accentColor: CodableColor
 }
 
 struct ToggleTimer: Action {}

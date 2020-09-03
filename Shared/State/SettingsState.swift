@@ -5,6 +5,7 @@
 //  Created by d4Rk on 14.08.20.
 //
 
+import SwiftUI
 import SwiftUIFlux
 
 struct SettingsState: FluxState, Codable {
@@ -14,4 +15,5 @@ struct SettingsState: FluxState, Codable {
                                       .thursday,
                                       .friday]
     var workingMinutesPerDay: Int = 480
+    var accentColor: CodableColor = .green
 }

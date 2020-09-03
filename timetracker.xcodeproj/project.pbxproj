@@ -34,6 +34,11 @@
 		812FDD0324E81FEE000164FE /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDD0224E81FEE000164FE /* DateTextField.swift */; };
 		81408CF624FA926000EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
 		81408CF724FA926700EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
+		8149A4B42501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
+		8149A4B52501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
+		8149A4B62501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
+		8149A4B72501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
+		8149A4B82501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
 		8163530924E8FAD7003BC688 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816352F024E8F8FA003BC688 /* WidgetKit.framework */; };
 		8163530A24E8FAD7003BC688 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816352F224E8F8FA003BC688 /* SwiftUI.framework */; };
 		8163530F24E8FAD8003BC688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8163530E24E8FAD8003BC688 /* Assets.xcassets */; };
@@ -187,6 +192,7 @@
 		8126A28124E96B930038A4C0 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
 		812FDD0224E81FEE000164FE /* DateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTextField.swift; sourceTree = "<group>"; };
 		81408CF524FA926000EB76E5 /* AppToWatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToWatchData.swift; sourceTree = "<group>"; };
+		8149A4B32501921800A65C36 /* CodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
 		816352F024E8F8FA003BC688 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		816352F224E8F8FA003BC688 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		8163530824E8FAD7003BC688 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -410,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				8121750D24C54DDA00A2983B /* Date+.swift */,
+				8149A4B32501921800A65C36 /* CodableColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -842,6 +849,7 @@
 				81EFC54524C58E7A00245E73 /* TimerView.swift in Sources */,
 				81FA384124C83522004AF914 /* Playground.swift in Sources */,
 				81C057CA24F29B2B0010DAA1 /* WidgetData.swift in Sources */,
+				8149A4B42501921800A65C36 /* CodableColor.swift in Sources */,
 				81EFC53D24C55BFF00245E73 /* TimeEntry.swift in Sources */,
 				812FDD0324E81FEE000164FE /* DateTextField.swift in Sources */,
 				81FA384424C87CCC004AF914 /* ArcView.swift in Sources */,
@@ -873,6 +881,7 @@
 				8126A27824E968700038A4C0 /* TimeReducer.swift in Sources */,
 				8126A27724E968700038A4C0 /* TimeState.swift in Sources */,
 				8126A27A24E968700038A4C0 /* SettingsState.swift in Sources */,
+				8149A4B52501921800A65C36 /* CodableColor.swift in Sources */,
 				8121750F24C54DDA00A2983B /* Date+.swift in Sources */,
 				8126A27F24E969F60038A4C0 /* DateTextField.swift in Sources */,
 				8126A27D24E968700038A4C0 /* TimeActions.swift in Sources */,
@@ -886,6 +895,7 @@
 				81EFC54424C55CA900245E73 /* TimeEntry.swift in Sources */,
 				81EFC53B24C5588700245E73 /* Date+.swift in Sources */,
 				8108112124C2EB95005D7C85 /* Tests_iOS.swift in Sources */,
+				8149A4B62501921800A65C36 /* CodableColor.swift in Sources */,
 				8121750B24C54DCA00A2983B /* Date+Tests.swift in Sources */,
 				81EFC54A24C602DD00245E73 /* TimeReducerTests.swift in Sources */,
 				81EFC54224C55CA500245E73 /* TimeEntryTests.swift in Sources */,
@@ -908,6 +918,7 @@
 			files = (
 				81C057CB24F29B350010DAA1 /* WidgetData.swift in Sources */,
 				8163531B24E8FCC5003BC688 /* Date+.swift in Sources */,
+				8149A4B72501921800A65C36 /* CodableColor.swift in Sources */,
 				8163531824E8FAFB003BC688 /* TimerWidget.swift in Sources */,
 				8163531924E8FBE7003BC688 /* ArcView.swift in Sources */,
 				8163531C24E8FCD3003BC688 /* TimeEntry.swift in Sources */,
@@ -924,6 +935,7 @@
 				8189E6C824FAA8AD008FEFF7 /* WatchActions.swift in Sources */,
 				8106A01624FB948C009A1E84 /* WatchSizeHelper.swift in Sources */,
 				8106A01A24FBAE42009A1E84 /* ComplicationView.swift in Sources */,
+				8149A4B82501921800A65C36 /* CodableColor.swift in Sources */,
 				8187C72724FA9F13008228AC /* WatchState.swift in Sources */,
 				81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */,
 				81C057FA24F2B4A40010DAA1 /* TimeEntry.swift in Sources */,

@@ -10,12 +10,146 @@ import WatchKit
 import ClockKit
 
 struct ComplicationView: View {
+    let duration: Int
+    let maxDuration: Int
+
     var body: some View {
-        ArcViewFull(duration: 20000,
-                    maxDuration: 28800,
+        ArcViewFull(duration: self.duration,
+                    maxDuration: self.maxDuration,
                     color: .accentColor,
                     allowedUnits: [.hour, .minute])
-            .accentColor(.green)
+    }
+}
+
+enum ComplicationIdentifier: String {
+    case standard
+    case alternative
+    case alternative2
+}
+
+struct ComplicationProvider {
+    let duration: Int
+    let maxDuration: Int
+    let color: UIColor
+
+    func complication(for family: CLKComplicationFamily, identifier: ComplicationIdentifier = .standard) -> CLKComplicationTemplate? {
+        let complicationView = ComplicationView(duration: self.duration,
+                                                maxDuration: self.maxDuration)
+            .accentColor(Color(color))
+
+        let durationFormatted = self.duration.formatted(allowedUnits: [.hour, .minute]) ?? ""
+        let percent = Float(self.duration) / Float(self.maxDuration)
+        let percentFormatted = String(Int(percent * 100.0))
+        let onePieceImage = UIImage() // TODO: provide image
+        let fullColorImage = UIImage() // TODO: provide image
+        let header = "Time Tracker" // TODO: use app name
+
+        switch family {
+        case .modularSmall:
+            return CLKComplicationTemplateModularSmallRingText(textProvider: CLKTextProvider(format: percentFormatted),
+                                                               fillFraction: percent,
+                                                               ringStyle: .open)
+
+        case .modularLarge:
+            switch identifier {
+            case .standard:
+                return CLKComplicationTemplateModularLargeTallBody(headerTextProvider: CLKTextProvider(format: header),
+                                                                   bodyTextProvider: CLKTextProvider(format: durationFormatted))
+
+            case .alternative:
+                return CLKComplicationTemplateModularLargeTable(headerImageProvider: CLKImageProvider(onePieceImage: onePieceImage),
+                                                                headerTextProvider: CLKTextProvider(format: header),
+                                                                row1Column1TextProvider: CLKTextProvider(format: "Hours"),
+                                                                row1Column2TextProvider: CLKTextProvider(format: durationFormatted),
+                                                                row2Column1TextProvider: CLKTextProvider(format: "Percent"),
+                                                                row2Column2TextProvider: CLKTextProvider(format: percentFormatted))
+
+            default:
+                return nil
+            }
+
+        case .utilitarianSmall:
+            return CLKComplicationTemplateUtilitarianSmallRingText(textProvider: CLKTextProvider(format: percentFormatted),
+                                                                   fillFraction: percent,
+                                                                   ringStyle: .open)
+        case .utilitarianSmallFlat:
+            return CLKComplicationTemplateUtilitarianSmallFlat(textProvider: CLKTextProvider(format: durationFormatted),
+                                                               imageProvider: CLKImageProvider(onePieceImage: onePieceImage))
+
+        case .utilitarianLarge:
+            return CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKTextProvider(format: "\(durationFormatted) • \(percentFormatted) pct"),
+                                                               imageProvider: CLKImageProvider(onePieceImage: onePieceImage))
+
+        case .circularSmall:
+            switch identifier {
+            case .standard:
+                return CLKComplicationTemplateCircularSmallRingText(textProvider: CLKTextProvider(format: percentFormatted),
+                                                                    fillFraction: percent,
+                                                                    ringStyle: .open)
+
+            case .alternative:
+                return CLKComplicationTemplateCircularSmallSimpleText(textProvider: CLKTextProvider(format: durationFormatted))
+
+            default:
+                return nil
+            }
+
+        case .extraLarge:
+            switch identifier {
+            case .standard:
+                return CLKComplicationTemplateExtraLargeRingText(textProvider: CLKTextProvider(format: percentFormatted),
+                                                                 fillFraction: percent,
+                                                                 ringStyle: .open)
+
+            case .alternative:
+                return CLKComplicationTemplateExtraLargeStackText(line1TextProvider: CLKTextProvider(format: " \(durationFormatted) "),
+                                                                  line2TextProvider: CLKTextProvider(format: percentFormatted))
+
+            case .alternative2:
+                return CLKComplicationTemplateExtraLargeSimpleText(textProvider: CLKTextProvider(format: " \(durationFormatted) "))
+            }
+
+        case .graphicCorner:
+            switch identifier {
+            case .standard:
+                return CLKComplicationTemplateGraphicCornerGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill,
+                                                                                                           gaugeColor: self.color,
+                                                                                                           fillFraction: percent),
+                                                                     outerTextProvider: CLKTextProvider(format: durationFormatted))
+
+            case .alternative:
+                return CLKComplicationTemplateGraphicCornerGaugeImage(gaugeProvider: CLKSimpleGaugeProvider(style: .fill,
+                                                                                                            gaugeColor: self.color,
+                                                                                                            fillFraction: percent),
+                                                                      leadingTextProvider: CLKTextProvider(format: durationFormatted),
+                                                                      trailingTextProvider: nil,
+                                                                      imageProvider: CLKFullColorImageProvider(fullColorImage: fullColorImage))
+            case .alternative2:
+                return CLKComplicationTemplateGraphicCornerTextImage(textProvider: CLKTextProvider(format: "\(durationFormatted) • \(percentFormatted) pct"),
+                                                                     imageProvider: CLKFullColorImageProvider(fullColorImage: fullColorImage))
+            }
+
+        case .graphicBezel:
+            return CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: CLKComplicationTemplateGraphicCircularView(complicationView),
+                                                                   textProvider: CLKTextProvider(format: "\(durationFormatted) • \(percentFormatted) pct"))
+
+        case .graphicCircular:
+            return CLKComplicationTemplateGraphicCircularView(complicationView)
+
+        case .graphicRectangular:
+            return CLKComplicationTemplateGraphicRectangularTextGauge(headerImageProvider: CLKFullColorImageProvider(fullColorImage: fullColorImage),
+                                                               headerTextProvider: CLKTextProvider(format: header),
+                                                               body1TextProvider: CLKTextProvider(format: "\(durationFormatted) hrs • \(percentFormatted) pct"),
+                                                               gaugeProvider: CLKSimpleGaugeProvider(style: .fill,
+                                                                                                     gaugeColor: color,
+                                                                                                     fillFraction: percent))
+
+        case .graphicExtraLarge:
+            return CLKComplicationTemplateGraphicExtraLargeCircularView(complicationView)
+
+        @unknown default:
+            return nil
+        }
     }
 }
 
@@ -24,60 +158,51 @@ struct ComplicationView_Previews: PreviewProvider {
         Group {
             // Modular Small (0)
             Group {
-                CLKComplicationTemplateGraphicCircularView(ComplicationView())
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .modularSmall)!
                     .previewContext()
             }
 
             // Modular Large (1)
             Group {
-                CLKComplicationTemplateModularLargeTable(headerImageProvider: CLKImageProvider(onePieceImage: UIImage()),
-                                                         headerTextProvider: CLKTextProvider(format: "Time Tracker"),
-                                                         row1Column1TextProvider: CLKTextProvider(format: "Hours"),
-                                                         row1Column2TextProvider: CLKTextProvider(format: "06:42"),
-                                                         row2Column1TextProvider: CLKTextProvider(format: "Percent"),
-                                                         row2Column2TextProvider: CLKTextProvider(format: "78"))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .modularLarge)!
                     .previewContext()
 
-                CLKComplicationTemplateModularLargeTallBody(headerTextProvider: CLKTextProvider(format: "Time Tracker"),
-                                                            bodyTextProvider: CLKTextProvider(format: "06:42"))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .modularLarge, identifier: .alternative)!
                     .previewContext()
             }
 
             // Utilitarian Small (2)
             Group {
-                CLKComplicationTemplateUtilitarianSmallRingText(textProvider: CLKTextProvider(format: "78"),
-                                                                fillFraction: 0.78,
-                                                                ringStyle: .open)
-                    .previewContext()
-            }
-
-            // Utilitarian Large (3)
-            Group {
-                CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKTextProvider(format: "06:42 • 78 pct"),
-                                                            imageProvider: CLKImageProvider(onePieceImage: UIImage()))
-                    .previewContext()
-            }
-
-            // Circular Small (4)
-            Group {
-                CLKComplicationTemplateCircularSmallRingText(textProvider: CLKTextProvider(format: "78"),
-                                                             fillFraction: 0.3,
-                                                             ringStyle: .open)
-                    .previewContext()
-
-
-                CLKComplicationTemplateCircularSmallStackText(line1TextProvider: CLKTextProvider(format: "06:42"),
-                                                              line2TextProvider: CLKTextProvider(format: "78"))
-                    .previewContext()
-
-                CLKComplicationTemplateCircularSmallSimpleText(textProvider: CLKTextProvider(format: "06:42"))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .utilitarianSmall)!
                     .previewContext()
             }
 
             // Utilitarian Small Flat (6)
             Group {
-                CLKComplicationTemplateUtilitarianSmallFlat(textProvider: CLKTextProvider(format: "06:42"),
-                                                            imageProvider: CLKImageProvider(onePieceImage: UIImage()))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .utilitarianSmallFlat)!
+                    .previewContext()
+            }
+
+            // Utilitarian Large (3)
+            Group {
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .utilitarianLarge)!
+                    .previewContext()
+            }
+
+            // Circular Small (4)
+            Group {
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .circularSmall)!
+                    .previewContext()
+
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .circularSmall, identifier: .alternative)!
                     .previewContext()
             }
         }
@@ -90,77 +215,59 @@ struct ComplicationView2_Previews: PreviewProvider {
 
             // Extra Large (7)
             Group {
-                CLKComplicationTemplateExtraLargeRingText(textProvider: CLKTextProvider(format: "78"),
-                                                          fillFraction: 0.78,
-                                                          ringStyle: .open)
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .extraLarge)!
                     .previewContext()
 
-                CLKComplicationTemplateExtraLargeStackText(line1TextProvider: CLKTextProvider(format: "6:42"),
-                                                           line2TextProvider: CLKTextProvider(format: "78"))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .extraLarge, identifier: .alternative)!
                     .previewContext()
 
-                CLKComplicationTemplateExtraLargeSimpleText(textProvider: CLKTextProvider(format: " 06:42 "))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .extraLarge, identifier: .alternative2)!
                     .previewContext()
-
-                    CLKComplicationTemplateExtraLargeColumnsText(row1Column1TextProvider: CLKTextProvider(format: "HRS"),
-                                                                 row1Column2TextProvider: CLKTextProvider(format: "6:42"),
-                                                                 row2Column1TextProvider: CLKTextProvider(format: "PCT"),
-                                                                 row2Column2TextProvider: CLKTextProvider(format: "78"))
-                        .previewContext()
             }
 
             // Graphic Corner (8)
             Group {
-                CLKComplicationTemplateGraphicCornerGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill,
-                                                                                                    gaugeColor: .green,
-                                                                                                    fillFraction: 0.3),
-                                                              outerTextProvider: CLKTextProvider(format: "06:42"))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .graphicCorner)!
                     .previewContext()
 
-                CLKComplicationTemplateGraphicCornerGaugeImage(gaugeProvider: CLKSimpleGaugeProvider(style: .fill,
-                                                                                                     gaugeColor: .green,
-                                                                                                     fillFraction: 0.3),
-                                                               leadingTextProvider: CLKTextProvider(format: "06:42"),
-                                                               trailingTextProvider: nil,
-                                                               imageProvider: CLKFullColorImageProvider(fullColorImage: UIImage()))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .graphicCorner, identifier: .alternative)!
                     .previewContext()
 
-                CLKComplicationTemplateGraphicCornerTextImage(textProvider: CLKTextProvider(format: "06:42 • 78 pct"),
-                                                              imageProvider: CLKFullColorImageProvider(fullColorImage: UIImage()))
-                    .previewContext()
-
-                CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKTextProvider(format: "78 pct"),
-                                                              outerTextProvider: CLKTextProvider(format: "06:42"))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .graphicCorner, identifier: .alternative2)!
                     .previewContext()
             }
 
             // Graphic Bezel (9)
             Group {
-                CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: CLKComplicationTemplateGraphicCircularView(ComplicationView()),
-                                                                textProvider:  CLKTextProvider(format: "06:42 hrs • 78 pct"))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .graphicBezel)!
                     .previewContext()
             }
 
-//            // Graphic Circular (10)
-//            Group {
-//                CLKComplicationTemplateGraphicCircularView(ComplicationView())
-//                    .previewContext()
-//            }
+            // Graphic Circular (10)
+            Group {
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .graphicCircular)!
+                    .previewContext()
+            }
 
             // Graphic Rectangular (11)
             Group {
-                CLKComplicationTemplateGraphicRectangularTextGauge(headerImageProvider: CLKFullColorImageProvider(fullColorImage: UIImage()),
-                                                                   headerTextProvider: CLKTextProvider(format: "Time Tracker"),
-                                                                   body1TextProvider: CLKTextProvider(format: "06:42 hrs • 78 pct"),
-                                                                   gaugeProvider: CLKSimpleGaugeProvider(style: .fill,
-                                                                                                         gaugeColor: .green,
-                                                                                                         fillFraction: 0.3))
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .graphicRectangular)!
                     .previewContext()
             }
 
             // Graphic Extra Large (12)
             Group {
-                CLKComplicationTemplateGraphicExtraLargeCircularView(ComplicationView())
+                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                    .complication(for: .graphicExtraLarge)!
                     .previewContext()
             }
         }

@@ -8,22 +8,10 @@
 import ClockKit
 
 
-// CLKComplicationTemplate...
-
-//CLKComplicationTemplateGraphicRectangularFullView(GaugeSample())
-//    .previewContext()
-
-// CLKComplicationTimelineEntry
-//   date
-//   template
-
 // CLKComplicationServer
 //   reloadTimeline
 //   extendTimeline
 
-// CLKRelativeDateTextProvider
-// CLKTimeTextProvider
-// CLKTimeIntervalGaugeProvider
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
@@ -31,11 +19,19 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
         let descriptors = [
-            CLKComplicationDescriptor(identifier: "complication", displayName: "timetracker", supportedFamilies: CLKComplicationFamily.allCases)
-            // Multiple complication support can be added here with more descriptors
+            CLKComplicationDescriptor(identifier: ComplicationIdentifier.standard.rawValue,
+                                      displayName: "Default",
+                                      supportedFamilies: CLKComplicationFamily.allCases),
+
+            CLKComplicationDescriptor(identifier: ComplicationIdentifier.alternative.rawValue,
+                                      displayName: "Alternative",
+                                      supportedFamilies: [.modularLarge, .circularSmall, .extraLarge, .graphicCorner]),
+
+            CLKComplicationDescriptor(identifier: ComplicationIdentifier.alternative2.rawValue,
+                                      displayName: "Alternative",
+                                      supportedFamilies: [.extraLarge, .graphicCorner])
         ]
-        
-        // Call the handler with the currently supported complication descriptors
+
         handler(descriptors)
     }
     
@@ -51,26 +47,72 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
-        // Call the handler with your desired behavior when the device is locked
         handler(.showOnLockScreen)
     }
 
     // MARK: - Timeline Population
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
-        // Call the handler with the current timeline entry
-        handler(nil)
+        let duration = store.state.timeEntries.totalDurationInSeconds(on: Date())
+        let maxDuration = store.state.workingMinutesPerDay * 60
+
+        let template = ComplicationProvider(duration: duration,
+                                            maxDuration: maxDuration,
+                                            color: UIColor(store.state.accentColor.color))
+            .complication(for: complication.family,
+                          identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
+
+        guard let unwrappedTemplate = template else {
+            handler(nil)
+            return
+        }
+
+        handler(CLKComplicationTimelineEntry(date: Date(),
+                                             complicationTemplate: unwrappedTemplate))
     }
     
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
-        // Call the handler with the timeline entries after the given date
-        handler(nil)
+        let now = Date()
+        let timeEntries = store.state.timeEntries
+        let duration = timeEntries.totalDurationInSeconds(on: now)
+        let maxDuration = store.state.workingMinutesPerDay * 60
+
+        if timeEntries.isTimerRunning {
+            var entries: [CLKComplicationTimelineEntry] = []
+
+            for index in 0..<limit {
+                let difference = Int(date.timeIntervalSince(now))
+                let template = ComplicationProvider(duration: duration + difference + 60 * index,
+                                                    maxDuration: maxDuration,
+                                                    color: UIColor(store.state.accentColor.color))
+                    .complication(for: complication.family,
+                                  identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
+
+                guard let unwrappedTemplate = template else {
+                    handler(nil)
+                    return
+                }
+
+                let entry = CLKComplicationTimelineEntry(date: date.addingTimeInterval(TimeInterval(60 * index)),
+                                                         complicationTemplate: unwrappedTemplate)
+                entries.append(entry)
+            }
+
+            handler(entries)
+        } else {
+            handler(nil)
+        }
     }
 
     // MARK: - Sample Templates
     
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
-        // This method will be called once per supported complication, and the results will be cached
-        handler(nil)
+        let template = ComplicationProvider(duration: 12096,
+                                            maxDuration: 28800,
+                                            color: UIColor(store.state.accentColor.color))
+            .complication(for: complication.family,
+                          identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
+
+        handler(template)
     }
 }

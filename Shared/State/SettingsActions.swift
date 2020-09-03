@@ -5,6 +5,7 @@
 //  Created by d4Rk on 14.08.20.
 //
 
+import SwiftUI
 import SwiftUIFlux
 
 struct UpdateWorkingWeekDays: Action {
@@ -13,4 +14,8 @@ struct UpdateWorkingWeekDays: Action {
 
 struct UpdateWorkingMinutesPerDay: Action {
     let workingMinutesPerDay: Int
+}
+
+struct UpdateAccentColor: Action {
+    let color: Color
 }

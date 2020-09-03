@@ -8,6 +8,7 @@
 struct AppToWatchData: Codable {
     let timeEntries: [TimeEntry]
     let workingMinutesPerDay: Int
+    let accentColor: CodableColor
 }
 
 struct WatchToAppData: Codable {

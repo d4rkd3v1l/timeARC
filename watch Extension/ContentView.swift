@@ -12,11 +12,13 @@ struct ContentView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
         let workingMinutesPerDay: Int
+        let accentColor: Color
     }
 
     func map(state: WatchState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeEntries,
-                     workingMinutesPerDay: state.workingMinutesPerDay)
+                     workingMinutesPerDay: state.workingMinutesPerDay,
+                     accentColor: state.accentColor.color)
     }
 
     @State var duration: Int = 0
@@ -24,7 +26,7 @@ struct ContentView: ConnectedView {
 
     func body(props: Props) -> some View {
         VStack {
-            Spacer()
+//            Spacer()
             ArcViewFull(duration: self.duration,
                         maxDuration: props.workingMinutesPerDay * 60,
                         color: props.timeEntries.isTimerRunning ? .accentColor : .gray)
@@ -32,7 +34,7 @@ struct ContentView: ConnectedView {
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
                 }
-            Spacer()
+//            Spacer()
             Button(action: {
                 store.dispatch(action: ToggleTimer())
             }) {
@@ -45,9 +47,9 @@ struct ContentView: ConnectedView {
                     .cornerRadius(WatchHelper.buttonHeight / 2)
             }
             .buttonStyle(PlainButtonStyle())
-            Spacer()
+//            Spacer()
         }
-        .accentColor(.green)
+        .accentColor(props.accentColor)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
     }

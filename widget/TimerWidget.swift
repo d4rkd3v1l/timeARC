@@ -13,14 +13,16 @@ struct Provider: TimelineProvider {
         WidgetEntry(date: Date(),
                     duration: 2520,
                     maxDuration: 28800,
-                    isRunning: true)
+                    isRunning: true,
+                    accentColor: .green)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> ()) {
         let entry = WidgetEntry(date: Date(),
                                 duration: 2520,
                                 maxDuration: 28800,
-                                isRunning: true)
+                                isRunning: true,
+                                accentColor: .green)
         completion(entry)
     }
 
@@ -39,7 +41,8 @@ struct Provider: TimelineProvider {
                 let entry = WidgetEntry(date: Date().addingTimeInterval(TimeInterval(nextMinute)),
                                         duration: duration + nextMinute,
                                         maxDuration: widgetData.workingMinutesPerDay * 60,
-                                        isRunning: true)
+                                        isRunning: true,
+                                        accentColor: widgetData.accentColor.color)
                 entries.append(entry)
             }
 
@@ -49,7 +52,8 @@ struct Provider: TimelineProvider {
             let entry = WidgetEntry(date: Date(),
                                     duration: duration,
                                     maxDuration: widgetData.workingMinutesPerDay * 60,
-                                    isRunning: false)
+                                    isRunning: false,
+                                    accentColor: widgetData.accentColor.color)
 
             let timeline = Timeline(entries: [entry], policy: .never)
             completion(timeline)
@@ -63,6 +67,7 @@ struct WidgetEntry: TimelineEntry {
     let duration: Int
     let maxDuration: Int
     let isRunning: Bool
+    let accentColor: Color
 }
 
 struct WidgetEntryView: View {
@@ -79,6 +84,7 @@ struct WidgetEntryView: View {
                         allowedUnits: [.hour, .minute])
             .padding(20)
         }
+        .accentColor(entry.accentColor)
 //
 //        case .systemMedium:
 //            Text("Medium")
@@ -99,7 +105,6 @@ struct TimerWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WidgetEntryView(entry: entry)
-                .accentColor(.green)
         }
         .configurationDisplayName(LocalizedStringKey("TimeTracker"))
         .description(LocalizedStringKey("Have your time tracker always in sight."))
@@ -114,11 +119,11 @@ struct TimerWidgetSmall_Previews: PreviewProvider {
         let entry = WidgetEntry(date: Date(),
                                 duration: 2520,
                                 maxDuration: 28800,
-                                isRunning: true)
+                                isRunning: true,
+                                accentColor: .green)
 
         return WidgetEntryView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-            .accentColor(.green)
     }
 }
 
@@ -127,11 +132,11 @@ struct TimerWidgetMedium_Previews: PreviewProvider {
         let entry = WidgetEntry(date: Date(),
                                 duration: 2520,
                                 maxDuration: 28800,
-                                isRunning: true)
+                                isRunning: true,
+                                accentColor: .green)
 
         return WidgetEntryView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
-            .accentColor(.green)
     }
 }
 
@@ -140,10 +145,10 @@ struct TimerWidgetLarge_Previews: PreviewProvider {
         let entry = WidgetEntry(date: Date(),
                                 duration: 2520,
                                 maxDuration: 28800,
-                                isRunning: true)
+                                isRunning: true,
+                                accentColor: .green)
 
         return WidgetEntryView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
-            .accentColor(.green)
     }
 }

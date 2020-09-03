@@ -18,10 +18,10 @@ struct ArcView: View {
     var body: some View {
         GeometryReader { geometry in
             Arc(startAngle: .degrees(0), endAngle: .degrees(270), clockwise: true)
-                .strokeBorder(self.color.opacity(0.2), style: StrokeStyle(lineWidth: geometry.size.width / 9, lineCap: .round, lineJoin: .round))
+                .strokeBorder(self.color.opacity(0.33), style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
                 .overlay(
                     Arc(startAngle: .degrees(0), endAngle: self.endAngle, clockwise: true)
-                        .strokeBorder(self.color, style: StrokeStyle(lineWidth: geometry.size.width / 9, lineCap: .round, lineJoin: .round))
+                        .strokeBorder(self.color, style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
                 )
         }
     }
@@ -60,10 +60,10 @@ struct ArcViewFull: View {
 
     func timeFontSize(for geometry: GeometryProxy) -> CGFloat {
         if self.allowedUnits == [.hour, .minute, .second] {
-            return geometry.size.width / 10
+            return geometry.size.width / 9.5
         }
 
-        return geometry.size.width / 7
+        return geometry.size.width / 6.5
     }
     
     var body: some View {
@@ -76,7 +76,7 @@ struct ArcViewFull: View {
                 
                 Text(self.duration.formatted(allowedUnits: self.allowedUnits) ?? "")
                     .font(.system(size: self.timeFontSize(for: geometry))).bold()
-                    .offset(x: 0, y: geometry.size.height / 2.65)
+                    .offset(x: 0, y: geometry.size.height / 2.75)
             }
         }
     }
@@ -86,10 +86,44 @@ struct ArcViewFull: View {
 
 struct ArcViewFull_Previews: PreviewProvider {
     static var previews: some View {
-        ArcViewFull(duration: 123,
-                    maxDuration: 456,
-                    color: .pink,
-                    allowedUnits: [.hour, .minute])
-            .frame(width: 250, height: 250)
+        VStack {
+            ArcViewFull(duration: 123,
+                        maxDuration: 456,
+                        color: .pink,
+                        allowedUnits: [.hour, .minute])
+                .frame(width: 250, height: 250)
+
+            ArcViewFull(duration: 123,
+                        maxDuration: 456,
+                        color: .pink,
+                        allowedUnits: [.hour, .minute, .second])
+                .frame(width: 250, height: 250)
+            HStack {
+                ArcViewFull(duration: 123,
+                            maxDuration: 456,
+                            color: .pink,
+                            allowedUnits: [.hour, .minute])
+                    .frame(width: 100, height: 100)
+
+                ArcViewFull(duration: 123,
+                            maxDuration: 456,
+                            color: .pink,
+                            allowedUnits: [.hour, .minute, .second])
+                    .frame(width: 100, height: 100)
+            }
+            HStack {
+                ArcViewFull(duration: 123,
+                            maxDuration: 456,
+                            color: .pink,
+                            allowedUnits: [.hour, .minute])
+                    .frame(width: 50, height: 50)
+
+                ArcViewFull(duration: 123,
+                            maxDuration: 456,
+                            color: .pink,
+                            allowedUnits: [.hour, .minute, .second])
+                    .frame(width: 50, height: 50)
+            }
+        }
     }
 }

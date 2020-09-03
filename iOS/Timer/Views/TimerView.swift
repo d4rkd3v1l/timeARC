@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftUIFlux
 
 struct TimerView: ConnectedView {
+    @Environment(\.colorScheme) var colorScheme
+
     struct Props {
         let timeEntries: [TimeEntry]
         let workingMinutesPerDay: Int

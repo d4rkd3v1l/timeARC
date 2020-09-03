@@ -32,7 +32,8 @@ private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sen
     DispatchQueue.global().async {
         let relevantTimeEntries = state.timeState.timeEntries.filter { $0.isRelevant(for: Date()) }
         let data = AppToWatchData(timeEntries: relevantTimeEntries,
-                                  workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
+                                  workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
+                                  accentColor: state.settingsState.accentColor)
 
         if let encodedData = try? JSONEncoder().encode(data) {
             DispatchQueue.main.async {
@@ -48,7 +49,8 @@ func updateWidgetData(_ state: AppState) {
 
         let relevantTimeEntries = state.timeState.timeEntries.filter { $0.isRelevant(for: Date()) }
         let widgetData = WidgetData(timeEntries: relevantTimeEntries,
-                                    workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
+                                    workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
+                                    accentColor: state.settingsState.accentColor)
 
         let encodedWidgetData = try? JSONEncoder().encode(widgetData)
         userDefaults?.setValue(encodedWidgetData, forKey: "widgetData")
