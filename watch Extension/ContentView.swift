@@ -9,16 +9,20 @@ import SwiftUI
 import SwiftUIFlux
 
 struct ContentView: ConnectedView {
+    @Environment(\.colorScheme) var colorScheme
+
     struct Props {
         let timeEntries: [TimeEntry]
         let workingMinutesPerDay: Int
         let accentColor: Color
+        let buttonTextColor: Color
     }
 
     func map(state: WatchState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeEntries,
                      workingMinutesPerDay: state.workingMinutesPerDay,
-                     accentColor: state.accentColor.color)
+                     accentColor: state.accentColor.color,
+                     buttonTextColor: state.accentColor.contrastColor(for: self.colorScheme))
     }
 
     @State var duration: Int = 0

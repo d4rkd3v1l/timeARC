@@ -14,11 +14,13 @@ struct TimerView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
         let workingMinutesPerDay: Int
+        let buttonTextColor: Color
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeState.timeEntries,
-                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
+                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
+                     buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))
     }
 
     @State var duration: Int = 0
@@ -42,7 +44,7 @@ struct TimerView: ConnectedView {
                 Text(LocalizedStringKey(props.timeEntries.isTimerRunning ? "Stop" : "Start"))
                     .frame(width: 200, height: 50)
                     .font(Font.body.bold())
-                    .foregroundColor(.white)
+                    .foregroundColor(props.buttonTextColor)
                     .background(Color.accentColor)
                     .cornerRadius(25)
             }

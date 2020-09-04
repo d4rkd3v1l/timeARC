@@ -55,4 +55,18 @@ struct CodableColor: Codable {
         default:        return .primary
         }
     }
+
+    /// Returns a color that has high contrast to self, e.g. to distinguish text from background
+    func contrastColor(for colorScheme: ColorScheme) -> Color {
+        switch colorScheme {
+        case .light:
+            return self._color == "primary" ? .white : .primary
+
+        case .dark:
+            return self._color == "primary" ? .black : .primary
+
+        @unknown default:
+            return .primary
+        }
+    }
 }
