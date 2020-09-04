@@ -17,10 +17,9 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
 
             if let state = getState() as? AppState {
                 saveAppState(state) // TODO: optimize, don't do this for any action?
+                updateWidgetData(state)
 
-                if action is SyncTimeEntriesFromWatch {
-                    updateWidgetData(state)
-                } else {
+                if !(action is SyncTimeEntriesFromWatch) {
                     sendDataToWatch(state)
                 }
             }

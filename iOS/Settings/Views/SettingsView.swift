@@ -22,27 +22,33 @@ struct SettingsView: ConnectedView {
     }
 
     @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
+    @State private var revealWeekDays = false
     let colors: [Color] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
 
     func body(props: Props) -> some View {
         NavigationView {
             Form {
                 DatePicker("Working hours", selection: self.$workingHours, displayedComponents: .hourAndMinute)
-                NavigationLink(
-                    destination: MultipleValuesPickerView(title: "Week days",
-                                                          sectionHeader: "Choose your working days",
-                                                          initial: props.workingWeekDays)
-                        .onSelectionChange { newSelections in
-                            store.dispatch(action: UpdateWorkingWeekDays(workingWeekDays: newSelections))
+
+                DisclosureGroup(
+                    isExpanded: self.$revealWeekDays,
+                    content: {
+                        MultipleValuesPickerView(title: "Week days",
+                                                 sectionHeader: "Choose your working days",
+                                                 initial: props.workingWeekDays)
+                            .onSelectionChange { newSelections in
+                                store.dispatch(action: UpdateWorkingWeekDays(workingWeekDays: newSelections))
+                            }
+                    },
+                    label: {
+                        HStack {
+                            Text("Week days")
+                            Spacer()
+                            Text("\(props.workingWeekDays.count)") // sorted().map { $0.shortSymbol }.joined(separator: ", ")
                         }
-                ) {
-                    HStack {
-                        Text("Week days")
-                        Spacer()
-                        Text("\(props.workingWeekDays.count)") // sorted().map { $0.shortSymbol }.joined(separator: ", ")
                     }
-                    .onAppear {}
-                }
+                )
+
                 VStack(alignment: .leading) {
                     Text("Accent color")
                     ScrollView(.horizontal, showsIndicators: false) {

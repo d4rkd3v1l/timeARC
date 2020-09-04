@@ -26,29 +26,23 @@ struct MultipleValuesPickerView<Item: MultipleValuesSelectable>: View {
         self.sectionHeader = sectionHeader
         self.initial = initial
     }
-
+    
     var body: some View {
-        List {
-            Section(header: Text(self.sectionHeader)) {
-                ForEach(Item.availableItems) { item in
-                    MultipleValuesPicker(title: item.title, isSelected: self.selections.contains(item)) {
-                        if self.selections.contains(item) {
-                            self.selections.removeAll(where: { $0 == item })
-                            self.selectionChanged?(self.selections)
-                        }
-                        else {
-                            self.selections.append(item)
-                            self.selectionChanged?(self.selections)
-                        }
-                    }
+        ForEach(Item.availableItems) { item in
+            MultipleValuesPicker(title: item.title, isSelected: self.selections.contains(item)) {
+                if self.selections.contains(item) {
+                    self.selections.removeAll(where: { $0 == item })
+                    self.selectionChanged?(self.selections)
+                }
+                else {
+                    self.selections.append(item)
+                    self.selectionChanged?(self.selections)
                 }
             }
         }
         .onAppear { self.selections = self.initial }
-        .listStyle(InsetGroupedListStyle())
-        .navigationBarTitle(self.title)
     }
-
+    
     func onSelectionChange(perform action: (([Item]) -> Void)? = nil) -> some View {
         var copy = self
         copy.selectionChanged = action
