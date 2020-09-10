@@ -29,9 +29,7 @@
 		8126A27C24E968700038A4C0 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108114524C2ED2A005D7C85 /* AppState.swift */; };
 		8126A27D24E968700038A4C0 /* TimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55424C6032F00245E73 /* TimeActions.swift */; };
 		8126A27E24E969F60038A4C0 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
-		8126A27F24E969F60038A4C0 /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDD0224E81FEE000164FE /* DateTextField.swift */; };
 		8126A28324E997D90038A4C0 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8126A28224E997D90038A4C0 /* SwiftUIFlux */; };
-		812FDD0324E81FEE000164FE /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDD0224E81FEE000164FE /* DateTextField.swift */; };
 		81408CF624FA926000EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
 		81408CF724FA926700EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
 		8149A4B42501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
@@ -92,6 +90,11 @@
 		81F6E16C24F96423008EA1F3 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */; };
 		81FA384124C83522004AF914 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384024C83522004AF914 /* Playground.swift */; };
 		81FA384424C87CCC004AF914 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
+		81FC7160250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */; };
+		81FC7161250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */; };
+		81FC7162250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */; };
+		81FC7163250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */; };
+		81FC7164250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,7 +193,6 @@
 		8121750D24C54DDA00A2983B /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		8126A28024E96B440038A4C0 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		8126A28124E96B930038A4C0 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
-		812FDD0224E81FEE000164FE /* DateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTextField.swift; sourceTree = "<group>"; };
 		81408CF524FA926000EB76E5 /* AppToWatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToWatchData.swift; sourceTree = "<group>"; };
 		8149A4B32501921800A65C36 /* CodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
 		816352F024E8F8FA003BC688 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -236,6 +238,7 @@
 		81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleValuesPickerView.swift; sourceTree = "<group>"; };
 		81FA384024C83522004AF914 /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		81FA384324C87CCC004AF914 /* ArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcView.swift; sourceTree = "<group>"; };
+		81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableSystemFontModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +420,7 @@
 			children = (
 				8121750D24C54DDA00A2983B /* Date+.swift */,
 				8149A4B32501921800A65C36 /* CodableColor.swift */,
+				81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -521,7 +525,6 @@
 			isa = PBXGroup;
 			children = (
 				81FA384324C87CCC004AF914 /* ArcView.swift */,
-				812FDD0224E81FEE000164FE /* DateTextField.swift */,
 				81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */,
 			);
 			path = Views;
@@ -851,7 +854,7 @@
 				81C057CA24F29B2B0010DAA1 /* WidgetData.swift in Sources */,
 				8149A4B42501921800A65C36 /* CodableColor.swift in Sources */,
 				81EFC53D24C55BFF00245E73 /* TimeEntry.swift in Sources */,
-				812FDD0324E81FEE000164FE /* DateTextField.swift in Sources */,
+				81FC7160250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
 				81FA384424C87CCC004AF914 /* ArcView.swift in Sources */,
 				81EFC54724C58FB900245E73 /* ContentView.swift in Sources */,
 				8108114624C2ED2A005D7C85 /* AppState.swift in Sources */,
@@ -882,8 +885,8 @@
 				8126A27724E968700038A4C0 /* TimeState.swift in Sources */,
 				8126A27A24E968700038A4C0 /* SettingsState.swift in Sources */,
 				8149A4B52501921800A65C36 /* CodableColor.swift in Sources */,
+				81FC7161250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
 				8121750F24C54DDA00A2983B /* Date+.swift in Sources */,
-				8126A27F24E969F60038A4C0 /* DateTextField.swift in Sources */,
 				8126A27D24E968700038A4C0 /* TimeActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -899,6 +902,7 @@
 				8121750B24C54DCA00A2983B /* Date+Tests.swift in Sources */,
 				81EFC54A24C602DD00245E73 /* TimeReducerTests.swift in Sources */,
 				81EFC54224C55CA500245E73 /* TimeEntryTests.swift in Sources */,
+				81FC7162250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +920,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FC7163250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
 				81C057CB24F29B350010DAA1 /* WidgetData.swift in Sources */,
 				8163531B24E8FCC5003BC688 /* Date+.swift in Sources */,
 				8149A4B72501921800A65C36 /* CodableColor.swift in Sources */,
@@ -938,6 +943,7 @@
 				8149A4B82501921800A65C36 /* CodableColor.swift in Sources */,
 				8187C72724FA9F13008228AC /* WatchState.swift in Sources */,
 				81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */,
+				81FC7164250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
 				81C057FA24F2B4A40010DAA1 /* TimeEntry.swift in Sources */,
 				81C057E524F2AE6E0010DAA1 /* ComplicationController.swift in Sources */,
 				81C057F824F2B4640010DAA1 /* ArcView.swift in Sources */,

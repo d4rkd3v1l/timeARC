@@ -39,11 +39,15 @@ struct EntryDetailsView: ConnectedView {
     @State var duration: Int = 0
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
 
+    var arcViewSize: CGFloat {
+        return self.expandedId == nil ? 200 : 100
+    }
+
     func body(props: Props) -> some View {
         VStack {
             Spacer(minLength: 30)
             ArcViewFull(duration: self.duration, maxDuration: props.workingMinutesPerDay * 60)
-                .frame(width: 200, height: 200)
+                .frame(width: self.arcViewSize, height: self.arcViewSize)
                 .onReceive(self.timer) { _ in
                     self.duration = props.timeEntries.totalDurationInSeconds(on: self.selectedDate)
                 }

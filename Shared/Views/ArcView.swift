@@ -36,11 +36,11 @@ struct Arc: InsettableShape {
 
     func path(in rect: CGRect) -> Path {
         let rotationAdjustment = Angle.degrees(225)
-        let modifiedStart = startAngle - rotationAdjustment
-        let modifiedEnd = endAngle - rotationAdjustment
+        let modifiedStart = self.startAngle - rotationAdjustment
+        let modifiedEnd = self.endAngle - rotationAdjustment
 
         var path = Path()
-        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2 - insetAmount, startAngle: modifiedStart, endAngle: modifiedEnd, clockwise: !clockwise)
+        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2 - self.insetAmount, startAngle: modifiedStart, endAngle: modifiedEnd, clockwise: !self.clockwise)
 
         return path
     }
@@ -72,10 +72,10 @@ struct ArcViewFull: View {
                 ArcView(color: self.color, progress: (Double(self.duration) / Double(self.maxDuration)))
                 
                 Text("\(Int(Double(self.duration) / Double(self.maxDuration) * 100.0))%")
-                    .font(.system(size: geometry.size.width / 4)).bold()
+                    .animatableSystemFont(size: geometry.size.width / 4, weight: .bold)
                 
                 Text(self.duration.formatted(allowedUnits: self.allowedUnits) ?? "")
-                    .font(.system(size: self.timeFontSize(for: geometry))).bold()
+                    .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
                     .offset(x: 0, y: geometry.size.height / 2.75)
             }
         }
