@@ -22,13 +22,32 @@ struct SettingsView: ConnectedView {
     }
 
     @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
+    @State private var revealWorkingHours = false
     @State private var revealWeekDays = false
     let colors: [Color] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
 
     func body(props: Props) -> some View {
         NavigationView {
             Form {
-                DatePicker("Working hours", selection: self.$workingHours, displayedComponents: .hourAndMinute)
+                DisclosureGroup(
+                    isExpanded: self.$revealWorkingHours,
+                    content: {
+                        DatePicker("", selection: self.$workingHours, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(WheelDatePickerStyle())
+                            .onChange(of: self.workingHours) { time in
+                                store.dispatch(action: UpdateWorkingMinutesPerDay(workingMinutesPerDay: time.hoursAndMinutesInMinutes))
+                            }
+                            .environment(\.locale, Locale(identifier: "de"))
+                            .onAppear { self.workingHours = props.workingMinutesPerDay.hoursAndMinutes }
+                    },
+                    label: {
+                        HStack {
+                            Text("Working hours")
+                            Spacer()
+                            Text("\((props.workingMinutesPerDay * 60).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                        }
+                    }
+                )
 
                 DisclosureGroup(
                     isExpanded: self.$revealWeekDays,
@@ -44,7 +63,7 @@ struct SettingsView: ConnectedView {
                         HStack {
                             Text("Week days")
                             Spacer()
-                            Text("\(props.workingWeekDays.count)") // sorted().map { $0.shortSymbol }.joined(separator: ", ")
+                            Text("\(props.workingWeekDays.count)")
                         }
                     }
                 )
@@ -52,7 +71,7 @@ struct SettingsView: ConnectedView {
                 VStack(alignment: .leading) {
                     Text("Accent color")
                     ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHGrid(rows: [GridItem(.flexible(minimum: 40, maximum: 40))], alignment: .center, spacing: 10) {
+                        LazyHGrid(rows: [GridItem(.fixed(40))], alignment: .center, spacing: 10) {
                             ForEach(self.colors, id: \.self) { color in
                                 AccentColorView(color: color,
                                                 isSelected: color == props.accentColor)
@@ -61,9 +80,9 @@ struct SettingsView: ConnectedView {
                                     }
                             }
                         }
-//                        .padding(.horizontal, 16)
+                        .padding(.horizontal, 16)
                     }
-//                    .padding(.horizontal, -16)
+                    .padding(.horizontal, -16)
                 }
             }
             .navigationBarTitle("Settings")

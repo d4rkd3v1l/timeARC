@@ -38,4 +38,22 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
+
+    var hours: Int {
+        return Calendar.current.component(.hour, from: self)
+    }
+
+    var minutes: Int {
+        return Calendar.current.component(.minute, from: self)
+    }
+
+    var hoursAndMinutesInMinutes: Int {
+        return (self.hours * 60) + self.minutes
+    }
+}
+
+extension Int {
+    var hoursAndMinutes: Date {
+        return Date().startOfDay.addingTimeInterval(Double(self*60))
+    }
 }

@@ -8,10 +8,6 @@
 import SwiftUI
 import SwiftUIFlux
 
-class TimeEntriesStorage {
-    var timeEntries: [TimeEntry] = []
-}
-
 struct EntryDetailsView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
@@ -26,6 +22,17 @@ struct EntryDetailsView: ConnectedView {
         return Props(timeEntries: timeEntries,
                      workingMinutesPerDay: state.settingsState.workingMinutesPerDay
         )
+    }
+
+    @State private var expandedId: UUID?
+    func isExpanded(id: UUID) -> Binding<Bool> {
+        return Binding(
+            get: { id == self.expandedId },
+            set: { self.expandedId = $0 == true ? id : nil }
+        )
+    }
+    func toggleExpanded(for id: UUID) {
+        self.expandedId = self.expandedId == id ? nil : id
     }
 
     @State var selectedDate: Date
@@ -43,23 +50,28 @@ struct EntryDetailsView: ConnectedView {
             Spacer(minLength: 30)
             Form {
                 ForEach(props.timeEntries, id: \.self) { timeEntry in
-                    HStack {
-                        TimeEntryPicker(initialDate: timeEntry.start,
-                                        rangeThrough: ...timeEntry.actualEnd) { start in
-                            store.dispatch(action: UpdateTimeEntry(id: timeEntry.id,
-                                                                   start: start,
-                                                                   end: timeEntry.end))
+                    Bla(timeEntry: timeEntry, isExpanded: self.isExpanded(id: timeEntry.id))
+                        .onTapGesture {
+                            withAnimation { self.toggleExpanded(for: timeEntry.id) }
                         }
-                        Image(systemName: "arrow.right")
-                        TimeEntryPicker(initialDate: timeEntry.actualEnd,
-                                        rangeFrom: timeEntry.start...) { end in
-                            store.dispatch(action: UpdateTimeEntry(id: timeEntry.id,
-                                                                   start: timeEntry.start,
-                                                                   end: end))
-                        }
-                        Image(systemName: "clock")
-                        Text(timeEntry.durationFormatted() ?? "")
-                    }
+
+//                    HStack {
+//                        TimeEntryPicker(initialDate: timeEntry.start,
+//                                        rangeThrough: ...timeEntry.actualEnd) { start in
+//                            store.dispatch(action: UpdateTimeEntry(id: timeEntry.id,
+//                                                                   start: start,
+//                                                                   end: timeEntry.end))
+//                        }
+//                        Image(systemName: "arrow.right")
+//                        TimeEntryPicker(initialDate: timeEntry.actualEnd,
+//                                        rangeFrom: timeEntry.start...) { end in
+//                            store.dispatch(action: UpdateTimeEntry(id: timeEntry.id,
+//                                                                   start: timeEntry.start,
+//                                                                   end: end))
+//                        }
+//                        Image(systemName: "clock")
+//                        Text(timeEntry.durationFormatted() ?? "")
+//                    }
                 }
                 .onDelete(perform: { indexSet in
                     indexSet.forEach { index in
@@ -81,6 +93,57 @@ struct EntryDetailsView: ConnectedView {
             .padding(.vertical, 10)
         }
         .navigationTitle(self.selectedDate.formatted("MMM d, yyyy"))
+    }
+}
+
+struct Bla: View {
+    let timeEntry: TimeEntry
+    @Binding var isExpanded: Bool
+
+    @State private var startDate: Date = Date()
+    @State private var endDate: Date = Date() // TODO: Fix this, nil is not supported, so use a "magic date" instead?
+
+    var body: some View {
+        DisclosureGroup(
+            isExpanded: self.$isExpanded,
+            content: {
+                HStack {
+                    DatePicker("", selection: self.$startDate, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(WheelDatePickerStyle())
+                        .onChange(of: self.startDate) { start in
+                            store.dispatch(action: UpdateTimeEntry(id: self.timeEntry.id, start: start, end: self.timeEntry.end))
+                        }
+                        .environment(\.locale, Locale(identifier: "de"))
+                        .onAppear { self.startDate = self.timeEntry.start }
+                        .frame(width: 120, height: 200, alignment: .center)
+                        .clipped()
+                    Spacer()
+                    Image(systemName: "arrow.right")
+                    Spacer()
+                    DatePicker("", selection: self.$endDate, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(WheelDatePickerStyle())
+                        .onChange(of: self.endDate) { end in
+                            store.dispatch(action: UpdateTimeEntry(id: self.timeEntry.id, start: self.timeEntry.start, end: end))
+                        }
+                        .environment(\.locale, Locale(identifier: "de"))
+                        .onAppear { self.endDate = self.timeEntry.end ?? Date() }
+                        .frame(width: 120, height: 200, alignment: .center)
+                        .clipped()
+                }
+            },
+            label: {
+                HStack {
+                    Text("\(timeEntry.start.formatted("HH:mm"))")
+                    Spacer()
+                    Image(systemName: "arrow.right")
+                    Spacer()
+                    Text("\(timeEntry.end?.formatted("HH:mm") ?? "now")")
+                    Spacer()
+                    Image(systemName: "clock")
+                    Text("\(timeEntry.durationFormatted(allowedUnits: [.hour, .minute]) ?? "")")
+                }
+            }
+        )
     }
 }
 
@@ -107,6 +170,22 @@ struct TimeEntryPicker: View {
         .onAppear {
             self.selection = self.initialDate
         }
+    }
+}
+
+// TODO: Find a better name^^
+struct DisclosureGroupExpansionManager<T: Equatable> {
+    @State private var expandedId: T?
+
+    func isExpanded(id: T) -> Binding<Bool> {
+        return Binding(
+            get: { id == self.expandedId },
+            set: { self.expandedId = $0 == true ? id : nil }
+        )
+    }
+
+    func toggleExpanded(for id: T) {
+        self.expandedId = self.expandedId == id ? nil : id
     }
 }
 

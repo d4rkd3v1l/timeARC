@@ -38,7 +38,8 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     func isRelevant(for date: Date) -> Bool {
         return self.start.isInSameDay(as: date)
             || self.actualEnd.isInSameDay(as: date)
-            || (self.start...self.actualEnd).contains(date)
+            || (self.start < self.actualEnd && (self.start...self.actualEnd).contains(date))
+            || (self.actualEnd < self.start && (self.actualEnd...self.start).contains(date))
     }
 
     func durationInSeconds(on date: Date) -> Int? {
