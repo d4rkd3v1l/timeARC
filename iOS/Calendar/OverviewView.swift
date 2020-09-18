@@ -56,7 +56,8 @@ struct OverviewView: ConnectedView {
                             }
                         }
                     )
-            }.navigationBarTitle("Overview")
+            }
+            .navigationBarTitle("calendar")
         }
     }
 

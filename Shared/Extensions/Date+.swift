@@ -57,3 +57,14 @@ extension Int {
         return Date().startOfDay.addingTimeInterval(Double(self*60))
     }
 }
+
+extension NSCalendar.Unit {
+    var dateFormat: String {
+        switch self {
+        case .hour:     return "HH"
+        case .minute:   return "mm"
+        case .second:   return "ss"
+        default:        return "Not implemented"
+        }
+    }
+}

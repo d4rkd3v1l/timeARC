@@ -26,7 +26,8 @@ let watchMiddleware: Middleware<WatchState> = { dispatch, getState in
 
 private func sendDataToApp(_ state: WatchState) {
     DispatchQueue.global().async {
-        let data = WatchToAppData(timeEntries: state.timeEntries)
+        let data = WatchToAppData(timeEntries: state.timeEntries,
+                                  displayMode: state.displayMode)
 
         if let encodedData = try? JSONEncoder().encode(data) {
             DispatchQueue.main.async {

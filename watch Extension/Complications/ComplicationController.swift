@@ -53,12 +53,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Timeline Population
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
-        let duration = store.state.timeEntries.totalDurationInSeconds(on: Date())
+        let timeEntries = store.state.timeEntries
+        let duration = timeEntries.totalDurationInSeconds(on: Date())
         let maxDuration = store.state.workingMinutesPerDay * 60
+        let color = timeEntries.isTimerRunning ? UIColor(store.state.accentColor.color) : .gray
 
         let template = ComplicationProvider(duration: duration,
                                             maxDuration: maxDuration,
-                                            color: UIColor(store.state.accentColor.color))
+                                            color: color)
             .complication(for: complication.family,
                           identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
 

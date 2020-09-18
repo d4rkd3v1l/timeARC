@@ -11,39 +11,54 @@ import WidgetKit
 
 struct ContentView: ConnectedView {
     struct Props {
+        let isAppStateLoading: Bool
         let accentColor: Color
     }
-
+    
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(accentColor: state.settingsState.accentColor.color)
+        return Props(isAppStateLoading: state.isAppStateLoading,
+                     accentColor: state.settingsState.accentColor.color)
     }
 
-    func body(props: Props) -> some View {
-        TabView {
-            TimerView()
-                .tabItem {
-                    Image(systemName: "clock.fill") // timer
-                    Text(LocalizedStringKey("Timer"))
-                }
-            OverviewView()
-                .tabItem {
-                    Image(systemName: "equal.square.fill") // calendar, text.justify
-                    Text(LocalizedStringKey("Overview"))
-                }
-            Text("Statistics")
-                .tabItem {
-                    Image(systemName: "chart.bar.fill")
-                    Text(LocalizedStringKey("Statistics"))
-                }
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "wrench.fill") // gear
-                    Text(LocalizedStringKey("Settings"))
-                }
-        }
-        .accentColor(props.accentColor)
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            updateWidgetData(store.state)
+    @ViewBuilder func body(props: Props) -> some View {
+        if props.isAppStateLoading {
+            VStack {
+                ProgressView()
+                Text("loading")
+                    .padding(.all, 10)
+            }
+        } else {
+            TabView {
+                TimerView()
+                    .tabItem {
+                        Image(systemName: "clock.fill") // timer
+                        Text("timer")
+                    }
+                OverviewView()
+                    .tabItem {
+                        Image(systemName: "calendar")
+                        Text("calendar")
+                    }
+                ListView()
+                    .tabItem {
+                        Image(systemName: "tray.full.fill") // equal.square.fill
+                        Text("list")
+                    }
+                Text("Statistics")
+                    .tabItem {
+                        Image(systemName: "chart.bar.fill")
+                        Text("statistics")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Image(systemName: "wrench.fill") // gear
+                        Text("settings")
+                    }
+            }
+            .accentColor(props.accentColor)
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+                updateWidgetData(store.state)
+            }
         }
     }
 }

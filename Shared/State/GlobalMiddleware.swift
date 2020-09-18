@@ -19,9 +19,13 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
                 saveAppState(state) // TODO: optimize, don't do this for any action?
                 updateWidgetData(state)
 
-                if !(action is SyncTimeEntriesFromWatch) {
+                if state.timeState.didSyncWatchData {
                     sendDataToWatch(state)
                 }
+            }
+
+            if action is RequestWatchData {
+                requestWatchData()
             }
         }
     }
@@ -31,6 +35,7 @@ private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sen
     DispatchQueue.global().async {
         let relevantTimeEntries = state.timeState.timeEntries.filter { $0.isRelevant(for: Date()) }
         let data = AppToWatchData(timeEntries: relevantTimeEntries,
+                                  displayMode: state.timeState.displayMode,
                                   workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                                   accentColor: state.settingsState.accentColor)
 
@@ -39,6 +44,12 @@ private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sen
                 WCSession.default.sendMessageData(encodedData, replyHandler: nil)
             }
         }
+    }
+}
+
+private func requestWatchData() {
+    if let encodedData = try? JSONEncoder().encode("requestWatchData") {
+        WCSession.default.sendMessageData(encodedData, replyHandler: nil)
     }
 }
 

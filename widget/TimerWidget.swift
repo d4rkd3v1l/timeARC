@@ -106,8 +106,8 @@ struct TimerWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WidgetEntryView(entry: entry)
         }
-        .configurationDisplayName(LocalizedStringKey("TimeTracker"))
-        .description(LocalizedStringKey("Have your time tracker always in sight."))
+        .configurationDisplayName("TimeTracker")
+        .description("Have your time tracker always in sight.")
         .supportedFamilies([.systemSmall])
     }
 }

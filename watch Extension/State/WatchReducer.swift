@@ -11,8 +11,16 @@ func watchReducer(state: WatchState, action: Action) -> WatchState {
     var state = state
 
     switch action {
+    case _ as WatchStateLoadingInProgress:
+        state.isWatchStateLoading = true
+
+    case let action as WatchStateLoadingSuccess:
+        state = action.state
+        state.isWatchStateLoading = false
+
     case let action as SetWatchData:
         state.timeEntries = action.timeEntries
+        state.displayMode = action.displayMode
         state.workingMinutesPerDay = action.workingMinutesPerDay
         state.accentColor = action.accentColor
 
@@ -29,6 +37,9 @@ func watchReducer(state: WatchState, action: Action) -> WatchState {
         if !didStopTimer {
             state.timeEntries.append(TimeEntry())
         }
+
+    case let action as ChangeTimerDisplayMode:
+        state.displayMode = action.displayMode
 
     default:
         break

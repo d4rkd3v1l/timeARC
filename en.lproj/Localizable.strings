@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  timetracker
+
+  Created by d4Rk on 18.09.20.
+  
+*/
+
+"loading" = "Loading...";
+"timer" = "Timer";
+"statistics" = "Statistics";
+"settings" = "Settings";
+"stop" = "Stop";
+"start" = "Start";
+"addEntry" = "Add entry";
+"workingHours" = "Working hours";
+"weekDays" = "Week days";
+"weekDaysDescription" = "Choose your working days";
+"accentColor" = "Accent color";
+"calendar" = "Calendar";
+"list" = "List";

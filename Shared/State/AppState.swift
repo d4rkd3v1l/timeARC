@@ -14,13 +14,15 @@ let store = Store<AppState>(reducer: appStateReducer,
                             middleware: [globalMiddleware],
                             state: AppState())
 struct InitFlux: Action {}
-struct InitAppState: Action {
+struct AppStateLoadingInProgress: Action {}
+struct AppStateLoadingSuccess: Action {
     let state: AppState
 }
 
 // MARK: - AppState
 
 struct AppState: FluxState, Codable {
+    var isAppStateLoading: Bool = true
     var timeState: TimeState = TimeState()
     var settingsState: SettingsState = SettingsState()
 }
@@ -28,8 +30,15 @@ struct AppState: FluxState, Codable {
 private func appStateReducer(state: AppState, action: Action) -> AppState {
     var newState: AppState
     switch action {
-    case let action as InitAppState:
+
+    case _ as AppStateLoadingInProgress:
+        newState = AppState()
+        newState.isAppStateLoading = true
+
+    case let action as AppStateLoadingSuccess:
         newState = action.state
+        newState.isAppStateLoading = false
+
     default:
         newState = state
     }
@@ -39,7 +48,7 @@ private func appStateReducer(state: AppState, action: Action) -> AppState {
     return newState
 }
 
-// MARK: - Persistende
+// MARK: - Persistence
 
 func saveAppState(_ state: AppState) {
     DispatchQueue.global().async {
@@ -66,7 +75,6 @@ func loadAppState(_ completion: @escaping (AppState?) -> Void) {
         }
     }
 }
-
 
 // MARK: - Models
 

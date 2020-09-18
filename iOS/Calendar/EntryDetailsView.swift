@@ -54,7 +54,8 @@ struct EntryDetailsView: ConnectedView {
             Spacer(minLength: 30)
             Form {
                 ForEach(props.timeEntries, id: \.self) { timeEntry in
-                    Bla(timeEntry: timeEntry, isExpanded: self.isExpanded(id: timeEntry.id))
+                    TimeEntryPicker(timeEntry: timeEntry, isExpanded: self.isExpanded(id: timeEntry.id))
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             withAnimation { self.toggleExpanded(for: timeEntry.id) }
                         }
@@ -87,7 +88,7 @@ struct EntryDetailsView: ConnectedView {
             Button(action: {
                 store.dispatch(action: AddTimeEntry(start: self.selectedDate, end: self.selectedDate))
             }) {
-                Text(LocalizedStringKey("Add Entry"))
+                Text("addEntry")
                     .frame(width: 200, height: 50)
                     .font(Font.body.bold())
                     .foregroundColor(.white)
@@ -100,7 +101,7 @@ struct EntryDetailsView: ConnectedView {
     }
 }
 
-struct Bla: View {
+struct TimeEntryPicker: View {
     let timeEntry: TimeEntry
     @Binding var isExpanded: Bool
 
@@ -152,30 +153,30 @@ struct Bla: View {
 }
 
 // TODO: "De-hack" this?
-struct TimeEntryPicker: View {
-    var initialDate = Date()
-
-    @State private var selection: Date = Date()
-    var rangeThrough: PartialRangeThrough<Date>?
-    var rangeFrom: PartialRangeFrom<Date>?
-    var onChange: ((Date) -> Void)?
-
-    var body: some View {
-        GeometryReader { geometry in
-            if let rangeFrom = self.rangeFrom {
-                DatePicker("", selection: self.$selection, in: rangeFrom, displayedComponents: .hourAndMinute)
-                    .onChange(of: self.selection) { self.onChange?($0) }
-
-            } else if let rangeThrough = self.rangeThrough {
-                DatePicker("", selection: self.$selection, in: rangeThrough, displayedComponents: .hourAndMinute)
-                    .onChange(of: self.selection) { self.onChange?($0) }
-            }
-        }
-        .onAppear {
-            self.selection = self.initialDate
-        }
-    }
-}
+//struct TimeEntryPicker: View {
+//    var initialDate = Date()
+//
+//    @State private var selection: Date = Date()
+//    var rangeThrough: PartialRangeThrough<Date>?
+//    var rangeFrom: PartialRangeFrom<Date>?
+//    var onChange: ((Date) -> Void)?
+//
+//    var body: some View {
+//        GeometryReader { geometry in
+//            if let rangeFrom = self.rangeFrom {
+//                DatePicker("", selection: self.$selection, in: rangeFrom, displayedComponents: .hourAndMinute)
+//                    .onChange(of: self.selection) { self.onChange?($0) }
+//
+//            } else if let rangeThrough = self.rangeThrough {
+//                DatePicker("", selection: self.$selection, in: rangeThrough, displayedComponents: .hourAndMinute)
+//                    .onChange(of: self.selection) { self.onChange?($0) }
+//            }
+//        }
+//        .onAppear {
+//            self.selection = self.initialDate
+//        }
+//    }
+//}
 
 // TODO: Find a better name^^
 struct DisclosureGroupExpansionManager<T: Equatable> {

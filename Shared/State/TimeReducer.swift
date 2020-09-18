@@ -38,14 +38,22 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
         guard let index = state.timeEntries.firstIndex(where: { $0.id == action.id }) else { break }
         state.timeEntries.remove(at: index)
 
-    case let action as SyncTimeEntriesFromWatch: // TODO: Review this^^
+    case let action as SyncTimeEntriesFromWatch:
         action.timeEntries.forEach { timeEntry in
-            if state.timeEntries.contains(timeEntry) {
-                state.timeEntries.removeAll(where: { $0 == timeEntry })
+            if let localEntry = state.timeEntries.first(where: { $0.id == timeEntry.id }) {
+                state.timeEntries.removeAll(where: { $0.id == timeEntry.id })
+                state.timeEntries.append(localEntry.lastModified > timeEntry.lastModified ? localEntry : timeEntry)
+            } else {
+                state.timeEntries.append(timeEntry)
             }
-
-            state.timeEntries.append(timeEntry)
         }
+        state.didSyncWatchData = true
+
+    case _ as RequestWatchData:
+        state.didSyncWatchData = false
+
+    case let action as ChangeTimerDisplayMode:
+        state.displayMode = action.displayMode
 
     default:
         break

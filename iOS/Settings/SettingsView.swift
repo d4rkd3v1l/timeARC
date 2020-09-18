@@ -42,18 +42,22 @@ struct SettingsView: ConnectedView {
                     },
                     label: {
                         HStack {
-                            Text("Working hours")
+                            Text("workingHours")
                             Spacer()
                             Text("\((props.workingMinutesPerDay * 60).formatted(allowedUnits: [.hour, .minute]) ?? "")")
                         }
                     }
                 )
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation { self.revealWorkingHours.toggle() }
+                }
 
                 DisclosureGroup(
                     isExpanded: self.$revealWeekDays,
                     content: {
-                        MultipleValuesPickerView(title: "Week days",
-                                                 sectionHeader: "Choose your working days",
+                        MultipleValuesPickerView(title: "weekDays",
+                                                 sectionHeader: "weekDaysDescription",
                                                  initial: props.workingWeekDays)
                             .onSelectionChange { newSelections in
                                 store.dispatch(action: UpdateWorkingWeekDays(workingWeekDays: newSelections))
@@ -61,15 +65,19 @@ struct SettingsView: ConnectedView {
                     },
                     label: {
                         HStack {
-                            Text("Week days")
+                            Text("weekDays")
                             Spacer()
                             Text("\(props.workingWeekDays.count)")
                         }
                     }
                 )
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation { self.revealWeekDays.toggle() }
+                }
 
                 VStack(alignment: .leading) {
-                    Text("Accent color")
+                    Text("accentColor")
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: [GridItem(.fixed(40))], alignment: .center, spacing: 10) {
                             ForEach(self.colors, id: \.self) { color in
@@ -85,7 +93,7 @@ struct SettingsView: ConnectedView {
                     .padding(.horizontal, -16)
                 }
             }
-            .navigationBarTitle("Settings")
+            .navigationBarTitle("settings")
         }
     }
 }

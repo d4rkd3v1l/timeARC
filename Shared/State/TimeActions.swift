@@ -28,3 +28,9 @@ struct DeleteTimeEntry: Action {
 struct SyncTimeEntriesFromWatch: Action {
     let timeEntries: [TimeEntry]
 }
+
+struct RequestWatchData: Action {}
+
+struct ChangeTimerDisplayMode: Action {
+    let displayMode: TimerDisplayMode
+}

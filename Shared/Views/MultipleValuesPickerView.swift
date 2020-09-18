@@ -15,13 +15,13 @@ protocol MultipleValuesSelectable: Identifiable, Equatable {
 // Heavily inspired by https://www.pawelmadej.com/post/multi-select-picker-for-swiftui/
 struct MultipleValuesPickerView<Item: MultipleValuesSelectable>: View {
     @Environment(\.presentationMode) var presentationMode
-    let title: String
-    let sectionHeader: String
+    let title: LocalizedStringKey
+    let sectionHeader: LocalizedStringKey
     let initial: [Item]
     @State private var selections: [Item] = []
     var selectionChanged: (([Item]) -> Void)?
 
-    init(title: String, sectionHeader: String, initial: [Item]) {
+    init(title: LocalizedStringKey, sectionHeader: LocalizedStringKey, initial: [Item]) {
         self.title = title
         self.sectionHeader = sectionHeader
         self.initial = initial

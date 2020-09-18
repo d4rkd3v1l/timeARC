@@ -57,6 +57,7 @@ struct ArcViewFull: View {
     var maxDuration: Int
     var color: Color = Color.accentColor
     var allowedUnits: NSCalendar.Unit = [.hour, .minute, .second]
+    var displayMode: TimerDisplayMode = .countUp
 
     func timeFontSize(for geometry: GeometryProxy) -> CGFloat {
         if self.allowedUnits == [.hour, .minute, .second] {
@@ -64,6 +65,19 @@ struct ArcViewFull: View {
         }
 
         return geometry.size.width / 6.5
+    }
+
+    var text: String {
+        switch self.displayMode {
+        case .countUp:
+            return self.duration.formatted(allowedUnits: self.allowedUnits) ?? ""
+
+        case .countDown:
+            return (self.duration - self.maxDuration).formatted(allowedUnits: self.allowedUnits) ?? ""
+
+        case .endOfWorkingDay:
+            return Date().addingTimeInterval(TimeInterval(self.maxDuration - self.duration)).formatted("HH:mm:ss")
+        }
     }
     
     var body: some View {
@@ -74,10 +88,24 @@ struct ArcViewFull: View {
                 Text("\(Int(Double(self.duration) / Double(self.maxDuration) * 100.0))%")
                     .animatableSystemFont(size: geometry.size.width / 4, weight: .bold)
                 
-                Text(self.duration.formatted(allowedUnits: self.allowedUnits) ?? "")
+                Text(self.text)
                     .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
                     .offset(x: 0, y: geometry.size.height / 2.75)
             }
+        }
+    }
+}
+
+enum TimerDisplayMode: String, Codable {
+    case countUp
+    case countDown
+    case endOfWorkingDay
+
+    var next: TimerDisplayMode {
+        switch self {
+        case .countUp:          return .countDown
+        case .countDown:        return .endOfWorkingDay
+        case .endOfWorkingDay:  return .countUp
         }
     }
 }
@@ -96,7 +124,8 @@ struct ArcViewFull_Previews: PreviewProvider {
             ArcViewFull(duration: 123,
                         maxDuration: 456,
                         color: .pink,
-                        allowedUnits: [.hour, .minute, .second])
+                        allowedUnits: [.hour, .minute, .second],
+                        displayMode: .endOfWorkingDay)
                 .frame(width: 250, height: 250)
             HStack {
                 ArcViewFull(duration: 123,
@@ -108,7 +137,8 @@ struct ArcViewFull_Previews: PreviewProvider {
                 ArcViewFull(duration: 123,
                             maxDuration: 456,
                             color: .pink,
-                            allowedUnits: [.hour, .minute, .second])
+                            allowedUnits: [.hour, .minute, .second],
+                            displayMode: .countDown)
                     .frame(width: 100, height: 100)
             }
             HStack {
