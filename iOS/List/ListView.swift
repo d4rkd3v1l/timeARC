@@ -17,40 +17,38 @@ struct ListView: ConnectedView {
         return Props(timeEntries: Dictionary(grouping: state.timeState.timeEntries, by: { $0.start.startOfDay }))
     }
 
-    @State private var expandedId: UUID?
-    func isExpanded(id: UUID) -> Binding<Bool> {
-        return Binding(
-            get: { id == self.expandedId },
-            set: { self.expandedId = $0 == true ? id : nil }
-        )
-    }
-    func toggleExpanded(for id: UUID) {
-        self.expandedId = self.expandedId == id ? nil : id
-    }
+    @State private var editTimeEntry: TimeEntry?
 
     func body(props: Props) -> some View {
-        NavigationView {
-            Form {
-                ForEach(props.timeEntries.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
-                    Section(header: Text(key.formatted("MMMM dd yyyy"))) {
-                        ForEach(value.sorted(by: { $0.start < $1.start }), id: \.self) { timeEntry in
-                            TimeEntryPicker(timeEntry: timeEntry, isExpanded: self.isExpanded(id: timeEntry.id))
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    withAnimation { self.toggleExpanded(for: timeEntry.id) }
+        ZStack {
+            NavigationView {
+                Form {
+                    ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { key, value in
+                        Section(header: Text(key.formatted("MMMM dd yyyy"))) {
+                            ForEach(value.sorted(by: { $0.start > $1.start }), id: \.self) { timeEntry in
+                                TimeEntryListView(timeEntry: timeEntry)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        self.editTimeEntry = timeEntry
+                                    }
+                            }
+                            .onDelete(perform: { indexSet in
+                                indexSet.forEach { index in
+                                    guard let timeEntry = props.timeEntries[key]?[index] else { return }
+                                    store.dispatch(action: DeleteTimeEntry(id: timeEntry.id))
                                 }
-
+                            })
                         }
-//                        .onDelete(perform: { indexSet in
-//                            indexSet.forEach { index in
-//                                let timeEntry = props.timeEntries[index]
-//                                store.dispatch(action: DeleteTimeEntry(id: timeEntry.id))
-//                            }
-//                        })
                     }
                 }
+                .navigationBarTitle("list")
             }
-            .navigationBarTitle("list")
+            if let timeEntry = self.editTimeEntry {
+                TimeEntryEditViewPresenter(timeEntry: timeEntry)
+                    .onTapGesture {
+                        self.editTimeEntry = nil
+                    }
+            }
         }
     }
 }
@@ -69,6 +67,7 @@ struct ListView_Previews: PreviewProvider {
         return StoreProvider(store: store) {
             ListView()
                 .accentColor(.green)
+                .environment(\.colorScheme, .dark)
         }
     }
 }

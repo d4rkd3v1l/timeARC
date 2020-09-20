@@ -30,8 +30,16 @@
 		8126A27D24E968700038A4C0 /* TimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55424C6032F00245E73 /* TimeActions.swift */; };
 		8126A27E24E969F60038A4C0 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
 		8126A28324E997D90038A4C0 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8126A28224E997D90038A4C0 /* SwiftUIFlux */; };
+		812973B72517826200408C86 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812973B62517826100408C86 /* Color+.swift */; };
+		812973B82517826200408C86 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812973B62517826100408C86 /* Color+.swift */; };
+		812973B92517826200408C86 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812973B62517826100408C86 /* Color+.swift */; };
+		812973BA2517826200408C86 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812973B62517826100408C86 /* Color+.swift */; };
+		812973BB2517826200408C86 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812973B62517826100408C86 /* Color+.swift */; };
+		812973C42517858800408C86 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812973C32517858800408C86 /* VisualEffectView.swift */; };
 		81408CF624FA926000EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
 		81408CF724FA926700EB76E5 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81408CF524FA926000EB76E5 /* AppToWatchData.swift */; };
+		8149676D251786D400BD8040 /* TimeEntryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149675D2517868A00BD8040 /* TimeEntryEditView.swift */; };
+		814967762517870800BD8040 /* TimeEntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814967752517870800BD8040 /* TimeEntryListView.swift */; };
 		8149A4B42501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
 		8149A4B52501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
 		8149A4B62501921800A65C36 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149A4B32501921800A65C36 /* CodableColor.swift */; };
@@ -198,7 +206,11 @@
 		8121750D24C54DDA00A2983B /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		8126A28024E96B440038A4C0 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		8126A28124E96B930038A4C0 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
+		812973B62517826100408C86 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		812973C32517858800408C86 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		81408CF524FA926000EB76E5 /* AppToWatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToWatchData.swift; sourceTree = "<group>"; };
+		8149675D2517868A00BD8040 /* TimeEntryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryEditView.swift; sourceTree = "<group>"; };
+		814967752517870800BD8040 /* TimeEntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryListView.swift; sourceTree = "<group>"; };
 		8149A4B32501921800A65C36 /* CodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
 		816352F024E8F8FA003BC688 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		816352F224E8F8FA003BC688 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -435,6 +447,7 @@
 				8121750D24C54DDA00A2983B /* Date+.swift */,
 				8149A4B32501921800A65C36 /* CodableColor.swift */,
 				81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */,
+				812973B62517826100408C86 /* Color+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -556,6 +569,9 @@
 			children = (
 				81FA384324C87CCC004AF914 /* ArcView.swift */,
 				81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */,
+				812973C32517858800408C86 /* VisualEffectView.swift */,
+				8149675D2517868A00BD8040 /* TimeEntryEditView.swift */,
+				814967752517870800BD8040 /* TimeEntryListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -855,7 +871,9 @@
 				81EA993924E6CC88000457CE /* SettingsReducer.swift in Sources */,
 				81EA994224E6CECA000457CE /* WeekDay.swift in Sources */,
 				81EA993724E6CC81000457CE /* SettingsState.swift in Sources */,
+				8149676D251786D400BD8040 /* TimeEntryEditView.swift in Sources */,
 				81EFC55224C6032700245E73 /* TimeReducer.swift in Sources */,
+				812973C42517858800408C86 /* VisualEffectView.swift in Sources */,
 				81A3DD2A24C77FBF00D992E2 /* EntryDetailsView.swift in Sources */,
 				81EFC55824C6036700245E73 /* GlobalMiddleware.swift in Sources */,
 				81EFC54524C58E7A00245E73 /* TimerView.swift in Sources */,
@@ -864,6 +882,7 @@
 				8149A4B42501921800A65C36 /* CodableColor.swift in Sources */,
 				81EFC53D24C55BFF00245E73 /* TimeEntry.swift in Sources */,
 				81FC7160250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
+				814967762517870800BD8040 /* TimeEntryListView.swift in Sources */,
 				81FA384424C87CCC004AF914 /* ArcView.swift in Sources */,
 				81EFC54724C58FB900245E73 /* ContentView.swift in Sources */,
 				8108114624C2ED2A005D7C85 /* AppState.swift in Sources */,
@@ -872,6 +891,7 @@
 				81EFC54F24C6031F00245E73 /* TimeState.swift in Sources */,
 				816833E124C821A400DE7CCC /* CalendarView.swift in Sources */,
 				81EFC55524C6032F00245E73 /* TimeActions.swift in Sources */,
+				812973B72517826200408C86 /* Color+.swift in Sources */,
 				81408CF724FA926700EB76E5 /* AppToWatchData.swift in Sources */,
 				81F6E16C24F96423008EA1F3 /* MultipleValuesPickerView.swift in Sources */,
 				8121750E24C54DDA00A2983B /* Date+.swift in Sources */,
@@ -886,6 +906,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8126A27B24E968700038A4C0 /* SettingsReducer.swift in Sources */,
+				812973B82517826200408C86 /* Color+.swift in Sources */,
 				8126A27624E968700038A4C0 /* SettingsActions.swift in Sources */,
 				81EFC53E24C55BFF00245E73 /* TimeEntry.swift in Sources */,
 				8126A27C24E968700038A4C0 /* AppState.swift in Sources */,
@@ -907,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81EFC54424C55CA900245E73 /* TimeEntry.swift in Sources */,
+				812973B92517826200408C86 /* Color+.swift in Sources */,
 				81EFC53B24C5588700245E73 /* Date+.swift in Sources */,
 				8108112124C2EB95005D7C85 /* Tests_iOS.swift in Sources */,
 				8149A4B62501921800A65C36 /* CodableColor.swift in Sources */,
@@ -932,6 +954,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81FC7163250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
+				812973BA2517826200408C86 /* Color+.swift in Sources */,
 				81C057CB24F29B350010DAA1 /* WidgetData.swift in Sources */,
 				8163531B24E8FCC5003BC688 /* Date+.swift in Sources */,
 				8149A4B72501921800A65C36 /* CodableColor.swift in Sources */,
@@ -957,6 +980,7 @@
 				81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */,
 				81FC7164250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
 				81C057FA24F2B4A40010DAA1 /* TimeEntry.swift in Sources */,
+				812973BB2517826200408C86 /* Color+.swift in Sources */,
 				81C057E524F2AE6E0010DAA1 /* ComplicationController.swift in Sources */,
 				81C057F824F2B4640010DAA1 /* ArcView.swift in Sources */,
 				8189E6CA24FAA8B7008FEFF7 /* WatchMiddleware.swift in Sources */,
