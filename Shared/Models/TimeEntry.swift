@@ -82,10 +82,10 @@ extension Array where Element == TimeEntry {
 }
 
 extension Int {
-    func formatted(allowedUnits: NSCalendar.Unit = [.hour, .minute]) -> String? {
+    func formatted(allowedUnits: NSCalendar.Unit = [.hour, .minute], zeroFormattingBehavior: DateComponentsFormatter.ZeroFormattingBehavior = .pad) -> String? {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = allowedUnits
-        formatter.zeroFormattingBehavior = .pad
+        formatter.zeroFormattingBehavior = zeroFormattingBehavior
         return formatter.string(from: DateComponents(second: self))
     }
 }

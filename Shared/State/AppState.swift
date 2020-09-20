@@ -25,6 +25,7 @@ struct AppState: FluxState, Codable {
     var isAppStateLoading: Bool = true
     var timeState: TimeState = TimeState()
     var settingsState: SettingsState = SettingsState()
+    var statisticsState: StatisticsState = StatisticsState()
 }
 
 private func appStateReducer(state: AppState, action: Action) -> AppState {
@@ -45,6 +46,7 @@ private func appStateReducer(state: AppState, action: Action) -> AppState {
 
     newState.timeState = timeReducer(state: newState.timeState, action: action)
     newState.settingsState = settingsReducer(state: newState.settingsState, action: action)
+    newState.statisticsState = statisticsReducer(state: newState.statisticsState, action: action)
     return newState
 }
 

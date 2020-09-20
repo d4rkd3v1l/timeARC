@@ -19,3 +19,12 @@
 "accentColor" = "Accent color";
 "calendar" = "Calendar";
 "list" = "List";
+"all" = "All";
+"year" = "Year";
+"month" = "Month";
+"week" = "Week";
+"breaks" = "Breaks";
+"overtime" = "Overtime";
+"averages" = "Averages";
+"totals" = "Totals";
+"daysWorked" = "Days worked";

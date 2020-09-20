@@ -44,7 +44,7 @@ struct ContentView: ConnectedView {
                         Image(systemName: "tray.full.fill") // equal.square.fill
                         Text("list")
                     }
-                Text("Statistics")
+                StatisticsView()
                     .tabItem {
                         Image(systemName: "chart.bar.fill")
                         Text("statistics")

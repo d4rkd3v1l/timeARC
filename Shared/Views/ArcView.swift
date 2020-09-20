@@ -77,6 +77,9 @@ struct ArcViewFull: View {
 
         case .endOfWorkingDay:
             return Date().addingTimeInterval(TimeInterval(self.maxDuration - self.duration)).formatted("HH:mm:ss")
+
+        case .progress:
+            return "\(self.duration.formatted(allowedUnits: self.allowedUnits, zeroFormattingBehavior: .default) ?? "") / \(self.maxDuration.formatted(allowedUnits: self.allowedUnits, zeroFormattingBehavior: .default) ?? "")"
         }
     }
     
@@ -90,6 +93,9 @@ struct ArcViewFull: View {
                 
                 Text(self.text)
                     .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
+                    .minimumScaleFactor(0.1)
+                    .lineLimit(1)
+                    .frame(width: geometry.size.width * 0.5)
                     .offset(x: 0, y: geometry.size.height / 2.75)
             }
         }
@@ -100,12 +106,14 @@ enum TimerDisplayMode: String, Codable {
     case countUp
     case countDown
     case endOfWorkingDay
+    case progress
 
     var next: TimerDisplayMode {
         switch self {
         case .countUp:          return .countDown
         case .countDown:        return .endOfWorkingDay
         case .endOfWorkingDay:  return .countUp
+        case .progress:         return .countUp
         }
     }
 }
@@ -118,7 +126,8 @@ struct ArcViewFull_Previews: PreviewProvider {
             ArcViewFull(duration: 123,
                         maxDuration: 456,
                         color: .pink,
-                        allowedUnits: [.hour, .minute])
+                        allowedUnits: [.second],
+                        displayMode: .progress)
                 .frame(width: 250, height: 250)
 
             ArcViewFull(duration: 123,

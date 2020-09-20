@@ -22,6 +22,10 @@ extension Date {
         return Calendar.current.isDate(self, inSameDayAs: date)
     }
 
+    func byAdding(_ dateComponents: DateComponents) -> Date {
+        return Calendar.current.date(byAdding: dateComponents, to: self) ?? self
+    }
+
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }
@@ -31,6 +35,33 @@ extension Date {
         components.day = 1
         components.second = -1
         return Calendar.current.date(byAdding: components, to: self.startOfDay)!
+    }
+
+    var firstOfYear: Date {
+        let current = Calendar.current.dateComponents([.year], from: self)
+        return Calendar.current.date(from: DateComponents(year: current.year, month: 1, day: 1)) ?? self
+    }
+
+    var lastOfYear: Date {
+        return Calendar.current.date(byAdding: DateComponents(year: 1, day: -1), to: self.firstOfYear) ?? self
+    }
+
+    var firstOfMonth: Date {
+        let current = Calendar.current.dateComponents([.year, .month], from: self)
+        return Calendar.current.date(from: DateComponents(year: current.year, month: current.month, day: 1)) ?? self
+    }
+
+    var lastOfMonth: Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.firstOfMonth) ?? self
+    }
+
+    var firstOfWeek: Date {
+        let current = Calendar.current.dateComponents([.year, .weekOfYear], from: self)
+        return Calendar.current.date(from: DateComponents(year: current.year, weekOfYear: current.weekOfYear)) ?? self
+    }
+
+    var lastOfWeek: Date {
+        return Calendar.current.date(byAdding: DateComponents(day: -1, weekOfYear: 1), to: self.firstOfWeek) ?? self
     }
 
     func formatted(_ format: String) -> String {
