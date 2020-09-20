@@ -34,11 +34,11 @@ struct ContentView: ConnectedView {
                         Image(systemName: "clock.fill") // timer
                         Text("timer")
                     }
-                OverviewView()
-                    .tabItem {
-                        Image(systemName: "calendar")
-                        Text("calendar")
-                    }
+//                OverviewView()
+//                    .tabItem {
+//                        Image(systemName: "calendar")
+//                        Text("calendar")
+//                    }
                 ListView()
                     .tabItem {
                         Image(systemName: "tray.full.fill") // equal.square.fill

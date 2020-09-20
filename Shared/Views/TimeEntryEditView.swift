@@ -89,7 +89,7 @@ struct TimeEntryEditView: View {
                         .cornerRadius(20)
                 }
             }
-            .frame(width: 140, height: .infinity, alignment: .center)
+            .frame(minWidth: 140)
         }
     }
 }

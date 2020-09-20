@@ -12,14 +12,14 @@ struct TimeEntryListView: View {
 
     var body: some View {
         HStack {
-            Text("\(timeEntry.start.formatted("HH:mm"))")
+            Text(timeEntry.start.formatted("HH:mm"))
             Spacer()
             Image(systemName: "arrow.right")
             Spacer()
-            Text("\(timeEntry.end?.formatted("HH:mm") ?? "now")")
+            Text(timeEntry.end?.formatted("HH:mm") ?? "now")
             Spacer()
             Image(systemName: "clock")
-            Text("\(timeEntry.durationFormatted(allowedUnits: [.hour, .minute]) ?? "")")
+            Text(timeEntry.durationFormatted(allowedUnits: [.hour, .minute]) ?? "")
         }
     }
 }
