@@ -56,17 +56,19 @@ struct MultipleValuesPicker: View {
     var action: () -> Void
 
     var body: some View {
-        Button(action: self.action) {
             HStack {
                 Text(self.title)
                     .foregroundColor(.primary)
+                Spacer()
 
                 if self.isSelected {
-                    Spacer()
                     Image(systemName: "checkmark")
                         .foregroundColor(.accentColor)
                 }
             }
-        }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                self.action()
+            }
     }
 }

@@ -81,6 +81,33 @@ extension Date {
     var hoursAndMinutesInMinutes: Int {
         return (self.hours * 60) + self.minutes
     }
+
+    /// Keeps the current date, but adopts the time from `time`.
+    func withTime(from time: Date) -> Date? {
+        return combineDateWithTime(date: self, time: time)
+    }
+
+    /// Keeps the current time, but adopts the date from `date`.
+    func withDate(from date: Date) -> Date? {
+        return combineDateWithTime(date: date, time: self)
+    }
+}
+
+private func combineDateWithTime(date: Date, time: Date) -> Date? {
+    let calendar = NSCalendar.current
+
+    let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+    let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+
+    var mergedComponents = DateComponents()
+    mergedComponents.year = dateComponents.year
+    mergedComponents.month = dateComponents.month
+    mergedComponents.day = dateComponents.day
+    mergedComponents.hour = timeComponents.hour
+    mergedComponents.minute = timeComponents.minute
+    mergedComponents.second = timeComponents.second
+
+    return calendar.date(from: mergedComponents)
 }
 
 extension Array where Element == Date {
@@ -107,15 +134,5 @@ extension NSCalendar.Unit {
         case .second:   return "ss"
         default:        return "Not implemented"
         }
-    }
-}
-
-extension Date: Strideable {
-    public func distance(to other: Date) -> TimeInterval {
-        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
-    }
-
-    public func advanced(by n: TimeInterval) -> Date {
-        return self + n
     }
 }

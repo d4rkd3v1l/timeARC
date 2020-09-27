@@ -50,10 +50,6 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
             .second
     }
 
-    static func == (lhs: TimeEntry, rhs: TimeEntry) -> Bool {
-        return lhs.id == rhs.id
-    }
-
     func splittedIntoSingleDays() -> [TimeEntry] {
         guard self.start.startOfDay != self.actualEnd.startOfDay else { return [self] }
 
@@ -82,6 +78,10 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
             }
 
         return timeEntries
+    }
+
+    static func == (lhs: TimeEntry, rhs: TimeEntry) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
@@ -131,12 +131,11 @@ extension Dictionary where Key == Date, Value == [TimeEntry] {
     }
 
     mutating func remove(_ timeEntry: TimeEntry) {
-        guard let timeEntriesForDay = self[timeEntry.start.startOfDay],
-              let index = timeEntriesForDay.firstIndex(where: { $0.id == timeEntry.id }) else { return }
-        self[timeEntry.start.startOfDay]?.remove(at: index)
+        let day = timeEntry.start.startOfDay
+        self[day]?.removeAll(where: { $0.id == timeEntry.id })
 
-        if self[timeEntry.start.startOfDay]?.isEmpty ?? false {
-            self.removeValue(forKey: timeEntry.start.startOfDay)
+        if self[day]?.isEmpty ?? false {
+            self.removeValue(forKey: day)
         }
     }
 }
@@ -182,10 +181,17 @@ extension Array where Element == TimeEntry {
             let current = merged[index]
             let next = merged[index+1]
 
-            if current.actualEnd < next.start {
+            if current.actualEnd >= next.start {
                 merged.removeAll(where: { $0 == current })
                 merged.removeAll(where: { $0 == next })
-                merged.append(TimeEntry(start: current.start, end: next.end))
+
+                let end: Date?
+                if let currentEnd = current.end, let nextEnd = next.end {
+                    end = Swift.max(currentEnd, nextEnd)
+                } else {
+                    end = nil
+                }
+                merged.append(TimeEntry(start: current.start, end: end))
             } else {
                 index += 1
             }

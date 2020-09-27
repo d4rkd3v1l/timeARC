@@ -27,7 +27,7 @@ struct SettingsView: ConnectedView {
     }
 
     @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
-    @ObservedObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
+    @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
     let colors: [Color] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
 
     func body(props: Props) -> some View {
@@ -38,6 +38,8 @@ struct SettingsView: ConnectedView {
                     content: {
                         DatePicker("", selection: self.$workingHours, displayedComponents: .hourAndMinute)
                             .datePickerStyle(WheelDatePickerStyle())
+                            .contentShape(Rectangle())
+                            .onTapGesture {} // Note: Avoid revealing on tap
                             .onChange(of: self.workingHours) { time in
                                 store.dispatch(action: UpdateWorkingMinutesPerDay(workingMinutesPerDay: time.hoursAndMinutesInMinutes))
                             }

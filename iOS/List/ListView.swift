@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUIFlux
+import PartialSheet
 
 struct ListView: ConnectedView {
     struct Props {
@@ -17,52 +18,42 @@ struct ListView: ConnectedView {
         return Props(timeEntries: state.timeState.timeEntries)
     }
 
-    @State private var editTimeEntry: TimeEntry?
-    @ObservedObject private var expansionHandler = ExpansionHandler<Date>()
+    @StateObject private var expansionHandler = ExpansionHandler<Date>()
 
     func body(props: Props) -> some View {
-        ZStack {
-            NavigationView {
-                VStack {
-                    if props.timeEntries.isEmpty {
-                        Text("noEntriesYet")
-                            .padding(.all, 50)
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    } else {
-                        Form {
-                            ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
-                                DayView(date: day,
-                                        timeEntries: timeEntries,
-                                        isExpanded: self.expansionHandler.isExpanded(day),
-                                        editTimeEntry: self.$editTimeEntry)
-                                    .contentShape(Rectangle())
-                                    .onTapGesture {
-                                        withAnimation { self.expansionHandler.toggleExpanded(for: day) }
-                                    }
-                            }
+        NavigationView {
+            VStack {
+                if props.timeEntries.isEmpty {
+                    Text("noEntriesYet")
+                        .padding(.all, 50)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                } else {
+                    Form {
+                        ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
+                            DayView(date: day,
+                                    timeEntries: timeEntries,
+                                    isExpanded: self.expansionHandler.isExpanded(day))
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    withAnimation { self.expansionHandler.toggleExpanded(for: day) }
+                                }
                         }
                     }
-                    Button(action: {
-                        store.dispatch(action: AddTimeEntry(start: self.expansionHandler.expandedItem ?? Date(), end: self.expansionHandler.expandedItem ?? Date()))
-                    }) {
-                        Text("addEntry")
-                            .frame(width: 200, height: 50)
-                            .font(Font.body.bold())
-                            .foregroundColor(.white)
-                            .background(Color.accentColor)
-                            .cornerRadius(25)
-                    }
-                    .padding(.vertical, 10)
                 }
-                .navigationBarTitle("list")
+                Button(action: {
+                    store.dispatch(action: AddTimeEntry(start: self.expansionHandler.expandedItem ?? Date(), end: self.expansionHandler.expandedItem ?? Date()))
+                }) {
+                    Text("addEntry")
+                        .frame(width: 200, height: 50)
+                        .font(Font.body.bold())
+                        .foregroundColor(.white)
+                        .background(Color.accentColor)
+                        .cornerRadius(25)
+                }
+                .padding(.vertical, 10)
             }
-            if let timeEntry = self.editTimeEntry {
-                TimeEntryEditViewPresenter(timeEntry: timeEntry)
-                    .onTapGesture {
-                        self.editTimeEntry = nil
-                    }
-            }
+            .navigationBarTitle("list")
         }
     }
 
@@ -70,18 +61,27 @@ struct ListView: ConnectedView {
         let date: Date
         let timeEntries: [TimeEntry]
 
+        @EnvironmentObject var partialSheetManager: PartialSheetManager
         @Binding var isExpanded: Bool
-        @Binding var editTimeEntry: TimeEntry?
 
         var body: some View {
             DisclosureGroup(
                 isExpanded: self.$isExpanded,
                 content: {
-                    ForEach(self.timeEntries.sorted(by: { $0.start < $1.start }), id: \.self) { timeEntry in
+                    // TODO: Check why only "lastModified", everything else seems to lead to following error.
+                    //
+                    // Fatal error: Duplicate keys of type 'TimeEntry' were found in a Dictionary.
+                    // This usually means either that the type violates Hashable's requirements, or
+                    // that members of such a dictionary were mutated after insertion.
+                    ForEach(self.timeEntries, id: \.self.lastModified) { timeEntry in
                         TimeEntryListView(timeEntry: timeEntry)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                self.editTimeEntry = timeEntry
+                                self.partialSheetManager.showPartialSheet() {
+                                    TimeEntryEditView(timeEntry: timeEntry) {
+                                        store.dispatch(action: UpdateTimeEntry(timeEntry: $0))
+                                    }
+                                }
                             }
                     }
                     .onDelete(perform: { indexSet in
@@ -100,21 +100,6 @@ struct ListView: ConnectedView {
                     }
                 })
         }
-    }
-}
-
-class ExpansionHandler<T: Equatable>: ObservableObject {
-    @Published private (set) var expandedItem: T?
-
-    func isExpanded(_ item: T) -> Binding<Bool> {
-        return Binding(
-            get: { item == self.expandedItem },
-            set: { self.expandedItem = $0 == true ? item : nil }
-        )
-    }
-
-    func toggleExpanded(for item: T) {
-        self.expandedItem = self.expandedItem == item ? nil : item
     }
 }
 

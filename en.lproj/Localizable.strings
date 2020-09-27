@@ -20,6 +20,8 @@
 "calendar" = "Calendar";
 "list" = "List";
 "noEntriesYet" = "There are no entries yet. Just start a timer or add entries manually.";
+"editEntryTitle" = "Edit time entry";
+"timerCurrentlyRunning" = "This timer is currently running.";
 "noStatisticsForTimeFrameMessage" = "Unfortunately there are no statistics available for the selected time frame.";
 "allTime" = "All-Time";
 "year" = "Year";
@@ -30,3 +32,5 @@
 "averages" = "Averages";
 "totals" = "Totals";
 "daysWorked" = "Days worked";
+"date" = "Date";
+"time" = "Time";

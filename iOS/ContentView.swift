@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUIFlux
 import WidgetKit
+import PartialSheet
 
 struct ContentView: ConnectedView {
     struct Props {
@@ -55,10 +56,17 @@ struct ContentView: ConnectedView {
                         Text("settings")
                     }
             }
-            .accentColor(props.accentColor)
+            .addPartialSheet(style: PartialSheetStyle(background: .solid(Color(UIColor.systemGroupedBackground)),
+                                                      handlerBarColor: Color.primary,
+                                                      enableCover: true,
+                                                      coverColor: Color(UIColor.secondarySystemBackground).opacity(0.7),
+                                                      blurEffectStyle: nil,
+                                                      cornerRadius: 15,
+                                                      minTopDistance: 0))
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 updateWidgetData(store.state)
             }
+            .accentColor(props.accentColor)
         }
     }
 }

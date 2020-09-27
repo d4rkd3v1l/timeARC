@@ -7,10 +7,12 @@
 
 import SwiftUI
 import SwiftUIFlux
+import PartialSheet
 
 @main
 struct app: App {
     let watchCommunicator = WatchCommunicator()
+    let sheetManager: PartialSheetManager = PartialSheetManager()
 
     init() {
         store.dispatch(action: InitFlux())
@@ -25,6 +27,7 @@ struct app: App {
         WindowGroup {
             StoreProvider(store: store) {
                 ContentView()
+                    .environmentObject(self.sheetManager)
             }
         }
     }

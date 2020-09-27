@@ -15,6 +15,16 @@
 		8108113224C2EB95005D7C85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8108110724C2EB95005D7C85 /* Assets.xcassets */; };
 		8108113324C2EB95005D7C85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8108110724C2EB95005D7C85 /* Assets.xcassets */; };
 		8108114624C2ED2A005D7C85 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108114524C2ED2A005D7C85 /* AppState.swift */; };
+		812145B22520DD9A00CE12FA /* ExpansionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812145B12520DD9A00CE12FA /* ExpansionHandler.swift */; };
+		812145B32520DD9A00CE12FA /* ExpansionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812145B12520DD9A00CE12FA /* ExpansionHandler.swift */; };
+		812145B42520DD9A00CE12FA /* ExpansionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812145B12520DD9A00CE12FA /* ExpansionHandler.swift */; };
+		812145B52520DD9A00CE12FA /* ExpansionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812145B12520DD9A00CE12FA /* ExpansionHandler.swift */; };
+		812145B62520DD9A00CE12FA /* ExpansionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812145B12520DD9A00CE12FA /* ExpansionHandler.swift */; };
+		812146592520F65200CE12FA /* Date+Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812146372520F62F00CE12FA /* Date+Strideable.swift */; };
+		812146612520F65300CE12FA /* Date+Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812146372520F62F00CE12FA /* Date+Strideable.swift */; };
+		812146A42520F87C00CE12FA /* Date+Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812146372520F62F00CE12FA /* Date+Strideable.swift */; };
+		812146AC2520F87D00CE12FA /* Date+Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812146372520F62F00CE12FA /* Date+Strideable.swift */; };
+		812146C42520FA4D00CE12FA /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 812146C32520FA4D00CE12FA /* PartialSheet */; };
 		8121750B24C54DCA00A2983B /* Date+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750A24C54DCA00A2983B /* Date+Tests.swift */; };
 		8121750C24C54DCA00A2983B /* Date+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750A24C54DCA00A2983B /* Date+Tests.swift */; };
 		8121750E24C54DDA00A2983B /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750D24C54DDA00A2983B /* Date+.swift */; };
@@ -59,7 +69,6 @@
 		8163531924E8FBE7003BC688 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
 		8163531B24E8FCC5003BC688 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8121750D24C54DDA00A2983B /* Date+.swift */; };
 		8163531C24E8FCD3003BC688 /* TimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC53C24C55BFF00245E73 /* TimeEntry.swift */; };
-		816833E124C821A400DE7CCC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816833E024C821A400DE7CCC /* CalendarView.swift */; };
 		816B430A25153BDF003EFE52 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B430925153BDF003EFE52 /* ListView.swift */; };
 		816B43212515442A003EFE52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 81BFBD352515300B007636B2 /* Localizable.strings */; };
 		8187C72724FA9F13008228AC /* WatchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8187C72624FA9F13008228AC /* WatchState.swift */; };
@@ -67,7 +76,6 @@
 		8189E6C824FAA8AD008FEFF7 /* WatchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8189E6C724FAA8AD008FEFF7 /* WatchActions.swift */; };
 		8189E6CA24FAA8B7008FEFF7 /* WatchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8189E6C924FAA8B7008FEFF7 /* WatchMiddleware.swift */; };
 		8189E6CC24FAA8DE008FEFF7 /* WatchReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8189E6CB24FAA8DE008FEFF7 /* WatchReducer.swift */; };
-		81A3DD2A24C77FBF00D992E2 /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3DD2924C77FBF00D992E2 /* EntryDetailsView.swift */; };
 		81BDF27F25149BEC00B7C306 /* WatchCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDF27E25149BEC00B7C306 /* WatchCommunicator.swift */; };
 		81BDF28825149C2400B7C306 /* AppCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDF28725149C2400B7C306 /* AppCommunicator.swift */; };
 		81BFBD332515300B007636B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 81BFBD352515300B007636B2 /* Localizable.strings */; };
@@ -110,10 +118,8 @@
 		81EFC55224C6032700245E73 /* TimeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55124C6032700245E73 /* TimeReducer.swift */; };
 		81EFC55524C6032F00245E73 /* TimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55424C6032F00245E73 /* TimeActions.swift */; };
 		81EFC55824C6036700245E73 /* GlobalMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55724C6036700245E73 /* GlobalMiddleware.swift */; };
-		81EFC55C24C603EC00245E73 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFC55B24C603EC00245E73 /* OverviewView.swift */; };
 		81F6E16C24F96423008EA1F3 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F6E16B24F96423008EA1F3 /* MultipleValuesPickerView.swift */; };
 		81F6E2082517A78E00B8367E /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F6E2072517A78E00B8367E /* StatisticsView.swift */; };
-		81FA384124C83522004AF914 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384024C83522004AF914 /* Playground.swift */; };
 		81FA384424C87CCC004AF914 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA384324C87CCC004AF914 /* ArcView.swift */; };
 		81FC7160250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */; };
 		81FC7161250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */; };
@@ -214,6 +220,8 @@
 		8108112B24C2EB95005D7C85 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		8108112D24C2EB95005D7C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8108114524C2ED2A005D7C85 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		812145B12520DD9A00CE12FA /* ExpansionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionHandler.swift; sourceTree = "<group>"; };
+		812146372520F62F00CE12FA /* Date+Strideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Strideable.swift"; sourceTree = "<group>"; };
 		8121750A24C54DCA00A2983B /* Date+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Tests.swift"; sourceTree = "<group>"; };
 		8121750D24C54DDA00A2983B /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		8126A28024E96B440038A4C0 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
@@ -285,6 +293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				812146C42520FA4D00CE12FA /* PartialSheet in Frameworks */,
 				81DD520424C2F3A40039C792 /* SwiftUIFlux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,11 +470,13 @@
 		8121751024C54DDE00A2983B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8121750D24C54DDA00A2983B /* Date+.swift */,
-				8149A4B32501921800A65C36 /* CodableColor.swift */,
 				81FC715F250A2C50006AF590 /* AnimatableSystemFontModifier.swift */,
-				812973B62517826100408C86 /* Color+.swift */,
+				8149A4B32501921800A65C36 /* CodableColor.swift */,
 				81E9D102251F5C53005149C2 /* Collection+average.swift */,
+				812973B62517826100408C86 /* Color+.swift */,
+				8121750D24C54DDA00A2983B /* Date+.swift */,
+				812146372520F62F00CE12FA /* Date+Strideable.swift */,
+				812145B12520DD9A00CE12FA /* ExpansionHandler.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -647,6 +658,7 @@
 			name = "timetracker (iOS)";
 			packageProductDependencies = (
 				81DD520324C2F3A40039C792 /* SwiftUIFlux */,
+				812146C32520FA4D00CE12FA /* PartialSheet */,
 			);
 			productName = "timetracker (iOS)";
 			productReference = 8108110C24C2EB95005D7C85 /* timetracker.app */;
@@ -808,6 +820,7 @@
 			mainGroup = 810810FF24C2EB94005D7C85;
 			packageReferences = (
 				81DD520224C2F3A40039C792 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */,
+				812146C22520FA4D00CE12FA /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = 8108110D24C2EB95005D7C85 /* Products */;
 			projectDirPath = "";
@@ -894,15 +907,14 @@
 				81EA993924E6CC88000457CE /* SettingsReducer.swift in Sources */,
 				81EA994224E6CECA000457CE /* WeekDay.swift in Sources */,
 				81EA993724E6CC81000457CE /* SettingsState.swift in Sources */,
+				812146A42520F87C00CE12FA /* Date+Strideable.swift in Sources */,
 				812FEDCE2517BD0900B9C83E /* StatisticsState.swift in Sources */,
 				81E9D103251F5C53005149C2 /* Collection+average.swift in Sources */,
 				8149676D251786D400BD8040 /* TimeEntryEditView.swift in Sources */,
 				81EFC55224C6032700245E73 /* TimeReducer.swift in Sources */,
 				812973C42517858800408C86 /* VisualEffectView.swift in Sources */,
-				81A3DD2A24C77FBF00D992E2 /* EntryDetailsView.swift in Sources */,
 				81EFC55824C6036700245E73 /* GlobalMiddleware.swift in Sources */,
 				81EFC54524C58E7A00245E73 /* TimerView.swift in Sources */,
-				81FA384124C83522004AF914 /* Playground.swift in Sources */,
 				81C057CA24F29B2B0010DAA1 /* WidgetData.swift in Sources */,
 				8149A4B42501921800A65C36 /* CodableColor.swift in Sources */,
 				812FEDD92517BD0E00B9C83E /* StatisticsReducer.swift in Sources */,
@@ -912,17 +924,16 @@
 				81FA384424C87CCC004AF914 /* ArcView.swift in Sources */,
 				81EFC54724C58FB900245E73 /* ContentView.swift in Sources */,
 				8108114624C2ED2A005D7C85 /* AppState.swift in Sources */,
+				812145B22520DD9A00CE12FA /* ExpansionHandler.swift in Sources */,
 				8108112E24C2EB95005D7C85 /* App.swift in Sources */,
 				816B430A25153BDF003EFE52 /* ListView.swift in Sources */,
 				81F6E2082517A78E00B8367E /* StatisticsView.swift in Sources */,
 				81EFC54F24C6031F00245E73 /* TimeState.swift in Sources */,
-				816833E124C821A400DE7CCC /* CalendarView.swift in Sources */,
 				81EFC55524C6032F00245E73 /* TimeActions.swift in Sources */,
 				812973B72517826200408C86 /* Color+.swift in Sources */,
 				81408CF724FA926700EB76E5 /* AppToWatchData.swift in Sources */,
 				81F6E16C24F96423008EA1F3 /* MultipleValuesPickerView.swift in Sources */,
 				8121750E24C54DDA00A2983B /* Date+.swift in Sources */,
-				81EFC55C24C603EC00245E73 /* OverviewView.swift in Sources */,
 				81BDF27F25149BEC00B7C306 /* WatchCommunicator.swift in Sources */,
 				81EA994024E6CDED000457CE /* SettingsView.swift in Sources */,
 			);
@@ -948,6 +959,7 @@
 				8149A4B52501921800A65C36 /* CodableColor.swift in Sources */,
 				812FEDCF2517BD0900B9C83E /* StatisticsState.swift in Sources */,
 				81FC7161250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
+				812145B32520DD9A00CE12FA /* ExpansionHandler.swift in Sources */,
 				812FEDD82517BD0E00B9C83E /* StatisticsReducer.swift in Sources */,
 				8121750F24C54DDA00A2983B /* Date+.swift in Sources */,
 				8126A27D24E968700038A4C0 /* TimeActions.swift in Sources */,
@@ -960,11 +972,13 @@
 			files = (
 				81EFC54424C55CA900245E73 /* TimeEntry.swift in Sources */,
 				812973B92517826200408C86 /* Color+.swift in Sources */,
+				812145B42520DD9A00CE12FA /* ExpansionHandler.swift in Sources */,
 				81EFC53B24C5588700245E73 /* Date+.swift in Sources */,
 				8108112124C2EB95005D7C85 /* Tests_iOS.swift in Sources */,
 				8149A4B62501921800A65C36 /* CodableColor.swift in Sources */,
 				8121750B24C54DCA00A2983B /* Date+Tests.swift in Sources */,
 				81EFC54A24C602DD00245E73 /* TimeReducerTests.swift in Sources */,
+				812146AC2520F87D00CE12FA /* Date+Strideable.swift in Sources */,
 				81EFC54224C55CA500245E73 /* TimeEntryTests.swift in Sources */,
 				81E9D105251F5C53005149C2 /* Collection+average.swift in Sources */,
 				81FC7162250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
@@ -991,9 +1005,11 @@
 				8163531B24E8FCC5003BC688 /* Date+.swift in Sources */,
 				8149A4B72501921800A65C36 /* CodableColor.swift in Sources */,
 				8163531824E8FAFB003BC688 /* TimerWidget.swift in Sources */,
+				812145B52520DD9A00CE12FA /* ExpansionHandler.swift in Sources */,
 				81E9D106251F5C53005149C2 /* Collection+average.swift in Sources */,
 				8163531924E8FBE7003BC688 /* ArcView.swift in Sources */,
 				8163531C24E8FCD3003BC688 /* TimeEntry.swift in Sources */,
+				812146592520F65200CE12FA /* Date+Strideable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,6 +1018,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81BDF28825149C2400B7C306 /* AppCommunicator.swift in Sources */,
+				812145B62520DD9A00CE12FA /* ExpansionHandler.swift in Sources */,
 				81C057F924F2B4770010DAA1 /* Date+.swift in Sources */,
 				81408CF624FA926000EB76E5 /* AppToWatchData.swift in Sources */,
 				81C057E124F2AE6E0010DAA1 /* NotificationController.swift in Sources */,
@@ -1010,6 +1027,7 @@
 				8106A01A24FBAE42009A1E84 /* ComplicationView.swift in Sources */,
 				8149A4B82501921800A65C36 /* CodableColor.swift in Sources */,
 				8187C72724FA9F13008228AC /* WatchState.swift in Sources */,
+				812146612520F65300CE12FA /* Date+Strideable.swift in Sources */,
 				81C057DF24F2AE6E0010DAA1 /* ContentView.swift in Sources */,
 				81FC7164250A2C50006AF590 /* AnimatableSystemFontModifier.swift in Sources */,
 				81C057FA24F2B4A40010DAA1 /* TimeEntry.swift in Sources */,
@@ -1204,7 +1222,7 @@
 				PRODUCT_NAME = timetracker;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1228,7 +1246,7 @@
 				PRODUCT_NAME = timetracker;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1301,7 +1319,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = "timetracker (iOS)";
 			};
 			name = Debug;
@@ -1324,7 +1342,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = "timetracker (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1394,7 +1412,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1417,7 +1435,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1590,6 +1608,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		812146C22520FA4D00CE12FA /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.11;
+			};
+		};
 		81DD520224C2F3A40039C792 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Dimillian/SwiftUIFlux.git";
@@ -1601,6 +1627,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		812146C32520FA4D00CE12FA /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 812146C22520FA4D00CE12FA /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
+		};
 		8126A28224E997D90038A4C0 /* SwiftUIFlux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 81DD520224C2F3A40039C792 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */;

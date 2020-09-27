@@ -9,39 +9,78 @@ import SwiftUI
 
 struct TimeEntryEditView: View {
     let timeEntry: TimeEntry
-    let onDismiss: ((TimeEntry) -> Void)?
+    var onDismiss: ((TimeEntry) -> Void)? = nil
 
+    @State private var day: Date = Date()
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
     @State private var isRunning: Bool = false
 
     var body: some View {
-        HStack {
-            DatePickerView(date: self.$startDate)
-                .onChange(of: self.startDate) { startDate in
-                    if startDate > self.endDate {
-                        self.startDate = self.endDate
+        VStack {
+            Text("editEntryTitle")
+                .font(.headline)
+            Form {
+                VStack {
+                    if self.isRunning {
+                        Text("timerCurrentlyRunning")
+                            .multilineTextAlignment(.center)
+                            .padding(.all, 10)
                     }
-                }
-
-            Image(systemName: "arrow.right")
-
-            if self.isRunning {
-                StopTimerView(isRunning: self.$isRunning, date: self.$endDate)
-            } else {
-                DatePickerView(date: self.$endDate)
-                    .onChange(of: self.endDate) { endDate in
-                        if endDate < self.startDate {
-                            self.endDate = self.startDate
+                    HStack {
+                        Text("date")
+                        Spacer()
+                        DatePicker("", selection: self.$day, displayedComponents: .date)
+                            .labelsHidden()
+                            .frame(alignment: .center)
+                            .onChange(of: self.day) { day in
+                                guard let newStartDate = self.startDate.withDate(from: day),
+                                      let newEndDate = self.endDate.withDate(from: day) else { return }
+                                self.startDate = newStartDate
+                                self.endDate = newEndDate
+                            }
+                    }
+                    HStack {
+                        Text("time")
+                        Spacer()
+                        DatePicker("", selection: self.$startDate, displayedComponents: .hourAndMinute)
+                            .labelsHidden()
+                            .onChange(of: self.startDate) { startDate in
+                                if startDate > self.endDate {
+                                    self.startDate = self.endDate
+                                }
+                            }
+                        Image(systemName: "arrow.right")
+                        if self.isRunning {
+                            VStack {
+                                Button(action: {
+                                    self.endDate = Date()
+                                    self.isRunning.toggle()
+                                }) {
+                                    Text("stop")
+                                        .frame(width: 120, height: 34, alignment: .center)
+                                        .font(Font.body.bold())
+                                        .foregroundColor(.white)
+                                        .background(Color.accentColor)
+                                        .cornerRadius(17)
+                                }
+                            }
+                        } else {
+                            DatePicker("", selection: self.$endDate, displayedComponents: .hourAndMinute)
+                                .labelsHidden()
+                                .onChange(of: self.endDate) { endDate in
+                                    if endDate < self.startDate {
+                                        self.endDate = self.startDate
+                                    }
+                                }
                         }
                     }
+                }
             }
         }
-        .frame(maxWidth: 400)
-        .padding(.all, 15)
-        .background(Color.secondaryGray)
-        .cornerRadius(20)
+        .frame(maxHeight: 250)
         .onAppear {
+            self.day = self.startDate.startOfDay
             self.startDate = self.timeEntry.start
             self.endDate = self.timeEntry.end ?? Date()
             self.isRunning = self.timeEntry.isRunning
@@ -53,58 +92,19 @@ struct TimeEntryEditView: View {
             self.onDismiss?(newTimeEntry)
         }
     }
-
-    struct DatePickerView: View {
-        @Binding var date: Date
-
-        var body: some View {
-            DatePicker("", selection: self.$date, displayedComponents: .hourAndMinute)
-                .datePickerStyle(WheelDatePickerStyle())
-                .frame(minWidth: 140)
-                .background(Color.primaryGray)
-                .cornerRadius(10)
-                .clipped()
-                .environment(\.locale, Locale(identifier: "de")) // TODO: Remove
-        }
-    }
-
-    struct StopTimerView: View {
-        @Binding var isRunning: Bool
-        @Binding var date: Date
-
-        var body: some View {
-            VStack {
-                Text("This timer is currently running.")
-                    .multilineTextAlignment(.center)
-                    .padding([.leading, .trailing, .bottom], 20)
-                Button(action: {
-                    self.date = Date()
-                    self.isRunning.toggle()
-                }) {
-                    Text("stop")
-                        .frame(width: 120, height: 40, alignment: .center)
-                        .font(Font.body.bold())
-                        .foregroundColor(.white)
-                        .background(Color.accentColor)
-                        .cornerRadius(20)
-                }
-            }
-            .frame(minWidth: 140)
-        }
-    }
 }
 
-struct TimeEntryEditViewPresenter: View {
-    let timeEntry: TimeEntry
-
-    var body: some View {
-        ZStack {
-            VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial), intensity: 1)
-                .edgesIgnoringSafeArea(.all)
-
-            TimeEntryEditView(timeEntry: timeEntry) { timeEntry in
-                store.dispatch(action: UpdateTimeEntry(timeEntry: timeEntry))
-            }
+struct TimeEntryEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            Spacer()
+            TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: Date()))
+            Spacer()
+            TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: nil))
+            Spacer()
         }
+        .accentColor(.green)
+        .environment(\.colorScheme, .dark)
+        .background(Color.primary)
     }
 }

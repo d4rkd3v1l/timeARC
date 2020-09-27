@@ -67,12 +67,12 @@ struct EntryDetailsView: ConnectedView {
             }
             .navigationTitle(self.selectedDate.formatted("MMM d, yyyy"))
 
-            if let timeEntry = self.editTimeEntry {
-                TimeEntryEditViewPresenter(timeEntry: timeEntry)
-                    .onTapGesture {
-                        self.editTimeEntry = nil
-                    }
-            }
+//            if let timeEntry = self.editTimeEntry {
+//                TimeEntryEditViewPresenter(timeEntry: timeEntry)
+//                    .onTapGesture {
+//                        self.editTimeEntry = nil
+//                    }
+//            }
         }
     }
 }

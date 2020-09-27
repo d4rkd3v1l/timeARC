@@ -96,6 +96,7 @@ struct StatisticsView: ConnectedView {
 
                 if let errorMessage = props.errorMessage {
                     Text(LocalizedStringKey(errorMessage))
+                        .multilineTextAlignment(.center)
                         .padding(.all, 50)
                     Spacer()
                 } else {
