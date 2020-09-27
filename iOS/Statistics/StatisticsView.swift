@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUIFlux
 
 enum TimeFrame: String, CaseIterable, Identifiable, Codable {
-    case all
+    case allTime
     case year
     case month
     case week
@@ -21,14 +21,40 @@ enum TimeFrame: String, CaseIterable, Identifiable, Codable {
 
 struct StatisticsView: ConnectedView {
     struct Props {
-        
+        let selectedTimeFrame: TimeFrame
+        let selectedDateText: String
+        let errorMessage: String?
+        let targetDuration: Int
+        let averageDuration: Int
+        let averageWorkingHoursStartDate: Date
+        let averageWorkingHoursEndDate: Date
+        let averageBreaksDuration: Int
+        let averageOvertimeDuration: Int
+        let totalDays: Int
+        let totalDaysWorked: Int
+        let totalDuration: Int
+        let totalBreaksDuration: Int
+        let totalOvertimeDuration: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props()
+        return Props(selectedTimeFrame: state.statisticsState.selectedTimeFrame,
+                     selectedDateText: state.statisticsState.selectedDateText,
+                     errorMessage: state.statisticsState.errorMessage,
+                     targetDuration: state.statisticsState.targetDuration,
+                     averageDuration: state.statisticsState.averageDuration,
+                     averageWorkingHoursStartDate: state.statisticsState.averageWorkingHoursStartDate,
+                     averageWorkingHoursEndDate: state.statisticsState.averageWorkingHoursEndDate,
+                     averageBreaksDuration: state.statisticsState.averageBreaksDuration,
+                     averageOvertimeDuration: state.statisticsState.averageOvertimeDuration,
+                     totalDays: state.statisticsState.totalDays,
+                     totalDaysWorked: state.statisticsState.totalDaysWorked,
+                     totalDuration: state.statisticsState.totalDuration,
+                     totalBreaksDuration: state.statisticsState.totalBreaksDuration,
+                     totalOvertimeDuration: state.statisticsState.totalOvertimeDuration)
     }
 
-    @State private var selectedTimeFrame: TimeFrame = .all
+    @State private var selectedTimeFrame: TimeFrame = .allTime
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -40,88 +66,110 @@ struct StatisticsView: ConnectedView {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
+                .onChange(of: self.selectedTimeFrame) {
+                    store.dispatch(action: StatisticsChangeTimeFrame(timeFrame: $0))
+                }
 
                 HStack {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        store.dispatch(action: StatisticsPreviousInterval())
+                    }, label: {
                         Image(systemName: "arrow.left.circle.fill")
                             .resizable()
                             .frame(width: 25, height: 25, alignment: .center)
                             .padding(.all, 15)
                     })
+                    .disabled(props.selectedTimeFrame == .allTime)
 
-                    Text("02.10.2020 - 09.10.2020")
+                    Text(props.selectedDateText)
 
-                    Button(action: {}, label: {
+                    Button(action: {
+                        store.dispatch(action: StatisticsNextInterval())
+                    }, label: {
                         Image(systemName: "arrow.right.circle.fill")
                             .resizable()
                             .frame(width: 25, height: 25, alignment: .center)
                             .padding(.all, 15)
                     })
+                    .disabled(props.selectedTimeFrame == .allTime)
                 }
 
-                List {
-                    Section(header: Text("averages")) {
-                        VStack {
-                            HStack {
-                                ArcViewFull(duration: 26900, maxDuration: 28800, color: .accentColor, allowedUnits: [.hour, .minute, .second], displayMode: .countUp)
-                                    .frame(width: 150, height: 150)
-                                Spacer()
-                                VStack(alignment: .trailing) {
-                                    Text("workingHours")
+                if let errorMessage = props.errorMessage {
+                    Text(LocalizedStringKey(errorMessage))
+                        .padding(.all, 50)
+                    Spacer()
+                } else {
+                    List {
+                        Section(header: Text("averages")) {
+                            VStack {
+                                HStack {
+                                    ArcViewFull(duration: props.averageDuration, maxDuration: props.targetDuration, color: .accentColor, allowedUnits: [.hour, .minute, .second], displayMode: .countUp)
+                                        .frame(width: 150, height: 150)
                                     Spacer()
-                                    Text("08:34 - 18:13")
+                                    VStack(alignment: .trailing) {
+                                        Text("workingHours")
+                                        Spacer()
+                                        Text("\(props.averageWorkingHoursStartDate.formatted("HH:mm")) - \(props.averageWorkingHoursEndDate.formatted("HH:mm"))")
+                                    }
                                 }
+                            }
+
+                            HStack {
+                                Text("breaks")
+                                Spacer()
+                                Text("\(props.averageBreaksDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+                            }
+
+                            HStack {
+                                Text("overtime")
+                                Spacer()
+                                Text("\(props.averageOvertimeDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+
                             }
                         }
 
-                        HStack {
-                            Text("breaks")
-                            Spacer()
-                            Text("0:35")
-                        }
-
-                        HStack {
-                            Text("overtime")
-                            Spacer()
-                            Text("-0:14")
-                        }
-                    }
-
-                    Section(header: Text("Totals")) {
-                        VStack {
-                            HStack {
-                                ArcViewFull(duration: 4, maxDuration: 5, color: .accentColor, allowedUnits: [.second], displayMode: .progress)
-                                    .frame(width: 150, height: 150)
-                                Spacer()
-                                VStack(alignment: .trailing) {
-                                    Text("daysWorked")
+                        Section(header: Text("Totals")) {
+                            VStack {
+                                HStack {
+                                    ArcViewFull(duration: props.totalDaysWorked, maxDuration: props.totalDays, color: .accentColor, allowedUnits: [.second], displayMode: .progress)
+                                        .frame(width: 150, height: 150)
                                     Spacer()
+                                    VStack(alignment: .trailing) {
+                                        Text("daysWorked")
+                                        Spacer()
+                                    }
                                 }
                             }
-                        }
 
-                        HStack {
-                            Text("workingHours")
-                            Spacer()
-                            Text("145:43")
-                        }
+                            HStack {
+                                Text("workingHours")
+                                Spacer()
+                                Text("\(props.totalDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
 
-                        HStack {
-                            Text("breaks")
-                            Spacer()
-                            Text("4:34")
-                        }
+                            }
 
-                        HStack {
-                            Text("overtime")
-                            Spacer()
-                            Text("0:30")
+                            HStack {
+                                Text("breaks")
+                                Spacer()
+                                Text("\(props.totalBreaksDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+
+                            }
+
+                            HStack {
+                                Text("overtime")
+                                Spacer()
+                                Text("\(props.totalOvertimeDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+
+                            }
                         }
                     }
+                    .listStyle(InsetGroupedListStyle())
                 }
-                .listStyle(InsetGroupedListStyle())
             }
             .navigationBarTitle("statistics")
+        }
+        .onAppear {
+            self.selectedTimeFrame = props.selectedTimeFrame
         }
     }
 }

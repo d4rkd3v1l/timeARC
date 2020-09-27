@@ -14,41 +14,37 @@ struct ListView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: Dictionary(grouping: state.timeState.timeEntries, by: { $0.start.startOfDay }))
+        return Props(timeEntries: state.timeState.timeEntries)
     }
 
     @State private var editTimeEntry: TimeEntry?
-    @State private var expandedDay: Date?
-
-    func isExpanded(date: Date) -> Binding<Bool> {
-        return Binding(
-            get: { date == self.expandedDay },
-            set: { self.expandedDay = $0 == true ? date : nil }
-        )
-    }
-
-    func toggleExpanded(for date: Date) {
-        self.expandedDay = self.expandedDay == date ? nil : date
-    }
+    @ObservedObject private var expansionHandler = ExpansionHandler<Date>()
 
     func body(props: Props) -> some View {
         ZStack {
             NavigationView {
                 VStack {
-                    Form {
-                        ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { date, timeEntries in
-                            DayView(date: date,
-                                    timeEntries: timeEntries.filter { $0.isRelevant(for: date) },
-                                    isExpanded: self.isExpanded(date: date),
-                                    editTimeEntry: self.$editTimeEntry)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    withAnimation { self.toggleExpanded(for: date) }
-                                }
+                    if props.timeEntries.isEmpty {
+                        Text("noEntriesYet")
+                            .padding(.all, 50)
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    } else {
+                        Form {
+                            ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
+                                DayView(date: day,
+                                        timeEntries: timeEntries,
+                                        isExpanded: self.expansionHandler.isExpanded(day),
+                                        editTimeEntry: self.$editTimeEntry)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        withAnimation { self.expansionHandler.toggleExpanded(for: day) }
+                                    }
+                            }
                         }
                     }
                     Button(action: {
-                        store.dispatch(action: AddTimeEntry(start: self.expandedDay ?? Date(), end: self.expandedDay ?? Date()))
+                        store.dispatch(action: AddTimeEntry(start: self.expansionHandler.expandedItem ?? Date(), end: self.expansionHandler.expandedItem ?? Date()))
                     }) {
                         Text("addEntry")
                             .frame(width: 200, height: 50)
@@ -81,7 +77,7 @@ struct ListView: ConnectedView {
             DisclosureGroup(
                 isExpanded: self.$isExpanded,
                 content: {
-                    ForEach(timeEntries.sorted(by: { $0.start < $1.start }), id: \.self) { timeEntry in
+                    ForEach(self.timeEntries.sorted(by: { $0.start < $1.start }), id: \.self) { timeEntry in
                         TimeEntryListView(timeEntry: timeEntry)
                             .contentShape(Rectangle())
                             .onTapGesture {
@@ -91,19 +87,34 @@ struct ListView: ConnectedView {
                     .onDelete(perform: { indexSet in
                         indexSet.forEach { index in
                             let timeEntry = self.timeEntries[index]
-                            store.dispatch(action: DeleteTimeEntry(id: timeEntry.id))
+                            store.dispatch(action: DeleteTimeEntry(timeEntry: timeEntry))
                         }
                     })
                 },
                 label: {
                     HStack {
-                        Text(date.startOfDay.formatted("EE, dd.MM.YYYY"))
+                        Text(self.date.startOfDay.formatted("EE, dd.MM.YYYY"))
                         Spacer()
                         Image(systemName: "clock")
-                        Text(timeEntries.totalDurationInSeconds(on: self.date).formatted(allowedUnits: [.hour, .minute]) ?? "")
+                        Text(self.timeEntries.totalDurationInSeconds.formatted(allowedUnits: [.hour, .minute]) ?? "")
                     }
                 })
         }
+    }
+}
+
+class ExpansionHandler<T: Equatable>: ObservableObject {
+    @Published private (set) var expandedItem: T?
+
+    func isExpanded(_ item: T) -> Binding<Bool> {
+        return Binding(
+            get: { item == self.expandedItem },
+            set: { self.expandedItem = $0 == true ? item : nil }
+        )
+    }
+
+    func toggleExpanded(for item: T) {
+        self.expandedItem = self.expandedItem == item ? nil : item
     }
 }
 
@@ -111,12 +122,12 @@ struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         store.dispatch(action: InitFlux())
 
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy HH:mm"
-        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "01.01.2020 08:27")!, end: formatter.date(from: "01.01.2020 12:13")!))
-        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "01.01.2020 12:54")!, end: formatter.date(from: "01.01.2020 18:30")!))
-
-        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "04.01.2020 08:27")!, end: formatter.date(from: "04.01.2020 12:13")!))
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "dd.MM.yyyy HH:mm"
+//        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "01.01.2020 08:27")!, end: formatter.date(from: "01.01.2020 12:13")!))
+//        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "01.01.2020 12:54")!, end: formatter.date(from: "01.01.2020 18:30")!))
+//
+//        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "04.01.2020 08:27")!, end: formatter.date(from: "04.01.2020 12:13")!))
 
         return StoreProvider(store: store) {
             ListView()

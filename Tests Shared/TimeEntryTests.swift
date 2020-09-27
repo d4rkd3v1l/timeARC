@@ -41,46 +41,23 @@ class TimeEntryTests: XCTestCase {
         XCTAssertEqual(timeEntry.durationFormatted(allowedUnits: [.hour, .minute, .second]), "01:22:18")
     }
 
-    func testIsRelevant() throws {
-        let dateComponentsDay1 = DateComponents(year: 2020, month: 07, day: 19, hour: 13, minute: 37, second: 42)
-        let dateDay1 = try XCTUnwrap(Calendar.current.date(from: dateComponentsDay1))
-
-        let dateComponentsDay2 = DateComponents(year: 2020, month: 07, day: 20, hour: 6, minute: 6, second: 6)
-        let dateDay2 = try XCTUnwrap(Calendar.current.date(from: dateComponentsDay2))
-
-        let dateComponentsDay3 = DateComponents(year: 2020, month: 07, day: 21, hour: 13, minute: 37, second: 42)
-        let dateDay3 = try XCTUnwrap(Calendar.current.date(from: dateComponentsDay3))
-
-        let timeEntryWithRelevantStart = TimeEntry(start: dateDay2)
-        XCTAssertTrue(timeEntryWithRelevantStart.isRelevant(for: self.dateReference))
-
-        let timeEntryWithRelevantEnd = TimeEntry(start: dateDay1, end: dateDay2)
-        XCTAssertTrue(timeEntryWithRelevantEnd.isRelevant(for: self.dateReference))
-
-        let timeEntryWithRelevantBetween = TimeEntry(start: dateDay1, end: dateDay3)
-        XCTAssertTrue(timeEntryWithRelevantBetween.isRelevant(for: self.dateReference))
-
-        let timeEntryWithNoRelevance = TimeEntry(start: dateDay1, end: dateDay1)
-        XCTAssertFalse(timeEntryWithNoRelevance.isRelevant(for: self.dateReference))
-    }
-
     func testDurationInSeconds() throws {
-        let timeEntry = TimeEntry(start: self.dateStart, end: self.dateEnd)
-        XCTAssertEqual(timeEntry.durationInSeconds(on: self.dateReference), 4938)
-
-        let dateComponentsOtherDay = DateComponents(year: 2020, month: 07, day: 21)
-        let dateOtherDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsOtherDay))
-        XCTAssertEqual(timeEntry.durationInSeconds(on: dateOtherDay), nil)
-
-        let dateComponentsStartOtherDay = DateComponents(year: 2020, month: 07, day: 19, hour: 23)
-        let dateStartOtherDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsStartOtherDay))
-        let timeEntryStartOtherDay = TimeEntry(start: dateStartOtherDay, end: self.dateEnd)
-        XCTAssertEqual(timeEntryStartOtherDay.durationInSeconds(on: self.dateReference), 54000)
-
-        let dateComponentsEndOtherDay = DateComponents(year: 2020, month: 07, day: 25)
-        let dateEndOtherDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsEndOtherDay))
-        let timeEntryEndOtherDay = TimeEntry(start: self.dateStart, end: dateEndOtherDay)
-        XCTAssertEqual(timeEntryEndOtherDay.durationInSeconds(on: self.dateReference), 37337)
+//        let timeEntry = TimeEntry(start: self.dateStart, end: self.dateEnd)
+//        XCTAssertEqual(timeEntry.durationInSeconds(on: self.dateReference), 4938)
+//
+//        let dateComponentsOtherDay = DateComponents(year: 2020, month: 07, day: 21)
+//        let dateOtherDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsOtherDay))
+//        XCTAssertEqual(timeEntry.durationInSeconds(on: dateOtherDay), nil)
+//
+//        let dateComponentsStartOtherDay = DateComponents(year: 2020, month: 07, day: 19, hour: 23)
+//        let dateStartOtherDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsStartOtherDay))
+//        let timeEntryStartOtherDay = TimeEntry(start: dateStartOtherDay, end: self.dateEnd)
+//        XCTAssertEqual(timeEntryStartOtherDay.durationInSeconds(on: self.dateReference), 54000)
+//
+//        let dateComponentsEndOtherDay = DateComponents(year: 2020, month: 07, day: 25)
+//        let dateEndOtherDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsEndOtherDay))
+//        let timeEntryEndOtherDay = TimeEntry(start: self.dateStart, end: dateEndOtherDay)
+//        XCTAssertEqual(timeEntryEndOtherDay.durationInSeconds(on: self.dateReference), 37337)
     }
 
     func testTotalDurationFormatted() throws {
@@ -88,8 +65,8 @@ class TimeEntryTests: XCTestCase {
         let timeEntries = [TimeEntry(start: self.dateStart, end: self.dateEnd),
                            TimeEntry(start: self.dateStart, end: self.dateEnd)]
 
-        XCTAssertEqual(timeEntries.totalDurationFormatted(on: self.dateReference), "02:44")
-        XCTAssertEqual(timeEntries.totalDurationFormatted(on: self.dateReference, allowedUnits: [.hour, .minute]), "02:44")
-        XCTAssertEqual(timeEntries.totalDurationFormatted(on: self.dateReference, allowedUnits: [.hour, .minute, .second]), "02:44:36")
+        XCTAssertEqual(timeEntries.totalDurationInSeconds.formatted(), "02:44")
+        XCTAssertEqual(timeEntries.totalDurationInSeconds.formatted(allowedUnits: [.hour, .minute]), "02:44")
+        XCTAssertEqual(timeEntries.totalDurationInSeconds.formatted(allowedUnits: [.hour, .minute, .second]), "02:44:36")
     }
 }

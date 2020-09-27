@@ -16,13 +16,11 @@ struct AddTimeEntry: Action {
 }
 
 struct UpdateTimeEntry: Action {
-    let id: UUID
-    let start: Date
-    let end: Date?
+    let timeEntry: TimeEntry
 }
 
 struct DeleteTimeEntry: Action {
-    let id: UUID
+    let timeEntry: TimeEntry
 }
 
 struct SyncTimeEntriesFromWatch: Action {

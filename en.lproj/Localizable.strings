@@ -19,7 +19,9 @@
 "accentColor" = "Accent color";
 "calendar" = "Calendar";
 "list" = "List";
-"all" = "All";
+"noEntriesYet" = "There are no entries yet. Just start a timer or add entries manually.";
+"noStatisticsForTimeFrameMessage" = "Unfortunately there are no statistics available for the selected time frame.";
+"allTime" = "All-Time";
 "year" = "Year";
 "month" = "Month";
 "week" = "Week";

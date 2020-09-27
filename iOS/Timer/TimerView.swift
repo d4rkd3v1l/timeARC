@@ -19,7 +19,7 @@ struct TimerView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: state.timeState.timeEntries,
+        return Props(timeEntries: state.timeState.timeEntries.forDay(Date()),
                      workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                      displayMode: state.timeState.displayMode,
                      buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))
@@ -32,7 +32,7 @@ struct TimerView: ConnectedView {
         VStack {
             Spacer()
             Spacer()
-            ArcViewFull(duration: self.duration ?? props.timeEntries.totalDurationInSeconds(on: Date()),
+            ArcViewFull(duration: self.duration ?? props.timeEntries.totalDurationInSeconds,
                         maxDuration: props.workingMinutesPerDay * 60,
                         color: props.timeEntries.isTimerRunning ? .accentColor : .gray,
                         displayMode: props.displayMode)
@@ -43,7 +43,7 @@ struct TimerView: ConnectedView {
                     store.dispatch(action: ChangeTimerDisplayMode(displayMode: props.displayMode.next))
                 }
                 .onReceive(self.timer) { _ in
-                    self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
+                    self.duration = props.timeEntries.totalDurationInSeconds
                 }
             Button(action: {
                 store.dispatch(action: ToggleTimer())

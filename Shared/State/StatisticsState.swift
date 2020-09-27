@@ -9,10 +9,14 @@ import SwiftUI
 import SwiftUIFlux
 
 struct StatisticsState: FluxState, Codable {
-    var selectedTimeFrame: TimeFrame = .all
+    var selectedTimeFrame: TimeFrame = .allTime
     var selectedStartDate: Date = Date()
     var selectedEndDate: Date = Date()
+    var selectedDateText: String = ""
 
+    var errorMessage: String?
+
+    var targetDuration: Int = 0
     var averageDuration: Int = 0
     var averageWorkingHoursStartDate: Date = Date()
     var averageWorkingHoursEndDate: Date = Date()
@@ -24,4 +28,5 @@ struct StatisticsState: FluxState, Codable {
     var totalDuration: Int = 0
     var totalBreaksDuration: Int = 0
     var totalOvertimeDuration: Int = 0
+    // TODO: AbsenceTypes
 }

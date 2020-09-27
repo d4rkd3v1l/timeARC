@@ -16,7 +16,7 @@ struct OverviewView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: state.timeState.timeEntries,
+        return Props(timeEntries: state.timeState.timeEntries.values.flatMap { $0 },
                      workingWeekDays: state.settingsState.workingWeekDays,
                      workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
     }
@@ -38,7 +38,7 @@ struct OverviewView: ConnectedView {
                         NavigationLink(destination: EntryDetailsView(selectedDate: date)) {
                             let weekday = Calendar.current.component(.weekday, from: date)
                             let isWorkingDay = props.workingWeekDays.contains(WeekDay(weekday)) && date.startOfDay < Date()
-                            let duration = props.timeEntries.totalDurationInSeconds(on: date)
+                            let duration = props.timeEntries.totalDurationInSeconds
                             let desiredWorkMinutes = isWorkingDay ? props.workingMinutesPerDay : 0
                             let overtime = duration / 60 - desiredWorkMinutes
                             ZStack {

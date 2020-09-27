@@ -86,9 +86,9 @@ struct ArcViewFull: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ArcView(color: self.color, progress: (Double(self.duration) / Double(self.maxDuration)))
+                ArcView(color: self.color, progress: (Double(self.duration) / Double(max(self.maxDuration, 1))))
                 
-                Text("\(Int(Double(self.duration) / Double(self.maxDuration) * 100.0))%")
+                Text("\(Int(Double(self.duration) / Double(max(self.maxDuration, 1)) * 100.0))%")
                     .animatableSystemFont(size: geometry.size.width / 4, weight: .bold)
                 
                 Text(self.text)

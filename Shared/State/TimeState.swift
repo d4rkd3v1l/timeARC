@@ -5,10 +5,12 @@
 //  Created by d4Rk on 20.07.20.
 //
 
+import Foundation
 import SwiftUIFlux
 
 struct TimeState: FluxState, Codable {
-    var timeEntries: [TimeEntry] = []
+    /// `Date` is start of day, `TimeEntry`s are sorted by start ascending
+    var timeEntries: [Date: [TimeEntry]] = [:]
     var displayMode: TimerDisplayMode = .countUp
     var didSyncWatchData: Bool = false
 

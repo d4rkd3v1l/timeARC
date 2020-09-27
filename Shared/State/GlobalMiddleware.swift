@@ -33,7 +33,8 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
 
 private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sending new data, if actual relevant changes did happen
     DispatchQueue.global().async {
-        let relevantTimeEntries = state.timeState.timeEntries.filter { $0.isRelevant(for: Date()) }
+        let relevantTimeEntries = state.timeState.timeEntries.forDay(Date())
+
         let data = AppToWatchData(timeEntries: relevantTimeEntries,
                                   displayMode: state.timeState.displayMode,
                                   workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
@@ -57,7 +58,7 @@ func updateWidgetData(_ state: AppState) {
     DispatchQueue.global().async {
         let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker")
 
-        let relevantTimeEntries = state.timeState.timeEntries.filter { $0.isRelevant(for: Date()) }
+        let relevantTimeEntries = state.timeState.timeEntries.forDay(Date())
         let widgetData = WidgetData(timeEntries: relevantTimeEntries,
                                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                                     accentColor: state.settingsState.accentColor)

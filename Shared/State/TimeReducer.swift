@@ -5,6 +5,7 @@
 //  Created by d4Rk on 20.07.20.
 //
 
+import Foundation
 import SwiftUIFlux
 
 func timeReducer(state: TimeState, action: Action) -> TimeState {
@@ -13,38 +14,34 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
     switch action {
     case _ as ToggleTimer:
         var didStopTimer = false
-        for index in 0..<state.timeEntries.count {
-            if state.timeEntries[index].isRunning {
-                state.timeEntries[index].stop()
-                didStopTimer = true
-                break
-            }
+        let timeEntriesForDay = state.timeEntries.forDay(Date())
+        if var runningTimeEntry = timeEntriesForDay.first(where: { $0.isRunning }) {
+            runningTimeEntry.stop()
+            state.timeEntries.updateValidated(runningTimeEntry)
+            didStopTimer = true
         }
 
         if !didStopTimer {
-            state.timeEntries.append(TimeEntry())
+            state.timeEntries.insertValidated(TimeEntry())
         }
 
     case let action as AddTimeEntry:
         let entry = TimeEntry(start: action.start, end: action.end)
-        state.timeEntries.append(entry)
+        state.timeEntries.insertValidated(entry)
 
     case let action as UpdateTimeEntry:
-        guard let index = state.timeEntries.firstIndex(where: { $0.id == action.id }) else { break }
-        state.timeEntries[index].start = action.start
-        state.timeEntries[index].end = action.end
+        state.timeEntries.updateValidated(action.timeEntry)
 
     case let action as DeleteTimeEntry:
-        guard let index = state.timeEntries.firstIndex(where: { $0.id == action.id }) else { break }
-        state.timeEntries.remove(at: index)
+        state.timeEntries.remove(action.timeEntry)
 
     case let action as SyncTimeEntriesFromWatch:
         action.timeEntries.forEach { timeEntry in
-            if let localEntry = state.timeEntries.first(where: { $0.id == timeEntry.id }) {
-                state.timeEntries.removeAll(where: { $0.id == timeEntry.id })
-                state.timeEntries.append(localEntry.lastModified > timeEntry.lastModified ? localEntry : timeEntry)
+            if let localEntry = state.timeEntries.find(timeEntry) {
+                state.timeEntries.remove(localEntry)
+                state.timeEntries.insertValidated(localEntry.lastModified > timeEntry.lastModified ? localEntry : timeEntry)
             } else {
-                state.timeEntries.append(timeEntry)
+                state.timeEntries.insertValidated(timeEntry)
             }
         }
         state.didSyncWatchData = true

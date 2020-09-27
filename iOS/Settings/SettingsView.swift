@@ -9,6 +9,11 @@ import SwiftUI
 import SwiftUIFlux
 
 struct SettingsView: ConnectedView {
+    enum ExpandableSection: Equatable {
+        case workingHours
+        case weekDays
+    }
+
     struct Props {
         let workingWeekDays: [WeekDay]
         let workingMinutesPerDay: Int
@@ -22,15 +27,14 @@ struct SettingsView: ConnectedView {
     }
 
     @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
-    @State private var revealWorkingHours = false
-    @State private var revealWeekDays = false
+    @ObservedObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
     let colors: [Color] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
 
     func body(props: Props) -> some View {
         NavigationView {
             Form {
                 DisclosureGroup(
-                    isExpanded: self.$revealWorkingHours,
+                    isExpanded: self.expansionHandler.isExpanded(.workingHours),
                     content: {
                         DatePicker("", selection: self.$workingHours, displayedComponents: .hourAndMinute)
                             .datePickerStyle(WheelDatePickerStyle())
@@ -50,11 +54,11 @@ struct SettingsView: ConnectedView {
                 )
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    withAnimation { self.revealWorkingHours.toggle() }
+                    withAnimation { self.expansionHandler.toggleExpanded(for: .workingHours) }
                 }
 
                 DisclosureGroup(
-                    isExpanded: self.$revealWeekDays,
+                    isExpanded: self.expansionHandler.isExpanded(.weekDays),
                     content: {
                         MultipleValuesPickerView(title: "weekDays",
                                                  sectionHeader: "weekDaysDescription",
@@ -73,7 +77,7 @@ struct SettingsView: ConnectedView {
                 )
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    withAnimation { self.revealWeekDays.toggle() }
+                    withAnimation { self.expansionHandler.toggleExpanded(for: .weekDays) }
                 }
 
                 VStack(alignment: .leading) {

@@ -103,7 +103,7 @@ struct TimeEntryEditViewPresenter: View {
                 .edgesIgnoringSafeArea(.all)
 
             TimeEntryEditView(timeEntry: timeEntry) { timeEntry in
-                store.dispatch(action: UpdateTimeEntry(id: timeEntry.id, start: timeEntry.start, end: timeEntry.end))
+                store.dispatch(action: UpdateTimeEntry(timeEntry: timeEntry))
             }
         }
     }

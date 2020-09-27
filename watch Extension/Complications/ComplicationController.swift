@@ -54,7 +54,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         let timeEntries = store.state.timeEntries
-        let duration = timeEntries.totalDurationInSeconds(on: Date())
+        let duration = timeEntries.totalDurationInSeconds
         let maxDuration = store.state.workingMinutesPerDay * 60
         let color = timeEntries.isTimerRunning ? UIColor(store.state.accentColor.color) : .gray
 
@@ -76,7 +76,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         let now = Date()
         let timeEntries = store.state.timeEntries
-        let duration = timeEntries.totalDurationInSeconds(on: now)
+        let duration = timeEntries.totalDurationInSeconds
         let maxDuration = store.state.workingMinutesPerDay * 60
 
         if timeEntries.isTimerRunning {

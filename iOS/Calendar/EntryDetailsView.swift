@@ -15,9 +15,7 @@ struct EntryDetailsView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        let timeEntries = state.timeState.timeEntries
-            .filter { $0.isRelevant(for: self.selectedDate) }
-            .sorted(by: { $0.start < $1.start })
+        let timeEntries = state.timeState.timeEntries.forDay(self.selectedDate)
 
         return Props(timeEntries: timeEntries,
                      workingMinutesPerDay: state.settingsState.workingMinutesPerDay
@@ -37,7 +35,7 @@ struct EntryDetailsView: ConnectedView {
                 ArcViewFull(duration: self.duration, maxDuration: props.workingMinutesPerDay * 60)
                     .frame(width: 200, height: 200)
                     .onReceive(self.timer) { _ in
-                        self.duration = props.timeEntries.totalDurationInSeconds(on: self.selectedDate)
+                        self.duration = props.timeEntries.totalDurationInSeconds
                     }
                 Spacer(minLength: 30)
                 Form {
@@ -51,7 +49,7 @@ struct EntryDetailsView: ConnectedView {
                     .onDelete(perform: { indexSet in
                         indexSet.forEach { index in
                             let timeEntry = props.timeEntries[index]
-                            store.dispatch(action: DeleteTimeEntry(id: timeEntry.id))
+                            store.dispatch(action: DeleteTimeEntry(timeEntry: timeEntry))
                         }
                     })
                 }

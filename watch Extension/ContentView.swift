@@ -40,7 +40,7 @@ struct ContentView: ConnectedView {
             }
         } else {
             VStack {
-                ArcViewFull(duration: self.duration ?? props.timeEntries.totalDurationInSeconds(on: Date()),
+                ArcViewFull(duration: self.duration ?? props.timeEntries.totalDurationInSeconds,
                             maxDuration: props.workingMinutesPerDay * 60,
                             color: props.timeEntries.isTimerRunning ? .accentColor : .gray,
                             displayMode: props.displayMode)
@@ -49,7 +49,7 @@ struct ContentView: ConnectedView {
                         store.dispatch(action: ChangeTimerDisplayMode(displayMode: props.displayMode.next))
                     }
                     .onReceive(self.timer) { _ in
-                        self.duration = props.timeEntries.totalDurationInSeconds(on: Date())
+                        self.duration = props.timeEntries.totalDurationInSeconds
                     }
                 Button(action: {
                     store.dispatch(action: ToggleTimer())

@@ -21,7 +21,7 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     }
     private (set) var lastModified: Date = Date()
 
-    init(start: Date = Date(timeIntervalSinceNow: 0), end: Date? = nil) {
+    init(start: Date = Date(), end: Date? = nil) {
         self.start = start
         self.end = end
     }
@@ -37,47 +37,161 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     // MARK: Helper
 
     var actualEnd: Date {
-        return self.end ?? Date(timeIntervalSinceNow: 0)
+        return self.end ?? Date()
     }
 
     func durationFormatted(allowedUnits: NSCalendar.Unit = [.hour, .minute]) -> String? {
         return self.start.durationFormatted(until: self.actualEnd, allowedUnits: allowedUnits)
     }
 
-    func isRelevant(for date: Date) -> Bool {
-        return self.start.isInSameDay(as: date)
-            || self.actualEnd.isInSameDay(as: date)
-            || (self.start < self.actualEnd && (self.start...self.actualEnd).contains(date))
-            || (self.actualEnd < self.start && (self.actualEnd...self.start).contains(date))
-    }
-
-    func durationInSeconds(on date: Date) -> Int? {
-        guard self.isRelevant(for: date) else { return nil }
-
-        let start = self.start.isInSameDay(as: date) ? self.start : date.startOfDay
-        let end = self.actualEnd.isInSameDay(as: date) ? self.actualEnd : date.endOfDay
-
+    var durationInSeconds: Int? {
         return Calendar.current
-            .dateComponents([.second], from: start, to: end)
+            .dateComponents([.second], from: self.start, to: self.actualEnd)
             .second
     }
 
     static func == (lhs: TimeEntry, rhs: TimeEntry) -> Bool {
         return lhs.id == rhs.id
     }
+
+    func splittedIntoSingleDays() -> [TimeEntry] {
+        guard self.start.startOfDay != self.actualEnd.startOfDay else { return [self] }
+
+        let range = stride(from: self.start.startOfDay,
+                                 through: self.actualEnd.startOfDay,
+                                 by: 86400)
+            .map { $0 }
+
+        let timeEntries: [TimeEntry] = range
+            .enumerated()
+            .map { (index, date) in
+                switch index {
+                case 0:
+                    var newTimeEntry = self
+                    newTimeEntry.end = self.start.endOfDay
+                    return newTimeEntry
+
+                case range.count:
+                    var newTimeEntry = self
+                    newTimeEntry.start = self.actualEnd.startOfDay
+                    return newTimeEntry
+
+                default:
+                    return TimeEntry(start: date.startOfDay, end: date.endOfDay)
+                }
+            }
+
+        return timeEntries
+    }
 }
 
 // MARK: - Extensions
 
+extension Dictionary where Key == Date, Value == [TimeEntry] {
+    func forDay(_ date: Date) -> [TimeEntry] {
+        return self[date.startOfDay] ?? []
+    }
+
+    func find(_ timeEntry: TimeEntry) -> TimeEntry? {
+        // Optimization, works as long as start day did not change
+        if let timeEntriesForDay = self[timeEntry.start.startOfDay] {
+            return timeEntriesForDay.first(where: { $0.id == timeEntry.id })
+        }
+
+        // Fallback, if start day did change (have to go through all the entries in this case)
+        return self.values
+            .flatMap { $0 }
+            .first(where: { $0.id == timeEntry.id })
+    }
+
+    /// - Does automatically split `TimeEntry`s into single days, that would otherwise span multiple days
+    /// - `TimeEntry`s for each day are sorted ascending by their `start` date
+    mutating func insertValidated(_ timeEntry: TimeEntry) {
+        timeEntry.splittedIntoSingleDays().forEach { timeEntry in
+            let day = timeEntry.start.startOfDay
+            if !self.keys.contains(day) {
+                self[day] = []
+            }
+
+            self[day]?.append(timeEntry)
+            self[day] = self[day]?.mergedOverlappingEntries()
+            self[day]?.sort(by: { $0.start < $1.start })
+        }
+    }
+
+    mutating func updateValidated(_ timeEntry: TimeEntry) {
+        guard let oldTimeEntry = self.find(timeEntry) else { return }
+
+        var newTimeEntry = oldTimeEntry
+        newTimeEntry.start = timeEntry.start
+        newTimeEntry.end = timeEntry.end
+
+        self.remove(oldTimeEntry)
+        self.insertValidated(newTimeEntry)
+    }
+
+    mutating func remove(_ timeEntry: TimeEntry) {
+        guard let timeEntriesForDay = self[timeEntry.start.startOfDay],
+              let index = timeEntriesForDay.firstIndex(where: { $0.id == timeEntry.id }) else { return }
+        self[timeEntry.start.startOfDay]?.remove(at: index)
+
+        if self[timeEntry.start.startOfDay]?.isEmpty ?? false {
+            self.removeValue(forKey: timeEntry.start.startOfDay)
+        }
+    }
+}
+
 extension Array where Element == TimeEntry {
-    func totalDurationInSeconds(on date: Date) -> Int {
+    var totalDurationInSeconds: Int {
         return self
-            .compactMap { $0.durationInSeconds(on: date) }
+            .compactMap { $0.durationInSeconds }
             .reduce(0, +)
+    }
+
+    var totalBreaksInSeconds: Int {
+        var result = 0
+
+        for index in 0..<(self.count-1) {
+            let current = self[index]
+            let next = self[index+1]
+
+            let currentAbsoluteEnd = Int(current.actualEnd.timeIntervalSince(current.actualEnd.startOfDay))
+            let nextAbsoluteStart = Int(next.start.timeIntervalSince(next.start.startOfDay))
+
+            let difference = currentAbsoluteEnd - nextAbsoluteStart
+
+            if difference > 0 {
+                result += difference
+            }
+        }
+
+        return result
     }
 
     var isTimerRunning: Bool {
         return self.contains(where: { $0.isRunning })
+    }
+
+    func mergedOverlappingEntries() -> [TimeEntry] {
+        var merged = self
+        var index: Int = 0
+
+        for _ in 0..<merged.count {
+            guard index < (merged.count - 1) else { break }
+
+            let current = merged[index]
+            let next = merged[index+1]
+
+            if current.actualEnd < next.start {
+                merged.removeAll(where: { $0 == current })
+                merged.removeAll(where: { $0 == next })
+                merged.append(TimeEntry(start: current.start, end: next.end))
+            } else {
+                index += 1
+            }
+        }
+
+        return merged
     }
 }
 

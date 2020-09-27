@@ -31,8 +31,8 @@ struct Provider: TimelineProvider {
               let decodedWidgetData = userDefaults.data(forKey: "widgetData"),
               let widgetData = try? JSONDecoder().decode(WidgetData.self, from: decodedWidgetData) else { return }
 
-        let isRunning = widgetData.timeEntries.contains(where: { $0.end == nil })
-        let duration = widgetData.timeEntries.totalDurationInSeconds(on: Date())
+        let isRunning = widgetData.timeEntries.isTimerRunning
+        let duration = widgetData.timeEntries.totalDurationInSeconds
 
         if isRunning {
             var entries: [WidgetEntry] = []

@@ -57,7 +57,7 @@ extension Date {
 
     var firstOfWeek: Date {
         let current = Calendar.current.dateComponents([.year, .weekOfYear], from: self)
-        return Calendar.current.date(from: DateComponents(year: current.year, weekOfYear: current.weekOfYear)) ?? self
+        return Calendar.current.date(from: DateComponents(weekOfYear: current.weekOfYear, yearForWeekOfYear: current.year)) ?? self
     }
 
     var lastOfWeek: Date {
@@ -83,6 +83,16 @@ extension Date {
     }
 }
 
+extension Array where Element == Date {
+    var averageTime: Date {
+        let averageTimerInterval = self
+            .map { $0.timeIntervalSince($0.startOfDay) }
+            .average()
+
+        return Date(timeInterval: averageTimerInterval, since: Date().startOfDay)
+    }
+}
+
 extension Int {
     var hoursAndMinutes: Date {
         return Date().startOfDay.addingTimeInterval(Double(self*60))
@@ -97,5 +107,15 @@ extension NSCalendar.Unit {
         case .second:   return "ss"
         default:        return "Not implemented"
         }
+    }
+}
+
+extension Date: Strideable {
+    public func distance(to other: Date) -> TimeInterval {
+        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
+    }
+
+    public func advanced(by n: TimeInterval) -> Date {
+        return self + n
     }
 }
