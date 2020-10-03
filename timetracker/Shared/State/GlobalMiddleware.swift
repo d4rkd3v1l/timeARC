@@ -40,18 +40,18 @@ private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sen
                                   workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                                   accentColor: state.settingsState.accentColor)
 
-        if let encodedData = try? JSONEncoder().encode(data) {
+        let encodedData = try! JSONEncoder().encode(data)
             DispatchQueue.main.async {
                 WCSession.default.sendMessageData(encodedData, replyHandler: nil)
             }
-        }
+
     }
 }
 
 private func requestWatchData() {
-    if let encodedData = try? JSONEncoder().encode("requestWatchData") {
+    let encodedData = try! JSONEncoder().encode("requestWatchData")
         WCSession.default.sendMessageData(encodedData, replyHandler: nil)
-    }
+
 }
 
 func updateWidgetData(_ state: AppState) {
@@ -63,7 +63,7 @@ func updateWidgetData(_ state: AppState) {
                                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                                     accentColor: state.settingsState.accentColor)
 
-        let encodedWidgetData = try? JSONEncoder().encode(widgetData)
+        let encodedWidgetData = try! JSONEncoder().encode(widgetData)
         userDefaults?.setValue(encodedWidgetData, forKey: "widgetData")
 
         DispatchQueue.main.async {

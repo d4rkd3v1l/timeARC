@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "PartialSheet",
-        "repositoryURL": "https://github.com/AndreaMiotto/PartialSheet.git",
+        "repositoryURL": "https://github.com/AndreaMiotto/PartialSheet",
         "state": {
           "branch": null,
           "revision": "936465232b6399e402e79d5b031622af9a5e9960",
@@ -12,7 +12,7 @@
       },
       {
         "package": "SwiftUIFlux",
-        "repositoryURL": "https://github.com/Dimillian/SwiftUIFlux.git",
+        "repositoryURL": "https://github.com/Dimillian/SwiftUIFlux",
         "state": {
           "branch": null,
           "revision": "a48dd509702797028fa103844008239dded85063",

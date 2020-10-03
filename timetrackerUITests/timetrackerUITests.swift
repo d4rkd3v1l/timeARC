@@ -1,13 +1,13 @@
 //
-//  Tests_macOS.swift
-//  Tests macOS
+//  timetrackerUITests.swift
+//  timetrackerUITests
 //
-//  Created by d4Rk on 18.07.20.
+//  Created by d4Rk on 03.10.20.
 //
 
 import XCTest
 
-class Tests_macOS: XCTestCase {
+class timetrackerUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

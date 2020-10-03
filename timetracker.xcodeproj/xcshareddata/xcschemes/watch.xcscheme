@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8108110B24C2EB95005D7C85"
+               BlueprintIdentifier = "8179B37B2528E08B00A537B7"
+               BuildableName = "watch.app"
+               BlueprintName = "watch"
+               ReferencedContainer = "container:timetracker.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8179B26F2528DF7B00A537B7"
                BuildableName = "timetracker.app"
-               BlueprintName = "timetracker (iOS)"
+               BlueprintName = "timetracker"
                ReferencedContainer = "container:timetracker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,24 +40,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8108111B24C2EB95005D7C85"
-               BuildableName = "Tests iOS.xctest"
-               BlueprintName = "Tests iOS"
-               ReferencedContainer = "container:timetracker.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "Tests_iOS">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -60,9 +58,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8108110B24C2EB95005D7C85"
-            BuildableName = "timetracker.app"
-            BlueprintName = "timetracker (iOS)"
+            BlueprintIdentifier = "8179B37B2528E08B00A537B7"
+            BuildableName = "watch.app"
+            BlueprintName = "watch"
             ReferencedContainer = "container:timetracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -77,9 +75,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8108110B24C2EB95005D7C85"
-            BuildableName = "timetracker.app"
-            BlueprintName = "timetracker (iOS)"
+            BlueprintIdentifier = "8179B37B2528E08B00A537B7"
+            BuildableName = "watch.app"
+            BlueprintName = "watch"
             ReferencedContainer = "container:timetracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
