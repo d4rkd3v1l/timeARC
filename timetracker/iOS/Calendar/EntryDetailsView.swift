@@ -54,7 +54,8 @@ struct EntryDetailsView: ConnectedView {
                     })
                 }
                 Button(action: {
-                    store.dispatch(action: AddTimeEntry(start: self.selectedDate, end: self.selectedDate))
+                    let timeEntry = TimeEntry(start: self.selectedDate, end: self.selectedDate)
+                    store.dispatch(action: AddTimeEntry(timeEntry: timeEntry))
                 }) {
                     Text("addEntry")
                         .frame(width: 200, height: 50)

@@ -26,8 +26,7 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
         }
 
     case let action as AddTimeEntry:
-        let entry = TimeEntry(start: action.start, end: action.end)
-        state.timeEntries.insertValidated(entry)
+        state.timeEntries.insertValidated(action.timeEntry)
 
     case let action as UpdateTimeEntry:
         state.timeEntries.updateValidated(action.timeEntry)
@@ -37,9 +36,8 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
 
     case let action as SyncTimeEntriesFromWatch:
         action.timeEntries.forEach { timeEntry in
-            if let localEntry = state.timeEntries.find(timeEntry) {
-                state.timeEntries.remove(localEntry)
-                state.timeEntries.insertValidated(localEntry.lastModified > timeEntry.lastModified ? localEntry : timeEntry)
+            if state.timeEntries.find(timeEntry) != nil {
+                state.timeEntries.updateValidated(timeEntry)
             } else {
                 state.timeEntries.insertValidated(timeEntry)
             }

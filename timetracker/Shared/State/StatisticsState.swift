@@ -29,4 +29,9 @@ struct StatisticsState: FluxState, Codable {
     var totalBreaksDuration: Int = 0
     var totalOvertimeDuration: Int = 0
     // TODO: AbsenceTypes
+
+    // TODO: Avoid direct access to other states
+    var timeEntries: [Date: [TimeEntry]] { store.state.timeState.timeEntries }
+    var workingMinutesPerDay: Int { store.state.settingsState.workingMinutesPerDay }
+    var workingWeekDays: [WeekDay] { store.state.settingsState.workingWeekDays }
 }

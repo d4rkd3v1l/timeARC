@@ -31,7 +31,7 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     }
 
     mutating func stop() {
-        self.end = Date(timeIntervalSinceNow: 0)
+        self.end = Date()
     }
 
     // MARK: Helper
@@ -54,8 +54,8 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
         guard self.start.startOfDay != self.actualEnd.startOfDay else { return [self] }
 
         let range = stride(from: self.start.startOfDay,
-                                 through: self.actualEnd.startOfDay,
-                                 by: 86400)
+                           through: self.actualEnd.startOfDay,
+                           by: 86400)
             .map { $0 }
 
         let timeEntries: [TimeEntry] = range
@@ -67,10 +67,8 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
                     newTimeEntry.end = self.start.endOfDay
                     return newTimeEntry
 
-                case range.count:
-                    var newTimeEntry = self
-                    newTimeEntry.start = self.actualEnd.startOfDay
-                    return newTimeEntry
+                case (range.count - 1):
+                    return TimeEntry(start: date.startOfDay, end: self.end)
 
                 default:
                     return TimeEntry(start: date.startOfDay, end: date.endOfDay)
@@ -115,7 +113,6 @@ extension Dictionary where Key == Date, Value == [TimeEntry] {
 
             self[day]?.append(timeEntry)
             self[day] = self[day]?.mergedOverlappingEntries()
-            self[day]?.sort(by: { $0.start < $1.start })
         }
     }
 
@@ -157,7 +154,7 @@ extension Array where Element == TimeEntry {
             let currentAbsoluteEnd = Int(current.actualEnd.timeIntervalSince(current.actualEnd.startOfDay))
             let nextAbsoluteStart = Int(next.start.timeIntervalSince(next.start.startOfDay))
 
-            let difference = currentAbsoluteEnd - nextAbsoluteStart
+            let difference = nextAbsoluteStart - currentAbsoluteEnd
 
             if difference > 0 {
                 result += difference
@@ -172,7 +169,7 @@ extension Array where Element == TimeEntry {
     }
 
     func mergedOverlappingEntries() -> [TimeEntry] {
-        var merged = self
+        var merged = self.sorted(by: { $0.start < $1.start })
         var index: Int = 0
 
         for _ in 0..<merged.count {

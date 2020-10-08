@@ -42,7 +42,8 @@ struct ListView: ConnectedView {
                     }
                 }
                 Button(action: {
-                    store.dispatch(action: AddTimeEntry(start: self.expansionHandler.expandedItem ?? Date(), end: self.expansionHandler.expandedItem ?? Date()))
+                    let timeEntry = TimeEntry(start: self.expansionHandler.expandedItem ?? Date(), end: self.expansionHandler.expandedItem ?? Date())
+                    store.dispatch(action: AddTimeEntry(timeEntry: timeEntry))
                 }) {
                     Text("addEntry")
                         .frame(width: 200, height: 50)

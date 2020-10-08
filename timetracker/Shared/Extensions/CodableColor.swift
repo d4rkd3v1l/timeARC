@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CodableColor: Codable {
+struct CodableColor: Codable, Equatable {
     private let _color: String
 
     static var black = CodableColor(.black)

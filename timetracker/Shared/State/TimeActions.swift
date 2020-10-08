@@ -11,8 +11,7 @@ import SwiftUIFlux
 struct ToggleTimer: Action {}
 
 struct AddTimeEntry: Action {
-    let start: Date
-    let end: Date
+    let timeEntry: TimeEntry
 }
 
 struct UpdateTimeEntry: Action {
