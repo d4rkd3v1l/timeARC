@@ -22,10 +22,23 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
                 if state.timeState.didSyncWatchData {
                     sendDataToWatch(state)
                 }
+
+                if state.timeState.timeEntries.isTimerRunning {
+                    let duration = state.timeState.timeEntries.forDay(Date()).totalDurationInSeconds
+                    let maxDuration = state.settingsState.workingMinutesPerDay * 60
+                    let endOfWorkingDayDate = Date().addingTimeInterval(5)//TimeInterval(maxDuration - duration))
+                    scheduleEndOfWorkingDayNotification(for: endOfWorkingDayDate)
+                } else {
+                    removeEndOfWorkingDayNotification()
+                }
             }
 
-            if action is RequestWatchData {
+            switch action {
+            case _ as RequestWatchData:
                 requestWatchData()
+
+            default:
+                break
             }
         }
     }
@@ -71,4 +84,34 @@ func updateWidgetData(_ state: AppState) {
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
+}
+
+private func scheduleEndOfWorkingDayNotification(for date: Date) {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
+        if success {
+            removeEndOfWorkingDayNotification()
+
+            let content = UNMutableNotificationContent()
+            content.title = "Congratulations"
+            content.subtitle = "You're done for today! 🥳"
+//            content.subtitle = "You're done for this week! 🙌"
+            content.sound = UNNotificationSound.default
+
+            let triggerDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],
+                                                                        from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponents, repeats: false)
+
+            let request = UNNotificationRequest(identifier: "endOfWorkingDayNotification",
+                                                content: content,
+                                                trigger: trigger)
+
+            UNUserNotificationCenter.current().add(request)
+        } else if let error = error {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+private func removeEndOfWorkingDayNotification() {
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["endOfWorkingDayNotification"])
 }

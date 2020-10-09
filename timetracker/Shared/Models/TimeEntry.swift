@@ -135,6 +135,10 @@ extension Dictionary where Key == Date, Value == [TimeEntry] {
             self.removeValue(forKey: day)
         }
     }
+
+    var isTimerRunning: Bool {
+        return self.forDay(Date()).isTimerRunning
+    }
 }
 
 extension Array where Element == TimeEntry {
