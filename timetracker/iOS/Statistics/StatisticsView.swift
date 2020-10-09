@@ -54,6 +54,7 @@ struct StatisticsView: ConnectedView {
                      totalOvertimeDuration: state.statisticsState.totalOvertimeDuration)
     }
 
+    @ObservedObject var updater = StateUpdater(updateInterval: 60, action: StatisticsRefresh())
     @State private var selectedTimeFrame: TimeFrame = .allTime
 
     func body(props: Props) -> some View {
@@ -104,7 +105,7 @@ struct StatisticsView: ConnectedView {
                         Section(header: Text("averages")) {
                             VStack {
                                 HStack {
-                                    ArcViewFull(duration: props.averageDuration, maxDuration: props.targetDuration, color: .accentColor, allowedUnits: [.hour, .minute, .second], displayMode: .countUp)
+                                    ArcViewFull(duration: props.averageDuration, maxDuration: props.targetDuration, color: .accentColor, allowedUnits: [.hour, .minute], displayMode: .countUp)
                                         .frame(width: 150, height: 150)
                                     Spacer()
                                     VStack(alignment: .trailing) {
@@ -118,13 +119,13 @@ struct StatisticsView: ConnectedView {
                             HStack {
                                 Text("breaks")
                                 Spacer()
-                                Text("\(props.averageBreaksDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+                                Text("\(props.averageBreaksDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
                             }
 
                             HStack {
                                 Text("overtime")
                                 Spacer()
-                                Text("\(props.averageOvertimeDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+                                Text("\(props.averageOvertimeDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
 
                             }
                         }
@@ -145,21 +146,21 @@ struct StatisticsView: ConnectedView {
                             HStack {
                                 Text("workingHours")
                                 Spacer()
-                                Text("\(props.totalDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+                                Text("\(props.totalDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
 
                             }
 
                             HStack {
                                 Text("breaks")
                                 Spacer()
-                                Text("\(props.totalBreaksDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+                                Text("\(props.totalBreaksDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
 
                             }
 
                             HStack {
                                 Text("overtime")
                                 Spacer()
-                                Text("\(props.totalOvertimeDuration.formatted(allowedUnits: [.hour, .minute], zeroFormattingBehavior: .default) ?? "")")
+                                Text("\(props.totalOvertimeDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
 
                             }
                         }

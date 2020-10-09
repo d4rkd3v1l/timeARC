@@ -8,19 +8,22 @@
 import SwiftUI
 
 struct ArcView: View {
+    let minAngle: Double = 0
+    let maxAngle: Double = 250
+
     let color: Color
     let progress: Double
 
     private var endAngle: Angle {
-        return .degrees(min(270 * self.progress, 270))
+        return .degrees(min(self.maxAngle * self.progress, self.maxAngle))
     }
 
     var body: some View {
         GeometryReader { geometry in
-            Arc(startAngle: .degrees(0), endAngle: .degrees(270), clockwise: true)
+            Arc(startAngle: .degrees(self.minAngle), endAngle: .degrees(self.maxAngle), clockwise: true)
                 .strokeBorder(self.color.opacity(0.33), style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
                 .overlay(
-                    Arc(startAngle: .degrees(0), endAngle: self.endAngle, clockwise: true)
+                    Arc(startAngle: .degrees(self.minAngle), endAngle: self.endAngle, clockwise: true)
                         .strokeBorder(self.color, style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
                 )
         }
@@ -35,7 +38,7 @@ struct Arc: InsettableShape {
     var insetAmount: CGFloat = 0
 
     func path(in rect: CGRect) -> Path {
-        let rotationAdjustment = Angle.degrees(225)
+        let rotationAdjustment = Angle.degrees(215)
         let modifiedStart = self.startAngle - rotationAdjustment
         let modifiedEnd = self.endAngle - rotationAdjustment
 
@@ -61,42 +64,33 @@ struct ArcViewFull: View {
 
     func timeFontSize(for geometry: GeometryProxy) -> CGFloat {
         if self.allowedUnits == [.hour, .minute, .second] {
-            return geometry.size.width / 9.5
+            return geometry.size.width / 7.5
         }
 
-        return geometry.size.width / 6.5
-    }
-
-    var text: String {
-        switch self.displayMode {
-        case .countUp:
-            return self.duration.formatted(allowedUnits: self.allowedUnits) ?? ""
-
-        case .countDown:
-            return (self.duration - self.maxDuration).formatted(allowedUnits: self.allowedUnits) ?? ""
-
-        case .endOfWorkingDay:
-            return Date().addingTimeInterval(TimeInterval(self.maxDuration - self.duration)).formatted("HH:mm:ss")
-
-        case .progress:
-            return "\(self.duration.formatted(allowedUnits: self.allowedUnits, zeroFormattingBehavior: .default) ?? "") / \(self.maxDuration.formatted(allowedUnits: self.allowedUnits, zeroFormattingBehavior: .default) ?? "")"
-        }
+        return geometry.size.width / 5.5
     }
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 ArcView(color: self.color, progress: (Double(self.duration) / Double(max(self.maxDuration, 1))))
-                
-                Text("\(Int(Double(self.duration) / Double(max(self.maxDuration, 1)) * 100.0))%")
-                    .animatableSystemFont(size: geometry.size.width / 4, weight: .bold)
-                
-                Text(self.text)
+
+                HStack(alignment: .lastTextBaseline, spacing: geometry.size.width * 0.01) {
+                    Text("\(Int(Double(self.duration) / Double(max(self.maxDuration, 1)) * 100.0))")
+                        .animatableSystemFont(size: geometry.size.width / 3.5, weight: .bold)
+                        .padding(0)
+
+                    Text("%")
+                        .animatableSystemFont(size: geometry.size.width / 4.5, weight: .bold)
+                        .padding(0)
+                }
+
+                Text(self.displayMode.text(for: self.duration, maxDuration: self.maxDuration, allowedUnits: self.allowedUnits))
                     .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
                     .minimumScaleFactor(0.1)
                     .lineLimit(1)
-                    .frame(width: geometry.size.width * 0.5)
-                    .offset(x: 0, y: geometry.size.height / 2.75)
+                    .frame(width: geometry.size.width * 0.65)
+                    .offset(x: 0, y: geometry.size.height / 3)
             }
         }
     }
@@ -116,6 +110,29 @@ enum TimerDisplayMode: String, Codable {
         case .progress:         return .countUp
         }
     }
+
+    func text(for duration: Int, maxDuration: Int, allowedUnits: NSCalendar.Unit) -> String {
+        switch self {
+        case .countUp:
+            return duration.formatted(allowedUnits: allowedUnits) ?? ""
+
+        case .countDown:
+            return (duration - maxDuration).formatted(allowedUnits: allowedUnits) ?? ""
+
+        case .endOfWorkingDay:
+            let format: String
+            if allowedUnits == [.hour, .minute, .second] {
+                format = "HH:mm:ss"
+            } else {
+                format = "HH:mm"
+            }
+
+            return Date().addingTimeInterval(TimeInterval(maxDuration - duration)).formatted(format)
+
+        case .progress:
+            return "\(duration.formatted(allowedUnits: allowedUnits, zeroFormattingBehavior: .default) ?? "") / \(maxDuration.formatted(allowedUnits: allowedUnits, zeroFormattingBehavior: .default) ?? "")"
+        }
+    }
 }
 
 // MARK: - Preview
@@ -130,8 +147,8 @@ struct ArcViewFull_Previews: PreviewProvider {
                         displayMode: .progress)
                 .frame(width: 250, height: 250)
 
-            ArcViewFull(duration: 123,
-                        maxDuration: 456,
+            ArcViewFull(duration: 1,
+                        maxDuration: 100,
                         color: .pink,
                         allowedUnits: [.hour, .minute, .second],
                         displayMode: .endOfWorkingDay)
@@ -160,7 +177,8 @@ struct ArcViewFull_Previews: PreviewProvider {
                 ArcViewFull(duration: 123,
                             maxDuration: 456,
                             color: .pink,
-                            allowedUnits: [.hour, .minute, .second])
+                            allowedUnits: [.hour, .minute],
+                            displayMode: .countDown)
                     .frame(width: 50, height: 50)
             }
         }

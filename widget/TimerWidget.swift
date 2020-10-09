@@ -14,7 +14,8 @@ struct Provider: TimelineProvider {
                     duration: 2520,
                     maxDuration: 28800,
                     isRunning: true,
-                    accentColor: .green)
+                    accentColor: .green,
+                    displayMode: .countUp)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> ()) {
@@ -22,7 +23,8 @@ struct Provider: TimelineProvider {
                                 duration: 2520,
                                 maxDuration: 28800,
                                 isRunning: true,
-                                accentColor: .green)
+                                accentColor: .green,
+                                displayMode: .countUp)
         completion(entry)
     }
 
@@ -42,7 +44,8 @@ struct Provider: TimelineProvider {
                                         duration: duration + nextMinute,
                                         maxDuration: widgetData.workingMinutesPerDay * 60,
                                         isRunning: true,
-                                        accentColor: widgetData.accentColor.color)
+                                        accentColor: widgetData.accentColor.color,
+                                        displayMode: widgetData.displayMode)
                 entries.append(entry)
             }
 
@@ -53,7 +56,8 @@ struct Provider: TimelineProvider {
                                     duration: duration,
                                     maxDuration: widgetData.workingMinutesPerDay * 60,
                                     isRunning: false,
-                                    accentColor: widgetData.accentColor.color)
+                                    accentColor: widgetData.accentColor.color,
+                                    displayMode: widgetData.displayMode)
 
             let timeline = Timeline(entries: [entry], policy: .never)
             completion(timeline)
@@ -68,33 +72,144 @@ struct WidgetEntry: TimelineEntry {
     let maxDuration: Int
     let isRunning: Bool
     let accentColor: Color
+    let displayMode: TimerDisplayMode
 }
 
 struct WidgetEntryView: View {
     @Environment(\.widgetFamily) private var widgetFamily
     var entry: WidgetEntry
 
-    var body: some View {
-//        switch self.widgetFamily {
-//        case .systemSmall:
-        return ZStack {
-            ArcViewFull(duration: self.entry.duration,
-                        maxDuration: self.entry.maxDuration,
-                        color: self.entry.isRunning ? .accentColor : .gray,
-                        allowedUnits: [.hour, .minute])
-            .padding(20)
+    @ViewBuilder var body: some View {
+        GeometryReader { geometry in
+            switch self.widgetFamily {
+            case .systemSmall:
+                ArcViewFull(duration: self.entry.duration,
+                            maxDuration: self.entry.maxDuration,
+                            color: self.entry.isRunning ? .accentColor : .gray,
+                            allowedUnits: [.hour, .minute],
+                            displayMode: entry.displayMode)
+                    .padding()
+                    .aspectRatio(1, contentMode: .fit)
+                    .accentColor(entry.accentColor)
+
+            case .systemMedium:
+                HStack {
+                    ArcViewFull(duration: self.entry.duration,
+                                maxDuration: self.entry.maxDuration,
+                                color: self.entry.isRunning ? .accentColor : .gray,
+                                allowedUnits: [.hour, .minute],
+                                displayMode: entry.displayMode)
+                        .aspectRatio(1, contentMode: .fit)
+                        .accentColor(entry.accentColor)
+
+                    Spacer(minLength: 20)
+
+                    VStack {
+//                        Text("week")
+//                            .font(.title2)
+//                            .bold()
+//
+//                        Spacer()
+
+                        HStack {
+                            Text("hours")
+                            Spacer()
+                            Text("34:34")
+                        }
+
+                        Divider()
+
+                        HStack {
+                            Text("breaks")
+                            Spacer()
+                            Text("0:34")
+                        }
+
+                        Divider()
+
+                        HStack {
+                            Text("overtime")
+                            Spacer()
+                            Text("1:51")
+                        }
+                    }
+                }
+                .padding()
+
+            case .systemLarge:
+                VStack(alignment: .center, spacing: 10) {
+//                    HStack {
+//                        Text("today")
+//                            .font(.title2)
+//                            .bold()
+//                        Spacer()
+//                        Text("week")
+//                            .font(.title2)
+//                            .bold()
+//                    }
+
+                    Spacer()
+
+                    HStack {
+                        ArcViewFull(duration: self.entry.duration,
+                                    maxDuration: self.entry.maxDuration,
+                                    color: self.entry.isRunning ? .accentColor : .gray,
+                                    allowedUnits: [.hour, .minute],
+                                    displayMode: entry.displayMode)
+                            .aspectRatio(1, contentMode: .fit)
+                            .accentColor(entry.accentColor)
+
+                        Spacer(minLength: 20)
+
+                        ArcViewFull(duration: 53000,
+                                    maxDuration: 115200,
+                                    color: self.entry.isRunning ? .accentColor : .gray,
+                                    allowedUnits: [.hour, .minute],
+                                    displayMode: entry.displayMode)
+                            .aspectRatio(1, contentMode: .fit)
+                            .accentColor(entry.accentColor)
+                    }
+
+                    Spacer()
+
+                    HStack(alignment: .top, spacing: 0) {
+                        VStack(alignment: .leading, spacing: nil) {
+                            Text("week").bold().hidden()
+                            Divider()
+                            Text("hours")
+                            Divider()
+                            Text("breaks")
+                            Divider()
+                            Text("overtime")
+                        }
+
+                        VStack(alignment: .trailing, spacing: nil) {
+                            Text("averages").bold()
+                            Divider()
+                            Text("8:34")
+                            Divider()
+                            Text("0:45")
+                            Divider()
+                            Text("0:15")
+                        }
+
+                        VStack(alignment: .trailing, spacing: nil) {
+                            Text("totals").bold()
+                            Divider()
+                            Text("13:08")
+                            Divider()
+                            Text("2:32")
+                            Divider()
+                            Text("0:30")
+                        }
+                    }
+                }
+                .padding()
+
+            @unknown default:
+                fatalError()
+            }
         }
-        .accentColor(entry.accentColor)
-//
-//        case .systemMedium:
-//            Text("Medium")
-//
-//        case .systemLarge:
-//            Text("Large")
-//
-//        @unknown default:
-//            fatalError()
-//        }
     }
 }
 
@@ -108,7 +223,7 @@ struct TimerWidget: Widget {
         }
         .configurationDisplayName("TimeTracker")
         .description("Have your time tracker always in sight.")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
@@ -120,7 +235,8 @@ struct TimerWidgetSmall_Previews: PreviewProvider {
                                 duration: 2520,
                                 maxDuration: 28800,
                                 isRunning: true,
-                                accentColor: .green)
+                                accentColor: .green,
+                                displayMode: .countUp)
 
         return WidgetEntryView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
@@ -133,7 +249,8 @@ struct TimerWidgetMedium_Previews: PreviewProvider {
                                 duration: 2520,
                                 maxDuration: 28800,
                                 isRunning: true,
-                                accentColor: .green)
+                                accentColor: .green,
+                                displayMode: .countDown)
 
         return WidgetEntryView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
@@ -146,7 +263,8 @@ struct TimerWidgetLarge_Previews: PreviewProvider {
                                 duration: 2520,
                                 maxDuration: 28800,
                                 isRunning: true,
-                                accentColor: .green)
+                                accentColor: .green,
+                                displayMode: .endOfWorkingDay)
 
         return WidgetEntryView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemLarge))

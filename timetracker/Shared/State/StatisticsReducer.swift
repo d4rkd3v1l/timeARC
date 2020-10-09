@@ -36,6 +36,8 @@ func statisticsReducer(state: StatisticsState, action: Action) -> StatisticsStat
             state.selectedEndDate = Date().lastOfWeek
         }
 
+        ensureStatistics(&state)
+
     case _ as StatisticsNextInterval:
         switch state.selectedTimeFrame {
         case .allTime:
@@ -53,6 +55,8 @@ func statisticsReducer(state: StatisticsState, action: Action) -> StatisticsStat
             state.selectedStartDate = state.selectedStartDate.byAdding(DateComponents(weekOfYear: 1)).firstOfWeek
             state.selectedEndDate = state.selectedStartDate.lastOfWeek
         }
+
+        ensureStatistics(&state)
 
     case _ as StatisticsPreviousInterval:
         switch state.selectedTimeFrame {
@@ -72,11 +76,14 @@ func statisticsReducer(state: StatisticsState, action: Action) -> StatisticsStat
             state.selectedEndDate = state.selectedStartDate.lastOfWeek
         }
 
+        ensureStatistics(&state)
+
+    case _ as StatisticsRefresh:
+        ensureStatistics(&state)
+
     default:
         break
     }
-
-    ensureStatistics(&state)
 
     return state
 }

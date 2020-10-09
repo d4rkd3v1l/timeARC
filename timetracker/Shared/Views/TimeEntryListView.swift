@@ -10,16 +10,26 @@ import SwiftUI
 struct TimeEntryListView: View {
     let timeEntry: TimeEntry
 
+    @ObservedObject var updater = ViewUpdater(updateInterval: 60)
+
     var body: some View {
         HStack {
-            Text(timeEntry.start.formatted("HH:mm"))
+            ZStack {
+                Text("00:00").hidden()
+                Text(timeEntry.start.formatted("HH:mm"))
+            }
             Spacer()
             Image(systemName: "arrow.right")
             Spacer()
-            Text(timeEntry.end?.formatted("HH:mm") ?? "now")
+            ZStack {
+                Text("00:00").hidden()
+                Text(timeEntry.end?.formatted("HH:mm") ?? "now")
+            }
             Spacer()
-            Image(systemName: "clock")
-            Text(timeEntry.durationFormatted(allowedUnits: [.hour, .minute]) ?? "")
+            ZStack {
+                Text("00:00").hidden()
+                Text(timeEntry.durationFormatted(allowedUnits: [.hour, .minute]) ?? "")
+            }
         }
     }
 }

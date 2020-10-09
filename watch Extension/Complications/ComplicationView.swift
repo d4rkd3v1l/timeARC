@@ -12,12 +12,14 @@ import ClockKit
 struct ComplicationView: View {
     let duration: Int
     let maxDuration: Int
+    let displayMode: TimerDisplayMode
 
     var body: some View {
         ArcViewFull(duration: self.duration,
                     maxDuration: self.maxDuration,
                     color: .accentColor,
-                    allowedUnits: [.hour, .minute])
+                    allowedUnits: [.hour, .minute],
+                    displayMode: self.displayMode)
     }
 }
 
@@ -31,13 +33,17 @@ struct ComplicationProvider {
     let duration: Int
     let maxDuration: Int
     let color: UIColor
+    let displayMode: TimerDisplayMode
 
     func complication(for family: CLKComplicationFamily, identifier: ComplicationIdentifier = .standard) -> CLKComplicationTemplate? {
         let complicationView = ComplicationView(duration: self.duration,
-                                                maxDuration: self.maxDuration)
+                                                maxDuration: self.maxDuration,
+                                                displayMode: self.displayMode)
             .accentColor(Color(color))
 
-        let durationFormatted = self.duration.formatted(allowedUnits: [.hour, .minute]) ?? ""
+        let durationFormatted = self.displayMode.text(for: self.duration,
+                                                      maxDuration: self.maxDuration,
+                                                      allowedUnits: [.hour, .minute])
         let percent = Float(self.duration) / Float(self.maxDuration)
         let percentFormatted = String(Int(percent * 100.0))
         let onePieceImage = UIImage() // TODO: provide image
@@ -158,50 +164,74 @@ struct ComplicationView_Previews: PreviewProvider {
         Group {
             // Modular Small (0)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .modularSmall)!
                     .previewContext()
             }
 
             // Modular Large (1)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .modularLarge)!
                     .previewContext()
 
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .modularLarge, identifier: .alternative)!
                     .previewContext()
             }
 
             // Utilitarian Small (2)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .utilitarianSmall)!
                     .previewContext()
             }
 
             // Utilitarian Small Flat (6)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .utilitarianSmallFlat)!
                     .previewContext()
             }
 
             // Utilitarian Large (3)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .utilitarianLarge)!
                     .previewContext()
             }
 
             // Circular Small (4)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .circularSmall)!
                     .previewContext()
 
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .circularSmall, identifier: .alternative)!
                     .previewContext()
             }
@@ -215,58 +245,88 @@ struct ComplicationView2_Previews: PreviewProvider {
 
             // Extra Large (7)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .extraLarge)!
                     .previewContext()
 
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .extraLarge, identifier: .alternative)!
                     .previewContext()
 
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .extraLarge, identifier: .alternative2)!
                     .previewContext()
             }
 
             // Graphic Corner (8)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .graphicCorner)!
                     .previewContext()
 
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .graphicCorner, identifier: .alternative)!
                     .previewContext()
 
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .graphicCorner, identifier: .alternative2)!
                     .previewContext()
             }
 
             // Graphic Bezel (9)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .graphicBezel)!
                     .previewContext()
             }
 
             // Graphic Circular (10)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .graphicCircular)!
                     .previewContext()
             }
 
             // Graphic Rectangular (11)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .graphicRectangular)!
                     .previewContext()
             }
 
             // Graphic Extra Large (12)
             Group {
-                ComplicationProvider(duration: 12096, maxDuration: 28800, color: .green)
+                ComplicationProvider(duration: 12096,
+                                     maxDuration: 28800,
+                                     color: .green,
+                                     displayMode: .endOfWorkingDay)
                     .complication(for: .graphicExtraLarge)!
                     .previewContext()
             }

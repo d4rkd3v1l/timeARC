@@ -96,6 +96,8 @@
 		8179B43D2528E25C00A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B43C2528E25C00A537B7 /* SwiftUIFlux */; };
 		8179B4452528E2C800A537B7 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B4442528E2C800A537B7 /* PartialSheet */; };
 		8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3C12528E0BA00A537B7 /* AppToWatchData.swift */; };
+		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
+		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE88AA25291501000375FF /* SettingsReducerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -255,6 +257,7 @@
 		8179B3CF2528E0BA00A537B7 /* WatchReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchReducer.swift; sourceTree = "<group>"; };
 		8179B3D02528E0BA00A537B7 /* WatchActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchActions.swift; sourceTree = "<group>"; };
 		8179B3D22528E0BB00A537B7 /* WatchApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
+		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81FE88AA25291501000375FF /* SettingsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -479,6 +482,7 @@
 				8179B3382528E02100A537B7 /* Date+.swift */,
 				8179B3352528E02100A537B7 /* Date+Strideable.swift */,
 				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
+				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -774,6 +778,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8147750F2528E46400EDBE79 /* Assets.xcassets in Resources */,
+				81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,6 +858,7 @@
 				8179B3422528E02100A537B7 /* OverviewView.swift in Sources */,
 				8179B3552528E02100A537B7 /* TimeState.swift in Sources */,
 				8179B34C2528E02100A537B7 /* TimeEntry.swift in Sources */,
+				81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */,
 				8179B34D2528E02100A537B7 /* AppState.swift in Sources */,
 				8179B34E2528E02100A537B7 /* StatisticsReducer.swift in Sources */,
 				8179B3632528E02100A537B7 /* TimeEntryListView.swift in Sources */,

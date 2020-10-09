@@ -62,6 +62,7 @@ struct ListView: ConnectedView {
         let date: Date
         let timeEntries: [TimeEntry]
 
+        @ObservedObject var updater = ViewUpdater(updateInterval: 60)
         @EnvironmentObject var partialSheetManager: PartialSheetManager
         @Binding var isExpanded: Bool
 
@@ -96,8 +97,10 @@ struct ListView: ConnectedView {
                     HStack {
                         Text(self.date.startOfDay.formatted("EE, dd.MM.YYYY"))
                         Spacer()
-                        Image(systemName: "clock")
-                        Text(self.timeEntries.totalDurationInSeconds.formatted(allowedUnits: [.hour, .minute]) ?? "")
+                        ZStack {
+                            Text("00:00").hidden()
+                            Text(self.timeEntries.totalDurationInSeconds.formatted(allowedUnits: [.hour, .minute]) ?? "")
+                        }
                     }
                 })
         }
@@ -122,3 +125,4 @@ struct ListView_Previews: PreviewProvider {
         }
     }
 }
+

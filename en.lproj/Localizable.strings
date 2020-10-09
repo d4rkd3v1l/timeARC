@@ -27,6 +27,7 @@
 "year" = "Year";
 "month" = "Month";
 "week" = "Week";
+"today" = "Today";
 "breaks" = "Breaks";
 "overtime" = "Overtime";
 "averages" = "Averages";
@@ -34,3 +35,4 @@
 "daysWorked" = "Days worked";
 "date" = "Date";
 "time" = "Time";
+"hours" = "Hours";

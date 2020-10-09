@@ -16,7 +16,7 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
             next(action)
 
             if let state = getState() as? AppState {
-                saveAppState(state) // TODO: optimize, don't do this for any action?
+                saveAppState(state) // TODO: Optimize, don't do this for any action?
                 updateWidgetData(state)
 
                 if state.timeState.didSyncWatchData {
@@ -61,7 +61,8 @@ func updateWidgetData(_ state: AppState) {
         let relevantTimeEntries = state.timeState.timeEntries.forDay(Date())
         let widgetData = WidgetData(timeEntries: relevantTimeEntries,
                                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
-                                    accentColor: state.settingsState.accentColor)
+                                    accentColor: state.settingsState.accentColor,
+                                    displayMode: state.timeState.displayMode)
 
         let encodedWidgetData = try! JSONEncoder().encode(widgetData)
         userDefaults?.setValue(encodedWidgetData, forKey: "widgetData")

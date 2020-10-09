@@ -57,10 +57,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let duration = timeEntries.totalDurationInSeconds
         let maxDuration = store.state.workingMinutesPerDay * 60
         let color = timeEntries.isTimerRunning ? UIColor(store.state.accentColor.color) : .gray
+        let displayMode = store.state.displayMode
 
         let template = ComplicationProvider(duration: duration,
                                             maxDuration: maxDuration,
-                                            color: color)
+                                            color: color,
+                                            displayMode: displayMode)
             .complication(for: complication.family,
                           identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
 
@@ -78,6 +80,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let timeEntries = store.state.timeEntries
         let duration = timeEntries.totalDurationInSeconds
         let maxDuration = store.state.workingMinutesPerDay * 60
+        let displayMode = store.state.displayMode
 
         if timeEntries.isTimerRunning {
             var entries: [CLKComplicationTimelineEntry] = []
@@ -86,7 +89,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 let difference = Int(date.timeIntervalSince(now))
                 let template = ComplicationProvider(duration: duration + difference + 60 * index,
                                                     maxDuration: maxDuration,
-                                                    color: UIColor(store.state.accentColor.color))
+                                                    color: UIColor(store.state.accentColor.color),
+                                                    displayMode: displayMode)
                     .complication(for: complication.family,
                                   identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
 
@@ -111,7 +115,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         let template = ComplicationProvider(duration: 12096,
                                             maxDuration: 28800,
-                                            color: UIColor(store.state.accentColor.color))
+                                            color: UIColor(store.state.accentColor.color),
+                                            displayMode: .countUp)
             .complication(for: complication.family,
                           identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
 
