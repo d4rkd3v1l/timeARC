@@ -17,48 +17,38 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
         let timeEntriesForDay = state.timeEntries.forDay(Day())
         if var runningTimeEntry = timeEntriesForDay.first(where: { $0.isRunning }) {
             runningTimeEntry.stop()
-            state.timeEntries.updateValidated(runningTimeEntry)
+            state.updateTimeEntryValidated(runningTimeEntry)
             didStopTimer = true
         }
 
         if !didStopTimer {
-            state.timeEntries.insertValidated(TimeEntry())
+            state.insertTimeEntryValidated(TimeEntry())
         }
 
     case let action as AddTimeEntry:
-        state.timeEntries.insertValidated(action.timeEntry)
+        state.insertTimeEntryValidated(action.timeEntry)
 
     case let action as UpdateTimeEntry:
-        state.timeEntries.updateValidated(action.timeEntry)
+        state.updateTimeEntryValidated(action.timeEntry)
 
     case let action as DeleteTimeEntry:
-        state.timeEntries.remove(action.timeEntry)
+        state.removeTimeEntry(action.timeEntry)
 
     case let action as AddAbsenceEntry:
-        state.absenceEntries.append(action.absenceEntry)
-
-        
+        state.insertAbsenceEntry(action.absenceEntry)
 
     case let action as UpdateAbsenceEntry:
-        guard let oldAbsenceEntry = state.absenceEntries.first(where: { $0 == action.absenceEntry }) else { break }
-
-        var newAbsenceEntry = oldAbsenceEntry
-        newAbsenceEntry.update(type: action.absenceEntry.type,
-                               start: action.absenceEntry.start,
-                               end: action.absenceEntry.end)
-
-        state.absenceEntries.removeAll(where: { $0 == action.absenceEntry })
-        state.absenceEntries.append(newAbsenceEntry)
+        state.updateAbsenceEntry(action.absenceEntry)
 
     case let action as DeleteAbsenceEntry:
-        state.absenceEntries.removeAll(where: { $0 == action.absenceEntry })
+        state.removeAbsenceEntry(action.absenceEntry, onlyFor: action.onlyForDay)
 
     case let action as SyncTimeEntriesFromWatch:
         action.timeEntries.forEach { timeEntry in
             if state.timeEntries.find(timeEntry) != nil {
-                state.timeEntries.updateValidated(timeEntry)
+                state.updateTimeEntryValidated(timeEntry)
             } else {
-                state.timeEntries.insertValidated(timeEntry)
+                state.insertTimeEntryValidated(timeEntry)
             }
         }
         state.didSyncWatchData = true

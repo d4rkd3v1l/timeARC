@@ -95,8 +95,9 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
 
     func find(_ timeEntry: TimeEntry) -> TimeEntry? {
         // Optimization, works as long as start day did not change
-        if let timeEntriesForDay = self[timeEntry.start.day] {
-            return timeEntriesForDay.first(where: { $0.id == timeEntry.id })
+        if let timeEntriesForDay = self[timeEntry.start.day],
+            let timeEntry = timeEntriesForDay.first(where: { $0.id == timeEntry.id }) {
+            return timeEntry
         }
 
         // Fallback, if start day did change (have to go through all the entries in this case)
@@ -104,41 +105,7 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
             .flatMap { $0 }
             .first(where: { $0.id == timeEntry.id })
     }
-
-    /// - Does automatically split `TimeEntry`s into single days, that would otherwise span multiple days
-    /// - `TimeEntry`s for each day are sorted ascending by their `start` date
-    mutating func insertValidated(_ timeEntry: TimeEntry) {
-        timeEntry.splittedIntoSingleDays().forEach { timeEntry in
-            let day = timeEntry.start.day
-            if !self.keys.contains(day) {
-                self[day] = []
-            }
-
-            self[day]?.append(timeEntry)
-            self[day] = self[day]?.mergedOverlappingEntries()
-        }
-    }
-
-    mutating func updateValidated(_ timeEntry: TimeEntry) {
-        guard let oldTimeEntry = self.find(timeEntry) else { return }
-
-        var newTimeEntry = oldTimeEntry
-        newTimeEntry.start = timeEntry.start
-        newTimeEntry.end = timeEntry.end
-
-        self.remove(oldTimeEntry)
-        self.insertValidated(newTimeEntry)
-    }
-
-    mutating func remove(_ timeEntry: TimeEntry) {
-        let day = timeEntry.start.day
-        self[day]?.removeAll(where: { $0.id == timeEntry.id })
-
-        if self[day]?.isEmpty ?? false {
-            self.removeValue(forKey: day)
-        }
-    }
-
+    
     var isTimerRunning: Bool {
         return self.forDay(Day()).isTimerRunning
     }

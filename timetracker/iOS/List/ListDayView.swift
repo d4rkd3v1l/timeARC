@@ -23,7 +23,7 @@ struct DayView: View {
         DisclosureGroup(
             isExpanded: self.$isExpanded,
             content: {
-                ForEach(self.absenceEntries, id: \.self.id) { absenceEntry in
+                ForEach(self.absenceEntries, id: \.self) { absenceEntry in
                     AbsenceEntryListView(absenceEntry: absenceEntry)
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -32,16 +32,20 @@ struct DayView: View {
                                                      absenceTypes: self.absenceTypes,
                                                      title: "updateAbsenceEntryTitle",
                                                      buttonTitle: "update",
-                                                     buttonTextColor: self.buttonTextColor) {
-                                    store.dispatch(action: UpdateAbsenceEntry(absenceEntry: $0))
-                                }
+                                                     buttonTextColor: self.buttonTextColor,
+                                                     onUpdate: {
+                                                        store.dispatch(action: UpdateAbsenceEntry(absenceEntry: $0))
+                                                     },
+                                                     onDelete: {
+                                                        store.dispatch(action: DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: nil))
+                                                     })
                             }
                         }
                 }
                 .onDelete(perform: { indexSet in
                     indexSet.forEach { index in
                         let absenceEntry = self.absenceEntries[index]
-                        store.dispatch(action: DeleteAbsenceEntry(absenceEntry: absenceEntry))
+                        store.dispatch(action: DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: self.day))
                     }
                 })
                 // TODO: Check why only "lastModified", everything else seems to lead to following error.
@@ -57,9 +61,13 @@ struct DayView: View {
                                 TimeEntryEditView(timeEntry: timeEntry,
                                                   title: "updateTimeEntryTitle",
                                                   buttonTitle: "update",
-                                                  buttonTextColor: self.buttonTextColor) {
-                                    store.dispatch(action: UpdateTimeEntry(timeEntry: $0))
-                                }
+                                                  buttonTextColor: self.buttonTextColor,
+                                                  onUpdate: {
+                                                    store.dispatch(action: UpdateTimeEntry(timeEntry: $0))
+                                                  },
+                                                  onDelete: {
+                                                    store.dispatch(action: DeleteTimeEntry(timeEntry: timeEntry))
+                                                  })
                             }
                         }
                 }
@@ -72,7 +80,12 @@ struct DayView: View {
             },
             label: {
                 HStack {
-                    Text(self.day.date.formatted("EE, dd.MM.YYYY"))
+                    ZStack(alignment: .leading) {
+                        Text("0000").hidden()
+                        Text(self.day.date.formatted("EE"))
+                    }
+                    Text(self.day.date.formatted("dd.MM.YYYY"))
+                    Spacer()
                     ForEach(self.absenceEntries, id: \.self) { entry in
                         Text(entry.type.icon)
                     }

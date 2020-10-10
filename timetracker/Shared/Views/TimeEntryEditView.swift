@@ -14,6 +14,7 @@ struct TimeEntryEditView: View {
     let buttonTitle: LocalizedStringKey
     let buttonTextColor: Color
     var onUpdate: ((TimeEntry) -> Void)? = nil
+    var onDelete: (() -> Void)? = nil
 
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @State private var day: Day = Day()
@@ -27,91 +28,113 @@ struct TimeEntryEditView: View {
             set: { self.day = $0.day }
         )
 
-        return VStack {
-            Text(self.title)
-                .font(.headline)
-            Form {
-                VStack {
-                    if self.isRunning {
-                        Text("timerCurrentlyRunning")
-                            .multilineTextAlignment(.center)
-                            .padding(.all, 10)
-                    }
-                    HStack {
-                        Text("date")
-                        Spacer()
-                        DatePicker("", selection: dayBinding, displayedComponents: .date)
-                            .labelsHidden()
-                            .frame(alignment: .center)
-                            .onChange(of: self.day) { day in
-                                guard let newStartDate = self.startDate.withDate(from: day.date),
-                                      let newEndDate = self.endDate.withDate(from: day.date) else { return }
-                                self.startDate = newStartDate
-                                self.endDate = newEndDate
-                            }
-                    }
-                    HStack {
-                        Text("time")
-                        Spacer()
-                        DatePicker("", selection: self.$startDate, displayedComponents: .hourAndMinute)
-                            .labelsHidden()
-                            .onChange(of: self.startDate) { startDate in
-                                if startDate > self.endDate {
-                                    self.startDate = self.endDate
-                                }
-                            }
-                        Image(systemName: "arrow.right")
+        return ZStack {
+            VStack {
+                Text(self.title)
+                    .font(.headline)
+                    .padding()
+                Form {
+                    VStack {
                         if self.isRunning {
-                            VStack {
-                                Button(action: {
-                                    self.endDate = Date()
-                                    self.isRunning.toggle()
-                                }) {
-                                    Text("stop")
-                                        .frame(width: 120, height: 34, alignment: .center)
-                                        .font(Font.body.bold())
-                                        .foregroundColor(self.buttonTextColor)
-                                        .background(Color.accentColor)
-                                        .cornerRadius(17)
-                                }
-                            }
-                        } else {
-                            DatePicker("", selection: self.$endDate, displayedComponents: .hourAndMinute)
+                            Text("timerCurrentlyRunning")
+                                .multilineTextAlignment(.center)
+                                .padding(.all, 10)
+                        }
+                        HStack {
+                            Text("date")
+                            Spacer()
+                            DatePicker("", selection: dayBinding, displayedComponents: .date)
                                 .labelsHidden()
-                                .onChange(of: self.endDate) { endDate in
-                                    if endDate < self.startDate {
-                                        self.endDate = self.startDate
+                                .frame(alignment: .center)
+                                .onChange(of: self.day) { day in
+                                    guard let newStartDate = self.startDate.withDate(from: day.date),
+                                          let newEndDate = self.endDate.withDate(from: day.date) else { return }
+                                    self.startDate = newStartDate
+                                    self.endDate = newEndDate
+                                }
+                        }
+                        HStack {
+                            Text("time")
+                            Spacer()
+                            DatePicker("", selection: self.$startDate, displayedComponents: .hourAndMinute)
+                                .labelsHidden()
+                                .onChange(of: self.startDate) { startDate in
+                                    if startDate > self.endDate {
+                                        self.startDate = self.endDate
                                     }
                                 }
+                            Image(systemName: "arrow.right")
+                            if self.isRunning {
+                                VStack {
+                                    Button(action: {
+                                        self.endDate = Date()
+                                        self.isRunning.toggle()
+                                    }) {
+                                        Text("stop")
+                                            .frame(width: 120, height: 34, alignment: .center)
+                                            .font(Font.body.bold())
+                                            .foregroundColor(self.buttonTextColor)
+                                            .background(Color.accentColor)
+                                            .cornerRadius(17)
+                                    }
+                                }
+                            } else {
+                                DatePicker("", selection: self.$endDate, displayedComponents: .hourAndMinute)
+                                    .labelsHidden()
+                                    .onChange(of: self.endDate) { endDate in
+                                        if endDate < self.startDate {
+                                            self.endDate = self.startDate
+                                        }
+                                    }
+                            }
                         }
                     }
                 }
-            }
-            Button(action: {
-                var newTimeEntry = self.timeEntry
-                newTimeEntry.start = self.startDate
-                newTimeEntry.end = self.isRunning ? nil : self.endDate
-                self.onUpdate?(newTimeEntry)
+                Button(action: {
+                    var newTimeEntry = self.timeEntry
+                    newTimeEntry.start = self.startDate
+                    newTimeEntry.end = self.isRunning ? nil : self.endDate
+                    self.onUpdate?(newTimeEntry)
 
-                withAnimation {
-                    self.partialSheetManager.closePartialSheet()
+                    withAnimation {
+                        self.partialSheetManager.closePartialSheet()
+                    }
+                }) {
+                    Text(self.buttonTitle)
+                        .frame(width: 200, height: 50)
+                        .font(Font.body.bold())
+                        .foregroundColor(self.buttonTextColor)
+                        .background(Color.accentColor)
+                        .cornerRadius(25)
                 }
-            }) {
-                Text(self.buttonTitle)
-                    .frame(width: 200, height: 50)
-                    .font(Font.body.bold())
-                    .foregroundColor(self.buttonTextColor)
-                    .background(Color.accentColor)
-                    .cornerRadius(25)
+            }
+            .onAppear {
+                self.day = self.startDate.day
+                self.startDate = self.timeEntry.start
+                self.endDate = self.timeEntry.end ?? Date()
+                self.isRunning = self.timeEntry.isRunning
+            }
+
+            if let onDelete = self.onDelete {
+                HStack {
+                    Spacer()
+                    VStack {
+                        Button(action: {
+                            onDelete()
+
+                            withAnimation {
+                                self.partialSheetManager.closePartialSheet()
+                            }
+                        }) {
+                            Image(systemName: "trash.fill").imageScale(.large)
+                        }
+                        .padding()
+                        Spacer()
+                    }
+                }
             }
         }
-        .frame(maxHeight: self.isRunning ? 300 : 250)
-        .onAppear {
-            self.day = self.startDate.day
-            self.startDate = self.timeEntry.start
-            self.endDate = self.timeEntry.end ?? Date()
-            self.isRunning = self.timeEntry.isRunning
-        }
+        .frame(maxHeight: self.isRunning ? 350 : 300)
     }
 }
 
@@ -127,7 +150,9 @@ struct TimeEntryEditView_Previews: PreviewProvider {
             TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: nil),
                               title: "updateEntryTitle",
                               buttonTitle: "update",
-                              buttonTextColor: .white)
+                              buttonTextColor: .white,
+                              onUpdate: { _ in },
+                              onDelete: {})
             Spacer()
         }
         .accentColor(.green)

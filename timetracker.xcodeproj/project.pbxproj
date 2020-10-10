@@ -98,6 +98,7 @@
 		817B42F72531FA00005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B42FE2531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B43052531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
+		817B431925320440005240C5 /* Sequence+Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B431825320440005240C5 /* Sequence+Unique.swift */; };
 		817D61C92531C560009761DE /* AbsenceEntryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61C82531C560009761DE /* AbsenceEntryEditView.swift */; };
 		817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */; };
 		817D61E52531CDDC009761DE /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
@@ -266,6 +267,7 @@
 		817B42DA2531EFAE005240C5 /* AbsenceEntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryListView.swift; sourceTree = "<group>"; };
 		817B42E82531F031005240C5 /* ListDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDayView.swift; sourceTree = "<group>"; };
 		817B42F62531FA00005240C5 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		817B431825320440005240C5 /* Sequence+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Unique.swift"; sourceTree = "<group>"; };
 		817D61C82531C560009761DE /* AbsenceEntryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryEditView.swift; sourceTree = "<group>"; };
 		817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryTests.swift; sourceTree = "<group>"; };
 		817D61E42531CDDC009761DE /* AbsenceEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntry.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				8179B3352528E02100A537B7 /* Date+Strideable.swift */,
 				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
 				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
+				817B431825320440005240C5 /* Sequence+Unique.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				8179B3542528E02100A537B7 /* StatisticsState.swift in Sources */,
 				8179B3482528E02100A537B7 /* App.swift in Sources */,
 				8179B3552528E02100A537B7 /* TimeState.swift in Sources */,
+				817B431925320440005240C5 /* Sequence+Unique.swift in Sources */,
 				8179B34C2528E02100A537B7 /* TimeEntry.swift in Sources */,
 				81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */,
 				8179B34D2528E02100A537B7 /* AppState.swift in Sources */,

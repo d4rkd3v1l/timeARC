@@ -15,6 +15,7 @@ struct AbsenceEntryEditView: View {
     let buttonTitle: LocalizedStringKey
     let buttonTextColor: Color
     var onUpdate: ((AbsenceEntry) -> Void)? = nil
+    var onDelete: (() -> Void)? = nil
 
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @State private var absenceType: AbsenceType = .dummy
@@ -33,103 +34,132 @@ struct AbsenceEntryEditView: View {
             set: { self.endDay = $0.day }
         )
 
-        return VStack {
-            Text(self.title)
-                .font(.headline)
-            Form {
-                DisclosureGroup(
-                    isExpanded: self.$isAbsenceTypeExpanded,
-                    content: {
-                        Picker("", selection: self.$absenceType) {
-                            ForEach(self.absenceTypes, id: \.self) { absenceType in
-                                HStack {
-                                    Text(LocalizedStringKey(absenceType.title))
-                                    Text(absenceType.icon)
+        return ZStack {
+            VStack {
+                Text(self.title)
+                    .font(.headline)
+                    .padding()
+                Form {
+                    DisclosureGroup(
+                        isExpanded: self.$isAbsenceTypeExpanded,
+                        content: {
+                            Picker("", selection: self.$absenceType) {
+                                ForEach(self.absenceTypes, id: \.self) { absenceType in
+                                    HStack {
+                                        Text(LocalizedStringKey(absenceType.title))
+                                        Text(absenceType.icon)
+                                    }
+                                    .tag(absenceType)
                                 }
-                                .tag(absenceType)
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .contentShape(Rectangle())
+                            .onTapGesture {} // Note: Avoid closing on tap
+                        },
+                        label: {
+                            HStack {
+                                Text("absenceType")
+                                Spacer()
+                                Text(LocalizedStringKey(self.absenceType.title))
+                                Text(self.absenceType.icon)
                             }
                         }
-                        .pickerStyle(WheelPickerStyle())
-                        .contentShape(Rectangle())
-                        .onTapGesture {} // Note: Avoid closing on tap
-                    },
-                    label: {
-                        HStack {
-                            Text("absenceType")
-                            Spacer()
-                            Text(LocalizedStringKey(self.absenceType.title))
-                            Text(self.absenceType.icon)
+                    )
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation {
+                            self.isAbsenceTypeExpanded.toggle()
                         }
                     }
-                )
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation {
-                        self.isAbsenceTypeExpanded.toggle()
+                    HStack {
+                        Text("date")
+                        Spacer()
+                        DatePicker("", selection: startDayBinding, displayedComponents: .date)
+                            .labelsHidden()
+                            .onChange(of: self.startDay) { startDay in
+                                if startDay > self.endDay {
+                                    self.startDay = self.endDay
+                                }
+                            }
+                        Image(systemName: "arrow.right")
+                        DatePicker("", selection: endDayBinding, displayedComponents: .date)
+                            .labelsHidden()
+                            .onChange(of: self.endDay) { endDate in
+                                if endDay < self.startDay {
+                                    self.endDay = self.startDay
+                                }
+                            }
                     }
                 }
-                HStack {
-                    Text("date")
-                    Spacer()
-                    DatePicker("", selection: startDayBinding, displayedComponents: .date)
-                        .labelsHidden()
-                        .onChange(of: self.startDay) { startDay in
-                            if startDay > self.endDay {
-                                self.startDay = self.endDay
-                            }
-                        }
-                    Image(systemName: "arrow.right")
-                    DatePicker("", selection: endDayBinding, displayedComponents: .date)
-                        .labelsHidden()
-                        .onChange(of: self.endDay) { endDate in
-                            if endDay < self.startDay {
-                                self.endDay = self.startDay
-                            }
-                        }
-                }
-            }
-            Button(action: {
-                var newAbsenceEntry = self.absenceEntry
-                newAbsenceEntry.update(type: self.absenceType,
-                                       start: self.startDay,
-                                       end: self.endDay)
-                self.onUpdate?(newAbsenceEntry)
 
-                withAnimation {
-                    self.partialSheetManager.closePartialSheet()
+                Button(action: {
+                    var newAbsenceEntry = self.absenceEntry
+                    newAbsenceEntry.update(type: self.absenceType,
+                                           start: self.startDay,
+                                           end: self.endDay)
+                    self.onUpdate?(newAbsenceEntry)
+
+                    withAnimation {
+                        self.partialSheetManager.closePartialSheet()
+                    }
+                }) {
+                    Text(self.buttonTitle)
+                        .frame(width: 200, height: 50)
+                        .font(Font.body.bold())
+                        .foregroundColor(self.buttonTextColor)
+                        .background(Color.accentColor)
+                        .cornerRadius(25)
                 }
-            }) {
-                Text(self.buttonTitle)
-                    .frame(width: 200, height: 50)
-                    .font(Font.body.bold())
-                    .foregroundColor(self.buttonTextColor)
-                    .background(Color.accentColor)
-                    .cornerRadius(25)
+            }
+            .onAppear {
+                self.absenceType = self.absenceEntry.type
+                self.startDay = self.absenceEntry.start
+                self.endDay = self.absenceEntry.end
+            }
+
+            if let onDelete = self.onDelete {
+                HStack {
+                    Spacer()
+                    VStack {
+                        Button(action: {
+                            onDelete()
+
+                            withAnimation {
+                                self.partialSheetManager.closePartialSheet()
+                            }
+                        }) {
+                            Image(systemName: "trash.fill").imageScale(.large)
+                        }
+                        .padding()
+                        Spacer()
+                    }
+                }
             }
         }
-        .frame(maxHeight: self.isAbsenceTypeExpanded ? 500 : 270)
-        .onAppear {
-            self.absenceType = self.absenceEntry.type
-            self.startDay = self.absenceEntry.start
-            self.endDay = self.absenceEntry.end
-        }
+        .frame(maxHeight: self.isAbsenceTypeExpanded ? 530 : 300)
     }
 }
 
 struct AbsenceEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
-        AbsenceEntryEditView(absenceEntry: AbsenceEntry(type: AbsenceType(id: UUID(),
-                                                                          title: "bankHoliday",
-                                                                          icon: "🙌",
-                                                                          offPercentage: 1),
-                                                        start: Day(),
-                                                        end: Day().addingDays(2)),
-                             absenceTypes: SettingsState().absenceTypes,
-                             title: "addAbsenceEntry",
-                             buttonTitle: "add",
-                             buttonTextColor: .white)
-            .accentColor(.green)
-            .environment(\.colorScheme, .dark)
-            .background(Color.primary)
+        VStack {
+            Spacer()
+            AbsenceEntryEditView(absenceEntry: AbsenceEntry(type: AbsenceType(id: UUID(),
+                                                                              title: "bankHoliday",
+                                                                              icon: "🙌",
+                                                                              offPercentage: 1),
+                                                            start: Day(),
+                                                            end: Day().addingDays(2)),
+                                 absenceTypes: SettingsState().absenceTypes,
+                                 title: "addAbsenceEntry",
+                                 buttonTitle: "add",
+                                 buttonTextColor: .white,
+                                 onUpdate: { _ in },
+                                 onDelete: {})
+            Spacer()
+        }
+        .accentColor(.green)
+        .environment(\.colorScheme, .dark)
+        .background(Color.primary)
     }
 }

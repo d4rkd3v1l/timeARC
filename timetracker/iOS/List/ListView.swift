@@ -53,48 +53,47 @@ struct ListView: ConnectedView {
                         }
                     }
                 }
-                Button(action: {
-                    self.partialSheetManager.showPartialSheet() {
-                        let timeEntry = TimeEntry(start: Date(), end: Date())
-                        TimeEntryEditView(timeEntry: timeEntry,
-                                          title: "addTimeEntryTitle",
-                                          buttonTitle: "add",
-                                          buttonTextColor: props.buttonTextColor) {
-                            store.dispatch(action: AddTimeEntry(timeEntry: $0))
-                        }
-                    }
-                }) {
-                    Text("addTimeEntry")
-                        .frame(width: 200, height: 50)
-                        .font(Font.body.bold())
-                        .foregroundColor(props.buttonTextColor)
-                        .background(Color.accentColor)
-                        .cornerRadius(25)
-                }
-                .padding(.vertical)
-                Button(action: {
-                    guard let initialAbsenceType = props.absenceTypes.first else { return }
-                    self.partialSheetManager.showPartialSheet() {
-                        let absenceEntry = AbsenceEntry(type: initialAbsenceType, start: Day(), end: Day())
-                        AbsenceEntryEditView(absenceEntry: absenceEntry,
-                                             absenceTypes: props.absenceTypes,
-                                             title: "addAbsenceEntryTitle",
-                                             buttonTitle: "add",
-                                             buttonTextColor: props.buttonTextColor) {
-                            store.dispatch(action: AddAbsenceEntry(absenceEntry: $0))
-                        }
-                    }
-                }) {
-                    Text("addAbsenceEntry")
-                        .frame(width: 200, height: 50)
-                        .font(Font.body.bold())
-                        .foregroundColor(props.buttonTextColor)
-                        .background(Color.accentColor)
-                        .cornerRadius(25)
-                }
-                .padding(.vertical)
             }
             .navigationBarTitle("list")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Menu {
+                        Button(action: {
+                            self.partialSheetManager.showPartialSheet() {
+                                let timeEntry = TimeEntry(start: Date(), end: Date())
+                                TimeEntryEditView(timeEntry: timeEntry,
+                                                  title: "addTimeEntryTitle",
+                                                  buttonTitle: "add",
+                                                  buttonTextColor: props.buttonTextColor) {
+                                    store.dispatch(action: AddTimeEntry(timeEntry: $0))
+                                }
+                            }
+                        }) {
+                            Label("addTimeEntry", systemImage: "tray.and.arrow.down.fill")
+                        }
+
+                        Button(action: {
+                            guard let initialAbsenceType = props.absenceTypes.first else { return }
+                            self.partialSheetManager.showPartialSheet() {
+                                let absenceEntry = AbsenceEntry(type: initialAbsenceType, start: Day(), end: Day())
+                                AbsenceEntryEditView(absenceEntry: absenceEntry,
+                                                     absenceTypes: props.absenceTypes,
+                                                     title: "addAbsenceEntryTitle",
+                                                     buttonTitle: "add",
+                                                     buttonTextColor: props.buttonTextColor) {
+                                    store.dispatch(action: AddAbsenceEntry(absenceEntry: $0))
+                                }
+                            }
+                        }) {
+                            Label("addAbsenceEntry", systemImage: "calendar")
+                        }
+                    }
+                    label: {
+                        Text("add")
+                            .padding([.top, .bottom, .leading])
+                    }
+                }
+            }
         }
     }
 }

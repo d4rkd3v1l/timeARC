@@ -12,8 +12,8 @@
 "settings" = "Settings";
 "stop" = "Stop";
 "start" = "Start";
-"addTimeEntry" = "Add entry";
-"addAbsenceEntry" = "Add absence";
+"addTimeEntry" = "Time entry";
+"addAbsenceEntry" = "Absence entry";
 "workingHours" = "Working hours";
 "weekDays" = "Week days";
 "weekDaysDescription" = "Choose your working days";

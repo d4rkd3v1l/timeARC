@@ -32,6 +32,7 @@ struct UpdateAbsenceEntry: Action {
 
 struct DeleteAbsenceEntry: Action {
     let absenceEntry: AbsenceEntry
+    let onlyForDay: Day?
 }
 
 struct SyncTimeEntriesFromWatch: Action {
