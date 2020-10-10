@@ -31,7 +31,7 @@ struct StatisticsState: FluxState, Codable {
     // TODO: AbsenceTypes
 
     // TODO: Avoid direct access to other states
-    var timeEntries: [Date: [TimeEntry]] { store.state.timeState.timeEntries }
+    var timeEntries: [Day: [TimeEntry]] { store.state.timeState.timeEntries }
     var workingMinutesPerDay: Int { store.state.settingsState.workingMinutesPerDay }
     var workingWeekDays: [WeekDay] { store.state.settingsState.workingWeekDays }
 }

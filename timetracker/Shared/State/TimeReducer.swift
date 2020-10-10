@@ -14,7 +14,7 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
     switch action {
     case _ as ToggleTimer:
         var didStopTimer = false
-        let timeEntriesForDay = state.timeEntries.forDay(Date())
+        let timeEntriesForDay = state.timeEntries.forDay(Day())
         if var runningTimeEntry = timeEntriesForDay.first(where: { $0.isRunning }) {
             runningTimeEntry.stop()
             state.timeEntries.updateValidated(runningTimeEntry)
@@ -37,13 +37,15 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
     case let action as AddAbsenceEntry:
         state.absenceEntries.append(action.absenceEntry)
 
+        
+
     case let action as UpdateAbsenceEntry:
         guard let oldAbsenceEntry = state.absenceEntries.first(where: { $0 == action.absenceEntry }) else { break }
 
         var newAbsenceEntry = oldAbsenceEntry
         newAbsenceEntry.update(type: action.absenceEntry.type,
-                               startDate: action.absenceEntry.startDate,
-                               endDate: action.absenceEntry.endDate)
+                               start: action.absenceEntry.start,
+                               end: action.absenceEntry.end)
 
         state.absenceEntries.removeAll(where: { $0 == action.absenceEntry })
         state.absenceEntries.append(newAbsenceEntry)

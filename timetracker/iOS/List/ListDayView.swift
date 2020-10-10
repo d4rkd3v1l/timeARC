@@ -9,7 +9,7 @@ import SwiftUI
 import PartialSheet
 
 struct DayView: View {
-    let date: Date
+    let day: Day
     let timeEntries: [TimeEntry]
     let absenceEntries: [AbsenceEntry]
     let absenceTypes: [AbsenceType]
@@ -72,7 +72,7 @@ struct DayView: View {
             },
             label: {
                 HStack {
-                    Text(self.date.startOfDay.formatted("EE, dd.MM.YYYY"))
+                    Text(self.day.date.formatted("EE, dd.MM.YYYY"))
                     ForEach(self.absenceEntries, id: \.self) { entry in
                         Text(entry.type.icon)
                     }

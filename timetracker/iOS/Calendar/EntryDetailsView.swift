@@ -15,7 +15,7 @@ struct EntryDetailsView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        let timeEntries = state.timeState.timeEntries.forDay(self.selectedDate)
+        let timeEntries = state.timeState.timeEntries.forDay(self.selectedDay)
 
         return Props(timeEntries: timeEntries,
                      workingMinutesPerDay: state.settingsState.workingMinutesPerDay
@@ -24,12 +24,12 @@ struct EntryDetailsView: ConnectedView {
 
     @State private var editTimeEntry: TimeEntry?
 
-    @State var selectedDate: Date
+    @State var selectedDay: Day
     @State var duration: Int = 0
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
 
     func body(props: Props) -> some View {
-        ZStack {
+        return ZStack {
             VStack {
                 Spacer(minLength: 30)
                 ArcViewFull(duration: self.duration, maxDuration: props.workingMinutesPerDay * 60)
@@ -54,7 +54,7 @@ struct EntryDetailsView: ConnectedView {
                     })
                 }
                 Button(action: {
-                    let timeEntry = TimeEntry(start: self.selectedDate, end: self.selectedDate)
+                    let timeEntry = TimeEntry(start: self.selectedDay.date, end: self.selectedDay.date)
                     store.dispatch(action: AddTimeEntry(timeEntry: timeEntry))
                 }) {
                     Text("addEntry")
@@ -66,7 +66,7 @@ struct EntryDetailsView: ConnectedView {
                 }
                 .padding(.vertical, 10)
             }
-            .navigationTitle(self.selectedDate.formatted("MMM d, yyyy"))
+            .navigationTitle(self.selectedDay.date.formatted("MMM d, yyyy"))
 
 //            if let timeEntry = self.editTimeEntry {
 //                TimeEntryEditViewPresenter(timeEntry: timeEntry)
@@ -85,7 +85,7 @@ struct EntryDetailsView_Previews: PreviewProvider {
         store.dispatch(action: InitFlux())
         store.dispatch(action: ToggleTimer())
         return StoreProvider(store: store) {
-            EntryDetailsView(selectedDate: Date())
+            EntryDetailsView(selectedDate: Day())
                 .accentColor(.green)
         }
     }

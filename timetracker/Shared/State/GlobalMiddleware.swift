@@ -24,7 +24,7 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
                 }
 
                 if state.timeState.timeEntries.isTimerRunning {
-                    let duration = state.timeState.timeEntries.forDay(Date()).totalDurationInSeconds
+                    let duration = state.timeState.timeEntries.forDay(Day()).totalDurationInSeconds
                     let maxDuration = state.settingsState.workingMinutesPerDay * 60
                     let endOfWorkingDayDate = Date().addingTimeInterval(5)//TimeInterval(maxDuration - duration))
                     scheduleEndOfWorkingDayNotification(for: endOfWorkingDayDate)
@@ -46,7 +46,7 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
 
 private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sending new data, if actual relevant changes did happen
     DispatchQueue.global().async {
-        let relevantTimeEntries = state.timeState.timeEntries.forDay(Date())
+        let relevantTimeEntries = state.timeState.timeEntries.forDay(Day())
 
         let data = AppToWatchData(timeEntries: relevantTimeEntries,
                                   displayMode: state.timeState.displayMode,
@@ -71,7 +71,7 @@ func updateWidgetData(_ state: AppState) {
     DispatchQueue.global().async {
         let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker")
 
-        let relevantTimeEntries = state.timeState.timeEntries.forDay(Date())
+        let relevantTimeEntries = state.timeState.timeEntries.forDay(Day())
         let widgetData = WidgetData(timeEntries: relevantTimeEntries,
                                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                                     accentColor: state.settingsState.accentColor,

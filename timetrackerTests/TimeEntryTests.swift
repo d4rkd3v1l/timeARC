@@ -123,7 +123,7 @@ class TimeEntryTests: XCTestCase {
 
     // MARK: Dictionary extensions
 
-    private func timeEntriesProvider() throws -> (dict: [Date: [TimeEntry]], entries: [TimeEntry]) {
+    private func timeEntriesProvider() throws -> (dict: [Day: [TimeEntry]], entries: [TimeEntry]) {
         let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
         let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
 
@@ -146,10 +146,10 @@ class TimeEntryTests: XCTestCase {
         let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
         let timeEntry3 = TimeEntry(start: startDate3, end: endDate3)
 
-        var timeEntries: [Date: [TimeEntry]] = [:]
-        timeEntries[timeEntry1.start.startOfDay] = [timeEntry1]
-        timeEntries[timeEntry2.start.startOfDay] = [timeEntry2]
-        timeEntries[timeEntry3.start.startOfDay]?.append(timeEntry3)
+        var timeEntries: [Day: [TimeEntry]] = [:]
+        timeEntries[timeEntry1.start.day] = [timeEntry1]
+        timeEntries[timeEntry2.start.day] = [timeEntry2]
+        timeEntries[timeEntry3.start.day]?.append(timeEntry3)
 
         return (timeEntries, [timeEntry1, timeEntry2, timeEntry3])
     }
@@ -157,7 +157,7 @@ class TimeEntryTests: XCTestCase {
     func testForDay() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
 
-        let timeEntriesForDay = timeEntriesProvider.dict.forDay(timeEntriesProvider.entries[0].start)
+        let timeEntriesForDay = timeEntriesProvider.dict.forDay(timeEntriesProvider.entries[0].start.day)
         XCTAssertEqual(timeEntriesForDay.count, 1)
 
         let timeEntry = try XCTUnwrap(timeEntriesForDay.first)
@@ -249,7 +249,7 @@ class TimeEntryTests: XCTestCase {
 
     func testTotalBreaksInSeconds() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
-        let timeEntriesOfDay = try XCTUnwrap(timeEntriesProvider.dict[timeEntriesProvider.entries[1].start.startOfDay])
+        let timeEntriesOfDay = try XCTUnwrap(timeEntriesProvider.dict[timeEntriesProvider.entries[1].start.day])
         XCTAssertEqual(timeEntriesOfDay.totalBreaksInSeconds, 5400)
     }
 

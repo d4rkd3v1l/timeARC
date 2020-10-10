@@ -10,28 +10,26 @@ import Foundation
 struct AbsenceEntry: Identifiable, Equatable, Hashable, Codable {
     private (set) var id = UUID()
     private (set) var type: AbsenceType
-    private (set) var startDate: Date
-    private (set) var endDate: Date
+    private (set) var start: Day
+    private (set) var end: Day
 
-    init(type: AbsenceType, startDate: Date, endDate: Date) {
+    init(type: AbsenceType, start: Day, end: Day) {
         self.type = type
-        self.startDate = startDate.startOfDay
-        self.endDate = endDate.startOfDay
+        self.start = start
+        self.end = end
     }
 
-    mutating func update(type: AbsenceType, startDate: Date, endDate: Date) {
+    mutating func update(type: AbsenceType, start: Day, end: Day) {
         self.type = type
-        self.startDate = startDate.startOfDay
-        self.endDate = endDate.startOfDay
+        self.start = start
+        self.end = end
     }
 
-    func isRelevantFor(day: Date) -> Bool {
-        let range = stride(from: self.startDate,
-                           through: self.endDate,
-                           by: 86400)
-            .map { $0 }
-
-        return range.contains(day.startOfDay)
+    var relevantDays: [Day] {
+        return stride(from: self.start.date,
+                      through: self.end.date,
+                      by: 86400)
+            .map { $0.day }
     }
 
     static func == (lhs: AbsenceEntry, rhs: AbsenceEntry) -> Bool {
@@ -40,7 +38,7 @@ struct AbsenceEntry: Identifiable, Equatable, Hashable, Codable {
 }
 
 extension Array where Element == AbsenceEntry {
-    func absenceEntriesFor(day: Date) -> [AbsenceEntry] {
-        return self.filter { $0.isRelevantFor(day: day) }
+    func absenceEntriesFor(day: Day) -> [AbsenceEntry] {
+        return self.filter { $0.relevantDays.contains(day) }
     }
 }

@@ -104,7 +104,7 @@ private func ensureStatistics(_ state: inout StatisticsState) {
     }
 
     let relevantTimeEntries = state.timeEntries.filter {
-        (state.selectedStartDate.startOfDay...state.selectedEndDate.endOfDay).contains($0.key)
+        (state.selectedStartDate.startOfDay...state.selectedEndDate.endOfDay).contains($0.key.date)
     }
 
     guard !relevantTimeEntries.isEmpty else {

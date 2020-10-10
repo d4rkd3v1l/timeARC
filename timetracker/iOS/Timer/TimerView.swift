@@ -19,7 +19,7 @@ struct TimerView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: state.timeState.timeEntries.forDay(Date()),
+        return Props(timeEntries: state.timeState.timeEntries.forDay(Day()),
                      workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                      displayMode: state.timeState.displayMode,
                      buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))

@@ -18,12 +18,22 @@ struct AbsenceEntryEditView: View {
 
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @State private var absenceType: AbsenceType = .dummy
-    @State private var startDate: Date = Date()
-    @State private var endDate: Date = Date()
+    @State private var startDay: Day = Day()
+    @State private var endDay: Day = Day()
     @State private var isAbsenceTypeExpanded: Bool = false
 
     var body: some View {
-        VStack {
+        let startDayBinding = Binding<Date>(
+            get: { self.startDay.date },
+            set: { self.startDay = $0.day }
+        )
+
+        let endDayBinding = Binding<Date>(
+            get: { self.endDay.date },
+            set: { self.endDay = $0.day }
+        )
+
+        return VStack {
             Text(self.title)
                 .font(.headline)
             Form {
@@ -61,19 +71,19 @@ struct AbsenceEntryEditView: View {
                 HStack {
                     Text("date")
                     Spacer()
-                    DatePicker("", selection: self.$startDate, displayedComponents: .date)
+                    DatePicker("", selection: startDayBinding, displayedComponents: .date)
                         .labelsHidden()
-                        .onChange(of: self.startDate) { startDate in
-                            if startDate > self.endDate {
-                                self.startDate = self.endDate
+                        .onChange(of: self.startDay) { startDay in
+                            if startDay > self.endDay {
+                                self.startDay = self.endDay
                             }
                         }
                     Image(systemName: "arrow.right")
-                    DatePicker("", selection: self.$endDate, displayedComponents: .date)
+                    DatePicker("", selection: endDayBinding, displayedComponents: .date)
                         .labelsHidden()
-                        .onChange(of: self.endDate) { endDate in
-                            if endDate < self.startDate {
-                                self.endDate = self.startDate
+                        .onChange(of: self.endDay) { endDate in
+                            if endDay < self.startDay {
+                                self.endDay = self.startDay
                             }
                         }
                 }
@@ -81,8 +91,8 @@ struct AbsenceEntryEditView: View {
             Button(action: {
                 var newAbsenceEntry = self.absenceEntry
                 newAbsenceEntry.update(type: self.absenceType,
-                                       startDate: self.startDate,
-                                       endDate: self.endDate)
+                                       start: self.startDay,
+                                       end: self.endDay)
                 self.onUpdate?(newAbsenceEntry)
 
                 withAnimation {
@@ -100,8 +110,8 @@ struct AbsenceEntryEditView: View {
         .frame(maxHeight: self.isAbsenceTypeExpanded ? 500 : 270)
         .onAppear {
             self.absenceType = self.absenceEntry.type
-            self.startDate = self.absenceEntry.startDate
-            self.endDate = self.absenceEntry.endDate
+            self.startDay = self.absenceEntry.start
+            self.endDay = self.absenceEntry.end
         }
     }
 }
@@ -112,8 +122,8 @@ struct AbsenceEntryEditView_Previews: PreviewProvider {
                                                                           title: "bankHoliday",
                                                                           icon: "🙌",
                                                                           offPercentage: 1),
-                                                        startDate: Date(),
-                                                        endDate: Date().addingTimeInterval(216000)),
+                                                        start: Day(),
+                                                        end: Day().addingDays(2)),
                              absenceTypes: SettingsState().absenceTypes,
                              title: "addAbsenceEntry",
                              buttonTitle: "add",

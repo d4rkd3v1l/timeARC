@@ -14,7 +14,7 @@ struct ListView: ConnectedView {
     @EnvironmentObject var partialSheetManager: PartialSheetManager
 
     struct Props {
-        let timeEntries: [Date: [TimeEntry]]
+        let timeEntries: [Day: [TimeEntry]]
         let absenceEntries: [AbsenceEntry]
         let absenceTypes: [AbsenceType]
         let buttonTextColor: Color
@@ -27,7 +27,7 @@ struct ListView: ConnectedView {
                      buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))
     }
 
-    @StateObject private var expansionHandler = ExpansionHandler<Date>()
+    @StateObject private var expansionHandler = ExpansionHandler<Day>()
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -40,7 +40,7 @@ struct ListView: ConnectedView {
                 } else {
                     Form {
                         ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
-                            DayView(date: day,
+                            DayView(day: day,
                                     timeEntries: timeEntries,
                                     absenceEntries: props.absenceEntries.absenceEntriesFor(day: day),
                                     absenceTypes: props.absenceTypes,
@@ -75,7 +75,7 @@ struct ListView: ConnectedView {
                 Button(action: {
                     guard let initialAbsenceType = props.absenceTypes.first else { return }
                     self.partialSheetManager.showPartialSheet() {
-                        let absenceEntry = AbsenceEntry(type: initialAbsenceType, startDate: Date(), endDate: Date())
+                        let absenceEntry = AbsenceEntry(type: initialAbsenceType, start: Day(), end: Day())
                         AbsenceEntryEditView(absenceEntry: absenceEntry,
                                              absenceTypes: props.absenceTypes,
                                              title: "addAbsenceEntryTitle",

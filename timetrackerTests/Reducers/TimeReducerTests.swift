@@ -16,7 +16,7 @@ class TimeReducerTests: XCTestCase {
         let action = ToggleTimer()
         state = timeReducer(state: state, action: action)
         XCTAssertEqual(state.timeEntries.count, 1)
-        let timeEntriesOfDay = try XCTUnwrap(state.timeEntries[Date().startOfDay])
+        let timeEntriesOfDay = try XCTUnwrap(state.timeEntries[Day()])
         XCTAssertEqual(timeEntriesOfDay.count, 1)
 
         let timeEntry = try XCTUnwrap(timeEntriesOfDay.first)
@@ -27,14 +27,14 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let date = Date()
         let initialTimeEntry = TimeEntry(start: date, end: nil)
-        state.timeEntries[date.startOfDay] = [initialTimeEntry]
+        state.timeEntries[date.day] = [initialTimeEntry]
         XCTAssertEqual(state.timeEntries.count, 1)
 
         let action = ToggleTimer()
         state = timeReducer(state: state, action: action)
 
         XCTAssertEqual(state.timeEntries.count, 1)
-        let timeEntriesOfDay = try XCTUnwrap(state.timeEntries[Date().startOfDay])
+        let timeEntriesOfDay = try XCTUnwrap(state.timeEntries[Day()])
         XCTAssertEqual(timeEntriesOfDay.count, 1)
 
         let timeEntry = try XCTUnwrap(timeEntriesOfDay.first)
@@ -49,7 +49,7 @@ class TimeReducerTests: XCTestCase {
 
         XCTAssertEqual(state.timeEntries.count, 1)
 
-        let timeEntry = try XCTUnwrap(state.timeEntries[Date().startOfDay]?.first)
+        let timeEntry = try XCTUnwrap(state.timeEntries[Day()]?.first)
         XCTAssertEqual(timeEntry, initialTimeEntry)
     }
 
@@ -57,7 +57,7 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let date = Date()
         let initialTimeEntry = TimeEntry(start: date, end: nil)
-        state.timeEntries[date.startOfDay] = [initialTimeEntry]
+        state.timeEntries[date.day] = [initialTimeEntry]
         XCTAssertEqual(state.timeEntries.count, 1)
 
         var updatedTimeEntry = initialTimeEntry
@@ -65,7 +65,7 @@ class TimeReducerTests: XCTestCase {
         let action = UpdateTimeEntry(timeEntry: updatedTimeEntry)
         state = timeReducer(state: state, action: action)
 
-        let timeEntry = try XCTUnwrap(state.timeEntries[Date().startOfDay]?.first)
+        let timeEntry = try XCTUnwrap(state.timeEntries[Day()]?.first)
 
         XCTAssertEqual(timeEntry, updatedTimeEntry)
     }
@@ -74,7 +74,7 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let date = Date()
         let initialTimeEntry = TimeEntry(start: date, end: nil)
-        state.timeEntries[date.startOfDay] = [initialTimeEntry]
+        state.timeEntries[date.day] = [initialTimeEntry]
         XCTAssertEqual(state.timeEntries.count, 1)
 
         let action = DeleteTimeEntry(timeEntry: initialTimeEntry)
@@ -95,8 +95,8 @@ class TimeReducerTests: XCTestCase {
         let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
         var timeEntry2 = TimeEntry(start: startDate2, end: nil)
 
-        state.timeEntries[startDate1.startOfDay] = [timeEntry1, timeEntry2]
-        var timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.startOfDay])
+        state.timeEntries[startDate1.day] = [timeEntry1, timeEntry2]
+        var timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 2)
 
         let endDateComponents2 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 13)
@@ -104,7 +104,7 @@ class TimeReducerTests: XCTestCase {
         timeEntry2.end = endDate2
         let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2])
         state = timeReducer(state: state, action: action)
-        timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.startOfDay])
+        timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 2)
         XCTAssertTrue(state.didSyncWatchData)
     }
@@ -117,8 +117,8 @@ class TimeReducerTests: XCTestCase {
         let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
         let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
 
-        state.timeEntries[startDate1.startOfDay] = [timeEntry1]
-        var timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.startOfDay])
+        state.timeEntries[startDate1.day] = [timeEntry1]
+        var timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 1)
 
         let startDateComponents2 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 5)
@@ -129,7 +129,7 @@ class TimeReducerTests: XCTestCase {
 
         let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2])
         state = timeReducer(state: state, action: action)
-        timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.startOfDay])
+        timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 2)
         XCTAssertTrue(state.didSyncWatchData)
     }

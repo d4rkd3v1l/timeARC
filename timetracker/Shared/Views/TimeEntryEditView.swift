@@ -16,13 +16,18 @@ struct TimeEntryEditView: View {
     var onUpdate: ((TimeEntry) -> Void)? = nil
 
     @EnvironmentObject var partialSheetManager: PartialSheetManager
-    @State private var day: Date = Date()
+    @State private var day: Day = Day()
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
     @State private var isRunning: Bool = false
 
     var body: some View {
-        VStack {
+        let dayBinding = Binding<Date>(
+            get: { self.day.date },
+            set: { self.day = $0.day }
+        )
+
+        return VStack {
             Text(self.title)
                 .font(.headline)
             Form {
@@ -35,12 +40,12 @@ struct TimeEntryEditView: View {
                     HStack {
                         Text("date")
                         Spacer()
-                        DatePicker("", selection: self.$day, displayedComponents: .date)
+                        DatePicker("", selection: dayBinding, displayedComponents: .date)
                             .labelsHidden()
                             .frame(alignment: .center)
                             .onChange(of: self.day) { day in
-                                guard let newStartDate = self.startDate.withDate(from: day),
-                                      let newEndDate = self.endDate.withDate(from: day) else { return }
+                                guard let newStartDate = self.startDate.withDate(from: day.date),
+                                      let newEndDate = self.endDate.withDate(from: day.date) else { return }
                                 self.startDate = newStartDate
                                 self.endDate = newEndDate
                             }
@@ -102,7 +107,7 @@ struct TimeEntryEditView: View {
         }
         .frame(maxHeight: self.isRunning ? 300 : 250)
         .onAppear {
-            self.day = self.startDate.startOfDay
+            self.day = self.startDate.day
             self.startDate = self.timeEntry.start
             self.endDate = self.timeEntry.end ?? Date()
             self.isRunning = self.timeEntry.isRunning
