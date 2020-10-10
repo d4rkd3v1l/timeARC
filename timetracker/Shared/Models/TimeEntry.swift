@@ -9,16 +9,19 @@ import Foundation
 
 struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     private (set) var id = UUID()
+
     var start: Date {
         didSet {
             self.lastModified = Date()
         }
     }
+
     var end: Date? {
         didSet {
             self.lastModified = Date()
         }
     }
+
     private (set) var lastModified: Date = Date()
 
     init(start: Date = Date(), end: Date? = nil) {

@@ -77,16 +77,3 @@ func loadAppState(_ completion: @escaping (AppState?) -> Void) {
         }
     }
 }
-
-// MARK: - Models
-
-enum AbsenceType { // Too strict?
-    case bankHoliday
-    case holiday
-    case sick // child sick?
-}
-
-struct AbsenceEntry {
-    let type: AbsenceType
-    let date: Date
-}

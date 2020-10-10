@@ -39,7 +39,7 @@ struct SettingsView: ConnectedView {
                         DatePicker("", selection: self.$workingHours, displayedComponents: .hourAndMinute)
                             .datePickerStyle(WheelDatePickerStyle())
                             .contentShape(Rectangle())
-                            .onTapGesture {} // Note: Avoid revealing on tap
+                            .onTapGesture {} // Note: Avoid closing on tap
                             .onChange(of: self.workingHours) { time in
                                 store.dispatch(action: UpdateWorkingMinutesPerDay(workingMinutesPerDay: time.hoursAndMinutesInMinutes))
                             }

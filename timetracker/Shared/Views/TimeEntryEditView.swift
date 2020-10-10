@@ -23,7 +23,7 @@ struct TimeEntryEditView: View {
 
     var body: some View {
         VStack {
-            Text(title)
+            Text(self.title)
                 .font(.headline)
             Form {
                 VStack {

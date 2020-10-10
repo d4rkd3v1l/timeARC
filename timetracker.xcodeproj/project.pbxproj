@@ -96,6 +96,12 @@
 		8179B43D2528E25C00A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B43C2528E25C00A537B7 /* SwiftUIFlux */; };
 		8179B4452528E2C800A537B7 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B4442528E2C800A537B7 /* PartialSheet */; };
 		8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3C12528E0BA00A537B7 /* AppToWatchData.swift */; };
+		817B42DB2531EFAE005240C5 /* AbsenceEntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42DA2531EFAE005240C5 /* AbsenceEntryListView.swift */; };
+		817B42E92531F031005240C5 /* ListDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42E82531F031005240C5 /* ListDayView.swift */; };
+		817D61C92531C560009761DE /* AbsenceEntryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61C82531C560009761DE /* AbsenceEntryEditView.swift */; };
+		817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */; };
+		817D61E52531CDDC009761DE /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
+		817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
 		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE88AA25291501000375FF /* SettingsReducerTests.swift */; };
@@ -257,6 +263,12 @@
 		8179B3CF2528E0BA00A537B7 /* WatchReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchReducer.swift; sourceTree = "<group>"; };
 		8179B3D02528E0BA00A537B7 /* WatchActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchActions.swift; sourceTree = "<group>"; };
 		8179B3D22528E0BB00A537B7 /* WatchApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
+		817B42DA2531EFAE005240C5 /* AbsenceEntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryListView.swift; sourceTree = "<group>"; };
+		817B42E82531F031005240C5 /* ListDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDayView.swift; sourceTree = "<group>"; };
+		817D61C82531C560009761DE /* AbsenceEntryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryEditView.swift; sourceTree = "<group>"; };
+		817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryTests.swift; sourceTree = "<group>"; };
+		817D61E42531CDDC009761DE /* AbsenceEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntry.swift; sourceTree = "<group>"; };
+		817D61EC2531CDF3009761DE /* AbsenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceType.swift; sourceTree = "<group>"; };
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81FE88AA25291501000375FF /* SettingsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -362,6 +374,7 @@
 			children = (
 				81FE88BE2529171E000375FF /* Reducers */,
 				8179B36B2528E03900A537B7 /* Extensions */,
+				817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */,
 				8179B36D2528E03900A537B7 /* TimeEntryTests.swift */,
 				8179B2872528DF7C00A537B7 /* Info.plist */,
 			);
@@ -380,13 +393,13 @@
 		8179B30F2528E02100A537B7 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8179B31E2528E02100A537B7 /* App.swift */,
 				8179B3142528E02100A537B7 /* Calendar */,
-				8179B31F2528E02100A537B7 /* ContentView.swift */,
 				8179B31B2528E02100A537B7 /* List */,
 				8179B3122528E02100A537B7 /* Settings */,
 				8179B3102528E02100A537B7 /* Statistics */,
 				8179B3182528E02100A537B7 /* Timer */,
+				8179B31E2528E02100A537B7 /* App.swift */,
+				8179B31F2528E02100A537B7 /* ContentView.swift */,
 				8179B31D2528E02100A537B7 /* WatchCommunicator.swift */,
 			);
 			path = iOS;
@@ -430,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				8179B31C2528E02100A537B7 /* ListView.swift */,
+				817B42E82531F031005240C5 /* ListDayView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -450,6 +464,8 @@
 			children = (
 				8179B3242528E02100A537B7 /* TimeEntry.swift */,
 				8179B3232528E02100A537B7 /* WeekDay.swift */,
+				817D61E42531CDDC009761DE /* AbsenceEntry.swift */,
+				817D61EC2531CDF3009761DE /* AbsenceType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,6 +506,8 @@
 		8179B3392528E02100A537B7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				817D61C82531C560009761DE /* AbsenceEntryEditView.swift */,
+				817B42DA2531EFAE005240C5 /* AbsenceEntryListView.swift */,
 				8179B33B2528E02100A537B7 /* ArcView.swift */,
 				8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */,
 				8179B33A2528E02100A537B7 /* TimeEntryEditView.swift */,
@@ -849,6 +867,7 @@
 				8179B3502528E02100A537B7 /* SettingsState.swift in Sources */,
 				8179B3412528E02100A537B7 /* EntryDetailsView.swift in Sources */,
 				8179B3622528E02100A537B7 /* MultipleValuesPickerView.swift in Sources */,
+				817D61C92531C560009761DE /* AbsenceEntryEditView.swift in Sources */,
 				8179B3432528E02100A537B7 /* CalendarView.swift in Sources */,
 				8179B3562528E02100A537B7 /* SettingsReducer.swift in Sources */,
 				8179B3492528E02100A537B7 /* ContentView.swift in Sources */,
@@ -861,16 +880,19 @@
 				81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */,
 				8179B34D2528E02100A537B7 /* AppState.swift in Sources */,
 				8179B34E2528E02100A537B7 /* StatisticsReducer.swift in Sources */,
+				817D61E52531CDDC009761DE /* AbsenceEntry.swift in Sources */,
 				8179B3632528E02100A537B7 /* TimeEntryListView.swift in Sources */,
 				8179B3532528E02100A537B7 /* TimeReducer.swift in Sources */,
 				8179B3402528E02100A537B7 /* SettingsView.swift in Sources */,
 				8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */,
 				8179B35E2528E02100A537B7 /* Date+.swift in Sources */,
 				8179B34B2528E02100A537B7 /* WeekDay.swift in Sources */,
+				817B42E92531F031005240C5 /* ListDayView.swift in Sources */,
 				8179B35B2528E02100A537B7 /* Date+Strideable.swift in Sources */,
 				8179B3522528E02100A537B7 /* TimeActions.swift in Sources */,
 				8179B35F2528E02100A537B7 /* TimeEntryEditView.swift in Sources */,
 				8179B33F2528E02100A537B7 /* StatisticsView.swift in Sources */,
+				817B42DB2531EFAE005240C5 /* AbsenceEntryListView.swift in Sources */,
 				8179B3602528E02100A537B7 /* ArcView.swift in Sources */,
 				8179B34F2528E02100A537B7 /* SettingsActions.swift in Sources */,
 				8179B3592528E02100A537B7 /* AnimatableSystemFontModifier.swift in Sources */,
@@ -882,6 +904,7 @@
 				8179B35C2528E02100A537B7 /* Collection+average.swift in Sources */,
 				8179B3612528E02100A537B7 /* VisualEffectView.swift in Sources */,
 				8179B3572528E02100A537B7 /* StatisticsActions.swift in Sources */,
+				817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */,
 				8179B3582528E02100A537B7 /* ExpansionHandler.swift in Sources */,
 				8179B3462528E02100A537B7 /* ListView.swift in Sources */,
 			);
@@ -891,6 +914,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */,
 				81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */,
 				81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */,
 				81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */,
@@ -1028,6 +1052,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1089,6 +1114,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

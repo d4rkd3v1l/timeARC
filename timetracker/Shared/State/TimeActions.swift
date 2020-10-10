@@ -22,6 +22,18 @@ struct DeleteTimeEntry: Action {
     let timeEntry: TimeEntry
 }
 
+struct AddAbsenceEntry: Action {
+    let absenceEntry: AbsenceEntry
+}
+
+struct UpdateAbsenceEntry: Action {
+    let absenceEntry: AbsenceEntry
+}
+
+struct DeleteAbsenceEntry: Action {
+    let absenceEntry: AbsenceEntry
+}
+
 struct SyncTimeEntriesFromWatch: Action {
     let timeEntries: [TimeEntry]
 }

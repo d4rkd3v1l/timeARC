@@ -12,7 +12,8 @@
 "settings" = "Settings";
 "stop" = "Stop";
 "start" = "Start";
-"addEntry" = "Add entry";
+"addTimeEntry" = "Add entry";
+"addAbsenceEntry" = "Add absence";
 "workingHours" = "Working hours";
 "weekDays" = "Week days";
 "weekDaysDescription" = "Choose your working days";
@@ -20,9 +21,11 @@
 "calendar" = "Calendar";
 "list" = "List";
 "noEntriesYet" = "There are no entries yet. Just start a timer or add entries manually.";
-"updateEntryTitle" = "Update time entry";
+"updateTimeEntryTitle" = "Update time entry";
+"updateAbsenceEntryTitle" = "Update absence entry";
 "update" = "Update";
-"addEntryTitle" = "Add time entry";
+"addTimeEntryTitle" = "Add time entry";
+"addAbsenceEntryTitle" = "Add absence entry";
 "add" = "Add";
 "timerCurrentlyRunning" = "This timer is currently running.";
 "noStatisticsForTimeFrameMessage" = "Unfortunately there are no statistics available for the selected time frame.";
@@ -39,3 +42,11 @@
 "date" = "Date";
 "time" = "Time";
 "hours" = "Hours";
+"absenceType" = "Absence type";
+"bankHoliday" = "Bank holiday";
+"holiday" = "Holiday";
+"sick" = "Sick";
+"childSick" = "Child sick";
+"vocationalSchool" = "Vocational school";
+"parentalLeave" = "Parental leave";
+"training" = "Training";

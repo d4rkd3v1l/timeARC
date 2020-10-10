@@ -34,6 +34,23 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
     case let action as DeleteTimeEntry:
         state.timeEntries.remove(action.timeEntry)
 
+    case let action as AddAbsenceEntry:
+        state.absenceEntries.append(action.absenceEntry)
+
+    case let action as UpdateAbsenceEntry:
+        guard let oldAbsenceEntry = state.absenceEntries.first(where: { $0 == action.absenceEntry }) else { break }
+
+        var newAbsenceEntry = oldAbsenceEntry
+        newAbsenceEntry.update(type: action.absenceEntry.type,
+                               startDate: action.absenceEntry.startDate,
+                               endDate: action.absenceEntry.endDate)
+
+        state.absenceEntries.removeAll(where: { $0 == action.absenceEntry })
+        state.absenceEntries.append(newAbsenceEntry)
+
+    case let action as DeleteAbsenceEntry:
+        state.absenceEntries.removeAll(where: { $0 == action.absenceEntry })
+
     case let action as SyncTimeEntriesFromWatch:
         action.timeEntries.forEach { timeEntry in
             if state.timeEntries.find(timeEntry) != nil {
