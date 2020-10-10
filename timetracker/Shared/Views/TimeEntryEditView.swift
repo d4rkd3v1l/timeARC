@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct TimeEntryEditView: View {
     let timeEntry: TimeEntry
-    var onDismiss: ((TimeEntry) -> Void)? = nil
+    let title: LocalizedStringKey
+    let buttonTitle: LocalizedStringKey
+    let buttonTextColor: Color
+    var onUpdate: ((TimeEntry) -> Void)? = nil
 
+    @EnvironmentObject var partialSheetManager: PartialSheetManager
     @State private var day: Date = Date()
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
@@ -18,7 +23,7 @@ struct TimeEntryEditView: View {
 
     var body: some View {
         VStack {
-            Text("editEntryTitle")
+            Text(title)
                 .font(.headline)
             Form {
                 VStack {
@@ -60,7 +65,7 @@ struct TimeEntryEditView: View {
                                     Text("stop")
                                         .frame(width: 120, height: 34, alignment: .center)
                                         .font(Font.body.bold())
-                                        .foregroundColor(.white)
+                                        .foregroundColor(self.buttonTextColor)
                                         .background(Color.accentColor)
                                         .cornerRadius(17)
                                 }
@@ -77,19 +82,30 @@ struct TimeEntryEditView: View {
                     }
                 }
             }
+            Button(action: {
+                var newTimeEntry = self.timeEntry
+                newTimeEntry.start = self.startDate
+                newTimeEntry.end = self.isRunning ? nil : self.endDate
+                self.onUpdate?(newTimeEntry)
+
+                withAnimation {
+                    self.partialSheetManager.closePartialSheet()
+                }
+            }) {
+                Text(self.buttonTitle)
+                    .frame(width: 200, height: 50)
+                    .font(Font.body.bold())
+                    .foregroundColor(self.buttonTextColor)
+                    .background(Color.accentColor)
+                    .cornerRadius(25)
+            }
         }
-        .frame(maxHeight: 250)
+        .frame(maxHeight: self.isRunning ? 300 : 250)
         .onAppear {
             self.day = self.startDate.startOfDay
             self.startDate = self.timeEntry.start
             self.endDate = self.timeEntry.end ?? Date()
             self.isRunning = self.timeEntry.isRunning
-        }
-        .onDisappear {
-            var newTimeEntry = self.timeEntry
-            newTimeEntry.start = self.startDate
-            newTimeEntry.end = self.isRunning ? nil : self.endDate
-            self.onDismiss?(newTimeEntry)
         }
     }
 }
@@ -98,9 +114,15 @@ struct TimeEntryEditView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: Date()))
+            TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: Date()),
+                              title: "addEntryTitle",
+                              buttonTitle: "add",
+                              buttonTextColor: .white)
             Spacer()
-            TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: nil))
+            TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: nil),
+                              title: "updateEntryTitle",
+                              buttonTitle: "update",
+                              buttonTextColor: .white)
             Spacer()
         }
         .accentColor(.green)

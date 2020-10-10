@@ -10,12 +10,17 @@ import SwiftUIFlux
 import PartialSheet
 
 struct ListView: ConnectedView {
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var partialSheetManager: PartialSheetManager
+
     struct Props {
         let timeEntries: [Date: [TimeEntry]]
+        let buttonTextColor: Color
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(timeEntries: state.timeState.timeEntries)
+        return Props(timeEntries: state.timeState.timeEntries,
+                     buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))
     }
 
     @StateObject private var expansionHandler = ExpansionHandler<Date>()
@@ -33,6 +38,7 @@ struct ListView: ConnectedView {
                         ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
                             DayView(date: day,
                                     timeEntries: timeEntries,
+                                    buttonTextColor: props.buttonTextColor,
                                     isExpanded: self.expansionHandler.isExpanded(day))
                                 .contentShape(Rectangle())
                                 .onTapGesture {
@@ -42,13 +48,20 @@ struct ListView: ConnectedView {
                     }
                 }
                 Button(action: {
-                    let timeEntry = TimeEntry(start: self.expansionHandler.expandedItem ?? Date(), end: self.expansionHandler.expandedItem ?? Date())
-                    store.dispatch(action: AddTimeEntry(timeEntry: timeEntry))
+                    self.partialSheetManager.showPartialSheet() {
+                        let timeEntry = TimeEntry(start: Date(), end: Date())
+                        TimeEntryEditView(timeEntry: timeEntry,
+                                          title: "addEntryTitle",
+                                          buttonTitle: "add",
+                                          buttonTextColor: props.buttonTextColor) {
+                            store.dispatch(action: AddTimeEntry(timeEntry: $0))
+                        }
+                    }
                 }) {
                     Text("addEntry")
                         .frame(width: 200, height: 50)
                         .font(Font.body.bold())
-                        .foregroundColor(.white)
+                        .foregroundColor(props.buttonTextColor)
                         .background(Color.accentColor)
                         .cornerRadius(25)
                 }
@@ -61,9 +74,10 @@ struct ListView: ConnectedView {
     struct DayView: View {
         let date: Date
         let timeEntries: [TimeEntry]
+        let buttonTextColor: Color
 
-        @ObservedObject var updater = ViewUpdater(updateInterval: 60)
         @EnvironmentObject var partialSheetManager: PartialSheetManager
+        @ObservedObject var updater = ViewUpdater(updateInterval: 60)
         @Binding var isExpanded: Bool
 
         var body: some View {
@@ -80,7 +94,10 @@ struct ListView: ConnectedView {
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 self.partialSheetManager.showPartialSheet() {
-                                    TimeEntryEditView(timeEntry: timeEntry) {
+                                    TimeEntryEditView(timeEntry: timeEntry,
+                                                      title: "updateEntryTitle",
+                                                      buttonTitle: "update",
+                                                      buttonTextColor: self.buttonTextColor) {
                                         store.dispatch(action: UpdateTimeEntry(timeEntry: $0))
                                     }
                                 }
@@ -111,12 +128,11 @@ struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         store.dispatch(action: InitFlux())
 
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "dd.MM.yyyy HH:mm"
-//        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "01.01.2020 08:27")!, end: formatter.date(from: "01.01.2020 12:13")!))
-//        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "01.01.2020 12:54")!, end: formatter.date(from: "01.01.2020 18:30")!))
-//
-//        store.dispatch(action: AddTimeEntry(start: formatter.date(from: "04.01.2020 08:27")!, end: formatter.date(from: "04.01.2020 12:13")!))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
+        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 08:27")!, end: formatter.date(from: "01.01.2020 12:13")!)))
+        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 12:54")!, end: formatter.date(from: "01.01.2020 18:30")!)))
+        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "04.01.2020 08:27")!, end: formatter.date(from: "04.01.2020 12:13")!)))
 
         return StoreProvider(store: store) {
             ListView()

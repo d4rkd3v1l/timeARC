@@ -20,7 +20,10 @@
 "calendar" = "Calendar";
 "list" = "List";
 "noEntriesYet" = "There are no entries yet. Just start a timer or add entries manually.";
-"editEntryTitle" = "Edit time entry";
+"updateEntryTitle" = "Update time entry";
+"update" = "Update";
+"addEntryTitle" = "Add time entry";
+"add" = "Add";
 "timerCurrentlyRunning" = "This timer is currently running.";
 "noStatisticsForTimeFrameMessage" = "Unfortunately there are no statistics available for the selected time frame.";
 "allTime" = "All-Time";
