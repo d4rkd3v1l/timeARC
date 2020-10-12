@@ -9,5 +9,15 @@ import XCTest
 @testable import timetracker
 
 class StatisticsReducerTests: XCTestCase {
+    func testChangeTimeFrame() throws {
+        throw XCTSkip("TODO")
+    }
 
+    func testNextInterval() throws {
+        throw XCTSkip("TODO")
+    }
+
+    func testPreviosInterval() throws {
+        throw XCTSkip("TODO")
+    }
 }

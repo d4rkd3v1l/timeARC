@@ -24,6 +24,37 @@ class TimeEntryTests: XCTestCase {
         self.dateReference = try XCTUnwrap(Calendar.current.date(from: dateComponentsReference))
     }
 
+    private func timeEntriesProvider() throws -> (dict: [Day: [TimeEntry]], entries: [TimeEntry]) {
+        let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
+
+        let endDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
+
+        let startDateComponents2 = DateComponents(year: 2020, month: 07, day: 21, hour: 11, minute: 0, second: 0)
+        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
+
+        let endDateComponents2 = DateComponents(year: 2020, month: 07, day: 21, hour: 15, minute: 0, second: 0)
+        let endDate2 = try XCTUnwrap(Calendar.current.date(from: endDateComponents2))
+
+        let startDateComponents3 = DateComponents(year: 2020, month: 07, day: 21, hour: 16, minute: 30, second: 0)
+        let startDate3 = try XCTUnwrap(Calendar.current.date(from: startDateComponents3))
+
+        let endDateComponents3 = DateComponents(year: 2020, month: 07, day: 21, hour: 17, minute: 0, second: 0)
+        let endDate3 = try XCTUnwrap(Calendar.current.date(from: endDateComponents3))
+
+        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
+        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
+        let timeEntry3 = TimeEntry(start: startDate3, end: endDate3)
+
+        var timeEntries: [Day: [TimeEntry]] = [:]
+        timeEntries[timeEntry1.start.day] = [timeEntry1]
+        timeEntries[timeEntry2.start.day] = [timeEntry2]
+        timeEntries[timeEntry3.start.day]?.append(timeEntry3)
+
+        return (timeEntries, [timeEntry1, timeEntry2, timeEntry3])
+    }
+
     // MARK: TimeEntry
 
     func testIsRunning_Running() throws {
@@ -123,37 +154,6 @@ class TimeEntryTests: XCTestCase {
 
     // MARK: Dictionary extensions
 
-    private func timeEntriesProvider() throws -> (dict: [Day: [TimeEntry]], entries: [TimeEntry]) {
-        let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
-
-        let endDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
-
-        let startDateComponents2 = DateComponents(year: 2020, month: 07, day: 21, hour: 11, minute: 0, second: 0)
-        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
-
-        let endDateComponents2 = DateComponents(year: 2020, month: 07, day: 21, hour: 15, minute: 0, second: 0)
-        let endDate2 = try XCTUnwrap(Calendar.current.date(from: endDateComponents2))
-
-        let startDateComponents3 = DateComponents(year: 2020, month: 07, day: 21, hour: 16, minute: 30, second: 0)
-        let startDate3 = try XCTUnwrap(Calendar.current.date(from: startDateComponents3))
-
-        let endDateComponents3 = DateComponents(year: 2020, month: 07, day: 21, hour: 17, minute: 0, second: 0)
-        let endDate3 = try XCTUnwrap(Calendar.current.date(from: endDateComponents3))
-
-        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
-        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
-        let timeEntry3 = TimeEntry(start: startDate3, end: endDate3)
-
-        var timeEntries: [Day: [TimeEntry]] = [:]
-        timeEntries[timeEntry1.start.day] = [timeEntry1]
-        timeEntries[timeEntry2.start.day] = [timeEntry2]
-        timeEntries[timeEntry3.start.day]?.append(timeEntry3)
-
-        return (timeEntries, [timeEntry1, timeEntry2, timeEntry3])
-    }
-
     func testForDay() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
 
@@ -179,65 +179,6 @@ class TimeEntryTests: XCTestCase {
 
         let result = timeEntriesProvider.dict.find(timeEntry1)
         XCTAssertEqual(result, timeEntry1)
-    }
-
-    func testInsertValidated() throws {
-        let timeEntriesProvider = try self.timeEntriesProvider()
-
-        let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 22, hour: 08, minute: 0, second: 0)
-        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
-
-        let endDateComponents1 = DateComponents(year: 2020, month: 07, day: 22, hour: 12, minute: 0, second: 0)
-        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
-        let newTimeEntry = TimeEntry(start: startDate1, end: endDate1)
-
-        var timeEntries = timeEntriesProvider.dict
-        timeEntries.insertValidated(newTimeEntry)
-        XCTAssertEqual(timeEntries.values.flatMap({ $0 }).count, 4)
-
-        let result = timeEntries.find(newTimeEntry)
-        XCTAssertEqual(result, newTimeEntry)
-    }
-
-    func testUpdateValidated() throws {
-        let timeEntriesProvider = try self.timeEntriesProvider()
-
-        var updatedEntry = timeEntriesProvider.entries[0]
-        updatedEntry.start = Date()
-        updatedEntry.end = nil
-
-        var timeEntries = timeEntriesProvider.dict
-        timeEntries.updateValidated(updatedEntry)
-        XCTAssertEqual(timeEntries.values.flatMap({ $0 }).count, 3)
-
-        let result = timeEntries.find(updatedEntry)
-        XCTAssertEqual(result, updatedEntry)
-    }
-
-    func testUpdateValidated_NotFound() throws {
-        let timeEntriesProvider = try self.timeEntriesProvider()
-
-        let updatedEntry = TimeEntry(start: Date(), end: nil)
-
-        var timeEntries = timeEntriesProvider.dict
-        timeEntries.updateValidated(updatedEntry)
-        XCTAssertEqual(timeEntries.values.flatMap({ $0 }).count, 3)
-
-        let result = timeEntries.find(updatedEntry)
-        XCTAssertNil(result)
-    }
-
-    func testRemove() throws {
-        let timeEntriesProvider = try self.timeEntriesProvider()
-
-        var timeEntries = timeEntriesProvider.dict
-        timeEntries.remove(timeEntriesProvider.entries[0])
-
-        var result = timeEntries.find(timeEntriesProvider.entries[0])
-        XCTAssertNil(result)
-
-        result = timeEntries.find(timeEntriesProvider.entries[1])
-        XCTAssertEqual(result, timeEntriesProvider.entries[1])
     }
 
     // MARK: Array extensions
@@ -328,6 +269,10 @@ class TimeEntryTests: XCTestCase {
         let mergedEntry = try XCTUnwrap(mergedEntries.first)
         XCTAssertEqual(mergedEntry.start, date1)
         XCTAssertEqual(mergedEntry.end, date2)
+    }
+
+    func testMergeOverlappingEntriesIsRunning() throws {
+        throw XCTSkip("TODO")
     }
 
     // MARK: Int extensions

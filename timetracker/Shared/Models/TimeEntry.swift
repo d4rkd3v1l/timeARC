@@ -93,7 +93,7 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
         return self[day] ?? []
     }
 
-    func find(_ timeEntry: TimeEntry) -> TimeEntry? {
+    func find(_ timeEntry: TimeEntry) -> TimeEntry? { 
         // Optimization, works as long as start day did not change
         if let timeEntriesForDay = self[timeEntry.start.day],
             let timeEntry = timeEntriesForDay.first(where: { $0.id == timeEntry.id }) {

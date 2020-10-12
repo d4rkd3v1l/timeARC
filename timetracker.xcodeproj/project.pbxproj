@@ -27,6 +27,8 @@
 		814775852528E5F000EDBE79 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
 		814775922528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		814775932528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
+		8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1702534EEED00C39CA4 /* WeekDayTests.swift */; };
+		8172E17A2534EFA500C39CA4 /* DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1792534EFA500C39CA4 /* DayTests.swift */; };
 		8179B2912528DF7C00A537B7 /* timetrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B2902528DF7C00A537B7 /* timetrackerUITests.swift */; };
 		8179B33F2528E02100A537B7 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3112528E02100A537B7 /* StatisticsView.swift */; };
 		8179B3402528E02100A537B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3132528E02100A537B7 /* SettingsView.swift */; };
@@ -198,6 +200,8 @@
 		814775C32528EAC600EDBE79 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
 		814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		814775ED2528F10C00EDBE79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8172E1702534EEED00C39CA4 /* WeekDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayTests.swift; sourceTree = "<group>"; };
+		8172E1792534EFA500C39CA4 /* DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTests.swift; sourceTree = "<group>"; };
 		8179B2702528DF7B00A537B7 /* timetracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timetracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8179B27C2528DF7C00A537B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8179B2812528DF7C00A537B7 /* timetrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timetrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +336,17 @@
 			path = widget;
 			sourceTree = "<group>";
 		};
+		8172E1782534EF6200C39CA4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */,
+				8172E1792534EFA500C39CA4 /* DayTests.swift */,
+				8179B36D2528E03900A537B7 /* TimeEntryTests.swift */,
+				8172E1702534EEED00C39CA4 /* WeekDayTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		8179B2672528DF7B00A537B7 = {
 			isa = PBXGroup;
 			children = (
@@ -375,10 +390,9 @@
 		8179B2842528DF7C00A537B7 /* timetrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				81FE88BE2529171E000375FF /* Reducers */,
 				8179B36B2528E03900A537B7 /* Extensions */,
-				817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */,
-				8179B36D2528E03900A537B7 /* TimeEntryTests.swift */,
+				8172E1782534EF6200C39CA4 /* Models */,
+				81FE88BE2529171E000375FF /* Reducers */,
 				8179B2872528DF7C00A537B7 /* Info.plist */,
 			);
 			path = timetrackerTests;
@@ -919,10 +933,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8172E17A2534EFA500C39CA4 /* DayTests.swift in Sources */,
 				817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */,
 				81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */,
 				81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */,
 				81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */,
+				8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */,
 				8179B3702528E03900A537B7 /* TimeEntryTests.swift in Sources */,
 				81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */,
 				8179B36E2528E03900A537B7 /* TimeReducerTests.swift in Sources */,

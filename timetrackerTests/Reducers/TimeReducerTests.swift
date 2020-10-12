@@ -83,6 +83,18 @@ class TimeReducerTests: XCTestCase {
         XCTAssertTrue(state.timeEntries.isEmpty)
     }
 
+    func testInsertAbsenceEntry() throws {
+        throw XCTSkip("TODO")
+    }
+
+    func testUpdateAbsenceEntry() throws {
+        throw XCTSkip("TODO")
+    }
+
+    func testRemoveAbsenceEntry() throws {
+        throw XCTSkip("TODO")
+    }
+
     func testSyncTimeEntriesFromWatch_Update() throws {
         var state = TimeState()
         let startDateComponents1 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 41, second: 16)
