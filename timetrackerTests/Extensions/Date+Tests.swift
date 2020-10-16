@@ -36,7 +36,11 @@ class DateTests: XCTestCase {
     }
 
     func testByAdding() throws {
-        throw XCTSkip("TODO")
+        let date = Date()
+        let components = DateComponents(day: 1)
+        let verification = try XCTUnwrap(Calendar.current.date(byAdding: DateComponents(day: 1), to: date))
+
+        XCTAssertEqual(date.byAdding(components), verification)
     }
 
     func testStartOfDay() throws {

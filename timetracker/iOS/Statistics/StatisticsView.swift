@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftUIFlux
 
 enum TimeFrame: String, CaseIterable, Identifiable, Codable {
-    case allTime
-    case year
-    case month
     case week
+    case month
+    case year
+    case allTime
 
     var id: String {
         return self.rawValue

@@ -203,7 +203,7 @@ class TimeEntryTests: XCTestCase {
         XCTAssertTrue(timeEntries.isTimerRunning)
     }
 
-    func testMergeOverlappingEntriesSimple() throws {
+    func testMergeOverlappingEntries_Simple() throws {
         let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
         let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
 
@@ -225,7 +225,26 @@ class TimeEntryTests: XCTestCase {
         XCTAssertEqual(mergedEntry.end, endDate2)
     }
 
-    func testMergeOverlappingEntriesNoMerge() throws {
+    func testMergeOverlappingEntries_Simple_IsRunning() throws {
+        let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
+
+        let endDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
+
+        let startDateComponents2 = DateComponents(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
+        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
+
+        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
+        let timeEntry2 = TimeEntry(start: startDate2, end: nil)
+        let entries = [timeEntry1, timeEntry2]
+        let mergedEntry = try XCTUnwrap(entries.mergedOverlappingEntries().first)
+
+        XCTAssertEqual(mergedEntry.start, startDate1)
+        XCTAssertEqual(mergedEntry.end, nil)
+    }
+
+    func testMergeOverlappingEntries_NoMerge() throws {
         let dateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
         let date1 = try XCTUnwrap(Calendar.current.date(from: dateComponents1))
 
@@ -247,7 +266,7 @@ class TimeEntryTests: XCTestCase {
         XCTAssertEqual(mergedEntries[1], timeEntry2)
     }
 
-    func testMergeOverlappingEntriesContains() throws {
+    func testMergeOverlappingEntries_Contains() throws {
         let dateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
         let date1 = try XCTUnwrap(Calendar.current.date(from: dateComponents1))
 
@@ -269,10 +288,6 @@ class TimeEntryTests: XCTestCase {
         let mergedEntry = try XCTUnwrap(mergedEntries.first)
         XCTAssertEqual(mergedEntry.start, date1)
         XCTAssertEqual(mergedEntry.end, date2)
-    }
-
-    func testMergeOverlappingEntriesIsRunning() throws {
-        throw XCTSkip("TODO")
     }
 
     // MARK: Int extensions

@@ -72,7 +72,6 @@ struct AbsenceEntryEditView: View {
                         }
                     }
                     HStack {
-                        Text("date")
                         Spacer()
                         DatePicker("", selection: startDayBinding, displayedComponents: .date)
                             .labelsHidden()
@@ -89,6 +88,7 @@ struct AbsenceEntryEditView: View {
                                     self.endDay = self.startDay
                                 }
                             }
+                        Spacer()
                     }
                 }
 

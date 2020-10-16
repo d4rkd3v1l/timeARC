@@ -84,15 +84,148 @@ class TimeReducerTests: XCTestCase {
     }
 
     func testInsertAbsenceEntry() throws {
-        throw XCTSkip("TODO")
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
+
+        let action = AddAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: action)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
     }
 
     func testUpdateAbsenceEntry() throws {
-        throw XCTSkip("TODO")
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
+        state.absenceEntries.append(absenceEntry)
+
+        var updatedAbsenceEntry = absenceEntry
+        updatedAbsenceEntry.update(type: .dummy, start: Day().addingDays(1), end: Day().addingDays(3))
+
+        let action = UpdateAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: action)
+
+        XCTAssertEqual(state.absenceEntries, [updatedAbsenceEntry])
     }
 
     func testRemoveAbsenceEntry() throws {
-        throw XCTSkip("TODO")
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
+
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: addAction)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
+
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: nil)
+        state = timeReducer(state: state, action: removeAction)
+
+        XCTAssertTrue(state.absenceEntries.isEmpty)
+        XCTAssertFalse(state.timeEntries.keys.contains(Day()))
+        XCTAssertFalse(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertFalse(state.timeEntries.keys.contains(Day().addingDays(2)))
+    }
+
+    func testRemoveAbsenceEntry_OnlyFor_FirstDay() throws {
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
+
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: addAction)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
+
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day())
+        state = timeReducer(state: state, action: removeAction)
+
+        XCTAssertEqual(state.absenceEntries.count, 1)
+        XCTAssertFalse(state.timeEntries.keys.contains(Day()))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
+    }
+
+    func testRemoveAbsenceEntry_OnlyFor_MiddleDay() throws {
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
+
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: addAction)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
+
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1))
+        state = timeReducer(state: state, action: removeAction)
+
+        XCTAssertEqual(state.absenceEntries.count, 2)
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+        XCTAssertFalse(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
+    }
+
+    func testRemoveAbsenceEntry_OnlyFor_LastDay() throws {
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
+
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: addAction)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
+
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(2))
+        state = timeReducer(state: state, action: removeAction)
+
+        XCTAssertEqual(state.absenceEntries.count, 1)
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
+        XCTAssertFalse(state.timeEntries.keys.contains(Day().addingDays(2)))
+    }
+
+    func testRemoveAbsenceEntry_OnlyFor_SingleDay() throws {
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day())
+
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: addAction)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day())
+        state = timeReducer(state: state, action: removeAction)
+
+        XCTAssertTrue(state.absenceEntries.isEmpty)
+        XCTAssertFalse(state.timeEntries.keys.contains(Day()))
+    }
+
+    func testRemoveAbsenceEntry_OnlyFor_InvalidDay() throws {
+        var state = TimeState()
+        let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day())
+
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        state = timeReducer(state: state, action: addAction)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
+
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1))
+        state = timeReducer(state: state, action: removeAction)
+
+        XCTAssertEqual(state.absenceEntries, [absenceEntry])
+        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
     }
 
     func testSyncTimeEntriesFromWatch_Update() throws {

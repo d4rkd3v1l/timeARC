@@ -50,3 +50,7 @@
 "vocationalSchool" = "Vocational school";
 "parentalLeave" = "Parental leave";
 "training" = "Training";
+"endOfWoringDayNotificationTitle" = "Congratulations";
+"endOfWoringDayNotificationSubtitle" = "You're done for today! 🥳";
+"endOfWoringWeekNotificationTitle" = "Congratulations";
+"endOfWoringWeekNotificationSubtitle" = "You're done for the week! 🙌";

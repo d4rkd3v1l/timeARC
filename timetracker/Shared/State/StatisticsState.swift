@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUIFlux
 
 struct StatisticsState: FluxState, Codable {
-    var selectedTimeFrame: TimeFrame = .allTime
+    var selectedTimeFrame: TimeFrame = .week
     var selectedStartDate: Date = Date()
     var selectedEndDate: Date = Date()
     var selectedDateText: String = ""

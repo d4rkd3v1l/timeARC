@@ -10,6 +10,9 @@ import SwiftUIFlux
 import WatchConnectivity
 import WidgetKit
 
+private let endOfWoringDayNotificationIdentifier = "endOfWoringDayNotificationIdentifier"
+private let endOfWoringWeekNotificationIdentifier = "endOfWoringWeekNotificationIdentifier"
+
 let globalMiddleware: Middleware<AppState> = { dispatch, getState in
     return { next in
         return { action in
@@ -24,12 +27,11 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
                 }
 
                 if state.timeState.timeEntries.isTimerRunning {
-                    let duration = state.timeState.timeEntries.forDay(Day()).totalDurationInSeconds
-                    let maxDuration = state.settingsState.workingMinutesPerDay * 60
-                    let endOfWorkingDayDate = Date().addingTimeInterval(5)//TimeInterval(maxDuration - duration))
-                    scheduleEndOfWorkingDayNotification(for: endOfWorkingDayDate)
+                    scheduleEndOfWorkingDayNotification(state: state)
+                    scheduleEndOfWorkingWeekNotification(state: state)
                 } else {
-                    removeEndOfWorkingDayNotification()
+                    removeNotifications(identifiers: [endOfWoringDayNotificationIdentifier,
+                                                      endOfWoringWeekNotificationIdentifier])
                 }
             }
 
@@ -86,22 +88,47 @@ func updateWidgetData(_ state: AppState) {
     }
 }
 
-private func scheduleEndOfWorkingDayNotification(for date: Date) {
+private func scheduleEndOfWorkingDayNotification(state: AppState) {
+    let duration = state.timeState.timeEntries.forDay(Day()).totalDurationInSeconds
+    let maxDuration = state.settingsState.workingMinutesPerDay * 60
+    let endOfWorkingDayDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
+
+    removeNotifications(identifiers: [endOfWoringDayNotificationIdentifier])
+    scheduleNotification(with: "endOfWoringDayNotificationTitle",
+                         subtitle: "endOfWoringDayNotificationSubtitle",
+                         identifier: endOfWoringDayNotificationIdentifier,
+                         for: endOfWorkingDayDate)
+}
+
+private func scheduleEndOfWorkingWeekNotification(state: AppState) {
+    let duration = state.timeState.timeEntries
+        .filter { (Date().firstOfWeek...Date().lastOfWeek).contains($0.key.date) }
+        .flatMap { $0.value }
+        .totalDurationInSeconds
+
+    let maxDuration = (state.settingsState.workingMinutesPerDay * 60) * state.settingsState.workingWeekDays.count
+    let endOfWorkingWeekDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
+
+    removeNotifications(identifiers: [endOfWoringWeekNotificationIdentifier])
+    scheduleNotification(with: "endOfWoringWeekNotificationTitle",
+                         subtitle: "endOfWoringWeekNotificationSubtitle",
+                         identifier: endOfWoringWeekNotificationIdentifier,
+                         for: endOfWorkingWeekDate)
+}
+
+private func scheduleNotification(with title: String, subtitle: String, identifier: String, for date: Date) {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
         if success {
-            removeEndOfWorkingDayNotification()
-
             let content = UNMutableNotificationContent()
-            content.title = "Congratulations"
-            content.subtitle = "You're done for today! 🥳"
-//            content.subtitle = "You're done for this week! 🙌"
+            content.title = title
+            content.subtitle = subtitle
             content.sound = UNNotificationSound.default
 
             let triggerDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],
                                                                         from: date)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponents, repeats: false)
 
-            let request = UNNotificationRequest(identifier: "endOfWorkingDayNotification",
+            let request = UNNotificationRequest(identifier: identifier,
                                                 content: content,
                                                 trigger: trigger)
 
@@ -112,6 +139,6 @@ private func scheduleEndOfWorkingDayNotification(for date: Date) {
     }
 }
 
-private func removeEndOfWorkingDayNotification() {
-    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["endOfWorkingDayNotification"])
+private func removeNotifications(identifiers: [String]) {
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
 }

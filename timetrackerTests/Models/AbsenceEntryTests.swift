@@ -17,15 +17,62 @@ class AbsenceEntryTests: XCTestCase {
                                        AbsenceType(id: UUID(), title: "parentalLeave", icon: "🧒", offPercentage: 1),
                                        AbsenceType(id: UUID(), title: "training", icon: "📚", offPercentage: 1)]
 
-    func testAbsenceEntryInit() throws {
+    func testInit() throws {
         let dayStart = Day()
         let dayEnd = Day().addingDays(3)
         
-        let absenceEntry = AbsenceEntry(type: self.absenceTypes[0], start: dayStart, end: dayEnd)
+        let absenceEntry = AbsenceEntry(type: self.absenceTypes[0],
+                                        start: dayStart,
+                                        end: dayEnd)
 
         XCTAssertEqual(absenceEntry.type.id, self.absenceTypes[0].id)
         XCTAssertEqual(absenceEntry.start, dayStart)
         XCTAssertEqual(absenceEntry.end, dayEnd)
+    }
+
+    func testUpdate() throws {
+        var absenceEntry = AbsenceEntry(type: self.absenceTypes[0],
+                                        start: Day(),
+                                        end: Day().addingDays(2))
+
+        let oldId = absenceEntry.id
+        let newAbsenceType = self.absenceTypes[1]
+        let newStart = Day().addingDays(-1)
+        let newEnd = Day().addingDays(1)
+        absenceEntry.update(type: self.absenceTypes[1], start: newStart, end: newEnd)
+
+        XCTAssertEqual(absenceEntry.id, oldId)
+        XCTAssertEqual(absenceEntry.type, newAbsenceType)
+        XCTAssertEqual(absenceEntry.start, newStart)
+        XCTAssertEqual(absenceEntry.end, newEnd)
+    }
+
+    func testRelevantDays() throws {
+        let absenceEntry = AbsenceEntry(type: self.absenceTypes[0],
+                                        start: Day(),
+                                        end: Day().addingDays(2))
+
+        XCTAssertEqual(absenceEntry.relevantDays, [Day(),
+                                                   Day().addingDays(1),
+                                                   Day().addingDays(2)])
+    }
+
+    func testEquatable() throws {
+        let absenceEntry = AbsenceEntry(type: self.absenceTypes[0],
+                                        start: Day(),
+                                        end: Day().addingDays(2))
+
+        var absenceEntry1 = absenceEntry
+        absenceEntry1.update(type: self.absenceTypes[3],
+                             start: Day().addingDays(-1),
+                             end: Day())
+
+        var absenceEntry2 = absenceEntry
+        absenceEntry2.update(type: self.absenceTypes[4],
+                             start: Day().addingDays(3),
+                             end: Day().addingDays(8))
+
+        XCTAssertEqual(absenceEntry1, absenceEntry2)
     }
 
     func testAbsenceEntriesForDay() throws {
