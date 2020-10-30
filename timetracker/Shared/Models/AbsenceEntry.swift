@@ -38,7 +38,36 @@ struct AbsenceEntry: Identifiable, Equatable, Hashable, Codable {
 }
 
 extension Array where Element == AbsenceEntry {
-    func absenceEntriesFor(day: Day) -> [AbsenceEntry] {
+    func absenceEntries(for day: Day) -> [AbsenceEntry] {
         return self.filter { $0.relevantDays.contains(day) }
+    }
+
+    /// Will produce "new" `AbsenceEntry`s that exactly match the provided range of days
+    func exactAbsenceEntries(for range: ClosedRange<Date>) -> [AbsenceEntry] {
+        let days = stride(from: range.lowerBound,
+                                through: range.upperBound,
+                                by: 86400)
+            .map { $0.day }
+        let daysSet = Set(days)
+
+        let newAbsenceEntries: [AbsenceEntry] = self.compactMap { absenceEntry in
+            let absenceEntryRelevantDaysSet = Set<Day>(absenceEntry.relevantDays)
+            let intersection = [Day](absenceEntryRelevantDaysSet.intersection(daysSet)).sorted()
+
+            guard let start = intersection.first,
+                  let end = intersection.last else { return nil }
+
+            return AbsenceEntry(type: absenceEntry.type,
+                                start: start,
+                                end: end)
+        }
+
+        return newAbsenceEntries
+    }
+
+    func totalDurationInSeconds(for day: Day, with workingMinutesPerDay: Int) -> Int {
+        return self.absenceEntries(for: day).reduce(0) { total, current in
+            return total + Int((current.type.offPercentage * Float(workingMinutesPerDay * 60)))
+        }
     }
 }

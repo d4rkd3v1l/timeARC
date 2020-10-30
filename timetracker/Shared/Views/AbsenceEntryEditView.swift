@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PartialSheet
+import Introspect
 
 struct AbsenceEntryEditView: View {
     let absenceEntry: AbsenceEntry
@@ -43,18 +44,11 @@ struct AbsenceEntryEditView: View {
                     DisclosureGroup(
                         isExpanded: self.$isAbsenceTypeExpanded,
                         content: {
-                            Picker("", selection: self.$absenceType) {
-                                ForEach(self.absenceTypes, id: \.self) { absenceType in
-                                    HStack {
-                                        Text(LocalizedStringKey(absenceType.title))
-                                        Text(absenceType.icon)
-                                    }
-                                    .tag(absenceType)
+                            SingleValuePickerView(availableItems: self.absenceTypes,
+                                                  selection: self.absenceType)
+                                .onSelectionChange { newSelection in
+                                    self.absenceType = newSelection
                                 }
-                            }
-                            .pickerStyle(WheelPickerStyle())
-                            .contentShape(Rectangle())
-                            .onTapGesture {} // Note: Avoid closing on tap
                         },
                         label: {
                             HStack {
@@ -71,8 +65,8 @@ struct AbsenceEntryEditView: View {
                             self.isAbsenceTypeExpanded.toggle()
                         }
                     }
+
                     HStack {
-                        Spacer()
                         DatePicker("", selection: startDayBinding, displayedComponents: .date)
                             .labelsHidden()
                             .onChange(of: self.startDay) { startDay in
@@ -88,9 +82,11 @@ struct AbsenceEntryEditView: View {
                                     self.endDay = self.startDay
                                 }
                             }
-                        Spacer()
                     }
                 }
+                .introspectScrollView(customize: { scrollView in
+                    scrollView.isScrollEnabled = false
+                })
 
                 Button(action: {
                     var newAbsenceEntry = self.absenceEntry
@@ -136,7 +132,9 @@ struct AbsenceEntryEditView: View {
                 }
             }
         }
-        .frame(maxHeight: self.isAbsenceTypeExpanded ? 530 : 300)
+        // TODO: Fix this! This leads to absence type only being tappable after scrolling
+//        .frame(maxHeight: self.isAbsenceTypeExpanded ? 600 : 300)
+        .frame(maxHeight: 700)
     }
 }
 

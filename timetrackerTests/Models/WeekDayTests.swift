@@ -22,26 +22,26 @@ class WeekDayTests: XCTestCase {
         XCTAssertEqual(invalidWeekDay, .monday)
     }
 
-    func testSortIndex_de() throws {
-        guard Locale.current.identifier == "de" else { throw XCTSkip("Invalid locale for this test.") }
-        XCTAssertEqual(WeekDay.sunday.sortIndex, 6)
-        XCTAssertEqual(WeekDay.monday.sortIndex, 0)
-        XCTAssertEqual(WeekDay.tuesday.sortIndex, 1)
-        XCTAssertEqual(WeekDay.wednesday.sortIndex, 2)
-        XCTAssertEqual(WeekDay.thursday.sortIndex, 3)
-        XCTAssertEqual(WeekDay.friday.sortIndex, 4)
-        XCTAssertEqual(WeekDay.saturday.sortIndex, 5)
-    }
-
-    func testSortIndex_en() throws {
-        guard Locale.current.identifier == "en" else { throw XCTSkip("Invalid locale for this test.") }
-        XCTAssertEqual(WeekDay.sunday.sortIndex, 0)
-        XCTAssertEqual(WeekDay.monday.sortIndex, 1)
-        XCTAssertEqual(WeekDay.tuesday.sortIndex, 2)
-        XCTAssertEqual(WeekDay.wednesday.sortIndex, 3)
-        XCTAssertEqual(WeekDay.thursday.sortIndex, 4)
-        XCTAssertEqual(WeekDay.friday.sortIndex, 5)
-        XCTAssertEqual(WeekDay.saturday.sortIndex, 6)
+    func testSortIndex() throws {
+        if Locale.current.identifier == "de" {
+            XCTAssertEqual(WeekDay.sunday.sortIndex, 6)
+            XCTAssertEqual(WeekDay.monday.sortIndex, 0)
+            XCTAssertEqual(WeekDay.tuesday.sortIndex, 1)
+            XCTAssertEqual(WeekDay.wednesday.sortIndex, 2)
+            XCTAssertEqual(WeekDay.thursday.sortIndex, 3)
+            XCTAssertEqual(WeekDay.friday.sortIndex, 4)
+            XCTAssertEqual(WeekDay.saturday.sortIndex, 5)
+        } else if Locale.current.identifier == "en" {
+            XCTAssertEqual(WeekDay.sunday.sortIndex, 0)
+            XCTAssertEqual(WeekDay.monday.sortIndex, 1)
+            XCTAssertEqual(WeekDay.tuesday.sortIndex, 2)
+            XCTAssertEqual(WeekDay.wednesday.sortIndex, 3)
+            XCTAssertEqual(WeekDay.thursday.sortIndex, 4)
+            XCTAssertEqual(WeekDay.friday.sortIndex, 5)
+            XCTAssertEqual(WeekDay.saturday.sortIndex, 6)
+        } else {
+            throw XCTSkip("Invalid locale for this test.")
+        }
     }
 
     func testComparable() throws {

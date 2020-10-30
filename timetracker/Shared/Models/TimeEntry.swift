@@ -119,6 +119,8 @@ extension Array where Element == TimeEntry {
     }
 
     var totalBreaksInSeconds: Int {
+        guard !self.isEmpty else { return 0 }
+
         var result = 0
 
         for index in 0..<(self.count-1) {

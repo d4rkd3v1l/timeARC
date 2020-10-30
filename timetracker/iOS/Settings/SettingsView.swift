@@ -62,9 +62,7 @@ struct SettingsView: ConnectedView {
                 DisclosureGroup(
                     isExpanded: self.expansionHandler.isExpanded(.weekDays),
                     content: {
-                        MultipleValuesPickerView(title: "weekDays",
-                                                 sectionHeader: "weekDaysDescription",
-                                                 initial: props.workingWeekDays)
+                        MultipleValuesPickerView(initial: props.workingWeekDays)
                             .onSelectionChange { newSelections in
                                 store.dispatch(action: UpdateWorkingWeekDays(workingWeekDays: newSelections))
                             }

@@ -16,5 +16,4 @@ struct StatisticsNextInterval: Action {}
 
 struct StatisticsPreviousInterval: Action {}
 
-struct StatisticsRefresh: Action {}
-
+struct StatisticsRefresh: Action {} 

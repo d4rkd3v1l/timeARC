@@ -14,34 +14,20 @@ class TimeEntryTests: XCTestCase {
     var dateReference: Date!
 
     override func setUpWithError() throws {
-        let dateComponentsStart = DateComponents(year: 2020, month: 07, day: 20, hour: 13, minute: 37, second: 42)
-        self.dateStart = try XCTUnwrap(Calendar.current.date(from: dateComponentsStart))
-
-        let dateComponentsEnd = DateComponents(year: 2020, month: 07, day: 20, hour: 15, minute: 00, second: 00)
-        self.dateEnd = try XCTUnwrap(Calendar.current.date(from: dateComponentsEnd))
-
-        let dateComponentsReference = DateComponents(year: 2020, month: 07, day: 20)
-        self.dateReference = try XCTUnwrap(Calendar.current.date(from: dateComponentsReference))
+        self.dateStart = try Date(year: 2020, month: 07, day: 20, hour: 13, minute: 37, second: 42)
+        self.dateEnd = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 00, second: 00)
+        self.dateReference = try Date(year: 2020, month: 07, day: 20)
     }
 
     private func timeEntriesProvider() throws -> (dict: [Day: [TimeEntry]], entries: [TimeEntry]) {
-        let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
+        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
 
-        let endDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
+        let startDate2 = try Date(year: 2020, month: 07, day: 21, hour: 11, minute: 0, second: 0)
+        let endDate2 = try Date(year: 2020, month: 07, day: 21, hour: 15, minute: 0, second: 0)
 
-        let startDateComponents2 = DateComponents(year: 2020, month: 07, day: 21, hour: 11, minute: 0, second: 0)
-        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
-
-        let endDateComponents2 = DateComponents(year: 2020, month: 07, day: 21, hour: 15, minute: 0, second: 0)
-        let endDate2 = try XCTUnwrap(Calendar.current.date(from: endDateComponents2))
-
-        let startDateComponents3 = DateComponents(year: 2020, month: 07, day: 21, hour: 16, minute: 30, second: 0)
-        let startDate3 = try XCTUnwrap(Calendar.current.date(from: startDateComponents3))
-
-        let endDateComponents3 = DateComponents(year: 2020, month: 07, day: 21, hour: 17, minute: 0, second: 0)
-        let endDate3 = try XCTUnwrap(Calendar.current.date(from: endDateComponents3))
+        let startDate3 = try Date(year: 2020, month: 07, day: 21, hour: 16, minute: 30, second: 0)
+        let endDate3 = try Date(year: 2020, month: 07, day: 21, hour: 17, minute: 0, second: 0)
 
         let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
         let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
@@ -123,14 +109,9 @@ class TimeEntryTests: XCTestCase {
     }
 
     func testSplittedIntoSingleDays_MultipleDays() throws {
-        let dateComponentsStart = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let startDate = try XCTUnwrap(Calendar.current.date(from: dateComponentsStart))
-
-        let dateComponentsDay2 = DateComponents(year: 2020, month: 07, day: 21)
-        let day2 = try XCTUnwrap(Calendar.current.date(from: dateComponentsDay2))
-
-        let dateComponentsEnd = DateComponents(year: 2020, month: 07, day: 22, hour: 12, minute: 0, second: 0)
-        let endDate = try XCTUnwrap(Calendar.current.date(from: dateComponentsEnd))
+        let startDate = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let day2 = try Date(year: 2020, month: 07, day: 21)
+        let endDate = try Date(year: 2020, month: 07, day: 22, hour: 12, minute: 0, second: 0)
 
         let timeEntry = TimeEntry(start: startDate, end: endDate)
         let splittedTimeEntries = timeEntry.splittedIntoSingleDays()
@@ -204,17 +185,11 @@ class TimeEntryTests: XCTestCase {
     }
 
     func testMergeOverlappingEntries_Simple() throws {
-        let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
+        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
 
-        let endDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
-
-        let startDateComponents2 = DateComponents(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
-        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
-
-        let endDateComponents2 = DateComponents(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
-        let endDate2 = try XCTUnwrap(Calendar.current.date(from: endDateComponents2))
+        let startDate2 = try Date(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
+        let endDate2 = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
 
         let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
         let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
@@ -226,14 +201,9 @@ class TimeEntryTests: XCTestCase {
     }
 
     func testMergeOverlappingEntries_Simple_IsRunning() throws {
-        let startDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
-
-        let endDateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
-
-        let startDateComponents2 = DateComponents(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
-        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
+        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let startDate2 = try Date(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
 
         let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
         let timeEntry2 = TimeEntry(start: startDate2, end: nil)
@@ -245,17 +215,10 @@ class TimeEntryTests: XCTestCase {
     }
 
     func testMergeOverlappingEntries_NoMerge() throws {
-        let dateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let date1 = try XCTUnwrap(Calendar.current.date(from: dateComponents1))
-
-        let dateComponents2 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let date2 = try XCTUnwrap(Calendar.current.date(from: dateComponents2))
-
-        let dateComponents3 = DateComponents(year: 2020, month: 07, day: 20, hour: 13, minute: 0, second: 0)
-        let date3 = try XCTUnwrap(Calendar.current.date(from: dateComponents3))
-
-        let dateComponents4 = DateComponents(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
-        let date4 = try XCTUnwrap(Calendar.current.date(from: dateComponents4))
+        let date1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let date2 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let date3 = try Date(year: 2020, month: 07, day: 20, hour: 13, minute: 0, second: 0)
+        let date4 = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
 
         let timeEntry1 = TimeEntry(start: date1, end: date2)
         let timeEntry2 = TimeEntry(start: date3, end: date4)
@@ -267,17 +230,10 @@ class TimeEntryTests: XCTestCase {
     }
 
     func testMergeOverlappingEntries_Contains() throws {
-        let dateComponents1 = DateComponents(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let date1 = try XCTUnwrap(Calendar.current.date(from: dateComponents1))
-
-        let dateComponents2 = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let date2 = try XCTUnwrap(Calendar.current.date(from: dateComponents2))
-
-        let dateComponents3 = DateComponents(year: 2020, month: 07, day: 20, hour: 09, minute: 0, second: 0)
-        let date3 = try XCTUnwrap(Calendar.current.date(from: dateComponents3))
-
-        let dateComponents4 = DateComponents(year: 2020, month: 07, day: 20, hour: 10, minute: 0, second: 0)
-        let date4 = try XCTUnwrap(Calendar.current.date(from: dateComponents4))
+        let date1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let date2 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let date3 = try Date(year: 2020, month: 07, day: 20, hour: 09, minute: 0, second: 0)
+        let date4 = try Date(year: 2020, month: 07, day: 20, hour: 10, minute: 0, second: 0)
 
         let timeEntry1 = TimeEntry(start: date1, end: date2)
         let timeEntry2 = TimeEntry(start: date3, end: date4)

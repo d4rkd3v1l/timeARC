@@ -230,22 +230,18 @@ class TimeReducerTests: XCTestCase {
 
     func testSyncTimeEntriesFromWatch_Update() throws {
         var state = TimeState()
-        let startDateComponents1 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 41, second: 16)
-        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
-        let endDateComponents1 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 48, second: 41)
-        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
+        let startDate1 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 41, second: 16)
+        let endDate1 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 48, second: 41)
         let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
 
-        let startDateComponents2 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 5)
-        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
+        let startDate2 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 5)
         var timeEntry2 = TimeEntry(start: startDate2, end: nil)
 
         state.timeEntries[startDate1.day] = [timeEntry1, timeEntry2]
         var timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 2)
 
-        let endDateComponents2 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 13)
-        let endDate2 = try XCTUnwrap(Calendar.current.date(from: endDateComponents2))
+        let endDate2 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 13)
         timeEntry2.end = endDate2
         let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2])
         state = timeReducer(state: state, action: action)
@@ -256,20 +252,16 @@ class TimeReducerTests: XCTestCase {
 
     func testSyncTimeEntriesFromWatch_Insert() throws {
         var state = TimeState()
-        let startDateComponents1 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 41, second: 16)
-        let startDate1 = try XCTUnwrap(Calendar.current.date(from: startDateComponents1))
-        let endDateComponents1 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 48, second: 41)
-        let endDate1 = try XCTUnwrap(Calendar.current.date(from: endDateComponents1))
+        let startDate1 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 41, second: 16)
+        let endDate1 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 48, second: 41)
         let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
 
         state.timeEntries[startDate1.day] = [timeEntry1]
         var timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 1)
 
-        let startDateComponents2 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 5)
-        let startDate2 = try XCTUnwrap(Calendar.current.date(from: startDateComponents2))
-        let endDateComponents2 = DateComponents(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 13)
-        let endDate2 = try XCTUnwrap(Calendar.current.date(from: endDateComponents2))
+        let startDate2 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 5)
+        let endDate2 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 13)
         let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
 
         let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2])

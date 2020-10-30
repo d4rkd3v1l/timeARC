@@ -11,6 +11,7 @@
 		81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B042529A1C600CA0A69 /* Collection+averageTests.swift */; };
 		81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */; };
 		81130B1B2529B7E000CA0A69 /* StatisticsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B1A2529B7E000CA0A69 /* StatisticsReducerTests.swift */; };
+		8137EAFE254BEA4B00FE9AE7 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */; };
 		814775082528E46300EDBE79 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 814775072528E46300EDBE79 /* WidgetKit.framework */; };
 		8147750A2528E46300EDBE79 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 814775092528E46300EDBE79 /* SwiftUI.framework */; };
 		8147750F2528E46400EDBE79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8147750E2528E46400EDBE79 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		814775852528E5F000EDBE79 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
 		814775922528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		814775932528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
+		816852152543035E003F33FB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 816852142543035E003F33FB /* Introspect */; };
 		8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1702534EEED00C39CA4 /* WeekDayTests.swift */; };
 		8172E17A2534EFA500C39CA4 /* DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1792534EFA500C39CA4 /* DayTests.swift */; };
 		8179B2912528DF7C00A537B7 /* timetrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B2902528DF7C00A537B7 /* timetrackerUITests.swift */; };
@@ -189,6 +191,8 @@
 		81130B042529A1C600CA0A69 /* Collection+averageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+averageTests.swift"; sourceTree = "<group>"; };
 		81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionHandlerTests.swift; sourceTree = "<group>"; };
 		81130B1A2529B7E000CA0A69 /* StatisticsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsReducerTests.swift; sourceTree = "<group>"; };
+		812D5228253C36F70008AFBA /* PartialSheet */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PartialSheet; path = timetracker/PartialSheet; sourceTree = "<group>"; };
+		8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		814775062528E46300EDBE79 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		814775072528E46300EDBE79 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		814775092528E46300EDBE79 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -295,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8179B4452528E2C800A537B7 /* PartialSheet in Frameworks */,
+				816852152543035E003F33FB /* Introspect in Frameworks */,
 				8179B4352528E25300A537B7 /* SwiftUIFlux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +355,7 @@
 		8179B2672528DF7B00A537B7 = {
 			isa = PBXGroup;
 			children = (
+				812D5228253C36F70008AFBA /* PartialSheet */,
 				814775952528E75800EDBE79 /* Localizable.strings */,
 				8179B2722528DF7B00A537B7 /* timetracker */,
 				8179B2842528DF7C00A537B7 /* timetrackerTests */,
@@ -394,6 +400,7 @@
 				8172E1782534EF6200C39CA4 /* Models */,
 				81FE88BE2529171E000375FF /* Reducers */,
 				8179B2872528DF7C00A537B7 /* Info.plist */,
+				8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */,
 			);
 			path = timetrackerTests;
 			sourceTree = "<group>";
@@ -670,6 +677,7 @@
 			packageProductDependencies = (
 				8179B4342528E25300A537B7 /* SwiftUIFlux */,
 				8179B4442528E2C800A537B7 /* PartialSheet */,
+				816852142543035E003F33FB /* Introspect */,
 			);
 			productName = timetracker;
 			productReference = 8179B2702528DF7B00A537B7 /* timetracker.app */;
@@ -794,6 +802,7 @@
 			packageReferences = (
 				8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */,
 				8179B4432528E2C800A537B7 /* XCRemoteSwiftPackageReference "PartialSheet" */,
+				816852132543035E003F33FB /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 8179B2712528DF7B00A537B7 /* Products */;
 			projectDirPath = "";
@@ -944,6 +953,7 @@
 				8179B36E2528E03900A537B7 /* TimeReducerTests.swift in Sources */,
 				8179B36F2528E03900A537B7 /* Date+Tests.swift in Sources */,
 				81130B1B2529B7E000CA0A69 /* StatisticsReducerTests.swift in Sources */,
+				8137EAFE254BEA4B00FE9AE7 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1483,6 +1493,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		816852132543035E003F33FB /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Dimillian/SwiftUIFlux";
@@ -1502,6 +1520,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		816852142543035E003F33FB /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 816852132543035E003F33FB /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		8179B4342528E25300A537B7 /* SwiftUIFlux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */;

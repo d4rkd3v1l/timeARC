@@ -5,7 +5,7 @@
 //  Created by d4Rk on 10.10.20.
 //
 
-import Foundation
+import SwiftUI
 
 struct AbsenceType: Identifiable, Equatable, Hashable, Codable {
     let id: UUID
@@ -15,5 +15,11 @@ struct AbsenceType: Identifiable, Equatable, Hashable, Codable {
 
     static var dummy: AbsenceType {
         return AbsenceType(id: UUID(), title: "", icon: "", offPercentage: 1)
+    }
+}
+
+extension AbsenceType: SingleValueSelectable {
+    var localizedTitle: String {
+        return "\(NSLocalizedString(self.title, comment: "")) \(self.icon)"
     }
 }

@@ -81,7 +81,8 @@ private func insertTimeEntryValidated(_ timeEntry: TimeEntry, _ state: inout Tim
 }
 
 private func updateTimeEntryValidated(_ timeEntry: TimeEntry, _ state: inout TimeState) {
-    guard let oldTimeEntry = state.timeEntries.find(timeEntry) else { return }
+    guard let oldTimeEntry = state.timeEntries.find(timeEntry),
+          timeEntry.lastModified > oldTimeEntry.lastModified else { return }
 
     var newTimeEntry = oldTimeEntry
     newTimeEntry.start = timeEntry.start

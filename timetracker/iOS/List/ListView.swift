@@ -28,6 +28,7 @@ struct ListView: ConnectedView {
     }
 
     @StateObject private var expansionHandler = ExpansionHandler<Day>()
+    @State var isPresented: Bool = false
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -42,7 +43,7 @@ struct ListView: ConnectedView {
                         ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
                             DayView(day: day,
                                     timeEntries: timeEntries,
-                                    absenceEntries: props.absenceEntries.absenceEntriesFor(day: day),
+                                    absenceEntries: props.absenceEntries.absenceEntries(for: day),
                                     absenceTypes: props.absenceTypes,
                                     buttonTextColor: props.buttonTextColor,
                                     isExpanded: self.expansionHandler.isExpanded(day))

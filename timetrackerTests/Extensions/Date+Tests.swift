@@ -12,13 +12,11 @@ class DateTests: XCTestCase {
     var date: Date!
 
     override func setUpWithError() throws {
-        let dateComponents = DateComponents(year: 2020, month: 07, day: 20, hour: 13, minute: 37, second: 42)
-        self.date = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        self.date = try Date(year: 2020, month: 07, day: 20, hour: 13, minute: 37, second: 42)
     }
 
     func testDurationFormatted() throws {
-        let dateComponentsOther = DateComponents(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
-        let dateOther = try XCTUnwrap(Calendar.current.date(from: dateComponentsOther))
+        let dateOther = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
 
         XCTAssertEqual(self.date.durationFormatted(until: dateOther), "01:22")
         XCTAssertEqual(self.date.durationFormatted(until: dateOther, allowedUnits: [.hour, .minute]), "01:22")
@@ -26,12 +24,10 @@ class DateTests: XCTestCase {
     }
 
     func testIsInSameDay() throws {
-        let dateComponentsInSameDay = DateComponents(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let dateInSameDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsInSameDay))
+        let dateInSameDay = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
         XCTAssertTrue(self.date.isInSameDay(as: dateInSameDay))
 
-        let dateComponentsNotInSameDay = DateComponents(year: 2020, month: 07, day: 21, hour: 12, minute: 0, second: 0)
-        let dateNotInSameDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsNotInSameDay))
+        let dateNotInSameDay = try Date(year: 2020, month: 07, day: 21, hour: 12, minute: 0, second: 0)
         XCTAssertFalse(self.date.isInSameDay(as: dateNotInSameDay))
     }
 
@@ -44,52 +40,44 @@ class DateTests: XCTestCase {
     }
 
     func testStartOfDay() throws {
-        let dateComponentsStartOfDay = DateComponents(year: 2020, month: 07, day: 20, hour: 0, minute: 0, second: 0)
-        let dateStartOfDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsStartOfDay))
+        let dateStartOfDay = try Date(year: 2020, month: 07, day: 20, hour: 0, minute: 0, second: 0)
 
         XCTAssertEqual(self.date.startOfDay, dateStartOfDay)
     }
 
     func testEndOfDay() throws {
-        let dateComponentsEndOfDay = DateComponents(year: 2020, month: 07, day: 20, hour: 23, minute: 59, second: 59)
-        let dateEndOfDay = try XCTUnwrap(Calendar.current.date(from: dateComponentsEndOfDay))
+        let dateEndOfDay = try Date(year: 2020, month: 07, day: 20, hour: 23, minute: 59, second: 59)
 
         XCTAssertEqual(self.date.endOfDay, dateEndOfDay)
     }
 
     func testFirstOfYear() throws {
-        let dateComponents = DateComponents(year: 2020, month: 1, day: 1)
-        let firstOfYear = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let firstOfYear = try Date(year: 2020, month: 1, day: 1)
         XCTAssertEqual(self.date.firstOfYear, firstOfYear)
     }
 
     func testLastOfYear() throws {
-        let dateComponents = DateComponents(year: 2020, month: 12, day: 31)
-        let lastOfYear = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let lastOfYear = try Date(year: 2020, month: 12, day: 31)
         XCTAssertEqual(self.date.lastOfYear, lastOfYear)
     }
 
     func testFirstOfMonth() throws {
-        let dateComponents = DateComponents(year: 2020, month: 7, day: 1)
-        let firstOfMonth = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let firstOfMonth = try Date(year: 2020, month: 7, day: 1)
         XCTAssertEqual(self.date.firstOfMonth, firstOfMonth)
     }
 
     func testLastOfMonth() throws {
-        let dateComponents = DateComponents(year: 2020, month: 7, day: 31)
-        let lastOfMonth = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let lastOfMonth = try Date(year: 2020, month: 7, day: 31)
         XCTAssertEqual(self.date.lastOfMonth, lastOfMonth)
     }
 
     func testFirstOfWeek() throws {
-        let dateComponents = DateComponents(year: 2020, month: 7, day: 19)
-        let firstOfWeek = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let firstOfWeek = try Date(year: 2020, month: 7, day: 19)
         XCTAssertEqual(self.date.firstOfWeek, firstOfWeek)
     }
 
     func testLastOfWeek() throws {
-        let dateComponents = DateComponents(year: 2020, month: 7, day: 25)
-        let lastOfWeek = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let lastOfWeek = try Date(year: 2020, month: 7, day: 25)
         XCTAssertEqual(self.date.lastOfWeek, lastOfWeek)
     }
 
@@ -111,31 +99,25 @@ class DateTests: XCTestCase {
     }
 
     func testWithTime() throws {
-        let dateComponents = DateComponents(hour: 15, minute: 28, second: 31)
-        let time = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let time = try Date(hour: 15, minute: 28, second: 31)
 
-        let expectedDateComponents = DateComponents(year: 2020, month: 7, day: 20, hour: 15, minute: 28, second: 31)
-        let expectedDate = try XCTUnwrap(Calendar.current.date(from: expectedDateComponents))
+        let expectedDate = try Date(year: 2020, month: 7, day: 20, hour: 15, minute: 28, second: 31)
         XCTAssertEqual(self.date.withTime(from: time), expectedDate)
     }
 
     func testWithDate() throws {
-        let dateComponents = DateComponents(year: 2021, month: 9, day: 14)
-        let date = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let date = try Date(year: 2021, month: 9, day: 14)
 
-        let expectedDateComponents = DateComponents(year: 2021, month: 9, day: 14, hour: 13, minute: 37, second: 42)
-        let expectedDate = try XCTUnwrap(Calendar.current.date(from: expectedDateComponents))
+        let expectedDate = try Date(year: 2021, month: 9, day: 14, hour: 13, minute: 37, second: 42)
         XCTAssertEqual(self.date.withDate(from: date), expectedDate)
     }
 
     func testAverageTime() throws {
-        let dateComponents = DateComponents(year: 2020, month: 8, day: 5, hour: 15, minute: 39, second: 44)
-        let otherDate = try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        let otherDate = try Date(year: 2020, month: 8, day: 5, hour: 15, minute: 39, second: 44)
 
         let dates: [Date] = [self.date, otherDate]
 
-        let expectedDateComponents = DateComponents(hour: 14, minute: 38, second: 43)
-        let expectedDate = try XCTUnwrap(Calendar.current.date(from: expectedDateComponents))
+        let expectedDate = try Date(hour: 14, minute: 38, second: 43)
         let expectedAverageTime = try XCTUnwrap(Date().withTime(from: expectedDate))
         XCTAssertEqual(dates.averageTime, expectedAverageTime)
     }
