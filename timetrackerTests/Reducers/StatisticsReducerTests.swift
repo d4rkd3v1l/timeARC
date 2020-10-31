@@ -17,6 +17,8 @@ class StatisticsReducerTests: XCTestCase {
         self.endDate = try Date(year: 2020, month: 10, day: 30)
     }
 
+    // MARK: - Change Time Frame
+
     func testChangeTimeFrame_week() throws {
         let appState = AppState()
 
@@ -50,8 +52,8 @@ class StatisticsReducerTests: XCTestCase {
     func testChangeTimeFrame_allTime() throws {
         var appState = AppState()
 
-        let startDate1 = try Date(year: 2019, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let endDate1 = try Date(year: 2019, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let startDate1 = try Date(year: 2019, month: 7, day: 20, hour: 8, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2019, month: 7, day: 20, hour: 12, minute: 0, second: 0)
 
         let startDate2 = try Date(year: 2020, month: 10, day: 30, hour: 11, minute: 0, second: 0)
         let endDate2 = try Date(year: 2020, month: 10, day: 30, hour: 15, minute: 0, second: 0)
@@ -68,6 +70,8 @@ class StatisticsReducerTests: XCTestCase {
         XCTAssertEqual(state.selectedStartDate, startDate1)
         XCTAssertEqual(state.selectedEndDate, endDate2)
     }
+
+    // MARK: - Next Interval
 
     func testNextInterval_week() throws {
         var appState = AppState()
@@ -128,6 +132,8 @@ class StatisticsReducerTests: XCTestCase {
         XCTAssertEqual(state.selectedEndDate, self.endDate)
     }
 
+    // MARK: - Previous Interval
+
     func testPreviousInterval_week() throws {
         var appState = AppState()
         appState.statisticsState.selectedTimeFrame = .week
@@ -185,5 +191,81 @@ class StatisticsReducerTests: XCTestCase {
 
         XCTAssertEqual(state.selectedStartDate, self.startDate)
         XCTAssertEqual(state.selectedEndDate, self.endDate)
+    }
+
+    // MARK: - Ensure Statistics
+
+    func testStatistices() throws {
+        var appState = AppState()
+
+        let startDate1 = try Date(year: 2020, month: 10, day: 26, hour: 8, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 10, day: 26, hour: 12, minute: 12, second: 13)
+
+        let startDate2 = try Date(year: 2020, month: 10, day: 26, hour: 13, minute: 0, second: 0)
+        let endDate2 = try Date(year: 2020, month: 10, day: 26, hour: 17, minute: 56, second: 21)
+
+        let startDate3 = try Date(year: 2020, month: 10, day: 28, hour: 11, minute: 0, second: 0)
+        let endDate3 = try Date(year: 2020, month: 10, day: 28, hour: 15, minute: 14, second: 15)
+
+        let startDate4 = try Date(year: 2020, month: 10, day: 28, hour: 16, minute: 0, second: 0)
+        let endDate4 = try Date(year: 2020, month: 10, day: 28, hour: 17, minute: 45, second: 34)
+
+        let startDate5 = try Date(year: 2020, month: 10, day: 29, hour: 9, minute: 0, second: 0)
+        let endDate5 = try Date(year: 2020, month: 10, day: 29, hour: 13, minute: 12, second: 23)
+
+        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
+        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
+        let timeEntry3 = TimeEntry(start: startDate3, end: endDate3)
+        let timeEntry4 = TimeEntry(start: startDate4, end: endDate4)
+        let timeEntry5 = TimeEntry(start: startDate5, end: endDate5)
+
+        appState.timeState.timeEntries = [startDate1.day: [timeEntry1, timeEntry2],
+                                          startDate3.day: [timeEntry3, timeEntry4],
+                                          startDate5.day: [timeEntry5]]
+
+        appState.statisticsState.selectedTimeFrame = .week
+        appState.statisticsState.selectedStartDate = try Date(year: 2020, month: 10, day: 26)
+        appState.statisticsState.selectedEndDate = try Date(year: 2020, month: 11, day: 1)
+
+        let action = StatisticsRefresh()
+        let state = statisticsReducer(appState: appState, action: action)
+
+        XCTAssertEqual(state.targetDuration, 28800)
+        XCTAssertEqual(state.averageDuration, 23215)
+        XCTAssertEqual(state.averageWorkingHoursStartDate, Date(timeInterval: 33600, since: Date().startOfDay))
+        XCTAssertEqual(state.averageWorkingHoursEndDate, Date(timeInterval: 58686, since: Date().startOfDay))
+        XCTAssertEqual(state.averageBreaksDuration, 1870)
+        XCTAssertEqual(state.averageOvertimeDuration, -5585)
+
+        XCTAssertEqual(state.totalDays, 5)
+        XCTAssertEqual(state.totalDaysWorked, 3)
+        XCTAssertEqual(state.totalDuration, 69646)
+        XCTAssertEqual(state.totalBreaksDuration, 5612)
+        XCTAssertEqual(state.totalOvertimeDuration, -74354) // 69642
+    }
+
+    func testStatisticesWithAbsences() throws {
+        var appState = AppState()
+
+        let startDate1 = try Date(year: 2020, month: 10, day: 26, hour: 8, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 10, day: 26, hour: 12, minute: 12, second: 13)
+
+        let startDate2 = try Date(year: 2020, month: 10, day: 28, hour: 11, minute: 0, second: 0)
+        let endDate2 = try Date(year: 2020, month: 10, day: 28, hour: 15, minute: 14, second: 15)
+
+        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
+        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
+
+        appState.timeState.timeEntries = [startDate1.day: [timeEntry1],
+                                          startDate2.day: [timeEntry2]]
+
+        appState.statisticsState.selectedTimeFrame = .week
+        appState.statisticsState.selectedStartDate = try Date(year: 2020, month: 10, day: 26)
+        appState.statisticsState.selectedEndDate = try Date(year: 2020, month: 11, day: 1)
+
+        let action = StatisticsRefresh()
+        let state = statisticsReducer(appState: appState, action: action)
+
+        XCTFail("TODO: IMPLEMENT")
     }
 }

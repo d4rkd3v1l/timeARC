@@ -93,6 +93,15 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
         return self[day] ?? []
     }
 
+    func forCurrentWeek() -> [Day : [TimeEntry]] {
+        let days = stride(from: Date().firstOfWeek,
+                          to: Date().lastOfWeek,
+                          by: 86400)
+            .map { $0.day }
+
+        return self.filter { days.contains($0.key) }
+    }
+
     func find(_ timeEntry: TimeEntry) -> TimeEntry? { 
         // Optimization, works as long as start day did not change
         if let timeEntriesForDay = self[timeEntry.start.day],

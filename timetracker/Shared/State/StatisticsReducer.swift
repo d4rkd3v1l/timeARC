@@ -104,9 +104,13 @@ private func ensureStatistics(_ state: inout StatisticsState, with appState: App
     }
 
     let range = (state.selectedStartDate.startOfDay...state.selectedEndDate.endOfDay)
-    let days = stride(from: state.selectedStartDate.startOfDay,
+    let workingDays = stride(from: state.selectedStartDate.startOfDay,
                              through: state.selectedEndDate.endOfDay,
                              by: 86400)
+        .filter {
+            let weekday = Calendar.current.component(.weekday, from: $0)
+            return appState.settingsState.workingWeekDays.contains(WeekDay(weekday))
+        }
         .map { $0.day }
 
     let relevantTimeEntries = appState.timeState.timeEntries.filter {
@@ -123,61 +127,54 @@ private func ensureStatistics(_ state: inout StatisticsState, with appState: App
     state.errorMessage = nil
     state.targetDuration = appState.settingsState.workingMinutesPerDay * 60
 
-    let totalDurationInSeconds = days
-        .map { day -> Int in
-            let actualWorkingDuration = (relevantTimeEntries[day]?.totalDurationInSeconds ?? 0)
-            let absenceDuration = relevantAbsenceEntries.totalDurationInSeconds(for: day, with: appState.settingsState.workingMinutesPerDay)
-            return actualWorkingDuration + absenceDuration
-        }
-
-    state.averageDuration = totalDurationInSeconds.average()
-    state.totalDuration = totalDurationInSeconds.sum()
+    state.averageDuration = workingDays
+        .compactMap { relevantTimeEntries[$0]?.totalDurationInSeconds }
+        .average()
 
     state.averageWorkingHoursStartDate = relevantTimeEntries
-        .compactMap { day, timeEntries in
+        .compactMap { _, timeEntries in
             timeEntries.first?.start
         }
         .averageTime
 
     state.averageWorkingHoursEndDate = relevantTimeEntries
-        .compactMap { day, timeEntries in
+        .compactMap { _, timeEntries in
             timeEntries.last?.end
         }
         .averageTime
 
-    let totalBreaksInSeconds = relevantTimeEntries
-        .map { _, timeEntries in
-            timeEntries.totalBreaksInSeconds
-        }
+    let totalBreaksInSeconds = workingDays
+        .compactMap { relevantTimeEntries[$0]?.totalBreaksInSeconds }
 
     state.averageBreaksDuration = totalBreaksInSeconds.average()
-    state.totalBreaksDuration = totalBreaksInSeconds.sum()
 
-    let totalOvertimeInSeconds = days
-        .map { day -> Int in
-            let isCurrentDayAWorkingDay = appState.settingsState.workingWeekDays.contains(WeekDay(Calendar.current.component(.weekday, from: day.date)))
-            let actualWorkingDuration = (relevantTimeEntries[day]?.totalDurationInSeconds ?? 0)
-            let absenceDuration = relevantAbsenceEntries.totalDurationInSeconds(for: day, with: appState.settingsState.workingMinutesPerDay)
-            let expectedWorkingDuration = isCurrentDayAWorkingDay ? (appState.settingsState.workingMinutesPerDay * 60) : 0
-            return actualWorkingDuration + absenceDuration - expectedWorkingDuration
-        }
+    state.averageOvertimeDuration = state.averageDuration - (appState.settingsState.workingMinutesPerDay * 60)
 
-    state.averageOvertimeDuration = totalOvertimeInSeconds.average()
-    state.totalOvertimeDuration = totalOvertimeInSeconds.sum()
+    state.totalDays = workingDays.count
 
-    state.totalDays = days
-        .reduce(0) { result, current in
-            let isCurrentDayAWorkingDay = appState.settingsState.workingWeekDays.contains(WeekDay(Calendar.current.component(.weekday, from: current.date)))
-            return result + (isCurrentDayAWorkingDay ? 1 : 0)
-        }
     state.totalDaysWorked = relevantTimeEntries.count
 
+    state.totalDuration = workingDays
+        .map { day -> Int in
+            let actualWorkingDuration = (relevantTimeEntries[day]?.totalDurationInSeconds ?? 0)
+            let absenceDuration = relevantAbsenceEntries.totalDurationInSeconds(for: day, with: appState.settingsState.workingMinutesPerDay)
+            return actualWorkingDuration + absenceDuration
+        }
+        .sum()
+
+
+    state.totalBreaksDuration = totalBreaksInSeconds.sum()
+
+    state.totalOvertimeDuration = state.totalDuration - (appState.settingsState.workingMinutesPerDay * 60) * workingDays.count
+
+
+    
     var absenceEntriesByDay: [Day: [AbsenceEntry]] = [:]
-    days.forEach { day in
+    workingDays.forEach { day in
         absenceEntriesByDay[day] = relevantAbsenceEntries.absenceEntries(for: day)
     }
 
-    state.totalAbsenceDuration = absenceEntriesByDay.reduce(0) { total, current in
-        total + Int((current.value.map { $0.type.offPercentage }.max() ?? 1) * Float(appState.settingsState.workingMinutesPerDay * 60))
-    }
+//    state.totalAbsenceDuration = Float(absenceEntriesByDay.reduce(0) { total, current in
+//        total + Int((current.value.map { $0.type.offPercentage }.max() ?? 1) * Float(appState.settingsState.workingMinutesPerDay * 60))
+//    })
 }

@@ -12,6 +12,7 @@
 		81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */; };
 		81130B1B2529B7E000CA0A69 /* StatisticsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B1A2529B7E000CA0A69 /* StatisticsReducerTests.swift */; };
 		8137EAFE254BEA4B00FE9AE7 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */; };
+		8137EB12254C11FD00FE9AE7 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EB11254C11FD00FE9AE7 /* TodayView.swift */; };
 		814775082528E46300EDBE79 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 814775072528E46300EDBE79 /* WidgetKit.framework */; };
 		8147750A2528E46300EDBE79 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 814775092528E46300EDBE79 /* SwiftUI.framework */; };
 		8147750F2528E46400EDBE79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8147750E2528E46400EDBE79 /* Assets.xcassets */; };
@@ -193,6 +194,7 @@
 		81130B1A2529B7E000CA0A69 /* StatisticsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsReducerTests.swift; sourceTree = "<group>"; };
 		812D5228253C36F70008AFBA /* PartialSheet */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PartialSheet; path = timetracker/PartialSheet; sourceTree = "<group>"; };
 		8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		8137EB11254C11FD00FE9AE7 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		814775062528E46300EDBE79 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		814775072528E46300EDBE79 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		814775092528E46300EDBE79 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -459,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				8179B3192528E02100A537B7 /* TimerView.swift */,
+				8137EB11254C11FD00FE9AE7 /* TodayView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				8179B3472528E02100A537B7 /* WatchCommunicator.swift in Sources */,
 				8179B3442528E02100A537B7 /* TimerView.swift in Sources */,
 				8179B35C2528E02100A537B7 /* Collection+average.swift in Sources */,
+				8137EB12254C11FD00FE9AE7 /* TodayView.swift in Sources */,
 				8179B3612528E02100A537B7 /* VisualEffectView.swift in Sources */,
 				8179B3572528E02100A537B7 /* StatisticsActions.swift in Sources */,
 				817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */,

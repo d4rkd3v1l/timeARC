@@ -55,7 +55,7 @@ struct StatisticsView: ConnectedView {
     }
 
     @ObservedObject var updater = StateUpdater(updateInterval: 60, action: StatisticsRefresh())
-    @State private var selectedTimeFrame: TimeFrame = .allTime
+    @State private var selectedTimeFrame: TimeFrame = .week
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -67,6 +67,7 @@ struct StatisticsView: ConnectedView {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
+                .padding(.bottom, 10)
                 .onChange(of: self.selectedTimeFrame) {
                     store.dispatch(action: StatisticsChangeTimeFrame(timeFrame: $0))
                 }
@@ -78,7 +79,7 @@ struct StatisticsView: ConnectedView {
                         Image(systemName: "arrow.left.circle.fill")
                             .resizable()
                             .frame(width: 25, height: 25, alignment: .center)
-                            .padding(.all, 15)
+                            .padding(.all, 10)
                     })
                     .disabled(props.selectedTimeFrame == .allTime)
 
@@ -90,7 +91,7 @@ struct StatisticsView: ConnectedView {
                         Image(systemName: "arrow.right.circle.fill")
                             .resizable()
                             .frame(width: 25, height: 25, alignment: .center)
-                            .padding(.all, 15)
+                            .padding(.all, 10)
                     })
                     .disabled(props.selectedTimeFrame == .allTime)
                 }
