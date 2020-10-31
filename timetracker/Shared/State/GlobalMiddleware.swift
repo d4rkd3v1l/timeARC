@@ -73,11 +73,17 @@ func updateWidgetData(_ state: AppState) {
     DispatchQueue.global().async {
         let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker")
 
-        let relevantTimeEntries = state.timeState.timeEntries.forDay(Day())
+        let relevantTimeEntries = state.timeState.timeEntries.forCurrentWeek()
         let widgetData = WidgetData(timeEntries: relevantTimeEntries,
                                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
                                     accentColor: state.settingsState.accentColor,
-                                    displayMode: state.timeState.displayMode)
+                                    displayMode: state.timeState.displayMode,
+                                    averageDuration: state.statisticsState.averageDuration,
+                                    averageBreaksDuration: state.statisticsState.averageBreaksDuration,
+                                    averageOvertimeDuration: state.statisticsState.averageOvertimeDuration,
+                                    totalDuration: state.statisticsState.totalDuration,
+                                    totalBreaksDuration: state.statisticsState.totalBreaksDuration,
+                                    totalOvertimeDuration: state.statisticsState.totalOvertimeDuration)
 
         let encodedWidgetData = try! JSONEncoder().encode(widgetData)
         userDefaults?.setValue(encodedWidgetData, forKey: "widgetData")

@@ -86,6 +86,16 @@ class DateTests: XCTestCase {
         XCTAssertEqual(self.date.formatted("dd.MM.YYYY"), "20.07.2020")
     }
 
+    func testFormattedTime() throws {
+        if Locale.current.identifier == "de" {
+            XCTAssertEqual(self.date.formattedTime(), "13:37")
+        } else if Locale.current.identifier == "en" {
+            XCTAssertEqual(self.date.formattedTime(), "1:37 PM")
+        } else {
+            throw XCTSkip("Invalid locale for this test.")
+        }
+    }
+
     func testHours() throws {
         XCTAssertEqual(self.date.hours, 13)
     }

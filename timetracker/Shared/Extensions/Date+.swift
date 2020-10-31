@@ -56,8 +56,8 @@ extension Date {
     }
 
     var firstOfWeek: Date {
-        let current = Calendar.current.dateComponents([.year, .weekOfYear], from: self)
-        return Calendar.current.date(from: DateComponents(weekOfYear: current.weekOfYear, yearForWeekOfYear: current.year)) ?? self
+        let current = Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        return Calendar.current.date(from: DateComponents(weekOfYear: current.weekOfYear, yearForWeekOfYear: current.yearForWeekOfYear)) ?? self
     }
 
     var lastOfWeek: Date {
@@ -68,6 +68,10 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)
+    }
+
+    func formattedTime() -> String {
+        return DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
     }
 
     var hours: Int {

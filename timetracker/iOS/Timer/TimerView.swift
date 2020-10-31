@@ -47,7 +47,7 @@ struct TimerView: ConnectedView {
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect().share()
 
     func body(props: Props) -> some View {
-        GeometryReader { geometry in
+        GeometryReader { geometry in
             NavigationView {
                 VStack {
                     Spacer()

@@ -105,16 +105,23 @@ struct StatisticsView: ConnectedView {
                     List {
                         Section(header: Text("averages")) {
                             VStack {
-                                HStack {
-                                    ArcViewFull(duration: props.averageDuration, maxDuration: props.targetDuration, color: .accentColor, allowedUnits: [.hour, .minute], displayMode: .countUp)
-                                        .frame(width: 150, height: 150)
-                                    Spacer()
-                                    VStack(alignment: .trailing) {
-                                        Text("workingHours")
+                                ZStack {
+                                    HStack {
+                                        ArcViewFull(duration: props.averageDuration, maxDuration: props.targetDuration, color: .accentColor, allowedUnits: [.hour, .minute], displayMode: .countUp)
+                                            .frame(width: 150, height: 150)
                                         Spacer()
-                                        Text("\(props.averageWorkingHoursStartDate.formatted("HH:mm")) - \(props.averageWorkingHoursEndDate.formatted("HH:mm"))")
+                                    }
+                                    HStack {
+                                        Spacer()
+                                        VStack(alignment: .trailing) {
+                                            Text("workingHours")
+                                            Spacer()
+                                            Text("\(props.averageWorkingHoursStartDate.formattedTime()) - \(props.averageWorkingHoursEndDate.formattedTime())")
+
+                                        }
                                     }
                                 }
+                                .padding(.top, 5)
                             }
 
                             HStack {
@@ -142,6 +149,7 @@ struct StatisticsView: ConnectedView {
                                         Spacer()
                                     }
                                 }
+                                .padding(.top, 5)
                             }
 
                             HStack {
@@ -180,6 +188,12 @@ struct StatisticsView: ConnectedView {
 struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
         store.dispatch(action: InitFlux())
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
+        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 08:27")!, end: formatter.date(from: "01.01.2020 12:13")!)))
+        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 12:54")!, end: formatter.date(from: "01.01.2020 18:30")!)))
+        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "04.01.2020 08:27")!, end: formatter.date(from: "04.01.2020 12:13")!)))
 
         return StoreProvider(store: store) {
             StatisticsView()
