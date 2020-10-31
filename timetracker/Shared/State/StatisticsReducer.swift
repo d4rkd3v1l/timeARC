@@ -78,7 +78,7 @@ func statisticsReducer(appState: AppState, action: Action) -> StatisticsState {
 
         ensureStatistics(&state, with: appState)
 
-    case _ as StatisticsRefresh: // TODO: TBD if we just update the stats everytime?
+    case _ as StatisticsRefresh: // TODO: Just update the stats everytime?
         ensureStatistics(&state, with: appState)
 
     default:

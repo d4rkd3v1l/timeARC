@@ -72,13 +72,23 @@ class DateTests: XCTestCase {
     }
 
     func testFirstOfWeek() throws {
-        let firstOfWeek = try Date(year: 2020, month: 7, day: 19)
-        XCTAssertEqual(self.date.firstOfWeek, firstOfWeek)
+        if Locale.current.identifier == "de_DE" {
+            XCTAssertEqual(self.date.firstOfWeek, try Date(year: 2020, month: 7, day: 20))
+        } else if Locale.current.identifier == "en_US" {
+            XCTAssertEqual(self.date.firstOfWeek, try Date(year: 2020, month: 7, day: 19))
+        } else {
+            throw XCTSkip("Invalid locale for this test.")
+        }
     }
 
     func testLastOfWeek() throws {
-        let lastOfWeek = try Date(year: 2020, month: 7, day: 25)
-        XCTAssertEqual(self.date.lastOfWeek, lastOfWeek)
+        if Locale.current.identifier == "de_DE" {
+            XCTAssertEqual(self.date.lastOfWeek, try Date(year: 2020, month: 7, day: 26))
+        } else if Locale.current.identifier == "en_US" {
+            XCTAssertEqual(self.date.lastOfWeek, try Date(year: 2020, month: 7, day: 25))
+        } else {
+            throw XCTSkip("Invalid locale for this test.")
+        }
     }
 
     func testFormatted() throws {
@@ -87,9 +97,9 @@ class DateTests: XCTestCase {
     }
 
     func testFormattedTime() throws {
-        if Locale.current.identifier == "de" {
+        if Locale.current.identifier == "de_DE" {
             XCTAssertEqual(self.date.formattedTime(), "13:37")
-        } else if Locale.current.identifier == "en" {
+        } else if Locale.current.identifier == "en_US" {
             XCTAssertEqual(self.date.formattedTime(), "1:37 PM")
         } else {
             throw XCTSkip("Invalid locale for this test.")

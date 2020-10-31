@@ -1,0 +1,46 @@
+{
+  "configurations" : [
+    {
+      "id" : "BE1C13A7-73AD-4A48-AAC8-56F258A1D2A5",
+      "name" : "de-DE",
+      "options" : {
+        "language" : "de",
+        "region" : "DE"
+      }
+    },
+    {
+      "id" : "B8CD0E00-E4C2-49C2-AC95-A5FC11C31098",
+      "name" : "en-US",
+      "options" : {
+        "language" : "en",
+        "region" : "US"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:timetracker.xcodeproj",
+      "identifier" : "8179B26F2528DF7B00A537B7",
+      "name" : "timetracker"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:timetracker.xcodeproj",
+        "identifier" : "8179B2802528DF7C00A537B7",
+        "name" : "timetrackerTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:timetracker.xcodeproj",
+        "identifier" : "8179B28B2528DF7C00A537B7",
+        "name" : "timetrackerUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

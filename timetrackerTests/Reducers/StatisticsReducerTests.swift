@@ -82,10 +82,10 @@ class StatisticsReducerTests: XCTestCase {
         let action = StatisticsNextInterval()
         let state = statisticsReducer(appState: appState, action: action)
 
-        if Locale.current.identifier == "de" {
+        if Locale.current.identifier == "de_DE" {
             XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 11, day: 2))
             XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 11, day: 8))
-        } else if Locale.current.identifier == "en" {
+        } else if Locale.current.identifier == "en_US" {
             XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 11, day: 1))
             XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 11, day: 7))
         } else {
@@ -143,10 +143,10 @@ class StatisticsReducerTests: XCTestCase {
         let action = StatisticsPreviousInterval()
         let state = statisticsReducer(appState: appState, action: action)
 
-        if Locale.current.identifier == "de" {
+        if Locale.current.identifier == "de_DE" {
             XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 10, day: 19))
             XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 10, day: 25))
-        } else if Locale.current.identifier == "en" {
+        } else if Locale.current.identifier == "en_US" {
             XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 10, day: 18))
             XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 10, day: 24))
         } else {

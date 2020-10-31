@@ -281,6 +281,7 @@
 		817D61E42531CDDC009761DE /* AbsenceEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntry.swift; sourceTree = "<group>"; };
 		817D61EC2531CDF3009761DE /* AbsenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceType.swift; sourceTree = "<group>"; };
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
+		81BFE818254DF59800594425 /* timetracker.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timetracker.xctestplan; path = timetracker/timetracker.xctestplan; sourceTree = "<group>"; };
 		81FE88AA25291501000375FF /* SettingsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -355,6 +356,7 @@
 		8179B2672528DF7B00A537B7 = {
 			isa = PBXGroup;
 			children = (
+				81BFE818254DF59800594425 /* timetracker.xctestplan */,
 				812D5228253C36F70008AFBA /* PartialSheet */,
 				814775952528E75800EDBE79 /* Localizable.strings */,
 				8179B2722528DF7B00A537B7 /* timetracker */,
