@@ -12,8 +12,8 @@ struct UpdateWorkingWeekDays: Action {
     let workingWeekDays: [WeekDay]
 }
 
-struct UpdateWorkingMinutesPerDay: Action {
-    let workingMinutesPerDay: Int
+struct UpdateWorkingDuration: Action {
+    let workingDuration: Int
 }
 
 struct UpdateAccentColor: Action {

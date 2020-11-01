@@ -19,14 +19,14 @@ class SettingsReducerTests: XCTestCase {
         XCTAssertEqual(state.workingWeekDays, [.saturday])
     }
 
-    func testUpdateWorkingMinutesPerDay() throws {
+    func testUpdateWorkingDuration() throws {
         var state = SettingsState()
-        XCTAssertEqual(state.workingMinutesPerDay, 480)
+        XCTAssertEqual(state.workingDuration, 28800)
 
-        let action = UpdateWorkingMinutesPerDay(workingMinutesPerDay: 42)
+        let action = UpdateWorkingDuration(workingDuration: 1337)
         state = settingsReducer(state: state, action: action)
 
-        XCTAssertEqual(state.workingMinutesPerDay, 42)
+        XCTAssertEqual(state.workingDuration, 1337)
     }
 
     func testUpdateAccentColor() throws {

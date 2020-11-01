@@ -29,6 +29,16 @@
 		814775922528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		814775932528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		816852152543035E003F33FB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 816852142543035E003F33FB /* Introspect */; };
+		816BC4FB254EAAFD0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
+		816BC502254EAAFE0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
+		816BC509254EAE6F0015B905 /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
+		816BC510254EAE700015B905 /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
+		816BC517254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */; };
+		816BC51E254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */; };
+		816BC52C254EB89A0015B905 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3232528E02100A537B7 /* WeekDay.swift */; };
+		816BC53B254EC8C20015B905 /* WidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BC539254EC8C20015B905 /* WidgetEntryView.swift */; };
+		816BC544254EC8EF0015B905 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BC542254EC8EF0015B905 /* Provider.swift */; };
+		816BC54D254EC90F0015B905 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BC54B254EC90F0015B905 /* WidgetEntry.swift */; };
 		8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1702534EEED00C39CA4 /* WeekDayTests.swift */; };
 		8172E17A2534EFA500C39CA4 /* DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1792534EFA500C39CA4 /* DayTests.swift */; };
 		8179B2912528DF7C00A537B7 /* timetrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B2902528DF7C00A537B7 /* timetrackerUITests.swift */; };
@@ -204,6 +214,9 @@
 		814775C32528EAC600EDBE79 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
 		814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		814775ED2528F10C00EDBE79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		816BC539254EC8C20015B905 /* WidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryView.swift; sourceTree = "<group>"; };
+		816BC542254EC8EF0015B905 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		816BC54B254EC90F0015B905 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
 		8172E1702534EEED00C39CA4 /* WeekDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayTests.swift; sourceTree = "<group>"; };
 		8172E1792534EFA500C39CA4 /* DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTests.swift; sourceTree = "<group>"; };
 		8179B2702528DF7B00A537B7 /* timetracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timetracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,11 +346,14 @@
 		8147750B2528E46400EDBE79 /* widget */ = {
 			isa = PBXGroup;
 			children = (
-				814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */,
 				8147750E2528E46400EDBE79 /* Assets.xcassets */,
 				814775ED2528F10C00EDBE79 /* Info.plist */,
+				816BC542254EC8EF0015B905 /* Provider.swift */,
 				8147751E2528E47700EDBE79 /* TimerWidget.swift */,
 				814775212528E47700EDBE79 /* WidgetData.swift */,
+				816BC54B254EC90F0015B905 /* WidgetEntry.swift */,
+				816BC539254EC8C20015B905 /* WidgetEntryView.swift */,
+				814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */,
 			);
 			path = widget;
 			sourceTree = "<group>";
@@ -878,16 +894,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				816BC52C254EB89A0015B905 /* WeekDay.swift in Sources */,
+				816BC54D254EC90F0015B905 /* WidgetEntry.swift in Sources */,
 				8147757E2528E5E700EDBE79 /* Date+Strideable.swift in Sources */,
 				814775852528E5F000EDBE79 /* AnimatableSystemFontModifier.swift in Sources */,
 				8147754E2528E4C100EDBE79 /* CodableColor.swift in Sources */,
+				816BC544254EC8EF0015B905 /* Provider.swift in Sources */,
+				816BC53B254EC8C20015B905 /* WidgetEntryView.swift in Sources */,
 				8147755C2528E4F800EDBE79 /* Collection+average.swift in Sources */,
 				814775262528E47700EDBE79 /* WidgetData.swift in Sources */,
+				816BC502254EAAFE0015B905 /* AbsenceEntry.swift in Sources */,
 				814775552528E4EF00EDBE79 /* Date+.swift in Sources */,
 				814775232528E47700EDBE79 /* TimerWidget.swift in Sources */,
 				814775772528E5D800EDBE79 /* ArcView.swift in Sources */,
 				817B43052531FA0A005240C5 /* Day.swift in Sources */,
 				814775472528E4B900EDBE79 /* TimeEntry.swift in Sources */,
+				816BC51E254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */,
+				816BC510254EAE700015B905 /* AbsenceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,8 +1008,11 @@
 				8179B3D82528E0BB00A537B7 /* ContentView.swift in Sources */,
 				8179B3D42528E0BB00A537B7 /* ComplicationView.swift in Sources */,
 				8179B4112528E19200A537B7 /* Date+.swift in Sources */,
+				816BC517254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */,
+				816BC509254EAE6F0015B905 /* AbsenceType.swift in Sources */,
 				817B42FE2531FA0A005240C5 /* Day.swift in Sources */,
 				8179B3E22528E0BB00A537B7 /* WatchActions.swift in Sources */,
+				816BC4FB254EAAFD0015B905 /* AbsenceEntry.swift in Sources */,
 				8179B4172528E19D00A537B7 /* Date+Strideable.swift in Sources */,
 				8179B3D32528E0BB00A537B7 /* ComplicationController.swift in Sources */,
 				8179B3FB2528E14A00A537B7 /* CodableColor.swift in Sources */,

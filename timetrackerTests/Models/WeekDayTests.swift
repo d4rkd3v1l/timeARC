@@ -100,4 +100,25 @@ class WeekDayTests: XCTestCase {
             throw XCTSkip("Invalid locale for this test.")
         }
     }
+
+    func testWorkingDays() throws {
+        let startDate = try Date(year: 2020, month: 11, day: 1)
+        let endDate = try Date(year: 2020, month: 11, day: 11)
+        let workingWeekDays: [WeekDay] = [.monday,
+                                          .tuesday,
+                                          .wednesday,
+                                          .thursday,
+                                          .friday]
+
+        let workingDays = workingWeekDays.workingDays(startDate: startDate, endDate: endDate)
+
+        XCTAssertEqual(workingDays, [try Date(year: 2020, month: 11, day: 2).day,
+                                     try Date(year: 2020, month: 11, day: 3).day,
+                                     try Date(year: 2020, month: 11, day: 4).day,
+                                     try Date(year: 2020, month: 11, day: 5).day,
+                                     try Date(year: 2020, month: 11, day: 6).day,
+                                     try Date(year: 2020, month: 11, day: 9).day,
+                                     try Date(year: 2020, month: 11, day: 10).day,
+                                     try Date(year: 2020, month: 11, day: 11).day])
+    }
 }

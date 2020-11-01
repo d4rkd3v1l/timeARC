@@ -16,7 +16,7 @@ struct WatchStateLoadingSuccess: Action {
 struct SetWatchData: Action {
     let timeEntries: [TimeEntry]
     let displayMode: TimerDisplayMode
-    let workingMinutesPerDay: Int
+    let workingDuration: Int
     let accentColor: CodableColor
 }
 

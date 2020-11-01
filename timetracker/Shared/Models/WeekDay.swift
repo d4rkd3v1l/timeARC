@@ -55,3 +55,19 @@ extension WeekDay: MultipleValuesSelectable {
         return self.symbol
     }
 }
+
+extension Array where Element == WeekDay {
+    func workingDays(startDate: Date,
+                     endDate: Date) -> [Day] {
+        let workingDays = stride(from: startDate.startOfDay,
+                                 through: endDate.endOfDay,
+                                 by: 86400)
+            .filter {
+                let weekday = Calendar.current.component(.weekday, from: $0)
+                return self.contains(WeekDay(weekday))
+            }
+            .map { $0.day }
+
+        return workingDays
+    }
+}

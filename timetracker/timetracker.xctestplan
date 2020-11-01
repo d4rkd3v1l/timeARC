@@ -2,7 +2,7 @@
   "configurations" : [
     {
       "id" : "BE1C13A7-73AD-4A48-AAC8-56F258A1D2A5",
-      "name" : "de-DE",
+      "name" : "de_DE",
       "options" : {
         "language" : "de",
         "region" : "DE"
@@ -10,7 +10,7 @@
     },
     {
       "id" : "B8CD0E00-E4C2-49C2-AC95-A5FC11C31098",
-      "name" : "en-US",
+      "name" : "en_US",
       "options" : {
         "language" : "en",
         "region" : "US"
@@ -22,7 +22,8 @@
       "containerPath" : "container:timetracker.xcodeproj",
       "identifier" : "8179B26F2528DF7B00A537B7",
       "name" : "timetracker"
-    }
+    },
+    "testExecutionOrdering" : "random"
   },
   "testTargets" : [
     {

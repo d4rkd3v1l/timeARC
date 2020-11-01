@@ -12,13 +12,13 @@ struct OverviewView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
         let workingWeekDays: [WeekDay]
-        let workingMinutesPerDay: Int
+        let workingDuration: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeState.timeEntries.values.flatMap { $0 },
                      workingWeekDays: state.settingsState.workingWeekDays,
-                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay)
+                     workingDuration: state.settingsState.workingDuration)
     }
 
     private var year: DateInterval {
@@ -39,10 +39,10 @@ struct OverviewView: ConnectedView {
                             let weekday = Calendar.current.component(.weekday, from: date)
                             let isWorkingDay = props.workingWeekDays.contains(WeekDay(weekday)) && date.startOfDay < Date()
                             let duration = props.timeEntries.totalDurationInSeconds
-                            let desiredWorkMinutes = isWorkingDay ? props.workingMinutesPerDay : 0
+                            let desiredWorkMinutes = isWorkingDay ? props.workingDuration/60 : 0
                             let overtime = duration / 60 - desiredWorkMinutes
                             ZStack {
-                                ArcView(color: isWorkingDay ? Color.accentColor : .gray, progress: Double(duration) / Double(props.workingMinutesPerDay * 60))
+                                ArcView(color: isWorkingDay ? Color.accentColor : .gray, progress: Double(duration) / Double(props.workingDuration))
                                 Text(String(self.calendar.component(.day, from: date)))
                                     .font(.system(size: 18)).bold()
                                     .foregroundColor(.primary)

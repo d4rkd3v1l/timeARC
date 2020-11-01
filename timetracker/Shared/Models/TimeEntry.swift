@@ -93,15 +93,6 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
         return self[day] ?? []
     }
 
-    func forCurrentWeek() -> [Day : [TimeEntry]] {
-        let days = stride(from: Date().firstOfWeek,
-                          to: Date().lastOfWeek,
-                          by: 86400)
-            .map { $0.day }
-
-        return self.filter { days.contains($0.key) }
-    }
-
     func find(_ timeEntry: TimeEntry) -> TimeEntry? { 
         // Optimization, works as long as start day did not change
         if let timeEntriesForDay = self[timeEntry.start.day],
@@ -117,6 +108,75 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
     
     var isTimerRunning: Bool {
         return self.forDay(Day()).isTimerRunning
+    }
+
+    // MARK: Statistics
+    func timeEntries(from startDate: Date,
+                     to endDate: Date) -> [Day: [TimeEntry]] {
+        let range = (startDate.startOfDay...endDate.endOfDay)
+        return self.filter { range.contains($0.key.date) }
+    }
+
+    func averageDuration(workingDays: [Day]) -> Int {
+        return workingDays
+            .compactMap { self[$0]?.totalDurationInSeconds }
+            .average()
+    }
+
+    func totalDuration(workingDays: [Day],
+                       workingDuration: Int,
+                       absenceEntries: [AbsenceEntry]) -> Int {
+        return workingDays
+            .map { day -> Int in
+                let actualWorkingDuration = (self[day]?.totalDurationInSeconds ?? 0)
+                let absenceDuration = absenceEntries.totalDurationInSeconds(for: day, with: workingDuration)
+                return actualWorkingDuration + absenceDuration
+            }
+            .sum()
+    }
+
+    func averageWorkingHoursStartDate() -> Date {
+        return self
+            .compactMap { _, timeEntries in
+                timeEntries.first?.start
+            }
+            .averageTime
+    }
+
+    func averageWorkingHoursEndDate() -> Date {
+        return self
+            .compactMap { _, timeEntries in
+                timeEntries.last?.end
+            }
+            .averageTime
+    }
+
+    private func totalBreaksDurations(workingDays: [Day]) -> [Int] {
+        return workingDays
+            .compactMap { self[$0]?.totalBreaksInSeconds }
+    }
+
+    func averageBreaksDuration(workingDays: [Day]) -> Int {
+        return totalBreaksDurations(workingDays: workingDays)
+            .average()
+    }
+
+    func totalBreaksDuration(workingDays: [Day]) -> Int {
+        return totalBreaksDurations(workingDays: workingDays)
+            .sum()
+    }
+
+    func averageOvertimeDuration(workingDays: [Day],
+                                 workingDuration: Int) -> Int {
+        return self.averageDuration(workingDays: workingDays) - workingDuration
+    }
+
+    func totalOvertimeDuration(workingDays: [Day],
+                               workingDuration: Int,
+                               absenceEntries: [AbsenceEntry]) -> Int {
+        return self.totalDuration(workingDays: workingDays,
+                                  workingDuration: workingDuration,
+                                  absenceEntries: absenceEntries) - (workingDuration * workingDays.count)
     }
 }
 

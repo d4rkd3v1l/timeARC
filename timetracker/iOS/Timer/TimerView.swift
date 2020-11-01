@@ -26,7 +26,7 @@ struct TimerView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
         let timeEntriesWeek: [TimeEntry]
-        let workingMinutesPerDay: Int
+        let workingDuration: Int
         let workingWeekDaysCount: Int
         let displayMode: TimerDisplayMode
         let buttonTextColor: Color
@@ -34,8 +34,11 @@ struct TimerView: ConnectedView {
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeState.timeEntries.forDay(Day()),
-                     timeEntriesWeek: state.timeState.timeEntries.forCurrentWeek().flatMap { $0.value },
-                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
+                     timeEntriesWeek: state.timeState.timeEntries
+                        .timeEntries(from: Date().firstOfWeek,
+                                     to: Date().lastOfWeek)
+                        .flatMap { $0.value },
+                     workingDuration: state.settingsState.workingDuration,
                      workingWeekDaysCount: state.settingsState.workingWeekDays.count,
                      displayMode: state.timeState.displayMode,
                      buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))
@@ -55,7 +58,7 @@ struct TimerView: ConnectedView {
                     TabView(selection: self.$mode) {
                         VStack {
                             BlaView(timeEntries: props.timeEntries,
-                                    workingMinutesPerDay: props.workingMinutesPerDay,
+                                    workingDuration: props.workingDuration,
                                     displayMode: props.displayMode,
                                     timer: self.timer)
                         }
@@ -63,7 +66,7 @@ struct TimerView: ConnectedView {
 
                         VStack {
                             BlaView(timeEntries: props.timeEntriesWeek,
-                                    workingMinutesPerDay: props.workingMinutesPerDay * props.workingWeekDaysCount,
+                                    workingDuration: props.workingDuration * props.workingWeekDaysCount,
                                     displayMode: props.displayMode,
                                     timer: self.timer)
                         }
@@ -96,7 +99,7 @@ struct TimerView: ConnectedView {
 
 private struct BlaView: View {
     let timeEntries: [TimeEntry]
-    let workingMinutesPerDay: Int
+    let workingDuration: Int
     let displayMode: TimerDisplayMode
     let timer: Publishers.Share<Publishers.Autoconnect<Timer.TimerPublisher>>
 
@@ -104,7 +107,7 @@ private struct BlaView: View {
 
     var body: some View {
         ArcViewFull(duration: self.duration ?? timeEntries.totalDurationInSeconds,
-                    maxDuration: workingMinutesPerDay * 60,
+                    maxDuration: workingDuration,
                     color: timeEntries.isTimerRunning ? .accentColor : .gray,
                     displayMode: displayMode)
             .aspectRatio(contentMode: .fit)

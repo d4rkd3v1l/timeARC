@@ -82,8 +82,8 @@ extension Date {
         return Calendar.current.component(.minute, from: self)
     }
 
-    var hoursAndMinutesInMinutes: Int {
-        return (self.hours * 60) + self.minutes
+    var hoursAndMinutesInSeconds: Int {
+        return (self.hours * 3600) + self.minutes * 60
     }
 
     /// Keeps the current date, but adopts the time from `time`.
@@ -126,7 +126,7 @@ extension Array where Element == Date {
 
 extension Int {
     var hoursAndMinutes: Date {
-        return Date().startOfDay.addingTimeInterval(Double(self*60))
+        return Date().startOfDay.addingTimeInterval(Double(self))
     }
 }
 

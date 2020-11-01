@@ -114,8 +114,8 @@ class DateTests: XCTestCase {
         XCTAssertEqual(self.date.minutes, 37)
     }
 
-    func testHoursAndMinutesInMinutes() throws {
-        XCTAssertEqual(self.date.hoursAndMinutesInMinutes, 817)
+    func testHoursAndMinutesInSeconds() throws {
+        XCTAssertEqual(self.date.hoursAndMinutesInSeconds, 49020)
     }
 
     func testWithTime() throws {
@@ -146,7 +146,7 @@ class DateTests: XCTestCase {
         let expectedDateComponents = DateComponents(hour: 2, minute: 3)
         let expectedDate = try XCTUnwrap(Calendar.current.date(from: expectedDateComponents))
         let expectedTime = try XCTUnwrap(Date().withTime(from: expectedDate))
-        XCTAssertEqual(123.hoursAndMinutes, expectedTime)
+        XCTAssertEqual(7380.hoursAndMinutes, expectedTime)
     }
 
     func testDateFormat() throws {

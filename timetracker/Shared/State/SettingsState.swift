@@ -14,7 +14,7 @@ struct SettingsState: FluxState, Codable {
                                       .wednesday,
                                       .thursday,
                                       .friday]
-    var workingMinutesPerDay: Int = 480
+    var workingDuration: Int = 28800
     var accentColor: CodableColor = .green
     var absenceTypes: [AbsenceType] = [AbsenceType(id: UUID(), title: "bankHoliday", icon: "🙌", offPercentage: 1),
                                        AbsenceType(id: UUID(), title: "holiday", icon: "🏝", offPercentage: 1),

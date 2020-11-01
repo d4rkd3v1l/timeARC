@@ -43,10 +43,11 @@ extension Array where Element == AbsenceEntry {
     }
 
     /// Will produce "new" `AbsenceEntry`s that exactly match the provided range of days
-    func exactAbsenceEntries(for range: ClosedRange<Date>) -> [AbsenceEntry] {
-        let days = stride(from: range.lowerBound,
-                                through: range.upperBound,
-                                by: 86400)
+    func exactAbsenceEntries(from startDate: Date,
+                             to endDate: Date) -> [AbsenceEntry] {
+        let days = stride(from: startDate,
+                          through: endDate,
+                          by: 86400)
             .map { $0.day }
         let daysSet = Set(days)
 
@@ -65,9 +66,9 @@ extension Array where Element == AbsenceEntry {
         return newAbsenceEntries
     }
 
-    func totalDurationInSeconds(for day: Day, with workingMinutesPerDay: Int) -> Int {
+    func totalDurationInSeconds(for day: Day, with workingDuration: Int) -> Int {
         return self.absenceEntries(for: day).reduce(0) { total, current in
-            return total + Int((current.type.offPercentage * Float(workingMinutesPerDay * 60)))
+            return total + Int((current.type.offPercentage * Float(workingDuration)))
         }
     }
 }

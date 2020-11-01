@@ -21,7 +21,7 @@ func watchReducer(state: WatchState, action: Action) -> WatchState {
     case let action as SetWatchData:
         state.timeEntries = action.timeEntries
         state.displayMode = action.displayMode
-        state.workingMinutesPerDay = action.workingMinutesPerDay
+        state.workingDuration = action.workingDuration
         state.accentColor = action.accentColor
 
     case _ as ToggleTimer:

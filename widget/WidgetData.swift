@@ -7,14 +7,9 @@
 
 struct WidgetData: Codable {
     let timeEntries: [Day: [TimeEntry]]
-    let workingMinutesPerDay: Int
+    let absenceEntries: [AbsenceEntry]
+    let workingDays: [Day]
+    let workingDuration: Int
     let accentColor: CodableColor
     let displayMode: TimerDisplayMode
-    
-    let averageDuration: Int
-    let averageBreaksDuration: Int
-    let averageOvertimeDuration: Int
-    let totalDuration: Int
-    let totalBreaksDuration: Int
-    let totalOvertimeDuration: Int
 }

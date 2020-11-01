@@ -52,7 +52,7 @@ private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sen
 
         let data = AppToWatchData(timeEntries: relevantTimeEntries,
                                   displayMode: state.timeState.displayMode,
-                                  workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
+                                  workingDuration: state.settingsState.workingDuration,
                                   accentColor: state.settingsState.accentColor)
 
         let encodedData = try! JSONEncoder().encode(data)
@@ -73,17 +73,24 @@ func updateWidgetData(_ state: AppState) {
     DispatchQueue.global().async {
         let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker")
 
-        let relevantTimeEntries = state.timeState.timeEntries.forCurrentWeek()
+        let startDate = Date().firstOfWeek
+        let endDate = Date().lastOfWeek
+
+        let relevantTimeEntries = state.timeState.timeEntries
+            .timeEntries(from: startDate,
+                         to: endDate)
+
+        let relevantAbsenceEntries = state.timeState.absenceEntries
+            .exactAbsenceEntries(from: startDate,
+                                 to: endDate)
+
         let widgetData = WidgetData(timeEntries: relevantTimeEntries,
-                                    workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
+                                    absenceEntries: relevantAbsenceEntries,
+                                    workingDays: state.settingsState.workingWeekDays.workingDays(startDate: startDate,
+                                                                                                 endDate: endDate),
+                                    workingDuration: state.settingsState.workingDuration,
                                     accentColor: state.settingsState.accentColor,
-                                    displayMode: state.timeState.displayMode,
-                                    averageDuration: state.statisticsState.averageDuration,
-                                    averageBreaksDuration: state.statisticsState.averageBreaksDuration,
-                                    averageOvertimeDuration: state.statisticsState.averageOvertimeDuration,
-                                    totalDuration: state.statisticsState.totalDuration,
-                                    totalBreaksDuration: state.statisticsState.totalBreaksDuration,
-                                    totalOvertimeDuration: state.statisticsState.totalOvertimeDuration)
+                                    displayMode: state.timeState.displayMode)
 
         let encodedWidgetData = try! JSONEncoder().encode(widgetData)
         userDefaults?.setValue(encodedWidgetData, forKey: "widgetData")
@@ -96,7 +103,7 @@ func updateWidgetData(_ state: AppState) {
 
 private func scheduleEndOfWorkingDayNotification(state: AppState) {
     let duration = state.timeState.timeEntries.forDay(Day()).totalDurationInSeconds
-    let maxDuration = state.settingsState.workingMinutesPerDay * 60
+    let maxDuration = state.settingsState.workingDuration
     let endOfWorkingDayDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
 
     removeNotifications(identifiers: [endOfWoringDayNotificationIdentifier])
@@ -112,7 +119,7 @@ private func scheduleEndOfWorkingWeekNotification(state: AppState) {
         .flatMap { $0.value }
         .totalDurationInSeconds
 
-    let maxDuration = (state.settingsState.workingMinutesPerDay * 60) * state.settingsState.workingWeekDays.count
+    let maxDuration = state.settingsState.workingDuration * state.settingsState.workingWeekDays.count
     let endOfWorkingWeekDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
 
     removeNotifications(identifiers: [endOfWoringWeekNotificationIdentifier])

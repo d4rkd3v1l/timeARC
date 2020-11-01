@@ -246,6 +246,112 @@ class TimeEntryTests: XCTestCase {
         XCTAssertEqual(mergedEntry.end, date2)
     }
 
+    // MARK: Statistics
+
+    func timeEntries() throws -> [Day: [TimeEntry]] {
+        let startDate1 = try Date(year: 2020, month: 10, day: 26, hour: 8, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 10, day: 26, hour: 12, minute: 12, second: 13)
+
+        let startDate2 = try Date(year: 2020, month: 10, day: 26, hour: 13, minute: 0, second: 0)
+        let endDate2 = try Date(year: 2020, month: 10, day: 26, hour: 17, minute: 56, second: 21)
+
+        let startDate3 = try Date(year: 2020, month: 10, day: 28, hour: 11, minute: 0, second: 0)
+        let endDate3 = try Date(year: 2020, month: 10, day: 28, hour: 15, minute: 14, second: 15)
+
+        let startDate4 = try Date(year: 2020, month: 10, day: 28, hour: 16, minute: 0, second: 0)
+        let endDate4 = try Date(year: 2020, month: 10, day: 28, hour: 17, minute: 45, second: 34)
+
+        let startDate5 = try Date(year: 2020, month: 10, day: 29, hour: 9, minute: 0, second: 0)
+        let endDate5 = try Date(year: 2020, month: 10, day: 29, hour: 13, minute: 12, second: 23)
+
+        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
+        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
+        let timeEntry3 = TimeEntry(start: startDate3, end: endDate3)
+        let timeEntry4 = TimeEntry(start: startDate4, end: endDate4)
+        let timeEntry5 = TimeEntry(start: startDate5, end: endDate5)
+
+        return [startDate1.day: [timeEntry1, timeEntry2],
+                startDate3.day: [timeEntry3, timeEntry4],
+                startDate5.day: [timeEntry5]]
+    }
+
+    func workingDays() throws -> [Day] {
+        let startDate = try Date(year: 2020, month: 10, day: 26)
+        let endDate = try Date(year: 2020, month: 11, day: 1)
+
+        let workingWeekDays: [WeekDay] = [.monday,
+                                          .tuesday,
+                                          .wednesday,
+                                          .thursday,
+                                          .friday]
+
+        return workingWeekDays.workingDays(startDate: startDate, endDate: endDate)
+    }
+
+    func testAverageDuration() throws {
+        let timeEntries = try self.timeEntries()
+        let workingDays = try self.workingDays()
+
+        let averageDuration = timeEntries.averageDuration(workingDays: workingDays)
+        XCTAssertEqual(averageDuration, 23215)
+    }
+
+    func testTotalDuration() throws {
+        let timeEntries = try self.timeEntries()
+        let workingDays = try self.workingDays()
+
+        let totalDuration = timeEntries.totalDuration(workingDays: workingDays,
+                                                      workingDuration: 28800,
+                                                      absenceEntries: [])
+        XCTAssertEqual(totalDuration, 69646)
+    }
+
+    func testAverageWorkingHoursStartDate() throws {
+        let timeEntries = try self.timeEntries()
+
+        let averageWorkingHoursStartDate = timeEntries.averageWorkingHoursStartDate()
+        XCTAssertEqual(averageWorkingHoursStartDate, Date(timeInterval: 33600, since: Date().startOfDay))
+    }
+
+    func testAverageWorkingHoursEndDate() throws {
+        let timeEntries = try self.timeEntries()
+
+        let averageWorkingHoursEndDate = timeEntries.averageWorkingHoursEndDate()
+        XCTAssertEqual(averageWorkingHoursEndDate, Date(timeInterval: 58686, since: Date().startOfDay))
+    }
+
+    func testAverageBreaksDuration() throws {
+        let timeEntries = try self.timeEntries()
+        let workingDays = try self.workingDays()
+
+        let averageBreaksDuration = timeEntries.averageBreaksDuration(workingDays: workingDays)
+        XCTAssertEqual(averageBreaksDuration, 1870)
+    }
+
+    func testTotalBreaksDuration() throws {
+        let timeEntries = try self.timeEntries()
+        let workingDays = try self.workingDays()
+
+        let totalBreaksDuration = timeEntries.totalBreaksDuration(workingDays: workingDays)
+        XCTAssertEqual(totalBreaksDuration, 5612)
+    }
+
+    func testAverageOvertimeDuration() throws {
+        let timeEntries = try self.timeEntries()
+        let workingDays = try self.workingDays()
+
+        let averageOvertimeDuration = timeEntries.averageOvertimeDuration(workingDays: workingDays, workingDuration: 28800)
+        XCTAssertEqual(averageOvertimeDuration, -5585)
+    }
+
+    func testTotalOvertimeDuration() throws {
+        let timeEntries = try self.timeEntries()
+        let workingDays = try self.workingDays()
+
+        let totalOvertimeDuration = timeEntries.totalOvertimeDuration(workingDays: workingDays, workingDuration: 28800, absenceEntries: [])
+        XCTAssertEqual(totalOvertimeDuration, -74354)
+    }
+
     // MARK: Int extensions
 
     func testFormatted() throws {

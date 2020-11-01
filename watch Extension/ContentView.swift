@@ -15,7 +15,7 @@ struct ContentView: ConnectedView {
         let isWatchStateLoading: Bool
         let timeEntries: [TimeEntry]
         let displayMode: TimerDisplayMode
-        let workingMinutesPerDay: Int
+        let workingDuration: Int
         let accentColor: Color
         let buttonTextColor: Color
     }
@@ -24,7 +24,7 @@ struct ContentView: ConnectedView {
         return Props(isWatchStateLoading: state.isWatchStateLoading,
                      timeEntries: state.timeEntries,
                      displayMode: state.displayMode,
-                     workingMinutesPerDay: state.workingMinutesPerDay,
+                     workingDuration: state.workingDuration,
                      accentColor: state.accentColor.color,
                      buttonTextColor: state.accentColor.contrastColor(for: self.colorScheme))
     }
@@ -41,7 +41,7 @@ struct ContentView: ConnectedView {
         } else {
             VStack {
                 ArcViewFull(duration: self.duration ?? props.timeEntries.totalDurationInSeconds,
-                            maxDuration: props.workingMinutesPerDay * 60,
+                            maxDuration: props.workingDuration,
                             color: props.timeEntries.isTimerRunning ? .accentColor : .gray,
                             displayMode: props.displayMode)
                     .frame(width: self.arcSize, height: self.arcSize)

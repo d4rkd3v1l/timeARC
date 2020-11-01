@@ -11,14 +11,14 @@ import SwiftUIFlux
 struct EntryDetailsView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
-        let workingMinutesPerDay: Int
+        let workingDuration: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         let timeEntries = state.timeState.timeEntries.forDay(self.selectedDay)
 
         return Props(timeEntries: timeEntries,
-                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay
+                     workingDuration: state.settingsState.workingDuration
         )
     }
 
@@ -32,7 +32,7 @@ struct EntryDetailsView: ConnectedView {
         return ZStack {
             VStack {
                 Spacer(minLength: 30)
-                ArcViewFull(duration: self.duration, maxDuration: props.workingMinutesPerDay * 60)
+                ArcViewFull(duration: self.duration, maxDuration: props.workingDuration)
                     .frame(width: 200, height: 200)
                     .onReceive(self.timer) { _ in
                         self.duration = props.timeEntries.totalDurationInSeconds

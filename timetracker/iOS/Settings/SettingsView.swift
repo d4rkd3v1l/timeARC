@@ -16,13 +16,13 @@ struct SettingsView: ConnectedView {
 
     struct Props {
         let workingWeekDays: [WeekDay]
-        let workingMinutesPerDay: Int
+        let workingDuration: Int
         let accentColor: Color
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(workingWeekDays: state.settingsState.workingWeekDays,
-                     workingMinutesPerDay: state.settingsState.workingMinutesPerDay,
+                     workingDuration: state.settingsState.workingDuration,
                      accentColor: state.settingsState.accentColor.color)
     }
 
@@ -41,16 +41,16 @@ struct SettingsView: ConnectedView {
                             .contentShape(Rectangle())
                             .onTapGesture {} // Note: Avoid closing on tap
                             .onChange(of: self.workingHours) { time in
-                                store.dispatch(action: UpdateWorkingMinutesPerDay(workingMinutesPerDay: time.hoursAndMinutesInMinutes))
+                                store.dispatch(action: UpdateWorkingDuration(workingDuration: time.hoursAndMinutesInSeconds))
                             }
                             .environment(\.locale, Locale(identifier: "de"))
-                            .onAppear { self.workingHours = props.workingMinutesPerDay.hoursAndMinutes }
+                            .onAppear { self.workingHours = props.workingDuration.hoursAndMinutes }
                     },
                     label: {
                         HStack {
                             Text("workingHours")
                             Spacer()
-                            Text("\((props.workingMinutesPerDay * 60).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                            Text("\(props.workingDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
                         }
                     }
                 )

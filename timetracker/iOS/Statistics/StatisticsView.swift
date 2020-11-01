@@ -21,37 +21,29 @@ enum TimeFrame: String, CaseIterable, Identifiable, Codable {
 
 struct StatisticsView: ConnectedView {
     struct Props {
-        let selectedTimeFrame: TimeFrame
-        let selectedDateText: String
-        let errorMessage: String?
-        let targetDuration: Int
-        let averageDuration: Int
-        let averageWorkingHoursStartDate: Date
-        let averageWorkingHoursEndDate: Date
-        let averageBreaksDuration: Int
-        let averageOvertimeDuration: Int
-        let totalDays: Int
-        let totalDaysWorked: Int
-        let totalDuration: Int
-        let totalBreaksDuration: Int
-        let totalOvertimeDuration: Int
+        let timeFrame: TimeFrame
+        let startDate: Date
+        let endDate: Date
+        let timeEntries: [Day: [TimeEntry]]
+        let absenceEntries: [AbsenceEntry]
+        let workingDays: [Day]
+        let workingDuration: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(selectedTimeFrame: state.statisticsState.selectedTimeFrame,
-                     selectedDateText: state.statisticsState.selectedDateText,
-                     errorMessage: state.statisticsState.errorMessage,
-                     targetDuration: state.statisticsState.targetDuration,
-                     averageDuration: state.statisticsState.averageDuration,
-                     averageWorkingHoursStartDate: state.statisticsState.averageWorkingHoursStartDate,
-                     averageWorkingHoursEndDate: state.statisticsState.averageWorkingHoursEndDate,
-                     averageBreaksDuration: state.statisticsState.averageBreaksDuration,
-                     averageOvertimeDuration: state.statisticsState.averageOvertimeDuration,
-                     totalDays: state.statisticsState.totalDays,
-                     totalDaysWorked: state.statisticsState.totalDaysWorked,
-                     totalDuration: state.statisticsState.totalDuration,
-                     totalBreaksDuration: state.statisticsState.totalBreaksDuration,
-                     totalOvertimeDuration: state.statisticsState.totalOvertimeDuration)
+        return Props(timeFrame: state.statisticsState.selectedTimeFrame,
+                     startDate: state.statisticsState.selectedStartDate,
+                     endDate: state.statisticsState.selectedEndDate,
+                     timeEntries: state.timeState.timeEntries
+                        .timeEntries(from: state.statisticsState.selectedStartDate,
+                                     to: state.statisticsState.selectedEndDate),
+                     absenceEntries: state.timeState.absenceEntries
+                        .exactAbsenceEntries(from: state.statisticsState.selectedStartDate,
+                                             to: state.statisticsState.selectedEndDate),
+                     workingDays: state.settingsState.workingWeekDays
+                        .workingDays(startDate: state.statisticsState.selectedStartDate,
+                                     endDate: state.statisticsState.selectedEndDate),
+                     workingDuration: state.settingsState.workingDuration)
     }
 
     @ObservedObject var updater = StateUpdater(updateInterval: 60, action: StatisticsRefresh())
@@ -81,9 +73,9 @@ struct StatisticsView: ConnectedView {
                             .frame(width: 25, height: 25, alignment: .center)
                             .padding(.all, 10)
                     })
-                    .disabled(props.selectedTimeFrame == .allTime)
+                    .disabled(props.timeFrame == .allTime)
 
-                    Text(props.selectedDateText)
+                    Text(self.dateText(timeFrame: props.timeFrame, startDate: props.startDate, endDate: props.endDate))
 
                     Button(action: {
                         store.dispatch(action: StatisticsNextInterval())
@@ -93,10 +85,10 @@ struct StatisticsView: ConnectedView {
                             .frame(width: 25, height: 25, alignment: .center)
                             .padding(.all, 10)
                     })
-                    .disabled(props.selectedTimeFrame == .allTime)
+                    .disabled(props.timeFrame == .allTime)
                 }
 
-                if let errorMessage = props.errorMessage {
+                if let errorMessage = self.errorMessage(timeEntries: props.timeEntries, absenceEntries: props.absenceEntries) {
                     Text(LocalizedStringKey(errorMessage))
                         .multilineTextAlignment(.center)
                         .padding(.all, 50)
@@ -107,7 +99,11 @@ struct StatisticsView: ConnectedView {
                             VStack {
                                 ZStack {
                                     HStack {
-                                        ArcViewFull(duration: props.averageDuration, maxDuration: props.targetDuration, color: .accentColor, allowedUnits: [.hour, .minute], displayMode: .countUp)
+                                        ArcViewFull(duration: props.timeEntries.averageDuration(workingDays: props.workingDays),
+                                                    maxDuration: props.workingDuration,
+                                                    color: .accentColor,
+                                                    allowedUnits: [.hour, .minute],
+                                                    displayMode: .countUp)
                                             .frame(width: 150, height: 150)
                                         Spacer()
                                     }
@@ -116,8 +112,7 @@ struct StatisticsView: ConnectedView {
                                         VStack(alignment: .trailing) {
                                             Text("workingHours")
                                             Spacer()
-                                            Text("\(props.averageWorkingHoursStartDate.formattedTime()) - \(props.averageWorkingHoursEndDate.formattedTime())")
-
+                                            Text("\(props.timeEntries.averageWorkingHoursStartDate().formattedTime()) - \(props.timeEntries.averageWorkingHoursEndDate().formattedTime())")
                                         }
                                     }
                                 }
@@ -127,21 +122,24 @@ struct StatisticsView: ConnectedView {
                             HStack {
                                 Text("breaks")
                                 Spacer()
-                                Text("\(props.averageBreaksDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                                Text("\(props.timeEntries.averageBreaksDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")")
                             }
 
                             HStack {
                                 Text("overtime")
                                 Spacer()
-                                Text("\(props.averageOvertimeDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
-
+                                Text("\(props.timeEntries.averageOvertimeDuration(workingDays: props.workingDays, workingDuration: props.workingDuration).formatted(allowedUnits: [.hour, .minute]) ?? "")")
                             }
                         }
 
                         Section(header: Text("Totals")) {
                             VStack {
                                 HStack {
-                                    ArcViewFull(duration: props.totalDaysWorked, maxDuration: props.totalDays, color: .accentColor, allowedUnits: [.second], displayMode: .progress)
+                                    ArcViewFull(duration: props.timeEntries.count,
+                                                maxDuration: props.workingDays.count,
+                                                color: .accentColor,
+                                                allowedUnits: [.second],
+                                                displayMode: .progress)
                                         .frame(width: 150, height: 150)
                                     Spacer()
                                     VStack(alignment: .trailing) {
@@ -155,22 +153,19 @@ struct StatisticsView: ConnectedView {
                             HStack {
                                 Text("workingHours")
                                 Spacer()
-                                Text("\(props.totalDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
-
+                                Text("\(props.timeEntries.totalDuration(workingDays: props.workingDays, workingDuration: props.workingDuration, absenceEntries: props.absenceEntries).formatted(allowedUnits: [.hour, .minute]) ?? "")")
                             }
 
                             HStack {
                                 Text("breaks")
                                 Spacer()
-                                Text("\(props.totalBreaksDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
-
+                                Text("\(props.timeEntries.totalBreaksDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")")
                             }
 
                             HStack {
                                 Text("overtime")
                                 Spacer()
-                                Text("\(props.totalOvertimeDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
-
+                                Text("\(props.timeEntries.totalOvertimeDuration(workingDays: props.workingDays, workingDuration: props.workingDuration, absenceEntries: props.absenceEntries).formatted(allowedUnits: [.hour, .minute]) ?? "")")
                             }
                         }
                     }
@@ -180,8 +175,34 @@ struct StatisticsView: ConnectedView {
             .navigationBarTitle("statistics")
         }
         .onAppear {
-            self.selectedTimeFrame = props.selectedTimeFrame
+            self.selectedTimeFrame = props.timeFrame
         }
+    }
+
+    private func dateText(timeFrame: TimeFrame,
+                          startDate: Date,
+                          endDate: Date) -> String {
+        switch timeFrame {
+        case .week:
+            return "\(startDate.formatted("dd.MM.")) - \(endDate.formatted("dd.MM.yyyy")) (\(Calendar.current.component(.weekOfYear, from: startDate)))"
+
+        case .month:
+            return startDate.formatted("MMMM yyyy")
+
+        case .year:
+            return startDate.formatted("yyyy")
+
+        case .allTime:
+            return  "\(startDate.formatted("dd.MM.yyyy")) - \(endDate.formatted("dd.MM.yyyy"))"
+        }
+    }
+
+    private func errorMessage(timeEntries: [Day: [TimeEntry]], absenceEntries: [AbsenceEntry]) -> String? {
+        if timeEntries.isEmpty && absenceEntries.isEmpty {
+            return "noStatisticsForTimeFrameMessage"
+        }
+
+        return nil
     }
 }
 

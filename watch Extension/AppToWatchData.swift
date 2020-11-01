@@ -8,7 +8,7 @@
 struct AppToWatchData: Codable {
     let timeEntries: [TimeEntry]
     let displayMode: TimerDisplayMode
-    let workingMinutesPerDay: Int
+    let workingDuration: Int
     let accentColor: CodableColor
 }
 
