@@ -85,12 +85,21 @@ struct ArcViewFull: View {
                         .padding(0)
                 }
 
-                Text(self.displayMode.text(for: self.duration, maxDuration: self.maxDuration, allowedUnits: self.allowedUnits))
-                    .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
-                    .minimumScaleFactor(0.1)
-                    .lineLimit(1)
-                    .frame(width: geometry.size.width * 0.65)
-                    .offset(x: 0, y: geometry.size.height / 3)
+                VStack {
+                    Text(self.displayMode.text(for: self.duration, maxDuration: self.maxDuration, allowedUnits: self.allowedUnits).firstLine)
+                        .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
+
+                    if let secondLine = self.displayMode.text(for: self.duration, maxDuration: self.maxDuration, allowedUnits: self.allowedUnits).secondLine {
+                        Text(secondLine)
+                            .animatableSystemFont(size: self.timeFontSize(for: geometry) * 0.5)
+                            .minimumScaleFactor(0.1)
+                            .lineLimit(1)
+                    }
+                }
+                .frame(width: geometry.size.width * 0.65)
+                .offset(x: 0, y: geometry.size.height / 3)
             }
         }
     }
@@ -111,13 +120,15 @@ enum TimerDisplayMode: String, Codable {
         }
     }
 
-    func text(for duration: Int, maxDuration: Int, allowedUnits: NSCalendar.Unit) -> String {
+    func text(for duration: Int, maxDuration: Int, allowedUnits: NSCalendar.Unit) -> (firstLine: String, secondLine: String?) {
         switch self {
         case .countUp:
-            return duration.formatted(allowedUnits: allowedUnits) ?? ""
+            return (firstLine: duration.formatted(allowedUnits: allowedUnits) ?? "",
+                    secondLine: nil)
 
         case .countDown:
-            return (duration - maxDuration).formatted(allowedUnits: allowedUnits) ?? ""
+            return (firstLine: (duration - maxDuration).formatted(allowedUnits: allowedUnits) ?? "",
+                    secondLine: nil)
 
         case .endOfWorkingDay:
             let format: String
@@ -127,10 +138,25 @@ enum TimerDisplayMode: String, Codable {
                 format = "HH:mm"
             }
 
-            return Date().addingTimeInterval(TimeInterval(maxDuration - duration)).formatted(format)
+            let endDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
+            let daysAhead = Calendar.current.dateComponents([.day], from: Date().startOfDay, to: endDate.startOfDay).day ?? 0
+
+            let daysAheadString: String?
+            switch daysAhead {
+            case 0:
+                daysAheadString = nil
+            case 1:
+                daysAheadString = "+\(daysAhead) \(NSLocalizedString("day", comment: ""))"
+            default:
+                daysAheadString = "+\(daysAhead) \(NSLocalizedString("days", comment: ""))"
+            }
+
+            return (firstLine: Date().addingTimeInterval(TimeInterval(maxDuration - duration)).formatted(format),
+                    secondLine: daysAheadString)
 
         case .progress:
-            return "\(duration.formatted(allowedUnits: allowedUnits, zeroFormattingBehavior: .default) ?? "") / \(maxDuration.formatted(allowedUnits: allowedUnits, zeroFormattingBehavior: .default) ?? "")"
+            return (firstLine: "\(duration.formatted(allowedUnits: allowedUnits, zeroFormattingBehavior: .default) ?? "") / \(maxDuration.formatted(allowedUnits: allowedUnits, zeroFormattingBehavior: .default) ?? "")",
+                    secondLine: nil)
         }
     }
 }
@@ -147,8 +173,8 @@ struct ArcViewFull_Previews: PreviewProvider {
                         displayMode: .progress)
                 .frame(width: 250, height: 250)
 
-            ArcViewFull(duration: 1,
-                        maxDuration: 100,
+            ArcViewFull(duration: 1337,
+                        maxDuration: 115200,
                         color: .pink,
                         allowedUnits: [.hour, .minute, .second],
                         displayMode: .endOfWorkingDay)

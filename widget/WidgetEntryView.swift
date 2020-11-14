@@ -24,6 +24,10 @@ struct WidgetEntryView: View {
                     .padding()
                     .aspectRatio(1, contentMode: .fit)
                     .accentColor(entry.accentColor)
+                    .background(LinearGradient(gradient: Gradient(colors: [Color("BackgroundGradientFirst"),
+                                                                           Color("BackgroundGradientSecond")]),
+                                               startPoint: .topLeading,
+                                               endPoint: .bottomTrailing))
 
             case .systemMedium:
                 HStack {
@@ -35,6 +39,8 @@ struct WidgetEntryView: View {
                         .padding()
                         .aspectRatio(1, contentMode: .fit)
                         .accentColor(entry.accentColor)
+
+                    Divider()
 
                     VStack {
                         Text("week")
@@ -67,8 +73,11 @@ struct WidgetEntryView: View {
                     }
                     .font(.footnote)
                     .padding(.all, 10)
-                    .background(Color.primary.opacity(0.15))
                 }
+                .background(LinearGradient(gradient: Gradient(colors: [Color("BackgroundGradientFirst"),
+                                                                       Color("BackgroundGradientSecond")]),
+                                           startPoint: .topLeading,
+                                           endPoint: .bottomTrailing))
 
             case .systemLarge:
                 VStack {
@@ -87,7 +96,7 @@ struct WidgetEntryView: View {
                                 .accentColor(self.entry.accentColor)
                         }
                         .padding(.all, 10)
-                        .background(Color.primary.opacity(0.15))
+                        .background(Color("TodayBackground"))
                         .cornerRadius(12)
 
                         Spacer()
@@ -146,6 +155,10 @@ struct WidgetEntryView: View {
                     .font(.footnote)
                 }
                 .padding(.all)
+                .background(LinearGradient(gradient: Gradient(colors: [Color("BackgroundGradientFirst"),
+                                                                       Color("BackgroundGradientSecond")]),
+                                           startPoint: .topLeading,
+                                           endPoint: .bottomTrailing))
 
             @unknown default:
                 fatalError()
@@ -156,26 +169,32 @@ struct WidgetEntryView: View {
 
 // MARK: - Previews
 
-struct TimerWidgetSmall_Previews: PreviewProvider {
+struct TimerWidgetLight_Previews: PreviewProvider {
     static var previews: some View {
         let entry = Provider().providePlaceholder()
-        return WidgetEntryView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        return Group {
+            WidgetEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            WidgetEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            WidgetEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+        }
+        .environment(\.colorScheme, .light)
     }
 }
 
-struct TimerWidgetMedium_Previews: PreviewProvider {
+struct TimerWidgetDark_Previews: PreviewProvider {
     static var previews: some View {
         let entry = Provider().providePlaceholder()
-        return WidgetEntryView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
-}
-
-struct TimerWidgetLarge_Previews: PreviewProvider {
-    static var previews: some View {
-        let entry = Provider().providePlaceholder()
-        return WidgetEntryView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
+        return Group {
+            WidgetEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            WidgetEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            WidgetEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+        }
+        .environment(\.colorScheme, .dark)
     }
 }

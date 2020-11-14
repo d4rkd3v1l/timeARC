@@ -44,10 +44,11 @@ struct Provider: TimelineProvider {
 
     private func provideEntry(for advancedSeconds: Int, widgetData: WidgetData) -> WidgetEntry {
         var timeEntries = widgetData.timeEntries
-        var timeEntriesToday = timeEntries[Day()]!
-        let runningTimeEntryIndex = timeEntriesToday.firstIndex(where: { $0.isRunning })!
-        timeEntriesToday[runningTimeEntryIndex].end?.addTimeInterval(Double(advancedSeconds))
-        timeEntries[Day()] = timeEntriesToday
+        var timeEntriesToday = timeEntries[Day()]
+        if let runningTimeEntryIndex = timeEntriesToday?.firstIndex(where: { $0.isRunning }) {
+            timeEntriesToday?[runningTimeEntryIndex].end?.addTimeInterval(Double(advancedSeconds))
+            timeEntries[Day()] = timeEntriesToday
+        }
 
         let todayDuration = timeEntries.forDay(Day()).totalDurationInSeconds
         let todayMaxDuration = widgetData.workingDuration
@@ -76,7 +77,7 @@ struct Provider: TimelineProvider {
                            weekTotalBreaksDuration: weekTotalBreaksDuration,
                            weekAverageOvertimeDuration: weekAverageOvertimeDuration,
                            weekTotalOvertimeDuration: weekTotalOvertimeDuration,
-                           isRunning: true,
+                           isRunning: timeEntries.isTimerRunning,
                            accentColor: accentColor,
                            displayMode: displayMode)
     }

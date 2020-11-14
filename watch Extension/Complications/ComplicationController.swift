@@ -85,9 +85,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         if timeEntries.isTimerRunning {
             var entries: [CLKComplicationTimelineEntry] = []
 
-            for index in 0..<limit {
+            for minute in 0..<limit {
                 let difference = Int(date.timeIntervalSince(now))
-                let template = ComplicationProvider(duration: duration + difference + 60 * index,
+                let template = ComplicationProvider(duration: duration + difference + 60 * minute,
                                                     maxDuration: maxDuration,
                                                     color: UIColor(store.state.accentColor.color),
                                                     displayMode: displayMode)
@@ -99,7 +99,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                     return
                 }
 
-                let entry = CLKComplicationTimelineEntry(date: date.addingTimeInterval(TimeInterval(60 * index)),
+                let entry = CLKComplicationTimelineEntry(date: date.addingTimeInterval(TimeInterval(60 * minute)),
                                                          complicationTemplate: unwrappedTemplate)
                 entries.append(entry)
             }

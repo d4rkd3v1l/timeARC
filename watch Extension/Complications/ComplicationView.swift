@@ -43,7 +43,7 @@ struct ComplicationProvider {
 
         let durationFormatted = self.displayMode.text(for: self.duration,
                                                       maxDuration: self.maxDuration,
-                                                      allowedUnits: [.hour, .minute])
+                                                      allowedUnits: [.hour, .minute]).firstLine
         let percent = Float(self.duration) / Float(self.maxDuration)
         let percentFormatted = String(Int(percent * 100.0))
         let onePieceImage = UIImage() // TODO: provide image
