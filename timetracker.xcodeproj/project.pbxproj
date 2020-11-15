@@ -119,6 +119,7 @@
 		817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
 		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
+		81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */; };
 		81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE88AA25291501000375FF /* SettingsReducerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -295,6 +296,7 @@
 		817D61EC2531CDF3009761DE /* AbsenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceType.swift; sourceTree = "<group>"; };
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81BFE818254DF59800594425 /* timetracker.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timetracker.xctestplan; path = timetracker/timetracker.xctestplan; sourceTree = "<group>"; };
+		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
 		81FE88AA25291501000375FF /* SettingsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -568,6 +570,7 @@
 				81130B042529A1C600CA0A69 /* Collection+averageTests.swift */,
 				8179B36C2528E03900A537B7 /* Date+Tests.swift */,
 				81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */,
+				81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				8172E17A2534EFA500C39CA4 /* DayTests.swift in Sources */,
 				817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */,
 				81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */,
+				81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */,
 				81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */,
 				81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */,
 				8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */,

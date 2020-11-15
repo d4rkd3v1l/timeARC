@@ -56,3 +56,6 @@
 "endOfWoringWeekNotificationSubtitle" = "You're done for the week! 🙌";
 "day" = "day";
 "days" = "days";
+"absences" = "Absences";
+"averageHours" = "Average hours";
+"absenceDays" = "Absence days";

@@ -66,9 +66,22 @@ extension Array where Element == AbsenceEntry {
         return newAbsenceEntries
     }
 
-    func totalDurationInSeconds(for day: Day, with workingDuration: Int) -> Int {
-        return self.absenceEntries(for: day).reduce(0) { total, current in
-            return total + Int((current.type.offPercentage * Float(workingDuration)))
+    func totalDurationInSeconds(with workingDuration: Int) -> Int {
+        return self.reduce(0) { total, current in
+            let days = stride(from: current.start.date, through: current.end.date, by: 86400).map { $0 }
+            return total + Int((current.type.offPercentage * Float(workingDuration) * Float(days.count)))
         }
+    }
+
+    func totalDurationInDays() -> Float {
+        return self.reduce(0) { total, current in
+            let days = stride(from: current.start.date, through: current.end.date, by: 86400).map { $0 }
+            return total + (current.type.offPercentage * Float(days.count))
+        }
+    }
+
+    func totalDurationInDaysByType() -> [AbsenceType: Float] {
+        return Dictionary(grouping: self, by: { $0.type })
+            .mapValues { $0.totalDurationInDays() }
     }
 }

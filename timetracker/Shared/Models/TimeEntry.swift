@@ -129,7 +129,7 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
         return workingDays
             .map { day -> Int in
                 let actualWorkingDuration = (self[day]?.totalDurationInSeconds ?? 0)
-                let absenceDuration = absenceEntries.totalDurationInSeconds(for: day, with: workingDuration)
+                let absenceDuration = absenceEntries.absenceEntries(for: day).totalDurationInSeconds(with: workingDuration)
                 return actualWorkingDuration + absenceDuration
             }
             .sum()

@@ -20,6 +20,10 @@ enum TimeFrame: String, CaseIterable, Identifiable, Codable {
 }
 
 struct StatisticsView: ConnectedView {
+    enum ExpandableSection: Equatable {
+        case absenceDays
+    }
+
     struct Props {
         let timeFrame: TimeFrame
         let startDate: Date
@@ -46,8 +50,9 @@ struct StatisticsView: ConnectedView {
                      workingDuration: state.settingsState.workingDuration)
     }
 
-    @ObservedObject var updater = StateUpdater(updateInterval: 60, action: StatisticsRefresh())
+//    @ObservedObject var updater = StateUpdater(updateInterval: 60, action: StatisticsRefresh())
     @State private var selectedTimeFrame: TimeFrame = .week
+    @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -75,7 +80,12 @@ struct StatisticsView: ConnectedView {
                     })
                     .disabled(props.timeFrame == .allTime)
 
-                    Text(self.dateText(timeFrame: props.timeFrame, startDate: props.startDate, endDate: props.endDate))
+                    if stride(from: props.startDate, to: props.endDate, by: 86400).map({ $0.day }).contains(Day()) {
+                        Text(self.dateText(timeFrame: props.timeFrame, startDate: props.startDate, endDate: props.endDate))
+                            .bold()
+                    } else {
+                        Text(self.dateText(timeFrame: props.timeFrame, startDate: props.startDate, endDate: props.endDate))
+                    }
 
                     Button(action: {
                         store.dispatch(action: StatisticsNextInterval())
@@ -95,7 +105,10 @@ struct StatisticsView: ConnectedView {
                     Spacer()
                 } else {
                     List {
-                        Section(header: Text("averages")) {
+
+                        // MARK: - Working hours
+
+                        Section(header: Text("workingHours")) {
                             VStack {
                                 ZStack {
                                     HStack {
@@ -110,7 +123,7 @@ struct StatisticsView: ConnectedView {
                                     HStack {
                                         Spacer()
                                         VStack(alignment: .trailing) {
-                                            Text("workingHours")
+                                            Text("averageHours")
                                             Spacer()
                                             Text("\(props.timeEntries.averageWorkingHoursStartDate().formattedTime()) - \(props.timeEntries.averageWorkingHoursEndDate().formattedTime())")
                                         }
@@ -119,20 +132,124 @@ struct StatisticsView: ConnectedView {
                                 .padding(.top, 5)
                             }
 
+                            VStack {
+                                Spacer(minLength: 20)
+                                HStack {
+                                    Text("")
+                                        .hidden()
+                                        .frame(minWidth: 0,
+                                               maxWidth: .infinity,
+                                               minHeight: 0,
+                                               maxHeight: .infinity,
+                                               alignment: .leading)
+
+                                    Spacer()
+
+                                    Text("averages")
+                                        .bold()
+                                        .frame(minWidth: 0,
+                                               maxWidth: .infinity,
+                                               minHeight: 0,
+                                               maxHeight: .infinity,
+                                               alignment: .trailing)
+
+                                    Spacer()
+
+                                    Text("totals")
+                                        .bold()
+                                        .frame(minWidth: 0,
+                                               maxWidth: .infinity,
+                                               minHeight: 0,
+                                               maxHeight: .infinity,
+                                               alignment: .trailing)
+                                }
+                            }
+
+                            HStack {
+                                Text("hours")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .leading)
+
+                                Spacer()
+                                Text(props.timeEntries.averageDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .trailing)
+
+                                Spacer()
+
+                                Text("\(props.timeEntries.totalDuration(workingDays: props.workingDays, workingDuration: props.workingDuration, absenceEntries: props.absenceEntries).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .trailing)
+                            }
+
                             HStack {
                                 Text("breaks")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .leading)
+
                                 Spacer()
+
+                                Text(props.timeEntries.averageBreaksDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .trailing)
+
+                                Spacer()
+
                                 Text("\(props.timeEntries.averageBreaksDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .trailing)
                             }
 
                             HStack {
                                 Text("overtime")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .leading)
+
                                 Spacer()
+
+                                Text(props.timeEntries.averageOvertimeDuration(workingDays: props.workingDays, workingDuration: props.workingDuration).formatted(allowedUnits: [.hour, .minute]) ?? "")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .trailing)
+
+                                Spacer()
+
                                 Text("\(props.timeEntries.averageOvertimeDuration(workingDays: props.workingDays, workingDuration: props.workingDuration).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                                    .frame(minWidth: 0,
+                                           maxWidth: .infinity,
+                                           minHeight: 0,
+                                           maxHeight: .infinity,
+                                           alignment: .trailing)
                             }
                         }
 
-                        Section(header: Text("Totals")) {
+                        // MARK: - Absences
+
+                        Section(header: Text("absences")) {
                             VStack {
                                 HStack {
                                     ArcViewFull(duration: props.timeEntries.count,
@@ -150,23 +267,32 @@ struct StatisticsView: ConnectedView {
                                 .padding(.top, 5)
                             }
 
-                            HStack {
-                                Text("workingHours")
-                                Spacer()
-                                Text("\(props.timeEntries.totalDuration(workingDays: props.workingDays, workingDuration: props.workingDuration, absenceEntries: props.absenceEntries).formatted(allowedUnits: [.hour, .minute]) ?? "")")
-                            }
 
-                            HStack {
-                                Text("breaks")
-                                Spacer()
-                                Text("\(props.timeEntries.totalBreaksDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")")
-                            }
+                            DisclosureGroup(
+                                isExpanded: self.expansionHandler.isExpanded(.absenceDays),
+                                content: {
+                                    ForEach(props.absenceEntries.totalDurationInDaysByType().sorted(by: { $0.value > $1.value }), id: \.key) { key, value in
 
-                            HStack {
-                                Text("overtime")
-                                Spacer()
-                                Text("\(props.timeEntries.totalOvertimeDuration(workingDays: props.workingDays, workingDuration: props.workingDuration, absenceEntries: props.absenceEntries).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                                        HStack {
+                                            Text(key.localizedTitle)
+                                            Spacer()
+                                            Text(self.formattedAbsence(for: value))
+                                        }
+                                    }
+                                },
+                                label: {
+                                    HStack {
+                                        Text("absenceDays")
+                                        Spacer()
+                                        Text(self.formattedAbsence(for: props.absenceEntries.totalDurationInDays()))
+                                    }
+                                }
+                            )
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                withAnimation { self.expansionHandler.toggleExpanded(for: .absenceDays) }
                             }
+                            .disabled(props.absenceEntries.isEmpty)
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
@@ -204,6 +330,14 @@ struct StatisticsView: ConnectedView {
 
         return nil
     }
+
+    private func formattedAbsence(for duration: Float) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 2
+        return numberFormatter.string(from: NSNumber(floatLiteral: Double(duration))) ?? ""
+    }
 }
 
 struct StatisticsView_Previews: PreviewProvider {
@@ -215,6 +349,8 @@ struct StatisticsView_Previews: PreviewProvider {
         store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 08:27")!, end: formatter.date(from: "01.01.2020 12:13")!)))
         store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 12:54")!, end: formatter.date(from: "01.01.2020 18:30")!)))
         store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "04.01.2020 08:27")!, end: formatter.date(from: "04.01.2020 12:13")!)))
+
+        store.dispatch(action: AddAbsenceEntry(absenceEntry: AbsenceEntry(type: .dummy, start: formatter.date(from: "01.01.2020 08:27")!.day, end: formatter.date(from: "02.01.2020 08:27")!.day)))
 
         return StoreProvider(store: store) {
             StatisticsView()
