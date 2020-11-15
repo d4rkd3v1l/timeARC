@@ -261,8 +261,8 @@ class TimeEntryTests: XCTestCase {
         let startDate4 = try Date(year: 2020, month: 10, day: 28, hour: 16, minute: 0, second: 0)
         let endDate4 = try Date(year: 2020, month: 10, day: 28, hour: 17, minute: 45, second: 34)
 
-        let startDate5 = try Date(year: 2020, month: 10, day: 29, hour: 9, minute: 0, second: 0)
-        let endDate5 = try Date(year: 2020, month: 10, day: 29, hour: 13, minute: 12, second: 23)
+        let startDate5 = try Date(year: 2020, month: 10, day: 31, hour: 9, minute: 0, second: 0)
+        let endDate5 = try Date(year: 2020, month: 10, day: 31, hour: 13, minute: 12, second: 23)
 
         let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
         let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
@@ -298,10 +298,8 @@ class TimeEntryTests: XCTestCase {
 
     func testTotalDuration() throws {
         let timeEntries = try self.timeEntries()
-        let workingDays = try self.workingDays()
 
-        let totalDuration = timeEntries.totalDuration(workingDays: workingDays,
-                                                      workingDuration: 28800,
+        let totalDuration = timeEntries.totalDuration(workingDuration: 28800,
                                                       absenceEntries: [])
         XCTAssertEqual(totalDuration, 69646)
     }
@@ -322,17 +320,15 @@ class TimeEntryTests: XCTestCase {
 
     func testAverageBreaksDuration() throws {
         let timeEntries = try self.timeEntries()
-        let workingDays = try self.workingDays()
 
-        let averageBreaksDuration = timeEntries.averageBreaksDuration(workingDays: workingDays)
+        let averageBreaksDuration = timeEntries.averageBreaksDuration()
         XCTAssertEqual(averageBreaksDuration, 1870)
     }
 
     func testTotalBreaksDuration() throws {
         let timeEntries = try self.timeEntries()
-        let workingDays = try self.workingDays()
 
-        let totalBreaksDuration = timeEntries.totalBreaksDuration(workingDays: workingDays)
+        let totalBreaksDuration = timeEntries.totalBreaksDuration()
         XCTAssertEqual(totalBreaksDuration, 5612)
     }
 

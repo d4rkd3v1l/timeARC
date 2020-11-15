@@ -118,17 +118,20 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
     }
 
     func averageDuration(workingDays: [Day]) -> Int {
-        return workingDays
-            .compactMap { self[$0]?.totalDurationInSeconds }
+        return self
+            .compactMap { day, entries in
+                let totalDuration = entries.totalDurationInSeconds
+                guard workingDays.contains(day) || totalDuration > 0  else { return nil }
+                return totalDuration
+            }
             .average()
     }
 
-    func totalDuration(workingDays: [Day],
-                       workingDuration: Int,
+    func totalDuration(workingDuration: Int,
                        absenceEntries: [AbsenceEntry]) -> Int {
-        return workingDays
-            .map { day -> Int in
-                let actualWorkingDuration = (self[day]?.totalDurationInSeconds ?? 0)
+        return self
+            .map { day, entries -> Int in
+                let actualWorkingDuration = entries.totalDurationInSeconds
                 let absenceDuration = absenceEntries.absenceEntries(for: day).totalDurationInSeconds(with: workingDuration)
                 return actualWorkingDuration + absenceDuration
             }
@@ -151,18 +154,18 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
             .averageTime
     }
 
-    private func totalBreaksDurations(workingDays: [Day]) -> [Int] {
-        return workingDays
-            .compactMap { self[$0]?.totalBreaksInSeconds }
+    private func totalBreaksDurations() -> [Int] {
+        return self
+            .map { _, entries in entries.totalBreaksInSeconds }
     }
 
-    func averageBreaksDuration(workingDays: [Day]) -> Int {
-        return totalBreaksDurations(workingDays: workingDays)
+    func averageBreaksDuration() -> Int {
+        return totalBreaksDurations()
             .average()
     }
 
-    func totalBreaksDuration(workingDays: [Day]) -> Int {
-        return totalBreaksDurations(workingDays: workingDays)
+    func totalBreaksDuration() -> Int {
+        return totalBreaksDurations()
             .sum()
     }
 
@@ -174,8 +177,7 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
     func totalOvertimeDuration(workingDays: [Day],
                                workingDuration: Int,
                                absenceEntries: [AbsenceEntry]) -> Int {
-        return self.totalDuration(workingDays: workingDays,
-                                  workingDuration: workingDuration,
+        return self.totalDuration(workingDuration: workingDuration,
                                   absenceEntries: absenceEntries) - (workingDuration * workingDays.count)
     }
 }

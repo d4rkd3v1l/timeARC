@@ -183,7 +183,7 @@ struct StatisticsView: ConnectedView {
 
                                 Spacer()
 
-                                Text("\(props.timeEntries.totalDuration(workingDays: props.workingDays, workingDuration: props.workingDuration, absenceEntries: props.absenceEntries).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                                Text("\(props.timeEntries.totalDuration(workingDuration: props.workingDuration, absenceEntries: props.absenceEntries).formatted(allowedUnits: [.hour, .minute]) ?? "")")
 
                                     .frame(minWidth: 0,
                                            maxWidth: .infinity,
@@ -202,7 +202,7 @@ struct StatisticsView: ConnectedView {
 
                                 Spacer()
 
-                                Text(props.timeEntries.averageBreaksDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")
+                                Text(props.timeEntries.averageBreaksDuration().formatted(allowedUnits: [.hour, .minute]) ?? "")
                                     .frame(minWidth: 0,
                                            maxWidth: .infinity,
                                            minHeight: 0,
@@ -211,7 +211,7 @@ struct StatisticsView: ConnectedView {
 
                                 Spacer()
 
-                                Text("\(props.timeEntries.averageBreaksDuration(workingDays: props.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                                Text("\(props.timeEntries.averageBreaksDuration().formatted(allowedUnits: [.hour, .minute]) ?? "")")
                                     .frame(minWidth: 0,
                                            maxWidth: .infinity,
                                            minHeight: 0,
