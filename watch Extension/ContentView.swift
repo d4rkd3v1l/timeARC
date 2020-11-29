@@ -17,7 +17,6 @@ struct ContentView: ConnectedView {
         let displayMode: TimerDisplayMode
         let workingDuration: Int
         let accentColor: Color
-        let buttonTextColor: Color
     }
 
     func map(state: WatchState, dispatch: @escaping DispatchFunction) -> Props {
@@ -25,8 +24,7 @@ struct ContentView: ConnectedView {
                      timeEntries: state.timeEntries,
                      displayMode: state.displayMode,
                      workingDuration: state.workingDuration,
-                     accentColor: state.accentColor.color,
-                     buttonTextColor: state.accentColor.contrastColor(for: self.colorScheme))
+                     accentColor: state.accentColor.color)
     }
 
     @State var duration: Int?

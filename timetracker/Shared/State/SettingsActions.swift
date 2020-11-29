@@ -17,5 +17,5 @@ struct UpdateWorkingDuration: Action {
 }
 
 struct UpdateAccentColor: Action {
-    let color: Color
+    let color: CodableColor
 }

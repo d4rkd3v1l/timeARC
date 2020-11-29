@@ -29,7 +29,6 @@ struct TimerView: ConnectedView {
         let workingDuration: Int
         let workingWeekDaysCount: Int
         let displayMode: TimerDisplayMode
-        let buttonTextColor: Color
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
@@ -40,11 +39,9 @@ struct TimerView: ConnectedView {
                         .flatMap { $0.value },
                      workingDuration: state.settingsState.workingDuration,
                      workingWeekDaysCount: state.settingsState.workingWeekDays.count,
-                     displayMode: state.timeState.displayMode,
-                     buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))
+                     displayMode: state.timeState.displayMode)
     }
 
-    @Environment(\.colorScheme) var colorScheme
     @State private var mode: Tab = .today
     @State private var duration: Int?
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect().share()
@@ -75,20 +72,14 @@ struct TimerView: ConnectedView {
                     .tabViewStyle(PageTabViewStyle())
                     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                     .frame(width: geometry.size.width, height: geometry.size.width, alignment: .center)
-                    .background(CodableColor.primary.contrastColor(for: self.colorScheme))
 
                     Spacer()
 
-                    Button(action: {
+                    Button(props.timeEntries.isTimerRunning ? "stop" : "start") {
                         store.dispatch(action: ToggleTimer())
-                    }) {
-                        Text(props.timeEntries.isTimerRunning ? "stop" : "start")
-                            .frame(width: 200, height: 50)
-                            .font(Font.body.bold())
-                            .foregroundColor(props.buttonTextColor)
-                            .background(Color.accentColor)
-                            .cornerRadius(25)
                     }
+                    .buttonStyle(CTAStyle())
+
                     Spacer()
                 }
                 .navigationBarTitle(self.mode.title)
@@ -131,6 +122,7 @@ struct TimerView_Previews: PreviewProvider {
             StoreProvider(store: store) {
                 TimerView()
                     .accentColor(.green)
+                    .colorScheme(.dark)
             }
         }
     }

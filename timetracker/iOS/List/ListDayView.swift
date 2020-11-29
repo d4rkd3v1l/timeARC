@@ -13,7 +13,6 @@ struct DayView: View {
     let timeEntries: [TimeEntry]
     let absenceEntries: [AbsenceEntry]
     let absenceTypes: [AbsenceType]
-    let buttonTextColor: Color
 
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @ObservedObject var updater = ViewUpdater(updateInterval: 60)
@@ -32,7 +31,6 @@ struct DayView: View {
                                                      absenceTypes: self.absenceTypes,
                                                      title: "updateAbsenceEntryTitle",
                                                      buttonTitle: "update",
-                                                     buttonTextColor: self.buttonTextColor,
                                                      onUpdate: {
                                                         store.dispatch(action: UpdateAbsenceEntry(absenceEntry: $0))
                                                      },
@@ -61,7 +59,6 @@ struct DayView: View {
                                 TimeEntryEditView(timeEntry: timeEntry,
                                                   title: "updateTimeEntryTitle",
                                                   buttonTitle: "update",
-                                                  buttonTextColor: self.buttonTextColor,
                                                   onUpdate: {
                                                     store.dispatch(action: UpdateTimeEntry(timeEntry: $0))
                                                   },

@@ -39,8 +39,8 @@ class WatchCommunicator: NSObject, WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         if let decodedData = try? JSONDecoder().decode(WatchToAppData.self, from: messageData) {
-            store.dispatch(action: SyncTimeEntriesFromWatch(timeEntries: decodedData.timeEntries))
-            store.dispatch(action: ChangeTimerDisplayMode(displayMode: decodedData.displayMode))
+            store.dispatch(action: SyncTimeEntriesFromWatch(timeEntries: decodedData.timeEntries,
+                                                            displayMode: decodedData.displayMode))
         }
     }
 }

@@ -12,13 +12,15 @@ struct EntryDetailsView: ConnectedView {
     struct Props {
         let timeEntries: [TimeEntry]
         let workingDuration: Int
+        let accentColor: CodableColor
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         let timeEntries = state.timeState.timeEntries.forDay(self.selectedDay)
 
         return Props(timeEntries: timeEntries,
-                     workingDuration: state.settingsState.workingDuration
+                     workingDuration: state.settingsState.workingDuration,
+                     accentColor: state.settingsState.accentColor
         )
     }
 
@@ -53,17 +55,11 @@ struct EntryDetailsView: ConnectedView {
                         }
                     })
                 }
-                Button(action: {
+                Button("addEntry") {
                     let timeEntry = TimeEntry(start: self.selectedDay.date, end: self.selectedDay.date)
                     store.dispatch(action: AddTimeEntry(timeEntry: timeEntry))
-                }) {
-                    Text("addEntry")
-                        .frame(width: 200, height: 50)
-                        .font(Font.body.bold())
-                        .foregroundColor(.white)
-                        .background(Color.accentColor)
-                        .cornerRadius(25)
                 }
+                .buttonStyle(CTAStyle(color: props.accentColor))
                 .padding(.vertical, 10)
             }
             .navigationTitle(self.selectedDay.date.formatted("MMM d, yyyy"))

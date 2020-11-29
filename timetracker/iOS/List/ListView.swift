@@ -10,21 +10,18 @@ import SwiftUIFlux
 import PartialSheet
 
 struct ListView: ConnectedView {
-    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var partialSheetManager: PartialSheetManager
 
     struct Props {
         let timeEntries: [Day: [TimeEntry]]
         let absenceEntries: [AbsenceEntry]
         let absenceTypes: [AbsenceType]
-        let buttonTextColor: Color
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeEntries: state.timeState.timeEntries,
                      absenceEntries: state.timeState.absenceEntries,
-                     absenceTypes: state.settingsState.absenceTypes,
-                     buttonTextColor: state.settingsState.accentColor.contrastColor(for: self.colorScheme))
+                     absenceTypes: state.settingsState.absenceTypes)
     }
 
     @StateObject private var expansionHandler = ExpansionHandler<Day>()
@@ -45,7 +42,6 @@ struct ListView: ConnectedView {
                                     timeEntries: timeEntries,
                                     absenceEntries: props.absenceEntries.absenceEntries(for: day),
                                     absenceTypes: props.absenceTypes,
-                                    buttonTextColor: props.buttonTextColor,
                                     isExpanded: self.expansionHandler.isExpanded(day))
                                 .contentShape(Rectangle())
                                 .onTapGesture {
@@ -64,8 +60,7 @@ struct ListView: ConnectedView {
                                 let timeEntry = TimeEntry(start: Date(), end: Date())
                                 TimeEntryEditView(timeEntry: timeEntry,
                                                   title: "addTimeEntryTitle",
-                                                  buttonTitle: "add",
-                                                  buttonTextColor: props.buttonTextColor) {
+                                                  buttonTitle: "add") {
                                     store.dispatch(action: AddTimeEntry(timeEntry: $0))
                                 }
                             }
@@ -80,8 +75,7 @@ struct ListView: ConnectedView {
                                 AbsenceEntryEditView(absenceEntry: absenceEntry,
                                                      absenceTypes: props.absenceTypes,
                                                      title: "addAbsenceEntryTitle",
-                                                     buttonTitle: "add",
-                                                     buttonTextColor: props.buttonTextColor) {
+                                                     buttonTitle: "add") {
                                     store.dispatch(action: AddAbsenceEntry(absenceEntry: $0))
                                 }
                             }

@@ -12,10 +12,10 @@ struct TimeEntryEditView: View {
     let timeEntry: TimeEntry
     let title: LocalizedStringKey
     let buttonTitle: LocalizedStringKey
-    let buttonTextColor: Color
     var onUpdate: ((TimeEntry) -> Void)? = nil
     var onDelete: (() -> Void)? = nil
 
+    @Environment(\.contrastColor) var contrastColor
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @State private var day: Day = Day()
     @State private var startDate: Date = Date()
@@ -66,17 +66,11 @@ struct TimeEntryEditView: View {
                             Image(systemName: "arrow.right")
                             if self.isRunning {
                                 VStack {
-                                    Button(action: {
+                                    Button("stop") {
                                         self.endDate = Date()
                                         self.isRunning.toggle()
-                                    }) {
-                                        Text("stop")
-                                            .frame(width: 120, height: 34, alignment: .center)
-                                            .font(Font.body.bold())
-                                            .foregroundColor(self.buttonTextColor)
-                                            .background(Color.accentColor)
-                                            .cornerRadius(17)
                                     }
+                                    .buttonStyle(CTAStyle(.small))
                                 }
                             } else {
                                 DatePicker("", selection: self.$endDate, displayedComponents: .hourAndMinute)
@@ -90,7 +84,7 @@ struct TimeEntryEditView: View {
                         }
                     }
                 }
-                Button(action: {
+                Button(self.buttonTitle) {
                     var newTimeEntry = self.timeEntry
                     newTimeEntry.start = self.startDate
                     newTimeEntry.end = self.isRunning ? nil : self.endDate
@@ -99,14 +93,8 @@ struct TimeEntryEditView: View {
                     withAnimation {
                         self.partialSheetManager.closePartialSheet()
                     }
-                }) {
-                    Text(self.buttonTitle)
-                        .frame(width: 200, height: 50)
-                        .font(Font.body.bold())
-                        .foregroundColor(self.buttonTextColor)
-                        .background(Color.accentColor)
-                        .cornerRadius(25)
                 }
+                .buttonStyle(CTAStyle())
             }
             .onAppear {
                 self.day = self.startDate.day
@@ -144,13 +132,11 @@ struct TimeEntryEditView_Previews: PreviewProvider {
             Spacer()
             TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: Date()),
                               title: "addEntryTitle",
-                              buttonTitle: "add",
-                              buttonTextColor: .white)
+                              buttonTitle: "add")
             Spacer()
             TimeEntryEditView(timeEntry: TimeEntry(start: Date(), end: nil),
                               title: "updateEntryTitle",
                               buttonTitle: "update",
-                              buttonTextColor: .white,
                               onUpdate: { _ in },
                               onDelete: {})
             Spacer()

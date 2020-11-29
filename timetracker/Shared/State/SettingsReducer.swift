@@ -18,7 +18,7 @@ func settingsReducer(state: SettingsState, action: Action) -> SettingsState {
         state.workingDuration = action.workingDuration
 
     case let action as UpdateAccentColor:
-        state.accentColor = CodableColor(action.color)
+        state.accentColor = action.color
 
     default:
         break

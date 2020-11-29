@@ -17,18 +17,18 @@ struct SettingsView: ConnectedView {
     struct Props {
         let workingWeekDays: [WeekDay]
         let workingDuration: Int
-        let accentColor: Color
+        let accentColor: CodableColor
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(workingWeekDays: state.settingsState.workingWeekDays,
                      workingDuration: state.settingsState.workingDuration,
-                     accentColor: state.settingsState.accentColor.color)
+                     accentColor: state.settingsState.accentColor)
     }
 
     @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
     @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
-    let colors: [Color] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
+    let colors: [CodableColor] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -104,32 +104,18 @@ struct SettingsView: ConnectedView {
 
 struct AccentColorView: View {
     @Environment(\.colorScheme) var colorScheme
-    let color: Color
+    
+    let color: CodableColor
     let isSelected: Bool
 
     var body: some View {
-        self.color
+        self.color.color
             .frame(width: 40, height: 40)
             .cornerRadius(10)
             .overlay(
                 Image(systemName: self.isSelected ? "checkmark" : "")
                     .foregroundColor(self.color.contrastColor(for: self.colorScheme))
             )
-    }
-}
-
-extension Color {
-    func contrastColor(for colorScheme: ColorScheme) -> Color {
-        switch colorScheme {
-        case .light:
-            return self == .primary ? .white : .primary
-
-        case .dark:
-            return self == .primary ? .black : .primary
-
-        @unknown default:
-            return .primary
-        }
     }
 }
 
@@ -143,6 +129,7 @@ struct SettingsView_Previews: PreviewProvider {
                 NavigationView {
                     SettingsView()
                         .accentColor(.green)
+                        .colorScheme(.dark)
                 }
             }
         }

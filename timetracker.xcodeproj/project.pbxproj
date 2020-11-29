@@ -120,6 +120,8 @@
 		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */; };
+		81FD9CBD25740E960049C6CE /* CTAStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CBC25740E960049C6CE /* CTAStyle.swift */; };
+		81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CCA25741D050049C6CE /* ContrastColor.swift */; };
 		81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE88AA25291501000375FF /* SettingsReducerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -297,6 +299,8 @@
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81BFE818254DF59800594425 /* timetracker.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timetracker.xctestplan; path = timetracker/timetracker.xctestplan; sourceTree = "<group>"; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
+		81FD9CBC25740E960049C6CE /* CTAStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAStyle.swift; sourceTree = "<group>"; };
+		81FD9CCA25741D050049C6CE /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
 		81FE88AA25291501000375FF /* SettingsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -538,13 +542,15 @@
 			children = (
 				8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */,
 				8179B3372528E02100A537B7 /* CodableColor.swift */,
+				81FD9CCA25741D050049C6CE /* ContrastColor.swift */,
 				8179B3362528E02100A537B7 /* Collection+average.swift */,
 				8179B3342528E02100A537B7 /* Color+.swift */,
+				81FD9CBC25740E960049C6CE /* CTAStyle.swift */,
 				8179B3382528E02100A537B7 /* Date+.swift */,
 				8179B3352528E02100A537B7 /* Date+Strideable.swift */,
 				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
-				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
+				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -956,8 +962,10 @@
 				8179B35D2528E02100A537B7 /* CodableColor.swift in Sources */,
 				8179B35A2528E02100A537B7 /* Color+.swift in Sources */,
 				8179B3472528E02100A537B7 /* WatchCommunicator.swift in Sources */,
+				81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */,
 				8179B3442528E02100A537B7 /* TimerView.swift in Sources */,
 				8179B35C2528E02100A537B7 /* Collection+average.swift in Sources */,
+				81FD9CBD25740E960049C6CE /* CTAStyle.swift in Sources */,
 				8179B3612528E02100A537B7 /* VisualEffectView.swift in Sources */,
 				8179B3572528E02100A537B7 /* StatisticsActions.swift in Sources */,
 				817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */,

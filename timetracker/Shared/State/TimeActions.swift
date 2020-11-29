@@ -37,6 +37,7 @@ struct DeleteAbsenceEntry: Action {
 
 struct SyncTimeEntriesFromWatch: Action {
     let timeEntries: [TimeEntry]
+    let displayMode: TimerDisplayMode
 }
 
 struct RequestWatchData: Action {}

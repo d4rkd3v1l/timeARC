@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CodableColor: Codable, Equatable {
+struct CodableColor: Codable, Hashable, Equatable {
     private let _color: String
 
     static var black = CodableColor(.black)
@@ -39,6 +39,7 @@ struct CodableColor: Codable, Equatable {
         }
     }
 
+    /// Does not resolve `.primary`! Use `color(for:)` instead.
     var color: Color {
         switch self._color {
         case "black":   return .black
@@ -56,17 +57,40 @@ struct CodableColor: Codable, Equatable {
         }
     }
 
+    func color(for colorScheme: ColorScheme) -> Color {
+        switch self {
+        case .primary:
+            switch colorScheme {
+            case .dark: return .white
+            default:    return .black
+            }
+        default:        return self.color
+        }
+    }
+
     /// Returns a color that has high contrast to self, e.g. to distinguish text from background
     func contrastColor(for colorScheme: ColorScheme) -> Color {
-        switch colorScheme {
-        case .light:
-            return self._color == "primary" ? .white : .primary
+        return self.color(for: colorScheme).isLight ? .black : .white
+    }
+}
 
-        case .dark:
-            return self._color == "primary" ? .black : .primary
+// MARK: - Extensions
 
-        @unknown default:
-            return .primary
-        }
+private extension Color {
+    var isLight: Bool {
+        return UIColor(self).isLight
+    }
+}
+
+private extension UIColor {
+    // https://stackoverflow.com/a/40062565/2019384
+    var isLight: Bool {
+        return self.brightness > 0.5
+    }
+
+    var brightness: CGFloat {
+        var white: CGFloat = 0
+        self.getWhite(&white, alpha: nil)
+        return white
     }
 }

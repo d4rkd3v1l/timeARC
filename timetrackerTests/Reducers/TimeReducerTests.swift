@@ -243,7 +243,7 @@ class TimeReducerTests: XCTestCase {
 
         let endDate2 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 13)
         timeEntry2.end = endDate2
-        let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2])
+        let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2], displayMode: .countUp)
         state = timeReducer(state: state, action: action)
         timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 2)
@@ -264,7 +264,7 @@ class TimeReducerTests: XCTestCase {
         let endDate2 = try Date(year: 2020, month: 10, day: 3, hour: 21, minute: 52, second: 13)
         let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
 
-        let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2])
+        let action = SyncTimeEntriesFromWatch(timeEntries: [timeEntry1, timeEntry2], displayMode: .countUp)
         state = timeReducer(state: state, action: action)
         timeEntriesOfDay = try XCTUnwrap(state.timeEntries[startDate1.day])
         XCTAssertEqual(timeEntriesOfDay.count, 2)

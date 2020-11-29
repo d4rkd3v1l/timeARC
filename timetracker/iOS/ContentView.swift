@@ -13,13 +13,15 @@ import PartialSheet
 struct ContentView: ConnectedView {
     struct Props {
         let isAppStateLoading: Bool
-        let accentColor: Color
+        let accentColor: CodableColor
     }
     
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(isAppStateLoading: state.isAppStateLoading,
-                     accentColor: state.settingsState.accentColor.color)
+                     accentColor: state.settingsState.accentColor)
     }
+
+    @Environment(\.colorScheme) var colorScheme
 
     @ViewBuilder func body(props: Props) -> some View {
         if props.isAppStateLoading {
@@ -61,7 +63,8 @@ struct ContentView: ConnectedView {
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 updateWidgetData(store.state)
             }
-            .accentColor(props.accentColor)
+            .accentColor(props.accentColor.color)
+            .contrastColor(props.accentColor.contrastColor(for: self.colorScheme))
         }
     }
 }

@@ -14,7 +14,6 @@ struct AbsenceEntryEditView: View {
     let absenceTypes: [AbsenceType]
     let title: LocalizedStringKey
     let buttonTitle: LocalizedStringKey
-    let buttonTextColor: Color
     var onUpdate: ((AbsenceEntry) -> Void)? = nil
     var onDelete: (() -> Void)? = nil
 
@@ -88,7 +87,7 @@ struct AbsenceEntryEditView: View {
                     scrollView.isScrollEnabled = false
                 })
 
-                Button(action: {
+                Button(self.buttonTitle) {
                     var newAbsenceEntry = self.absenceEntry
                     newAbsenceEntry.update(type: self.absenceType,
                                            start: self.startDay,
@@ -98,14 +97,8 @@ struct AbsenceEntryEditView: View {
                     withAnimation {
                         self.partialSheetManager.closePartialSheet()
                     }
-                }) {
-                    Text(self.buttonTitle)
-                        .frame(width: 200, height: 50)
-                        .font(Font.body.bold())
-                        .foregroundColor(self.buttonTextColor)
-                        .background(Color.accentColor)
-                        .cornerRadius(25)
                 }
+                .buttonStyle(CTAStyle())
             }
             .onAppear {
                 self.absenceType = self.absenceEntry.type
@@ -151,7 +144,6 @@ struct AbsenceEntryEditView_Previews: PreviewProvider {
                                  absenceTypes: SettingsState().absenceTypes,
                                  title: "addAbsenceEntry",
                                  buttonTitle: "add",
-                                 buttonTextColor: .white,
                                  onUpdate: { _ in },
                                  onDelete: {})
             Spacer()

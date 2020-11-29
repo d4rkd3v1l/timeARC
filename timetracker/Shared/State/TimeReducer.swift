@@ -51,6 +51,7 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
                 insertTimeEntryValidated(timeEntry, &state)
             }
         }
+        state.displayMode = action.displayMode
         state.didSyncWatchData = true
 
     case _ as RequestWatchData:
