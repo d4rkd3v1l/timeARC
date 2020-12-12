@@ -13,6 +13,7 @@ struct WidgetEntry: TimelineEntry {
 
     let todayDuration: Int
     let todayMaxDuration: Int
+    let isTodayWorkingDay: Bool
     let weekDuration: Int
     let weekMaxDuration: Int
     let weekAverageDuration: Int

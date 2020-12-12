@@ -52,6 +52,7 @@ struct Provider: TimelineProvider {
 
         let todayDuration = timeEntries.forDay(Day()).totalDurationInSeconds
         let todayMaxDuration = widgetData.workingDuration
+        let isTodayWorkingDay = widgetData.workingDays.contains(Date().day)
         let weekDuration = timeEntries.totalDuration(workingDuration: widgetData.workingDuration,
                                                      absenceEntries: widgetData.absenceEntries)
         let weekMaxDuration = widgetData.workingDuration * widgetData.workingDays.count
@@ -69,6 +70,7 @@ struct Provider: TimelineProvider {
         return WidgetEntry(date: Date().addingTimeInterval(Double(advancedSeconds)),
                            todayDuration: todayDuration,
                            todayMaxDuration: todayMaxDuration,
+                           isTodayWorkingDay: isTodayWorkingDay,
                            weekDuration: weekDuration,
                            weekMaxDuration: weekMaxDuration,
                            weekAverageDuration: weekAverageDuration,
@@ -81,10 +83,11 @@ struct Provider: TimelineProvider {
                            displayMode: displayMode)
     }
 
-    func providePlaceholder() -> WidgetEntry {
+    func providePlaceholder(isTodayWorkingDay: Bool = true) -> WidgetEntry {
         return WidgetEntry(date: Date(),
                            todayDuration: 2520,
                            todayMaxDuration: 28800,
+                           isTodayWorkingDay: isTodayWorkingDay,
                            weekDuration: 2520,
                            weekMaxDuration: 144000,
                            weekAverageDuration: 1,

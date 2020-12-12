@@ -28,6 +28,7 @@
 		814775852528E5F000EDBE79 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
 		814775922528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		814775932528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
+		8153D9E1258548CA00137E43 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8153D9CD2585487000137E43 /* Icon.swift */; };
 		816852152543035E003F33FB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 816852142543035E003F33FB /* Introspect */; };
 		816BC4FB254EAAFD0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
 		816BC502254EAAFE0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
@@ -217,6 +218,7 @@
 		814775C32528EAC600EDBE79 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
 		814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		814775ED2528F10C00EDBE79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8153D9CD2585487000137E43 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		816BC539254EC8C20015B905 /* WidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryView.swift; sourceTree = "<group>"; };
 		816BC542254EC8EF0015B905 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		816BC54B254EC90F0015B905 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
@@ -364,6 +366,14 @@
 			path = widget;
 			sourceTree = "<group>";
 		};
+		8153D9C6258547DB00137E43 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				8153D9CD2585487000137E43 /* Icon.swift */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
 		8172E1782534EF6200C39CA4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +388,7 @@
 		8179B2672528DF7B00A537B7 = {
 			isa = PBXGroup;
 			children = (
+				8153D9C6258547DB00137E43 /* Icon */,
 				81BFE818254DF59800594425 /* timetracker.xctestplan */,
 				812D5228253C36F70008AFBA /* PartialSheet */,
 				814775952528E75800EDBE79 /* Localizable.strings */,
@@ -930,6 +941,7 @@
 				8179B3502528E02100A537B7 /* SettingsState.swift in Sources */,
 				8179B3622528E02100A537B7 /* MultipleValuesPickerView.swift in Sources */,
 				817D61C92531C560009761DE /* AbsenceEntryEditView.swift in Sources */,
+				8153D9E1258548CA00137E43 /* Icon.swift in Sources */,
 				8179B3562528E02100A537B7 /* SettingsReducer.swift in Sources */,
 				8179B3492528E02100A537B7 /* ContentView.swift in Sources */,
 				8147753A2528E49100EDBE79 /* WidgetData.swift in Sources */,

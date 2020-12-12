@@ -45,6 +45,7 @@
 "absenceType" = "Absence type";
 "bankHoliday" = "Bank holiday";
 "holiday" = "Holiday";
+"holidayHalfADay" = "Holiday (half a day)";
 "sick" = "Sick";
 "childSick" = "Child sick";
 "vocationalSchool" = "Vocational school";

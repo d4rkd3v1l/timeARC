@@ -92,9 +92,9 @@ struct SettingsView: ConnectedView {
                                     }
                             }
                         }
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.horizontal, -16)
+                    .padding(.horizontal, -20)
                 }
             }
             .navigationBarTitle("settings")
