@@ -26,6 +26,7 @@ struct SettingsView: ConnectedView {
                      accentColor: state.settingsState.accentColor)
     }
 
+    @Environment(\.colorScheme) var colorScheme
     @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
     @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
     let colors: [CodableColor] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
@@ -88,7 +89,7 @@ struct SettingsView: ConnectedView {
                                 AccentColorView(color: color,
                                                 isSelected: color == props.accentColor)
                                     .onTapGesture {
-                                        store.dispatch(action: UpdateAccentColor(color: color))
+                                        store.dispatch(action: UpdateAccentColor(color: color, colorScheme: self.colorScheme))
                                     }
                             }
                         }

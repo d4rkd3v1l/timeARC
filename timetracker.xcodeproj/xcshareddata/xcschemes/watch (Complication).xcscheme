@@ -55,8 +55,10 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "32">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/timetracker">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8179B37B2528E08B00A537B7"
@@ -64,7 +66,7 @@
             BlueprintName = "watch"
             ReferencedContainer = "container:timetracker.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -73,8 +75,10 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "32">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/timetracker">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8179B37B2528E08B00A537B7"
@@ -82,7 +86,16 @@
             BlueprintName = "watch"
             ReferencedContainer = "container:timetracker.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8179B37B2528E08B00A537B7"
+            BuildableName = "watch.app"
+            BlueprintName = "watch"
+            ReferencedContainer = "container:timetracker.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

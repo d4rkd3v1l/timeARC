@@ -102,6 +102,7 @@ struct ArcViewFull: View {
                 .offset(x: 0, y: geometry.size.height / 3)
             }
         }
+        .aspectRatio(1, contentMode: .fit)
     }
 }
 
@@ -171,7 +172,7 @@ struct ArcViewFull_Previews: PreviewProvider {
                         color: .pink,
                         allowedUnits: [.second],
                         displayMode: .progress)
-                .frame(width: 250, height: 250)
+                .frame(width: 250)
 
             ArcViewFull(duration: 1337,
                         maxDuration: 115200,

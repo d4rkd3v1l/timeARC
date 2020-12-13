@@ -159,178 +159,184 @@ struct ComplicationProvider {
     }
 }
 
-struct ComplicationView_Previews: PreviewProvider {
+struct ModularSmallPreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .modularSmall)!
+            .previewContext()
+    }
+}
+
+struct ModularLargePreview: PreviewProvider {
     static var previews: some View {
         Group {
-            // Modular Small (0)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .modularSmall)!
-                    .previewContext()
-            }
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .modularLarge)!
+                .previewContext()
 
-            // Modular Large (1)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .modularLarge)!
-                    .previewContext()
-
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .modularLarge, identifier: .alternative)!
-                    .previewContext()
-            }
-
-            // Utilitarian Small (2)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .utilitarianSmall)!
-                    .previewContext()
-            }
-
-            // Utilitarian Small Flat (6)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .utilitarianSmallFlat)!
-                    .previewContext()
-            }
-
-            // Utilitarian Large (3)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .utilitarianLarge)!
-                    .previewContext()
-            }
-
-            // Circular Small (4)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .circularSmall)!
-                    .previewContext()
-
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .circularSmall, identifier: .alternative)!
-                    .previewContext()
-            }
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .modularLarge, identifier: .alternative)!
+                .previewContext()
         }
     }
 }
 
-struct ComplicationView2_Previews: PreviewProvider {
+struct UtilitarianSmallPreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .utilitarianSmall)!
+            .previewContext()
+    }
+}
+
+struct UtilitarianSmallFlatPreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .utilitarianSmallFlat)!
+            .previewContext()
+    }
+}
+
+struct UtilitarianLargePreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .utilitarianLarge)!
+            .previewContext()
+    }
+}
+
+struct CircularSmallPreview: PreviewProvider {
     static var previews: some View {
         Group {
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .circularSmall)!
+                .previewContext()
 
-            // Extra Large (7)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .extraLarge)!
-                    .previewContext()
-
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .extraLarge, identifier: .alternative)!
-                    .previewContext()
-
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .extraLarge, identifier: .alternative2)!
-                    .previewContext()
-            }
-
-            // Graphic Corner (8)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .graphicCorner)!
-                    .previewContext()
-
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .graphicCorner, identifier: .alternative)!
-                    .previewContext()
-
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .graphicCorner, identifier: .alternative2)!
-                    .previewContext()
-            }
-
-            // Graphic Bezel (9)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .graphicBezel)!
-                    .previewContext()
-            }
-
-            // Graphic Circular (10)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .graphicCircular)!
-                    .previewContext()
-            }
-
-            // Graphic Rectangular (11)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .graphicRectangular)!
-                    .previewContext()
-            }
-
-            // Graphic Extra Large (12)
-            Group {
-                ComplicationProvider(duration: 12096,
-                                     maxDuration: 28800,
-                                     color: .green,
-                                     displayMode: .endOfWorkingDay)
-                    .complication(for: .graphicExtraLarge)!
-                    .previewContext()
-            }
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .circularSmall, identifier: .alternative)!
+                .previewContext()
         }
     }
 }
 
+struct ExtraLargePreview: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .extraLarge)!
+                .previewContext()
+
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .extraLarge, identifier: .alternative)!
+                .previewContext()
+
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .extraLarge, identifier: .alternative2)!
+                .previewContext()
+        }
+    }
+}
+
+struct GraphicCornerPreview: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .graphicCorner)!
+                .previewContext()
+
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .graphicCorner, identifier: .alternative)!
+                .previewContext()
+
+            ComplicationProvider(duration: 12096,
+                                 maxDuration: 28800,
+                                 color: .green,
+                                 displayMode: .endOfWorkingDay)
+                .complication(for: .graphicCorner, identifier: .alternative2)!
+                .previewContext()
+        }
+    }
+}
+
+struct GraphicBezelPreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .graphicBezel)!
+            .previewContext()
+    }
+}
+
+struct GraphicCircularPreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .graphicCircular)!
+            .previewContext()
+    }
+}
+
+struct GraphicRectangularPreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .graphicRectangular)!
+            .previewContext()
+    }
+}
+
+struct GraphicExtraLargePreview: PreviewProvider {
+    static var previews: some View {
+        ComplicationProvider(duration: 12096,
+                             maxDuration: 28800,
+                             color: .green,
+                             displayMode: .endOfWorkingDay)
+            .complication(for: .graphicExtraLarge)!
+            .previewContext()
+    }
+}

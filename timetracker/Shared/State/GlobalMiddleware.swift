@@ -39,12 +39,18 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
             case _ as RequestWatchData:
                 requestWatchData()
 
+            case let action as UpdateAccentColor:
+                updateAppIcon(with: action.color.color(for: action.colorScheme),
+                              for: action.colorScheme)
+
             default:
                 break
             }
         }
     }
 }
+
+// MARK: - Watch Sync
 
 private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sending new data, if actual relevant changes did happen
     DispatchQueue.global().async {
@@ -68,6 +74,8 @@ private func requestWatchData() {
         WCSession.default.sendMessageData(encodedData, replyHandler: nil)
 
 }
+
+// MARK: - Widget Sync
 
 func updateWidgetData(_ state: AppState) {
     DispatchQueue.global().async {
@@ -100,6 +108,8 @@ func updateWidgetData(_ state: AppState) {
         }
     }
 }
+
+// MARK: - Notifications
 
 private func scheduleEndOfWorkingDayNotification(state: AppState) {
     let duration = state.timeState.timeEntries.forDay(Day()).totalDurationInSeconds
@@ -154,4 +164,11 @@ private func scheduleNotification(with title: String, subtitle: String, identifi
 
 private func removeNotifications(identifiers: [String]) {
     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+}
+
+// MARK: - App Icon
+
+private func updateAppIcon(with color: Color, for colorScheme: ColorScheme) {
+    let iconName = "icon_\(colorScheme)_\(color)"
+    UIApplication.shared.setAlternateIconName(iconName)
 }

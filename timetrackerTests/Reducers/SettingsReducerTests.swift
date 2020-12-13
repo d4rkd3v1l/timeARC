@@ -33,7 +33,7 @@ class SettingsReducerTests: XCTestCase {
         var state = SettingsState()
         XCTAssertEqual(state.accentColor, .green)
 
-        let action = UpdateAccentColor(color: .pink)
+        let action = UpdateAccentColor(color: .pink, colorScheme: .light)
         state = settingsReducer(state: state, action: action)
 
         XCTAssertEqual(state.accentColor, .pink)
