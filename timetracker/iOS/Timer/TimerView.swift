@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftUIFlux
-import Introspect
 import Combine
 
 struct TimerView: ConnectedView {

@@ -48,7 +48,7 @@ struct ComplicationProvider {
         let percentFormatted = String(Int(percent * 100.0))
         let onePieceImage = UIImage() // TODO: provide image
         let fullColorImage = UIImage() // TODO: provide image
-        let header = "Time Tracker" // TODO: use app name
+        let header = "timeARC"
 
         switch family {
         case .modularSmall:

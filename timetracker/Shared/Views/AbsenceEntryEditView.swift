@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PartialSheet
-import Introspect
 
 struct AbsenceEntryEditView: View {
     let absenceEntry: AbsenceEntry
@@ -83,9 +82,6 @@ struct AbsenceEntryEditView: View {
                             }
                     }
                 }
-                .introspectScrollView(customize: { scrollView in
-                    scrollView.isScrollEnabled = false
-                })
 
                 Button(self.buttonTitle) {
                     var newAbsenceEntry = self.absenceEntry

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1200"
-   wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "814775052528E46300EDBE79"
-               BuildableName = "widgetExtension.appex"
-               BlueprintName = "widgetExtension"
-               ReferencedContainer = "container:timetracker.xcodeproj">
+               BlueprintIdentifier = "8179B37B2528E08B00A537B7"
+               BuildableName = "watch.app"
+               BlueprintName = "watch"
+               ReferencedContainer = "container:timeARC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8179B26F2528DF7B00A537B7"
-               BuildableName = "timetracker.app"
-               BlueprintName = "timetracker"
-               ReferencedContainer = "container:timetracker.xcodeproj">
+               BuildableName = "timeARC.app"
+               BlueprintName = "timeARC"
+               ReferencedContainer = "container:timeARC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,53 +46,25 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
-      launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard">
+      launchAutomaticallySubstyle = "32">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "814775052528E46300EDBE79"
-            BuildableName = "widgetExtension.appex"
-            BlueprintName = "widgetExtension"
-            ReferencedContainer = "container:timetracker.xcodeproj">
+            BlueprintIdentifier = "8179B37B2528E08B00A537B7"
+            BuildableName = "watch.app"
+            BlueprintName = "watch"
+            ReferencedContainer = "container:timeARC.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8179B26F2528DF7B00A537B7"
-            BuildableName = "timetracker.app"
-            BlueprintName = "timetracker"
-            ReferencedContainer = "container:timetracker.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "_XCWidgetKind"
-            value = ""
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetDefaultView"
-            value = "timeline"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetFamily"
-            value = "medium"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -101,15 +72,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
-      launchAutomaticallySubstyle = "2">
+      launchAutomaticallySubstyle = "32">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8179B26F2528DF7B00A537B7"
-            BuildableName = "timetracker.app"
-            BlueprintName = "timetracker"
-            ReferencedContainer = "container:timetracker.xcodeproj">
+            BlueprintIdentifier = "8179B37B2528E08B00A537B7"
+            BuildableName = "watch.app"
+            BlueprintName = "watch"
+            ReferencedContainer = "container:timeARC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

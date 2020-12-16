@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import timetracker
+@testable import timeARC
 
 class ExpansionHandlerTests: XCTestCase {
     func testIsExpaneded() throws {

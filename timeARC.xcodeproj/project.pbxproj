@@ -64,7 +64,6 @@
 		814775852528E5F000EDBE79 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
 		814775922528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		814775932528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
-		816852152543035E003F33FB /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 816852142543035E003F33FB /* Introspect */; };
 		816BC4FB254EAAFD0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
 		816BC502254EAAFE0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
 		816BC509254EAE6F0015B905 /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
@@ -295,11 +294,11 @@
 		816BC54B254EC90F0015B905 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
 		8172E1702534EEED00C39CA4 /* WeekDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayTests.swift; sourceTree = "<group>"; };
 		8172E1792534EFA500C39CA4 /* DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTests.swift; sourceTree = "<group>"; };
-		8179B2702528DF7B00A537B7 /* timetracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timetracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8179B2702528DF7B00A537B7 /* timeARC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeARC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8179B27C2528DF7C00A537B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8179B2812528DF7C00A537B7 /* timetrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timetrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8179B2812528DF7C00A537B7 /* timeARCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeARCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8179B2872528DF7C00A537B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8179B28C2528DF7C00A537B7 /* timetrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timetrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8179B28C2528DF7C00A537B7 /* timeARCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeARCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8179B2902528DF7C00A537B7 /* timetrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timetrackerUITests.swift; sourceTree = "<group>"; };
 		8179B2922528DF7C00A537B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8179B3112528E02100A537B7 /* StatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
@@ -370,7 +369,7 @@
 		817D61E42531CDDC009761DE /* AbsenceEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntry.swift; sourceTree = "<group>"; };
 		817D61EC2531CDF3009761DE /* AbsenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceType.swift; sourceTree = "<group>"; };
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
-		81BFE818254DF59800594425 /* timetracker.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timetracker.xctestplan; path = timetracker/timetracker.xctestplan; sourceTree = "<group>"; };
+		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timetracker/timeARC.xctestplan; sourceTree = "<group>"; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
 		81FD9CBC25740E960049C6CE /* CTAStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAStyle.swift; sourceTree = "<group>"; };
 		81FD9CCA25741D050049C6CE /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
@@ -392,7 +391,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8179B4452528E2C800A537B7 /* PartialSheet in Frameworks */,
-				816852152543035E003F33FB /* Introspect in Frameworks */,
 				8179B4352528E25300A537B7 /* SwiftUIFlux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,7 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				8153D9C6258547DB00137E43 /* Icon */,
-				81BFE818254DF59800594425 /* timetracker.xctestplan */,
+				81BFE818254DF59800594425 /* timeARC.xctestplan */,
 				812D5228253C36F70008AFBA /* PartialSheet */,
 				814775952528E75800EDBE79 /* Localizable.strings */,
 				8179B2722528DF7B00A537B7 /* timetracker */,
@@ -513,9 +511,9 @@
 		8179B2712528DF7B00A537B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8179B2702528DF7B00A537B7 /* timetracker.app */,
-				8179B2812528DF7C00A537B7 /* timetrackerTests.xctest */,
-				8179B28C2528DF7C00A537B7 /* timetrackerUITests.xctest */,
+				8179B2702528DF7B00A537B7 /* timeARC.app */,
+				8179B2812528DF7C00A537B7 /* timeARCTests.xctest */,
+				8179B28C2528DF7C00A537B7 /* timeARCUITests.xctest */,
 				8179B37C2528E08B00A537B7 /* watch.app */,
 				8179B3852528E08C00A537B7 /* watch Extension.appex */,
 				814775062528E46300EDBE79 /* widgetExtension.appex */,
@@ -802,9 +800,9 @@
 			productReference = 814775062528E46300EDBE79 /* widgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8179B26F2528DF7B00A537B7 /* timetracker */ = {
+		8179B26F2528DF7B00A537B7 /* timeARC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8179B2952528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timetracker" */;
+			buildConfigurationList = 8179B2952528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timeARC" */;
 			buildPhases = (
 				8179B26C2528DF7B00A537B7 /* Sources */,
 				8179B26D2528DF7B00A537B7 /* Frameworks */,
@@ -818,19 +816,18 @@
 				8179B39C2528E08D00A537B7 /* PBXTargetDependency */,
 				814775122528E46400EDBE79 /* PBXTargetDependency */,
 			);
-			name = timetracker;
+			name = timeARC;
 			packageProductDependencies = (
 				8179B4342528E25300A537B7 /* SwiftUIFlux */,
 				8179B4442528E2C800A537B7 /* PartialSheet */,
-				816852142543035E003F33FB /* Introspect */,
 			);
 			productName = timetracker;
-			productReference = 8179B2702528DF7B00A537B7 /* timetracker.app */;
+			productReference = 8179B2702528DF7B00A537B7 /* timeARC.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8179B2802528DF7C00A537B7 /* timetrackerTests */ = {
+		8179B2802528DF7C00A537B7 /* timeARCTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8179B2982528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timetrackerTests" */;
+			buildConfigurationList = 8179B2982528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timeARCTests" */;
 			buildPhases = (
 				8179B27D2528DF7C00A537B7 /* Sources */,
 				8179B27E2528DF7C00A537B7 /* Frameworks */,
@@ -841,14 +838,14 @@
 			dependencies = (
 				8179B2832528DF7C00A537B7 /* PBXTargetDependency */,
 			);
-			name = timetrackerTests;
+			name = timeARCTests;
 			productName = timetrackerTests;
-			productReference = 8179B2812528DF7C00A537B7 /* timetrackerTests.xctest */;
+			productReference = 8179B2812528DF7C00A537B7 /* timeARCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8179B28B2528DF7C00A537B7 /* timetrackerUITests */ = {
+		8179B28B2528DF7C00A537B7 /* timeARCUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8179B29B2528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timetrackerUITests" */;
+			buildConfigurationList = 8179B29B2528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timeARCUITests" */;
 			buildPhases = (
 				8179B2882528DF7C00A537B7 /* Sources */,
 				8179B2892528DF7C00A537B7 /* Frameworks */,
@@ -859,9 +856,9 @@
 			dependencies = (
 				8179B28E2528DF7C00A537B7 /* PBXTargetDependency */,
 			);
-			name = timetrackerUITests;
+			name = timeARCUITests;
 			productName = timetrackerUITests;
-			productReference = 8179B28C2528DF7C00A537B7 /* timetrackerUITests.xctest */;
+			productReference = 8179B28C2528DF7C00A537B7 /* timeARCUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		8179B37B2528E08B00A537B7 /* watch */ = {
@@ -934,7 +931,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8179B26B2528DF7B00A537B7 /* Build configuration list for PBXProject "timetracker" */;
+			buildConfigurationList = 8179B26B2528DF7B00A537B7 /* Build configuration list for PBXProject "timeARC" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -947,15 +944,14 @@
 			packageReferences = (
 				8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */,
 				8179B4432528E2C800A537B7 /* XCRemoteSwiftPackageReference "PartialSheet" */,
-				816852132543035E003F33FB /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 8179B2712528DF7B00A537B7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8179B26F2528DF7B00A537B7 /* timetracker */,
-				8179B2802528DF7C00A537B7 /* timetrackerTests */,
-				8179B28B2528DF7C00A537B7 /* timetrackerUITests */,
+				8179B26F2528DF7B00A537B7 /* timeARC */,
+				8179B2802528DF7C00A537B7 /* timeARCTests */,
+				8179B28B2528DF7C00A537B7 /* timeARCUITests */,
 				8179B37B2528E08B00A537B7 /* watch */,
 				8179B3842528E08C00A537B7 /* watch Extension */,
 				814775052528E46300EDBE79 /* widgetExtension */,
@@ -1197,12 +1193,12 @@
 		};
 		8179B2832528DF7C00A537B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8179B26F2528DF7B00A537B7 /* timetracker */;
+			target = 8179B26F2528DF7B00A537B7 /* timeARC */;
 			targetProxy = 8179B2822528DF7C00A537B7 /* PBXContainerItemProxy */;
 		};
 		8179B28E2528DF7C00A537B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8179B26F2528DF7B00A537B7 /* timetracker */;
+			target = 8179B26F2528DF7B00A537B7 /* timeARC */;
 			targetProxy = 8179B28D2528DF7C00A537B7 /* PBXContainerItemProxy */;
 		};
 		8179B3882528E08C00A537B7 /* PBXTargetDependency */ = {
@@ -1248,7 +1244,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1270,7 +1266,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1412,7 +1408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1436,7 +1432,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1460,7 +1456,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/timetracker.app/timetracker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/timeARC.app/timeARC";
 			};
 			name = Debug;
 		};
@@ -1483,7 +1479,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/timetracker.app/timetracker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/timeARC.app/timeARC";
 			};
 			name = Release;
 		};
@@ -1630,7 +1626,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8179B26B2528DF7B00A537B7 /* Build configuration list for PBXProject "timetracker" */ = {
+		8179B26B2528DF7B00A537B7 /* Build configuration list for PBXProject "timeARC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8179B2932528DF7C00A537B7 /* Debug */,
@@ -1639,7 +1635,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8179B2952528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timetracker" */ = {
+		8179B2952528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timeARC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8179B2962528DF7C00A537B7 /* Debug */,
@@ -1648,7 +1644,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8179B2982528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timetrackerTests" */ = {
+		8179B2982528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timeARCTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8179B2992528DF7C00A537B7 /* Debug */,
@@ -1657,7 +1653,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8179B29B2528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timetrackerUITests" */ = {
+		8179B29B2528DF7C00A537B7 /* Build configuration list for PBXNativeTarget "timeARCUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8179B29C2528DF7C00A537B7 /* Debug */,
@@ -1687,14 +1683,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		816852132543035E003F33FB /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
-			};
-		};
 		8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Dimillian/SwiftUIFlux";
@@ -1714,11 +1702,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		816852142543035E003F33FB /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 816852132543035E003F33FB /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
 		8179B4342528E25300A537B7 /* SwiftUIFlux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */;

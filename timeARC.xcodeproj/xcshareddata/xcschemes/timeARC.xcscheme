@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8179B26F2528DF7B00A537B7"
-               BuildableName = "timetracker.app"
-               BlueprintName = "timetracker"
-               ReferencedContainer = "container:timetracker.xcodeproj">
+               BuildableName = "timeARC.app"
+               BlueprintName = "timeARC"
+               ReferencedContainer = "container:timeARC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,7 +30,7 @@
       codeCoverageEnabled = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:timetracker/timetracker.xctestplan"
+            reference = "container:timetracker/timeARC.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -42,9 +42,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8179B2802528DF7C00A537B7"
-               BuildableName = "timetrackerTests.xctest"
-               BlueprintName = "timetrackerTests"
-               ReferencedContainer = "container:timetracker.xcodeproj">
+               BuildableName = "timeARCTests.xctest"
+               BlueprintName = "timeARCTests"
+               ReferencedContainer = "container:timeARC.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -52,9 +52,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8179B28B2528DF7C00A537B7"
-               BuildableName = "timetrackerUITests.xctest"
-               BlueprintName = "timetrackerUITests"
-               ReferencedContainer = "container:timetracker.xcodeproj">
+               BuildableName = "timeARCUITests.xctest"
+               BlueprintName = "timeARCUITests"
+               ReferencedContainer = "container:timeARC.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -74,9 +74,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8179B26F2528DF7B00A537B7"
-            BuildableName = "timetracker.app"
-            BlueprintName = "timetracker"
-            ReferencedContainer = "container:timetracker.xcodeproj">
+            BuildableName = "timeARC.app"
+            BlueprintName = "timeARC"
+            ReferencedContainer = "container:timeARC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -91,9 +91,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8179B26F2528DF7B00A537B7"
-            BuildableName = "timetracker.app"
-            BlueprintName = "timetracker"
-            ReferencedContainer = "container:timetracker.xcodeproj">
+            BuildableName = "timeARC.app"
+            BlueprintName = "timeARC"
+            ReferencedContainer = "container:timeARC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

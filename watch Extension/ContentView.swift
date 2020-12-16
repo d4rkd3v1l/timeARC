@@ -52,7 +52,7 @@ struct ContentView: ConnectedView {
                 Button(action: {
                     store.dispatch(action: ToggleTimer())
                 }) {
-                    Text(props.timeEntries.isTimerRunning ? "Stop" : "Start")
+                    Text(props.timeEntries.isTimerRunning ? "stop" : "start")
                         .frame(maxWidth: .infinity)
                         .frame(height: WatchHelper.buttonHeight)
                         .font(Font.body.bold())

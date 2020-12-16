@@ -117,8 +117,8 @@ private func scheduleEndOfWorkingDayNotification(state: AppState) {
     let endOfWorkingDayDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
 
     removeNotifications(identifiers: [endOfWoringDayNotificationIdentifier])
-    scheduleNotification(with: "endOfWoringDayNotificationTitle",
-                         subtitle: "endOfWoringDayNotificationSubtitle",
+    scheduleNotification(with: NSLocalizedString("endOfWoringDayNotificationTitle", comment: ""),
+                         subtitle: NSLocalizedString("endOfWoringDayNotificationSubtitle", comment: ""),
                          identifier: endOfWoringDayNotificationIdentifier,
                          for: endOfWorkingDayDate)
 }
@@ -133,8 +133,8 @@ private func scheduleEndOfWorkingWeekNotification(state: AppState) {
     let endOfWorkingWeekDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
 
     removeNotifications(identifiers: [endOfWoringWeekNotificationIdentifier])
-    scheduleNotification(with: "endOfWoringWeekNotificationTitle",
-                         subtitle: "endOfWoringWeekNotificationSubtitle",
+    scheduleNotification(with: NSLocalizedString("endOfWoringWeekNotificationTitle", comment: ""),
+                         subtitle: NSLocalizedString("endOfWoringWeekNotificationSubtitle", comment: ""),
                          identifier: endOfWoringWeekNotificationIdentifier,
                          for: endOfWorkingWeekDate)
 }

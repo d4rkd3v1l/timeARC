@@ -9,9 +9,25 @@ import SwiftUI
 
 struct Icon: View {
     let ms: UInt32 = 1000
+    let deviceScale: CGFloat = 2
+
     let colors: [Color] = [.black, .blue, .gray, .green, .orange, .pink, .purple, .red, .white, .yellow]
     let sizes: [Int: String] = [120: "@2x",
-                                180: "@3x"]//[40, 60, 58, 87, 80, 120, 180, 1024]
+                                180: "@3x",
+                                1024: "_1024"]//[40, 60, 58, 87, 80, 120, 180, 1024]
+
+    let watchColors: [Color] = [.green]
+    let watchSizes: [Int: String] = [48: "_48",
+                                     55: "_55",
+                                     58: "_58",
+                                     87: "_87",
+                                     80: "_80",
+                                     88: "_88",
+                                     100: "_100",
+                                     172: "_172",
+                                     196: "_196",
+                                     216: "_216",
+                                     1024: "_1024"]
 
     @Environment(\.colorScheme) var colorScheme
     @State private var rect: CGRect = .zero
@@ -39,13 +55,13 @@ struct Icon: View {
 
             Button("Store") {
                 DispatchQueue.global().async {
-                    for size in sizes {
+                    for size in self.sizes {
                         DispatchQueue.main.async {
-                            self.size = CGFloat(size.key)/2
+                            self.size = CGFloat(size.key)/self.deviceScale
                         }
                         usleep(100 * ms)
 
-                        for color in colors {
+                        for color in self.colors {
                             DispatchQueue.main.async {
                                 self.color = color
                             }
@@ -59,6 +75,29 @@ struct Icon: View {
                             }
                         }
                     }
+
+                    for size in self.watchSizes {
+                        DispatchQueue.main.async {
+                            self.size = CGFloat(size.key)/self.deviceScale
+                        }
+                        usleep(100 * ms)
+
+                        for color in self.watchColors {
+                            DispatchQueue.main.async {
+                                self.color = color
+                            }
+                            usleep(100 * ms)
+
+                            DispatchQueue.main.async {
+                                let image = UIApplication.shared.windows[0].rootViewController!.view.asImage(rect: self.rect)
+                                let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                                let filename = path.appendingPathComponent("icon_\(colorScheme)_\(color)\(size.value).png")
+                                try! image.pngData()!.write(to: filename)
+                            }
+                        }
+                    }
+
+                    print("Done. All files stored in: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!)")
                 }
             }
             .frame(width: 200, height: 50)
