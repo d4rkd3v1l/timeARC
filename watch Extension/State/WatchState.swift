@@ -24,6 +24,7 @@ struct WatchState: FluxState, Codable {
     var isWatchStateLoading: Bool = false
     var timeEntries: [TimeEntry] = []
     var displayMode: TimerDisplayMode = .countUp
+    var isTodayWorkingDay: Bool = true
     var workingDuration: Int = 28800
     var accentColor: CodableColor = .green
 }

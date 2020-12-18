@@ -26,6 +26,7 @@ class AppCommunicator: NSObject, WCSessionDelegate {
         if let decodedData = try? JSONDecoder().decode(AppToWatchData.self, from: messageData) {
             store.dispatch(action: SetWatchData(timeEntries: decodedData.timeEntries,
                                                 displayMode: decodedData.displayMode,
+                                                isTodayWorkingDay: decodedData.isTodayWorkingDay,
                                                 workingDuration: decodedData.workingDuration,
                                                 accentColor: decodedData.accentColor))
         } else if let decodedData = try? JSONDecoder().decode(String.self, from: messageData) {

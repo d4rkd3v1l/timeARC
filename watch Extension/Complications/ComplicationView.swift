@@ -13,13 +13,30 @@ struct ComplicationView: View {
     let duration: Int
     let maxDuration: Int
     let displayMode: TimerDisplayMode
+    let isTodayWorkingDay: Bool
 
     var body: some View {
-        ArcViewFull(duration: self.duration,
-                    maxDuration: self.maxDuration,
-                    color: .accentColor,
-                    allowedUnits: [.hour, .minute],
-                    displayMode: self.displayMode)
+        GeometryReader { proxy in
+            if self.isTodayWorkingDay {
+                ArcViewFull(duration: self.duration,
+                            maxDuration: self.maxDuration,
+                            color: .accentColor,
+                            allowedUnits: [.hour, .minute],
+                            displayMode: self.displayMode)
+            } else {
+                Group {
+                    Text("🥳")
+                        .font(.system(size: 100))
+                        .minimumScaleFactor(0.1)
+                        .lineLimit(1)
+                        .frame(width: proxy.size.width * 0.7,
+                               height: proxy.size.height * 0.7,
+                               alignment: .center)
+                }
+                .frame(width: proxy.size.width,
+                       height: proxy.size.height)
+            }
+        }
     }
 }
 
@@ -34,11 +51,13 @@ struct ComplicationProvider {
     let maxDuration: Int
     let color: UIColor
     let displayMode: TimerDisplayMode
+    let isTodayWorkingDay: Bool
 
     func complication(for family: CLKComplicationFamily, identifier: ComplicationIdentifier = .standard) -> CLKComplicationTemplate? {
         let complicationView = ComplicationView(duration: self.duration,
                                                 maxDuration: self.maxDuration,
-                                                displayMode: self.displayMode)
+                                                displayMode: self.displayMode,
+                                                isTodayWorkingDay: self.isTodayWorkingDay)
             .accentColor(Color(color))
 
         let durationFormatted = self.displayMode.text(for: self.duration,
@@ -164,7 +183,8 @@ struct ModularSmallPreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .modularSmall)!
             .previewContext()
     }
@@ -176,14 +196,16 @@ struct ModularLargePreview: PreviewProvider {
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .modularLarge)!
                 .previewContext()
 
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .modularLarge, identifier: .alternative)!
                 .previewContext()
         }
@@ -195,7 +217,8 @@ struct UtilitarianSmallPreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .utilitarianSmall)!
             .previewContext()
     }
@@ -206,7 +229,8 @@ struct UtilitarianSmallFlatPreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .utilitarianSmallFlat)!
             .previewContext()
     }
@@ -217,7 +241,8 @@ struct UtilitarianLargePreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .utilitarianLarge)!
             .previewContext()
     }
@@ -229,14 +254,16 @@ struct CircularSmallPreview: PreviewProvider {
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .circularSmall)!
                 .previewContext()
 
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .circularSmall, identifier: .alternative)!
                 .previewContext()
         }
@@ -249,21 +276,24 @@ struct ExtraLargePreview: PreviewProvider {
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .extraLarge)!
                 .previewContext()
 
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .extraLarge, identifier: .alternative)!
                 .previewContext()
 
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .extraLarge, identifier: .alternative2)!
                 .previewContext()
         }
@@ -276,21 +306,24 @@ struct GraphicCornerPreview: PreviewProvider {
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .graphicCorner)!
                 .previewContext()
 
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .graphicCorner, identifier: .alternative)!
                 .previewContext()
 
             ComplicationProvider(duration: 12096,
                                  maxDuration: 28800,
                                  color: .green,
-                                 displayMode: .endOfWorkingDay)
+                                 displayMode: .endOfWorkingDay,
+                                 isTodayWorkingDay: true)
                 .complication(for: .graphicCorner, identifier: .alternative2)!
                 .previewContext()
         }
@@ -302,7 +335,8 @@ struct GraphicBezelPreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .graphicBezel)!
             .previewContext()
     }
@@ -313,7 +347,8 @@ struct GraphicCircularPreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .graphicCircular)!
             .previewContext()
     }
@@ -324,7 +359,8 @@ struct GraphicRectangularPreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .graphicRectangular)!
             .previewContext()
     }
@@ -335,7 +371,8 @@ struct GraphicExtraLargePreview: PreviewProvider {
         ComplicationProvider(duration: 12096,
                              maxDuration: 28800,
                              color: .green,
-                             displayMode: .endOfWorkingDay)
+                             displayMode: .endOfWorkingDay,
+                             isTodayWorkingDay: true)
             .complication(for: .graphicExtraLarge)!
             .previewContext()
     }

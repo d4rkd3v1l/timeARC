@@ -8,6 +8,7 @@
 struct AppToWatchData: Codable {
     let timeEntries: [TimeEntry]
     let displayMode: TimerDisplayMode
+    let isTodayWorkingDay: Bool
     let workingDuration: Int
     let accentColor: CodableColor
 }

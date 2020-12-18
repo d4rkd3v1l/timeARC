@@ -55,9 +55,12 @@ let globalMiddleware: Middleware<AppState> = { dispatch, getState in
 private func sendDataToWatch(_ state: AppState) { // TODO: Optimize, by only sending new data, if actual relevant changes did happen
     DispatchQueue.global().async {
         let relevantTimeEntries = state.timeState.timeEntries.forDay(Day())
+        let workingDays = state.settingsState.workingWeekDays.workingDays(startDate: Date(), endDate: Date())
+        let isTodayWorkingDay = workingDays.contains(Day()) || !relevantTimeEntries.isEmpty
 
         let data = AppToWatchData(timeEntries: relevantTimeEntries,
                                   displayMode: state.timeState.displayMode,
+                                  isTodayWorkingDay: isTodayWorkingDay,
                                   workingDuration: state.settingsState.workingDuration,
                                   accentColor: state.settingsState.accentColor)
 

@@ -52,7 +52,7 @@ struct Provider: TimelineProvider {
 
         let todayDuration = timeEntries.forDay(Day()).totalDurationInSeconds
         let todayMaxDuration = widgetData.workingDuration
-        let isTodayWorkingDay = widgetData.workingDays.contains(Date().day) // TODO: Add condition "no time entry today"!
+        let isTodayWorkingDay = widgetData.workingDays.contains(Day()) || !timeEntries.forDay(Day()).isEmpty
         let weekDuration = timeEntries.totalDuration(workingDuration: widgetData.workingDuration,
                                                      absenceEntries: widgetData.absenceEntries)
         let weekMaxDuration = widgetData.workingDuration * widgetData.workingDays.count

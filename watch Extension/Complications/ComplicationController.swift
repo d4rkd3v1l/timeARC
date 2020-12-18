@@ -55,6 +55,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         let timeEntries = store.state.timeEntries
         let duration = timeEntries.totalDurationInSeconds
+        let isTodayWorkingDay = store.state.isTodayWorkingDay
         let maxDuration = store.state.workingDuration
         let color = timeEntries.isTimerRunning ? UIColor(store.state.accentColor.color) : .gray
         let displayMode = store.state.displayMode
@@ -62,7 +63,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let template = ComplicationProvider(duration: duration,
                                             maxDuration: maxDuration,
                                             color: color,
-                                            displayMode: displayMode)
+                                            displayMode: displayMode,
+                                            isTodayWorkingDay: isTodayWorkingDay)
             .complication(for: complication.family,
                           identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
 
@@ -79,6 +81,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let now = Date()
         let timeEntries = store.state.timeEntries
         let duration = timeEntries.totalDurationInSeconds
+        let isTodayWorkingDay = store.state.isTodayWorkingDay
         let maxDuration = store.state.workingDuration
         let displayMode = store.state.displayMode
 
@@ -90,7 +93,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 let template = ComplicationProvider(duration: duration + difference + 60 * minute,
                                                     maxDuration: maxDuration,
                                                     color: UIColor(store.state.accentColor.color),
-                                                    displayMode: displayMode)
+                                                    displayMode: displayMode,
+                                                    isTodayWorkingDay: isTodayWorkingDay)
                     .complication(for: complication.family,
                                   identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
 
@@ -116,7 +120,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         let template = ComplicationProvider(duration: 12096,
                                             maxDuration: 28800,
                                             color: UIColor(store.state.accentColor.color),
-                                            displayMode: .countUp)
+                                            displayMode: .countUp,
+                                            isTodayWorkingDay: true)
             .complication(for: complication.family,
                           identifier: ComplicationIdentifier(rawValue: complication.identifier) ?? .standard)
 
