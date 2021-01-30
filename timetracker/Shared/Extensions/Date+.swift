@@ -26,6 +26,12 @@ extension Date {
         return Calendar.current.date(byAdding: dateComponents, to: self) ?? self
     }
 
+    func from(seconds: Int) -> Date {
+        var components = DateComponents()
+        components.second = seconds
+        return Calendar.current.date(byAdding: components, to: self.startOfDay)!
+    }
+
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }

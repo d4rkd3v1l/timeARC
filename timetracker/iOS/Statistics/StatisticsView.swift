@@ -80,7 +80,7 @@ struct StatisticsView: ConnectedView {
                     })
                     .disabled(props.timeFrame == .allTime)
 
-                    if stride(from: props.startDate, to: props.endDate, by: 86400).map({ $0.day }).contains(Day()) {
+                    if stride(from: props.startDate, through: props.endDate, by: 86400).map({ $0.day }).contains(Day()) {
                         Text(self.dateText(timeFrame: props.timeFrame, startDate: props.startDate, endDate: props.endDate))
                             .bold()
                     } else {
@@ -112,11 +112,9 @@ struct StatisticsView: ConnectedView {
                             VStack {
                                 ZStack {
                                     HStack {
-                                        ArcViewFull(duration: props.timeEntries.averageDuration(workingDays: props.workingDays),
-                                                    maxDuration: props.workingDuration,
-                                                    color: .accentColor,
-                                                    allowedUnits: [.hour, .minute],
-                                                    displayMode: .countUp)
+                                        ArcViewAverage(timeEntries: props.timeEntries,
+                                                       workingDays: props.workingDays,
+                                                       color: .accentColor)
                                             .frame(width: 150, height: 150)
                                         Spacer()
                                     }

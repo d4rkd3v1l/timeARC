@@ -14,7 +14,7 @@ struct AbsenceType: Identifiable, Equatable, Hashable, Codable {
     var offPercentage: Float
 
     static var dummy: AbsenceType {
-        return AbsenceType(id: UUID(), title: "Dummy", icon: "😈", offPercentage: 42)
+        return AbsenceType(id: UUID(), title: "Dummy", icon: "😈", offPercentage: 0.42)
     }
 }
 

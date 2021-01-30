@@ -53,7 +53,7 @@ struct TimerView: ConnectedView {
 
                     TabView(selection: self.$mode) {
                         VStack {
-                            BlaView(timeEntries: props.timeEntries,
+                            TimerArcView(timeEntries: props.timeEntries,
                                     workingDuration: props.workingDuration,
                                     displayMode: props.displayMode,
                                     timer: self.timer)
@@ -61,7 +61,7 @@ struct TimerView: ConnectedView {
                         .tag(Tab.today)
 
                         VStack {
-                            BlaView(timeEntries: props.timeEntriesWeek,
+                            TimerArcView(timeEntries: props.timeEntriesWeek,
                                     workingDuration: props.workingDuration * props.workingWeekDaysCount,
                                     displayMode: props.displayMode,
                                     timer: self.timer)
@@ -87,7 +87,7 @@ struct TimerView: ConnectedView {
     }
 }
 
-private struct BlaView: View {
+private struct TimerArcView: View {
     let timeEntries: [TimeEntry]
     let workingDuration: Int
     let displayMode: TimerDisplayMode

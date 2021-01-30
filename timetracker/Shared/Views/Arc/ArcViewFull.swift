@@ -1,59 +1,11 @@
 //
-//  ArcView.swift
-//  timetracker (iOS)
+//  ArcViewFull.swift
+//  timeARC
 //
-//  Created by d4Rk on 22.07.20.
+//  Created by d4Rk on 30.01.21.
 //
 
 import SwiftUI
-
-struct ArcView: View {
-    let minAngle: Double = 0
-    let maxAngle: Double = 250
-
-    let color: Color
-    let progress: Double
-
-    private var endAngle: Angle {
-        return .degrees(min(self.maxAngle * self.progress, self.maxAngle))
-    }
-
-    var body: some View {
-        GeometryReader { geometry in
-            Arc(startAngle: .degrees(self.minAngle), endAngle: .degrees(self.maxAngle), clockwise: true)
-                .strokeBorder(self.color.opacity(0.33), style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
-                .overlay(
-                    Arc(startAngle: .degrees(self.minAngle), endAngle: self.endAngle, clockwise: true)
-                        .strokeBorder(self.color, style: StrokeStyle(lineWidth: geometry.size.width / 10, lineCap: .round, lineJoin: .round))
-                )
-        }
-    }
-}
-
-// https://www.hackingwithswift.com/books/ios-swiftui/adding-strokeborder-support-with-insettableshape
-struct Arc: InsettableShape {
-    var startAngle: Angle
-    var endAngle: Angle
-    var clockwise: Bool
-    var insetAmount: CGFloat = 0
-
-    func path(in rect: CGRect) -> Path {
-        let rotationAdjustment = Angle.degrees(215)
-        let modifiedStart = self.startAngle - rotationAdjustment
-        let modifiedEnd = self.endAngle - rotationAdjustment
-
-        var path = Path()
-        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2 - self.insetAmount, startAngle: modifiedStart, endAngle: modifiedEnd, clockwise: !self.clockwise)
-
-        return path
-    }
-
-    func inset(by amount: CGFloat) -> some InsettableShape {
-        var arc = self
-        arc.insetAmount += amount
-        return arc
-    }
-}
 
 struct ArcViewFull: View {
     var duration: Int
@@ -69,13 +21,16 @@ struct ArcViewFull: View {
 
         return geometry.size.width / 5.5
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ArcView(color: self.color, progress: (Double(self.duration) / Double(max(self.maxDuration, 1))))
+                ArcView(color: self.color,
+                        progress: (Double(self.duration) / Double(max(self.maxDuration, 1))))
 
-                HStack(alignment: .lastTextBaseline, spacing: geometry.size.width * 0.01) {
+                HStack(alignment: .lastTextBaseline,
+                       spacing: geometry.size.width * 0.01) {
+
                     Text("\(Int(Double(self.duration) / Double(max(self.maxDuration, 1)) * 100.0))")
                         .animatableSystemFont(size: geometry.size.width / 3.5, weight: .bold)
                         .padding(0)
@@ -86,12 +41,16 @@ struct ArcViewFull: View {
                 }
 
                 VStack {
-                    Text(self.displayMode.text(for: self.duration, maxDuration: self.maxDuration, allowedUnits: self.allowedUnits).firstLine)
+                    Text(self.displayMode.text(for: self.duration,
+                                               maxDuration: self.maxDuration,
+                                               allowedUnits: self.allowedUnits).firstLine)
                         .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
                         .minimumScaleFactor(0.1)
                         .lineLimit(1)
 
-                    if let secondLine = self.displayMode.text(for: self.duration, maxDuration: self.maxDuration, allowedUnits: self.allowedUnits).secondLine {
+                    if let secondLine = self.displayMode.text(for: self.duration,
+                                                              maxDuration: self.maxDuration,
+                                                              allowedUnits: self.allowedUnits).secondLine {
                         Text(secondLine)
                             .animatableSystemFont(size: self.timeFontSize(for: geometry) * 0.5)
                             .minimumScaleFactor(0.1)

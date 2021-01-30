@@ -23,12 +23,13 @@ class WatchCommunicator: NSObject, WCSessionDelegate {
     }
 
     func sessionDidDeactivate(_ session: WCSession) {
-        print("APP: sessionDidDeactivate")
+        WCSession.default.activate()
     }
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print("APP: activationDidCompleteWith: \(activationState.rawValue), error: \(error?.localizedDescription ?? "no error")")
-        store.dispatch(action: RequestWatchData())
+        if activationState == .activated {
+            store.dispatch(action: RequestWatchData())
+        }
     }
 
     func sessionReachabilityDidChange(_ session: WCSession) {
