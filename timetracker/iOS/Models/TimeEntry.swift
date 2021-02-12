@@ -5,7 +5,7 @@
 //  Created by d4Rk on 20.07.20.
 //
 
-import Foundation
+import SwiftUI
 
 struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     private (set) var id = UUID()
@@ -160,12 +160,12 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
     }
 
     func averageBreaksDuration() -> Int {
-        return totalBreaksDurations()
+        return self.totalBreaksDurations()
             .average()
     }
 
     func totalBreaksDuration() -> Int {
-        return totalBreaksDurations()
+        return self.totalBreaksDurations()
             .sum()
     }
 
@@ -251,5 +251,12 @@ extension Int {
         formatter.allowedUnits = allowedUnits
         formatter.zeroFormattingBehavior = zeroFormattingBehavior
         return formatter.string(from: DateComponents(second: self))
+    }
+
+    func formattedFull(allowedUnits: NSCalendar.Unit = [.hour, .minute]) -> String? {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = allowedUnits
+        formatter.unitsStyle = .full
+        return formatter.string(from: Double(self))
     }
 }

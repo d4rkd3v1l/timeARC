@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "SwiftUICharts",
+        "repositoryURL": "https://github.com/mecid/SwiftUICharts",
+        "state": {
+          "branch": null,
+          "revision": "6cacb77e8d3e0a9ed1d09ce9a19ba057c95ce529",
+          "version": "0.5.2"
+        }
+      },
+      {
         "package": "SwiftUIFlux",
         "repositoryURL": "https://github.com/Dimillian/SwiftUIFlux",
         "state": {
