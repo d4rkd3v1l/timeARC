@@ -121,7 +121,7 @@ private func scheduleEndOfWorkingDayNotification(state: AppState) {
 
     removeNotifications(identifiers: [endOfWoringDayNotificationIdentifier])
     scheduleNotification(with: NSLocalizedString("endOfWoringDayNotificationTitle", comment: ""),
-                         subtitle: NSLocalizedString("endOfWoringDayNotificationSubtitle", comment: ""),
+                         body: NSLocalizedString("endOfWoringDayNotificationBody", comment: ""),
                          identifier: endOfWoringDayNotificationIdentifier,
                          for: endOfWorkingDayDate)
 }
@@ -137,17 +137,17 @@ private func scheduleEndOfWorkingWeekNotification(state: AppState) {
 
     removeNotifications(identifiers: [endOfWoringWeekNotificationIdentifier])
     scheduleNotification(with: NSLocalizedString("endOfWoringWeekNotificationTitle", comment: ""),
-                         subtitle: NSLocalizedString("endOfWoringWeekNotificationSubtitle", comment: ""),
+                         body: NSLocalizedString("endOfWoringWeekNotificationBody", comment: ""),
                          identifier: endOfWoringWeekNotificationIdentifier,
                          for: endOfWorkingWeekDate)
 }
 
-private func scheduleNotification(with title: String, subtitle: String, identifier: String, for date: Date) {
+private func scheduleNotification(with title: String, body: String, identifier: String, for date: Date) {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
         if success {
             let content = UNMutableNotificationContent()
             content.title = title
-            content.subtitle = subtitle
+            content.body = body
             content.sound = UNNotificationSound.default
 
             let triggerDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],
