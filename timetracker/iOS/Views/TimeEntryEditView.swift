@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PartialSheet
 
 struct TimeEntryEditView: View {
     let timeEntry: TimeEntry
@@ -16,7 +15,6 @@ struct TimeEntryEditView: View {
     var onDelete: (() -> Void)? = nil
 
     @Environment(\.contrastColor) var contrastColor
-    @EnvironmentObject var partialSheetManager: PartialSheetManager
     @State private var day: Day = Day()
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
@@ -90,9 +88,9 @@ struct TimeEntryEditView: View {
                     newTimeEntry.end = self.isRunning ? nil : self.endDate
                     self.onUpdate?(newTimeEntry)
 
-                    withAnimation {
-                        self.partialSheetManager.closePartialSheet()
-                    }
+//                    withAnimation {
+//                        self.partialSheetManager.closePartialSheet()
+//                    }
                 }
                 .buttonStyle(CTAStyle())
             }
@@ -110,9 +108,9 @@ struct TimeEntryEditView: View {
                         Button(action: {
                             onDelete()
 
-                            withAnimation {
-                                self.partialSheetManager.closePartialSheet()
-                            }
+//                            withAnimation {
+//                                self.partialSheetManager.closePartialSheet()
+//                            }
                         }) {
                             Image(systemName: "trash.fill").imageScale(.large)
                         }

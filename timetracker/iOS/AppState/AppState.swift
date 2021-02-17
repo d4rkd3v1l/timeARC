@@ -10,9 +10,6 @@ import SwiftUIFlux
 
 // MARK: - Store
 
-let store = Store<AppState>(reducer: appStateReducer,
-                            middleware: [globalMiddleware],
-                            state: AppState())
 struct InitFlux: Action {}
 struct AppStateLoadingInProgress: Action {}
 struct AppStateLoadingSuccess: Action {
@@ -26,28 +23,6 @@ struct AppState: FluxState, Codable {
     var timeState: TimeState = TimeState()
     var settingsState: SettingsState = SettingsState()
     var statisticsState: StatisticsState = StatisticsState()
-}
-
-private func appStateReducer(state: AppState, action: Action) -> AppState {
-    var newState: AppState
-    switch action {
-
-    case _ as AppStateLoadingInProgress:
-        newState = AppState()
-        newState.isAppStateLoading = true
-
-    case let action as AppStateLoadingSuccess:
-        newState = action.state
-        newState.isAppStateLoading = false
-
-    default:
-        newState = state
-    }
-
-    newState.timeState = timeReducer(state: newState.timeState, action: action)
-    newState.settingsState = settingsReducer(state: newState.settingsState, action: action)
-    newState.statisticsState = statisticsReducer(appState: newState, action: action)
-    return newState
 }
 
 // MARK: - Persistence

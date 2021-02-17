@@ -27,22 +27,3 @@ class ViewUpdater: ObservableObject {
         self.objectWillChange.send()
     }
 }
-
-class StateUpdater: ObservableObject {
-    var subscriptions = Set<AnyCancellable>()
-
-    init(updateInterval: TimeInterval, action: Action) {
-        Timer.publish(every: updateInterval,
-                      on: .current,
-                      in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                self?.forceUpdate(action: action)
-            }
-            .store(in: &subscriptions)
-    }
-
-    func forceUpdate(action: Action) {
-        store.dispatch(action: action)
-    }
-}

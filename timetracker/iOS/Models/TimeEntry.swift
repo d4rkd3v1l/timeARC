@@ -243,6 +243,14 @@ extension Array where Element == TimeEntry {
 
         return merged
     }
+
+    func getBreak(between index1: Int, and index2: Int) -> Int? {
+        guard index1 >= 0,
+              index1 < self.count,
+              index2 >= 0,
+              index2 < self.count else { return nil }
+        return [self[index1], self[index2]].totalBreaksInSeconds
+    }
 }
 
 extension Int {

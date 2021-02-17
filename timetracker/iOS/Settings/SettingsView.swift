@@ -14,50 +14,41 @@ struct SettingsView: ConnectedView {
         case weekDays
     }
 
+    private let colors: [CodableColor] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
+
+    @Environment(\.colorScheme) var colorScheme
+    @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
+    @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
+
     struct Props {
         let workingWeekDays: [WeekDay]
         let workingDuration: Int
         let accentColor: CodableColor
+        let updateWorkingDuration: (Int) -> Void
+        let updateWorkingWeekDays: ([WeekDay]) -> Void
+        let updateAccentColor: (CodableColor) -> Void
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(workingWeekDays: state.settingsState.workingWeekDays,
                      workingDuration: state.settingsState.workingDuration,
-                     accentColor: state.settingsState.accentColor)
+                     accentColor: state.settingsState.accentColor,
+                     updateWorkingDuration: { dispatch(UpdateWorkingDuration(workingDuration: $0)) },
+                     updateWorkingWeekDays: { dispatch(UpdateWorkingWeekDays(workingWeekDays: $0)) },
+                     updateAccentColor: { dispatch(UpdateAccentColor(color: $0, colorScheme: self.colorScheme)) })
     }
-
-    @Environment(\.colorScheme) var colorScheme
-    @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
-    @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
-    let colors: [CodableColor] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
 
     func body(props: Props) -> some View {
         NavigationView {
             Form {
-                DisclosureGroup(
-                    isExpanded: self.expansionHandler.isExpanded(.workingHours),
-                    content: {
-                        DatePicker("", selection: self.$workingHours, displayedComponents: .hourAndMinute)
-                            .datePickerStyle(WheelDatePickerStyle())
-                            .contentShape(Rectangle())
-                            .onTapGesture {} // Note: Avoid closing on tap
-                            .onChange(of: self.workingHours) { time in
-                                store.dispatch(action: UpdateWorkingDuration(workingDuration: time.hoursAndMinutesInSeconds))
-                            }
-                            .environment(\.locale, Locale(identifier: "de"))
-                            .onAppear { self.workingHours = props.workingDuration.hoursAndMinutes }
-                    },
-                    label: {
-                        HStack {
-                            Text("workingHours")
-                            Spacer()
-                            Text("\(props.workingDuration.formatted(allowedUnits: [.hour, .minute]) ?? "")")
+                HStack {
+                    Text("workingHours")
+                    DatePicker("", selection: self.$workingHours, displayedComponents: .hourAndMinute)
+                        .onChange(of: self.workingHours) { time in
+                            props.updateWorkingDuration(time.hoursAndMinutesInSeconds)
                         }
-                    }
-                )
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation { self.expansionHandler.toggleExpanded(for: .workingHours) }
+                        .environment(\.locale, Locale(identifier: "de"))
+                        .onAppear { self.workingHours = props.workingDuration.hoursAndMinutes }
                 }
 
                 DisclosureGroup(
@@ -65,7 +56,7 @@ struct SettingsView: ConnectedView {
                     content: {
                         MultipleValuesPickerView(initial: props.workingWeekDays)
                             .onSelectionChange { newSelections in
-                                store.dispatch(action: UpdateWorkingWeekDays(workingWeekDays: newSelections))
+                                props.updateWorkingWeekDays(newSelections)
                             }
                     },
                     label: {
@@ -89,7 +80,7 @@ struct SettingsView: ConnectedView {
                                 AccentColorView(color: color,
                                                 isSelected: color == props.accentColor)
                                     .onTapGesture {
-                                        store.dispatch(action: UpdateAccentColor(color: color, colorScheme: self.colorScheme))
+                                        props.updateAccentColor(color)
                                     }
                             }
                         }
@@ -124,14 +115,11 @@ struct AccentColorView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        store.dispatch(action: InitFlux())
         return Group {
-            StoreProvider(store: store) {
-                NavigationView {
-                    SettingsView()
-                        .accentColor(.green)
-                        .colorScheme(.dark)
-                }
+            NavigationView {
+                SettingsView()
+                    .accentColor(.green)
+                    .colorScheme(.dark)
             }
         }
     }

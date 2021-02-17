@@ -7,11 +7,8 @@
 
 import SwiftUI
 import SwiftUIFlux
-import PartialSheet
 
 struct ListView: ConnectedView {
-    @EnvironmentObject var partialSheetManager: PartialSheetManager
-
     struct Props {
         let timeEntries: [Day: [TimeEntry]]
         let absenceEntries: [AbsenceEntry]
@@ -24,10 +21,8 @@ struct ListView: ConnectedView {
                      absenceTypes: state.settingsState.absenceTypes)
     }
 
-    @StateObject private var expansionHandler = ExpansionHandler<Day>()
-    @State var isPresented: Bool = false
-
     func body(props: Props) -> some View {
+
         NavigationView {
             VStack {
                 if props.timeEntries.isEmpty {
@@ -36,17 +31,13 @@ struct ListView: ConnectedView {
                         .multilineTextAlignment(.center)
                     Spacer()
                 } else {
-                    Form {
+                    List {
                         ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
-                            DayView(day: day,
-                                    timeEntries: timeEntries,
-                                    absenceEntries: props.absenceEntries.absenceEntries(for: day),
-                                    absenceTypes: props.absenceTypes,
-                                    isExpanded: self.expansionHandler.isExpanded(day))
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    withAnimation { self.expansionHandler.toggleExpanded(for: day) }
-                                }
+                            NavigationLink(destination: TimeEntryDetailView(day: day)) {
+                                TimeEntryListView(day: day,
+                                                  timeEntries: timeEntries,
+                                                  absenceEntries: props.absenceEntries.absenceEntries(for: day))
+                            }
                         }
                     }
                 }
@@ -56,29 +47,29 @@ struct ListView: ConnectedView {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
                         Button(action: {
-                            self.partialSheetManager.showPartialSheet() {
-                                let timeEntry = TimeEntry(start: Date(), end: Date())
-                                TimeEntryEditView(timeEntry: timeEntry,
-                                                  title: "addTimeEntryTitle",
-                                                  buttonTitle: "add") {
-                                    store.dispatch(action: AddTimeEntry(timeEntry: $0))
-                                }
-                            }
+//                            self.partialSheetManager.showPartialSheet() {
+//                                let timeEntry = TimeEntry(start: Date(), end: Date())
+//                                TimeEntryEditView(timeEntry: timeEntry,
+//                                                  title: "addTimeEntryTitle",
+//                                                  buttonTitle: "add") {
+//                                    store.dispatch(action: AddTimeEntry(timeEntry: $0))
+//                                }
+//                            }
                         }) {
                             Label("addTimeEntry", systemImage: "tray.and.arrow.down.fill")
                         }
 
                         Button(action: {
-                            guard let initialAbsenceType = props.absenceTypes.first else { return }
-                            self.partialSheetManager.showPartialSheet() {
-                                let absenceEntry = AbsenceEntry(type: initialAbsenceType, start: Day(), end: Day())
-                                AbsenceEntryEditView(absenceEntry: absenceEntry,
-                                                     absenceTypes: props.absenceTypes,
-                                                     title: "addAbsenceEntryTitle",
-                                                     buttonTitle: "add") {
-                                    store.dispatch(action: AddAbsenceEntry(absenceEntry: $0))
-                                }
-                            }
+//                            guard let initialAbsenceType = props.absenceTypes.first else { return }
+//                            self.partialSheetManager.showPartialSheet() {
+//                                let absenceEntry = AbsenceEntry(type: initialAbsenceType, start: Day(), end: Day())
+//                                AbsenceEntryEditView(absenceEntry: absenceEntry,
+//                                                     absenceTypes: props.absenceTypes,
+//                                                     title: "addAbsenceEntryTitle",
+//                                                     buttonTitle: "add") {
+//                                    store.dispatch(action: AddAbsenceEntry(absenceEntry: $0))
+//                                }
+//                            }
                         }) {
                             Label("addAbsenceEntry", systemImage: "calendar")
                         }
@@ -95,19 +86,8 @@ struct ListView: ConnectedView {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        store.dispatch(action: InitFlux())
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy HH:mm"
-        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 08:27")!, end: formatter.date(from: "01.01.2020 12:13")!)))
-        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.01.2020 12:54")!, end: formatter.date(from: "01.01.2020 18:30")!)))
-        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "04.01.2020 08:27")!, end: formatter.date(from: "04.01.2020 12:13")!)))
-
-        return StoreProvider(store: store) {
-            ListView()
-                .accentColor(.green)
-                .environment(\.colorScheme, .dark)
-        }
+        ListView()
+            .accentColor(.green)
+            .environment(\.colorScheme, .dark)
     }
 }
-

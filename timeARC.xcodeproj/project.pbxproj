@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		81013F15258DDB2D00442542 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81013F14258DDB2D00442542 /* OverlayView.swift */; };
 		81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130AFC2529A10400CA0A69 /* CodableColorTests.swift */; };
 		81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B042529A1C600CA0A69 /* Collection+averageTests.swift */; };
 		81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */; };
@@ -76,6 +75,7 @@
 		814775852528E5F000EDBE79 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
 		814775922528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		814775932528E75800EDBE79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
+		816883B125DD8A3900956F8F /* Binding+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816883B025DD8A3900956F8F /* Binding+.swift */; };
 		816BC4FB254EAAFD0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
 		816BC502254EAAFE0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
 		816BC509254EAE6F0015B905 /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
@@ -121,7 +121,7 @@
 		8179B3602528E02100A537B7 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33B2528E02100A537B7 /* ArcView.swift */; };
 		8179B3612528E02100A537B7 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33C2528E02100A537B7 /* VisualEffectView.swift */; };
 		8179B3622528E02100A537B7 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */; };
-		8179B3632528E02100A537B7 /* TimeEntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33E2528E02100A537B7 /* TimeEntryListView.swift */; };
+		8179B3632528E02100A537B7 /* TimeEntryListView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33E2528E02100A537B7 /* TimeEntryListView2.swift */; };
 		8179B36E2528E03900A537B7 /* TimeReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B36A2528E03900A537B7 /* TimeReducerTests.swift */; };
 		8179B36F2528E03900A537B7 /* Date+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B36C2528E03900A537B7 /* Date+Tests.swift */; };
 		8179B3702528E03900A537B7 /* TimeEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B36D2528E03900A537B7 /* TimeEntryTests.swift */; };
@@ -152,10 +152,9 @@
 		8179B4232528E1B200A537B7 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
 		8179B4352528E25300A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B4342528E25300A537B7 /* SwiftUIFlux */; };
 		8179B43D2528E25C00A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B43C2528E25C00A537B7 /* SwiftUIFlux */; };
-		8179B4452528E2C800A537B7 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B4442528E2C800A537B7 /* PartialSheet */; };
 		8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3C12528E0BA00A537B7 /* AppToWatchData.swift */; };
 		817B42DB2531EFAE005240C5 /* AbsenceEntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42DA2531EFAE005240C5 /* AbsenceEntryListView.swift */; };
-		817B42E92531F031005240C5 /* ListDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42E82531F031005240C5 /* ListDayView.swift */; };
+		817B42E92531F031005240C5 /* TimeEntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42E82531F031005240C5 /* TimeEntryListView.swift */; };
 		817B42F72531FA00005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B42FE2531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B43052531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
@@ -177,6 +176,7 @@
 		81B5DE5A25C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
 		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
+		81CC768425D7BDD900600714 /* TimeEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CC768325D7BDD900600714 /* TimeEntryDetailView.swift */; };
 		81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */; };
 		81FD9CBD25740E960049C6CE /* CTAStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CBC25740E960049C6CE /* CTAStyle.swift */; };
 		81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CCA25741D050049C6CE /* ContrastColor.swift */; };
@@ -258,7 +258,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		81013F14258DDB2D00442542 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		81130AFC2529A10400CA0A69 /* CodableColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColorTests.swift; sourceTree = "<group>"; };
 		81130B042529A1C600CA0A69 /* Collection+averageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+averageTests.swift"; sourceTree = "<group>"; };
 		81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionHandlerTests.swift; sourceTree = "<group>"; };
@@ -321,6 +320,7 @@
 		814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		814775ED2528F10C00EDBE79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8153D9CD2585487000137E43 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		816883B025DD8A3900956F8F /* Binding+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+.swift"; sourceTree = "<group>"; };
 		816BC539254EC8C20015B905 /* WidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryView.swift; sourceTree = "<group>"; };
 		816BC542254EC8EF0015B905 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		816BC54B254EC90F0015B905 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 		8179B33B2528E02100A537B7 /* ArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcView.swift; sourceTree = "<group>"; };
 		8179B33C2528E02100A537B7 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleValuesPickerView.swift; sourceTree = "<group>"; };
-		8179B33E2528E02100A537B7 /* TimeEntryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEntryListView.swift; sourceTree = "<group>"; };
+		8179B33E2528E02100A537B7 /* TimeEntryListView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEntryListView2.swift; sourceTree = "<group>"; };
 		8179B36A2528E03900A537B7 /* TimeReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeReducerTests.swift; sourceTree = "<group>"; };
 		8179B36C2528E03900A537B7 /* Date+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Tests.swift"; sourceTree = "<group>"; };
 		8179B36D2528E03900A537B7 /* TimeEntryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEntryTests.swift; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 		8179B3D02528E0BA00A537B7 /* WatchActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchActions.swift; sourceTree = "<group>"; };
 		8179B3D22528E0BB00A537B7 /* WatchApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
 		817B42DA2531EFAE005240C5 /* AbsenceEntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryListView.swift; sourceTree = "<group>"; };
-		817B42E82531F031005240C5 /* ListDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDayView.swift; sourceTree = "<group>"; };
+		817B42E82531F031005240C5 /* TimeEntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryListView.swift; sourceTree = "<group>"; };
 		817B42F62531FA00005240C5 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		817B431825320440005240C5 /* Sequence+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Unique.swift"; sourceTree = "<group>"; };
 		817D61C82531C560009761DE /* AbsenceEntryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryEditView.swift; sourceTree = "<group>"; };
@@ -408,6 +408,7 @@
 		81B5DE5725C5927300C12C62 /* ArcViewFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewFull.swift; sourceTree = "<group>"; };
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timetracker/timeARC.xctestplan; sourceTree = "<group>"; };
+		81CC768325D7BDD900600714 /* TimeEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryDetailView.swift; sourceTree = "<group>"; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
 		81FD9CBC25740E960049C6CE /* CTAStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAStyle.swift; sourceTree = "<group>"; };
 		81FD9CCA25741D050049C6CE /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
@@ -429,7 +430,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				811F404825CDB055009761E8 /* SwiftUICharts in Frameworks */,
-				8179B4452528E2C800A537B7 /* PartialSheet in Frameworks */,
 				8179B4352528E25300A537B7 /* SwiftUIFlux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,7 +669,8 @@
 			isa = PBXGroup;
 			children = (
 				8179B31C2528E02100A537B7 /* ListView.swift */,
-				817B42E82531F031005240C5 /* ListDayView.swift */,
+				81CC768325D7BDD900600714 /* TimeEntryDetailView.swift */,
+				817B42E82531F031005240C5 /* TimeEntryListView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -711,6 +712,7 @@
 				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
 				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
+				816883B025DD8A3900956F8F /* Binding+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -723,9 +725,8 @@
 				817B42DA2531EFAE005240C5 /* AbsenceEntryListView.swift */,
 				8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */,
 				8179B33A2528E02100A537B7 /* TimeEntryEditView.swift */,
-				8179B33E2528E02100A537B7 /* TimeEntryListView.swift */,
+				8179B33E2528E02100A537B7 /* TimeEntryListView2.swift */,
 				8179B33C2528E02100A537B7 /* VisualEffectView.swift */,
-				81013F14258DDB2D00442542 /* OverlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -905,7 +906,6 @@
 			name = timeARC;
 			packageProductDependencies = (
 				8179B4342528E25300A537B7 /* SwiftUIFlux */,
-				8179B4442528E2C800A537B7 /* PartialSheet */,
 				811F404725CDB055009761E8 /* SwiftUICharts */,
 			);
 			productName = timetracker;
@@ -1030,7 +1030,6 @@
 			mainGroup = 8179B2672528DF7B00A537B7;
 			packageReferences = (
 				8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */,
-				8179B4432528E2C800A537B7 /* XCRemoteSwiftPackageReference "PartialSheet" */,
 				811F404625CDB055009761E8 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = 8179B2712528DF7B00A537B7 /* Products */;
@@ -1179,7 +1178,6 @@
 				8179B3542528E02100A537B7 /* StatisticsState.swift in Sources */,
 				8179B3482528E02100A537B7 /* App.swift in Sources */,
 				8179B3552528E02100A537B7 /* TimeState.swift in Sources */,
-				81013F15258DDB2D00442542 /* OverlayView.swift in Sources */,
 				817B431925320440005240C5 /* Sequence+Unique.swift in Sources */,
 				8179B34C2528E02100A537B7 /* TimeEntry.swift in Sources */,
 				8134BDE325D6765F00FF9106 /* StatisticsWorkingHoursView.swift in Sources */,
@@ -1189,7 +1187,7 @@
 				8179B34D2528E02100A537B7 /* AppState.swift in Sources */,
 				8179B34E2528E02100A537B7 /* StatisticsReducer.swift in Sources */,
 				817D61E52531CDDC009761DE /* AbsenceEntry.swift in Sources */,
-				8179B3632528E02100A537B7 /* TimeEntryListView.swift in Sources */,
+				8179B3632528E02100A537B7 /* TimeEntryListView2.swift in Sources */,
 				8134BDE525D6767B00FF9106 /* StatisticsBreaksView.swift in Sources */,
 				8179B3532528E02100A537B7 /* TimeReducer.swift in Sources */,
 				8179B3402528E02100A537B7 /* SettingsView.swift in Sources */,
@@ -1197,13 +1195,14 @@
 				8179B35E2528E02100A537B7 /* Date+.swift in Sources */,
 				8134BDE125D6763700FF9106 /* StatisticsAverageHoursView.swift in Sources */,
 				8179B34B2528E02100A537B7 /* WeekDay.swift in Sources */,
-				817B42E92531F031005240C5 /* ListDayView.swift in Sources */,
+				817B42E92531F031005240C5 /* TimeEntryListView.swift in Sources */,
 				8134BDE925D676B000FF9106 /* StatisticsAbsencesView.swift in Sources */,
 				8179B35B2528E02100A537B7 /* Date+Strideable.swift in Sources */,
 				8179B3522528E02100A537B7 /* TimeActions.swift in Sources */,
 				81B5DE3E25C5922900C12C62 /* ArcViewAverage.swift in Sources */,
 				817B42F72531FA00005240C5 /* Day.swift in Sources */,
 				81A6AF7825D70B15000E3B4D /* EdgeBorder.swift in Sources */,
+				816883B125DD8A3900956F8F /* Binding+.swift in Sources */,
 				8179B35F2528E02100A537B7 /* TimeEntryEditView.swift in Sources */,
 				8179B33F2528E02100A537B7 /* StatisticsView.swift in Sources */,
 				817B42DB2531EFAE005240C5 /* AbsenceEntryListView.swift in Sources */,
@@ -1223,6 +1222,7 @@
 				8134BDE725D6769100FF9106 /* StatisticsOvertimeView.swift in Sources */,
 				8179B3612528E02100A537B7 /* VisualEffectView.swift in Sources */,
 				8179B3572528E02100A537B7 /* StatisticsActions.swift in Sources */,
+				81CC768425D7BDD900600714 /* TimeEntryDetailView.swift in Sources */,
 				817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */,
 				81B5DE4825C5924400C12C62 /* Arc.swift in Sources */,
 				8179B3582528E02100A537B7 /* ExpansionHandler.swift in Sources */,
@@ -1809,14 +1809,6 @@
 				minimumVersion = 0.5.1;
 			};
 		};
-		8179B4432528E2C800A537B7 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.11;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1834,11 +1826,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8179B4332528E25300A537B7 /* XCRemoteSwiftPackageReference "SwiftUIFlux" */;
 			productName = SwiftUIFlux;
-		};
-		8179B4442528E2C800A537B7 /* PartialSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8179B4432528E2C800A537B7 /* XCRemoteSwiftPackageReference "PartialSheet" */;
-			productName = PartialSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

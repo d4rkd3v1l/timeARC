@@ -21,6 +21,8 @@ enum TimeFrame: String, CaseIterable, Identifiable, Codable {
 }
 
 struct StatisticsView: ConnectedView {
+    @State private var selectedTimeFrame: TimeFrame = .week
+    
     struct Props {
         let timeFrame: TimeFrame
         let startDate: Date
@@ -46,9 +48,6 @@ struct StatisticsView: ConnectedView {
                                      endDate: state.statisticsState.selectedEndDate),
                      workingDuration: state.settingsState.workingDuration)
     }
-
-//    @ObservedObject var updater = StateUpdater(updateInterval: 60, action: StatisticsRefresh())
-    @State private var selectedTimeFrame: TimeFrame = .week
 
     func body(props: Props) -> some View {
         NavigationView {
@@ -118,20 +117,8 @@ struct StatisticsView: ConnectedView {
 
 struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
-        store.dispatch(action: InitFlux())
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy HH:mm"
-        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.02.2021 08:27")!, end: formatter.date(from: "01.02.2021 12:13")!)))
-        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "01.02.2021 12:54")!, end: formatter.date(from: "01.02.2021 18:30")!)))
-        store.dispatch(action: AddTimeEntry(timeEntry: TimeEntry(start: formatter.date(from: "04.02.2021 08:27")!, end: formatter.date(from: "04.02.2021 12:13")!)))
-
-        store.dispatch(action: AddAbsenceEntry(absenceEntry: AbsenceEntry(type: .dummy, start: formatter.date(from: "01.02.2021 08:27")!.day, end: formatter.date(from: "02.02.2021 08:27")!.day)))
-
-        return StoreProvider(store: store) {
-            StatisticsView()
-                .accentColor(.green)
-                .environment(\.colorScheme, .dark)
-        }
+        StatisticsView()
+            .accentColor(.green)
+            .environment(\.colorScheme, .dark)
     }
 }

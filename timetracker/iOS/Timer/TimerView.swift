@@ -22,12 +22,19 @@ struct TimerView: ConnectedView {
         }
     }
 
+    private let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect().share()
+
+    @State private var mode: Tab = .today
+    @State private var duration: Int?
+
     struct Props {
         let timeEntries: [TimeEntry]
         let timeEntriesWeek: [TimeEntry]
         let workingDuration: Int
         let workingWeekDaysCount: Int
         let displayMode: TimerDisplayMode
+        let toggleTimer: () -> Void
+        let changeTimerDisplayMode: (TimerDisplayMode) -> Void
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
@@ -38,12 +45,10 @@ struct TimerView: ConnectedView {
                         .flatMap { $0.value },
                      workingDuration: state.settingsState.workingDuration,
                      workingWeekDaysCount: state.settingsState.workingWeekDays.count,
-                     displayMode: state.timeState.displayMode)
+                     displayMode: state.timeState.displayMode,
+                     toggleTimer: { dispatch(ToggleTimer()) },
+                     changeTimerDisplayMode: { dispatch(ChangeTimerDisplayMode(displayMode: $0)) })
     }
-
-    @State private var mode: Tab = .today
-    @State private var duration: Int?
-    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect().share()
 
     func body(props: Props) -> some View {
         GeometryReader { geometry in
@@ -56,7 +61,10 @@ struct TimerView: ConnectedView {
                             TimerArcView(timeEntries: props.timeEntries,
                                     workingDuration: props.workingDuration,
                                     displayMode: props.displayMode,
-                                    timer: self.timer)
+                                    timer: self.timer,
+                                    changeTimerDisplayMode: {
+                                        props.changeTimerDisplayMode($0)
+                                    })
                         }
                         .tag(Tab.today)
 
@@ -64,7 +72,10 @@ struct TimerView: ConnectedView {
                             TimerArcView(timeEntries: props.timeEntriesWeek,
                                     workingDuration: props.workingDuration * props.workingWeekDaysCount,
                                     displayMode: props.displayMode,
-                                    timer: self.timer)
+                                    timer: self.timer,
+                                    changeTimerDisplayMode: {
+                                        props.changeTimerDisplayMode($0)
+                                    })
                         }
                         .tag(Tab.week)
                     }
@@ -75,7 +86,7 @@ struct TimerView: ConnectedView {
                     Spacer()
 
                     Button(props.timeEntries.isTimerRunning ? "stop" : "start") {
-                        store.dispatch(action: ToggleTimer())
+                        props.toggleTimer()
                     }
                     .buttonStyle(CTAStyle())
 
@@ -92,6 +103,7 @@ private struct TimerArcView: View {
     let workingDuration: Int
     let displayMode: TimerDisplayMode
     let timer: Publishers.Share<Publishers.Autoconnect<Timer.TimerPublisher>>
+    let changeTimerDisplayMode: (TimerDisplayMode) -> Void
 
     @State private var duration: Int?
 
@@ -104,7 +116,7 @@ private struct TimerArcView: View {
             .padding(.all, 50)
             .contentShape(Circle())
             .onTapGesture {
-                store.dispatch(action: ChangeTimerDisplayMode(displayMode: displayMode.next))
+                self.changeTimerDisplayMode(displayMode.next)
             }
             .onReceive(self.timer) { _ in
                 self.duration = timeEntries.totalDurationInSeconds
@@ -116,13 +128,10 @@ private struct TimerArcView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        store.dispatch(action: InitFlux())
         return Group {
-            StoreProvider(store: store) {
-                TimerView()
-                    .accentColor(.green)
-                    .colorScheme(.dark)
-            }
+            TimerView()
+                .accentColor(.green)
+                .colorScheme(.dark)
         }
     }
 }

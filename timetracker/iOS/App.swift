@@ -7,12 +7,10 @@
 
 import SwiftUI
 import SwiftUIFlux
-import PartialSheet
 
 @main
 struct app: App {
-    let watchCommunicator = WatchCommunicator()
-    let sheetManager: PartialSheetManager = PartialSheetManager()
+    let watchCommunicator = WatchCommunicator(dispatch: store.dispatch)
 
     init() {
         store.dispatch(action: InitFlux())
@@ -27,8 +25,35 @@ struct app: App {
         WindowGroup {
             StoreProvider(store: store) {
                 ContentView()
-                    .environmentObject(self.sheetManager)
             }
         }
     }
+}
+
+// MARK: - Store
+
+private let store = Store<AppState>(reducer: appStateReducer,
+                            middleware: [globalMiddleware],
+                            state: AppState())
+
+private func appStateReducer(state: AppState, action: Action) -> AppState {
+    var newState: AppState
+    switch action {
+
+    case _ as AppStateLoadingInProgress:
+        newState = AppState()
+        newState.isAppStateLoading = true
+
+    case let action as AppStateLoadingSuccess:
+        newState = action.state
+        newState.isAppStateLoading = false
+
+    default:
+        newState = state
+    }
+
+    newState.timeState = timeReducer(state: newState.timeState, action: action)
+    newState.settingsState = settingsReducer(state: newState.settingsState, action: action)
+    newState.statisticsState = statisticsReducer(appState: newState, action: action)
+    return newState
 }

@@ -6,9 +6,13 @@
 //
 
 import WatchConnectivity
+import SwiftUIFlux
 
 class WatchCommunicator: NSObject, WCSessionDelegate {
-    override init() {
+    private let dispatch: DispatchFunction
+
+    init(dispatch: @escaping DispatchFunction) {
+        self.dispatch = dispatch
         super.init()
 
         if WCSession.isSupported() {
@@ -28,20 +32,20 @@ class WatchCommunicator: NSObject, WCSessionDelegate {
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if activationState == .activated {
-            store.dispatch(action: RequestWatchData())
+            self.dispatch(RequestWatchData())
         }
     }
 
     func sessionReachabilityDidChange(_ session: WCSession) {
         if session.isReachable {
-            store.dispatch(action: RequestWatchData())
+            self.dispatch(RequestWatchData())
         }
     }
 
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         if let decodedData = try? JSONDecoder().decode(WatchToAppData.self, from: messageData) {
-            store.dispatch(action: SyncTimeEntriesFromWatch(timeEntries: decodedData.timeEntries,
-                                                            displayMode: decodedData.displayMode))
+            self.dispatch(SyncTimeEntriesFromWatch(timeEntries: decodedData.timeEntries,
+                                                           displayMode: decodedData.displayMode))
         }
     }
 }

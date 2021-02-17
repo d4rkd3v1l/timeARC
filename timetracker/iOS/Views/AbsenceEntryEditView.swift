@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PartialSheet
 
 struct AbsenceEntryEditView: View {
     let absenceEntry: AbsenceEntry
@@ -16,7 +15,6 @@ struct AbsenceEntryEditView: View {
     var onUpdate: ((AbsenceEntry) -> Void)? = nil
     var onDelete: (() -> Void)? = nil
 
-    @EnvironmentObject var partialSheetManager: PartialSheetManager
     @State private var absenceType: AbsenceType = .dummy
     @State private var startDay: Day = Day()
     @State private var endDay: Day = Day()
@@ -90,9 +88,9 @@ struct AbsenceEntryEditView: View {
                                            end: self.endDay)
                     self.onUpdate?(newAbsenceEntry)
 
-                    withAnimation {
-                        self.partialSheetManager.closePartialSheet()
-                    }
+//                    withAnimation {
+//                        self.partialSheetManager.closePartialSheet()
+//                    }
                 }
                 .buttonStyle(CTAStyle())
             }
@@ -109,9 +107,9 @@ struct AbsenceEntryEditView: View {
                         Button(action: {
                             onDelete()
 
-                            withAnimation {
-                                self.partialSheetManager.closePartialSheet()
-                            }
+//                            withAnimation {
+//                                self.partialSheetManager.closePartialSheet()
+//                            }
                         }) {
                             Image(systemName: "trash.fill").imageScale(.large)
                         }

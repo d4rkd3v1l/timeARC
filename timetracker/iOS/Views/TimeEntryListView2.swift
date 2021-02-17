@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimeEntryListView: View {
+struct TimeEntryListView2: View {
     let timeEntry: TimeEntry
 
     @ObservedObject var updater = ViewUpdater(updateInterval: 60)

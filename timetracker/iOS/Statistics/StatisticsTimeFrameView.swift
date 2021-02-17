@@ -9,22 +9,28 @@ import SwiftUI
 import SwiftUIFlux
 
 struct StatisticsTimeFrameView: ConnectedView {
+    @Binding private var selectedTimeFrame: TimeFrame
+
+    init(selectedTimeFrame: Binding<TimeFrame>) {
+        self._selectedTimeFrame = selectedTimeFrame
+    }
+
     struct Props {
         let timeFrame: TimeFrame
         let startDate: Date
         let endDate: Date
+        let changeTimeFrame: (TimeFrame) -> Void
+        let selectPreviousInterval: () -> Void
+        let selectNextInterval: () -> Void
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(timeFrame: state.statisticsState.selectedTimeFrame,
                      startDate: state.statisticsState.selectedStartDate,
-                     endDate: state.statisticsState.selectedEndDate)
-    }
-
-    @Binding private var selectedTimeFrame: TimeFrame
-
-    init(selectedTimeFrame: Binding<TimeFrame>) {
-        self._selectedTimeFrame = selectedTimeFrame
+                     endDate: state.statisticsState.selectedEndDate,
+                     changeTimeFrame: { dispatch(StatisticsChangeTimeFrame(timeFrame: $0)) },
+                     selectPreviousInterval: { dispatch(StatisticsPreviousInterval()) },
+                     selectNextInterval: { dispatch(StatisticsNextInterval()) })
     }
 
     func body(props: Props) -> some View {
@@ -38,12 +44,12 @@ struct StatisticsTimeFrameView: ConnectedView {
             .padding(.horizontal)
             .padding(.bottom, 10)
             .onChange(of: self.selectedTimeFrame) {
-                store.dispatch(action: StatisticsChangeTimeFrame(timeFrame: $0))
+                props.changeTimeFrame($0)
             }
 
             HStack {
                 Button(action: {
-                    store.dispatch(action: StatisticsPreviousInterval())
+                    props.selectPreviousInterval()
                 }, label: {
                     Image(systemName: "arrow.left.circle.fill")
                         .resizable()
@@ -60,7 +66,7 @@ struct StatisticsTimeFrameView: ConnectedView {
                 }
 
                 Button(action: {
-                    store.dispatch(action: StatisticsNextInterval())
+                    props.selectNextInterval()
                 }, label: {
                     Image(systemName: "arrow.right.circle.fill")
                         .resizable()
