@@ -20,7 +20,7 @@ struct StatisticsAbsencesView: View {
     
     var body: some View {
         VStack {
-            StatisticsSectionHeaderView(imageName: "car.fill",
+            StatisticsSectionHeaderView(imageName: "calendar",
                                         title: "absences")
 
             HStack {

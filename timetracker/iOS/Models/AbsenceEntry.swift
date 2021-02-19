@@ -9,9 +9,9 @@ import Foundation
 
 struct AbsenceEntry: Identifiable, Equatable, Hashable, Codable {
     private (set) var id = UUID()
-    private (set) var type: AbsenceType
-    private (set) var start: Day
-    private (set) var end: Day
+    var type: AbsenceType
+    var start: Day
+    var end: Day
 
     init(type: AbsenceType, start: Day, end: Day) {
         self.type = type
@@ -38,7 +38,7 @@ struct AbsenceEntry: Identifiable, Equatable, Hashable, Codable {
 }
 
 extension Array where Element == AbsenceEntry {
-    func absenceEntries(for day: Day) -> [AbsenceEntry] {
+    func forDay(_ day: Day) -> [AbsenceEntry] {
         return self.filter { $0.relevantDays.contains(day) }
     }
 

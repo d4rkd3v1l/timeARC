@@ -19,7 +19,7 @@ struct StatisticsBreaksView: View {
 
 
         VStack {
-            StatisticsSectionHeaderView(imageName: "arrowshape.turn.up.backward.circle.fill",
+            StatisticsSectionHeaderView(imageName: "clock.arrow.circlepath",
                                         title: "breaks")
 
             BarChartView(dataPoints: self.timeEntries.dataPoints(from: self.startDate, to: self.endDate, for: { $0.totalBreaksDuration() }),

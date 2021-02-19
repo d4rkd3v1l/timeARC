@@ -26,7 +26,7 @@
       {
         "id": "3B9EDFE7-832A-4154-B903-4E8BFB34BB65",
         "title": "holidayHalfADay",
-        "icon": "🏝\\/2",
+        "icon": "🏝½",
         "offPercentage": 0.5
       },
       {
@@ -50,7 +50,7 @@
       {
         "id": "9E972C57-A84A-4177-8486-A89C97C0744C",
         "title": "parentalLeave",
-        "icon": "🧒",
+        "icon": "👨‍🍼",
         "offPercentage": 1
       },
       {

@@ -151,7 +151,7 @@
 		8179B4352528E25300A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B4342528E25300A537B7 /* SwiftUIFlux */; };
 		8179B43D2528E25C00A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B43C2528E25C00A537B7 /* SwiftUIFlux */; };
 		8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3C12528E0BA00A537B7 /* AppToWatchData.swift */; };
-		817B42E92531F031005240C5 /* TimeEntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42E82531F031005240C5 /* TimeEntryListView.swift */; };
+		817B42E92531F031005240C5 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42E82531F031005240C5 /* ListRowView.swift */; };
 		817B42F72531FA00005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B42FE2531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B43052531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
@@ -161,6 +161,8 @@
 		817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
 		81A6AF7625D70B07000E3B4D /* StatisticsSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6AF7525D70B07000E3B4D /* StatisticsSectionFooterView.swift */; };
 		81A6AF7825D70B15000E3B4D /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */; };
+		81A6D8F125DFA2F9004A31BC /* appState.json in Resources */ = {isa = PBXBuildFile; fileRef = 81A6AF7425D6FB8C000E3B4D /* appState.json */; };
+		81A6D8F525DFB3B4004A31BC /* ListAddTimeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D8F425DFB3B4004A31BC /* ListAddTimeEntryView.swift */; };
 		81B5DE3E25C5922900C12C62 /* ArcViewAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */; };
 		81B5DE3F25C5922900C12C62 /* ArcViewAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */; };
 		81B5DE4025C5922900C12C62 /* ArcViewAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */; };
@@ -172,8 +174,11 @@
 		81B5DE5A25C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
 		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
-		81CC768425D7BDD900600714 /* TimeEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CC768325D7BDD900600714 /* TimeEntryDetailView.swift */; };
+		81CC768425D7BDD900600714 /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CC768325D7BDD900600714 /* ListDetailView.swift */; };
 		81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */; };
+		81FA6D4C25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */; };
+		81FA6D4E25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4D25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift */; };
+		81FD95CC25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */; };
 		81FD9CBD25740E960049C6CE /* CTAStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CBC25740E960049C6CE /* CTAStyle.swift */; };
 		81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CCA25741D050049C6CE /* ContrastColor.swift */; };
 		81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FE88AA25291501000375FF /* SettingsReducerTests.swift */; };
@@ -383,7 +388,7 @@
 		8179B3CF2528E0BA00A537B7 /* WatchReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchReducer.swift; sourceTree = "<group>"; };
 		8179B3D02528E0BA00A537B7 /* WatchActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchActions.swift; sourceTree = "<group>"; };
 		8179B3D22528E0BB00A537B7 /* WatchApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
-		817B42E82531F031005240C5 /* TimeEntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryListView.swift; sourceTree = "<group>"; };
+		817B42E82531F031005240C5 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		817B42F62531FA00005240C5 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		817B431825320440005240C5 /* Sequence+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Unique.swift"; sourceTree = "<group>"; };
 		817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryTests.swift; sourceTree = "<group>"; };
@@ -392,13 +397,17 @@
 		81A6AF7425D6FB8C000E3B4D /* appState.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = appState.json; sourceTree = "<group>"; };
 		81A6AF7525D70B07000E3B4D /* StatisticsSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSectionFooterView.swift; sourceTree = "<group>"; };
 		81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
+		81A6D8F425DFB3B4004A31BC /* ListAddTimeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddTimeEntryView.swift; sourceTree = "<group>"; };
 		81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewAverage.swift; sourceTree = "<group>"; };
 		81B5DE4725C5924400C12C62 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
 		81B5DE5725C5927300C12C62 /* ArcViewFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewFull.swift; sourceTree = "<group>"; };
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timetracker/timeARC.xctestplan; sourceTree = "<group>"; };
-		81CC768325D7BDD900600714 /* TimeEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEntryDetailView.swift; sourceTree = "<group>"; };
+		81CC768325D7BDD900600714 /* ListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
+		81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarAddEntryModifier.swift; sourceTree = "<group>"; };
+		81FA6D4D25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddAbsenceEntryView.swift; sourceTree = "<group>"; };
+		81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailRowTimeEntryView.swift; sourceTree = "<group>"; };
 		81FD9CBC25740E960049C6CE /* CTAStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAStyle.swift; sourceTree = "<group>"; };
 		81FD9CCA25741D050049C6CE /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
 		81FE88AA25291501000375FF /* SettingsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducerTests.swift; sourceTree = "<group>"; };
@@ -639,8 +648,11 @@
 			isa = PBXGroup;
 			children = (
 				8179B31C2528E02100A537B7 /* ListView.swift */,
-				81CC768325D7BDD900600714 /* TimeEntryDetailView.swift */,
-				817B42E82531F031005240C5 /* TimeEntryListView.swift */,
+				81A6D8F425DFB3B4004A31BC /* ListAddTimeEntryView.swift */,
+				81FA6D4D25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift */,
+				817B42E82531F031005240C5 /* ListRowView.swift */,
+				81CC768325D7BDD900600714 /* ListDetailView.swift */,
+				81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */,
 			);
 			path = "02 List";
 			sourceTree = "<group>";
@@ -682,6 +694,7 @@
 				81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */,
 				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
+				81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */,
 				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
 			);
 			path = Extensions;
@@ -1037,6 +1050,7 @@
 				81304C9A258627C10030C42A /* icon_light_yellow@2x.png in Resources */,
 				81304C9B258627C10030C42A /* icon_dark_gray@3x.png in Resources */,
 				81304C97258627C10030C42A /* icon_dark_red@3x.png in Resources */,
+				81A6D8F125DFA2F9004A31BC /* appState.json in Resources */,
 				81304CA5258627C10030C42A /* icon_light_black@3x.png in Resources */,
 				81304CAF258627C10030C42A /* icon_light_black@2x.png in Resources */,
 				81304CB9258627C10030C42A /* icon_dark_white@2x.png in Resources */,
@@ -1141,6 +1155,7 @@
 				8179B3492528E02100A537B7 /* ContentView.swift in Sources */,
 				8147753A2528E49100EDBE79 /* WidgetData.swift in Sources */,
 				8179B3542528E02100A537B7 /* StatisticsState.swift in Sources */,
+				81FA6D4E25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift in Sources */,
 				8179B3482528E02100A537B7 /* App.swift in Sources */,
 				8179B3552528E02100A537B7 /* TimeState.swift in Sources */,
 				817B431925320440005240C5 /* Sequence+Unique.swift in Sources */,
@@ -1158,8 +1173,9 @@
 				8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */,
 				8179B35E2528E02100A537B7 /* Date+.swift in Sources */,
 				8134BDE125D6763700FF9106 /* StatisticsAverageHoursView.swift in Sources */,
+				81A6D8F525DFB3B4004A31BC /* ListAddTimeEntryView.swift in Sources */,
 				8179B34B2528E02100A537B7 /* WeekDay.swift in Sources */,
-				817B42E92531F031005240C5 /* TimeEntryListView.swift in Sources */,
+				817B42E92531F031005240C5 /* ListRowView.swift in Sources */,
 				8134BDE925D676B000FF9106 /* StatisticsAbsencesView.swift in Sources */,
 				8179B35B2528E02100A537B7 /* Date+Strideable.swift in Sources */,
 				8179B3522528E02100A537B7 /* TimeActions.swift in Sources */,
@@ -1172,11 +1188,13 @@
 				8179B34F2528E02100A537B7 /* SettingsActions.swift in Sources */,
 				8179B3592528E02100A537B7 /* AnimatableSystemFontModifier.swift in Sources */,
 				8179B3512528E02100A537B7 /* GlobalMiddleware.swift in Sources */,
+				81FD95CC25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift in Sources */,
 				8179B35D2528E02100A537B7 /* CodableColor.swift in Sources */,
 				8179B35A2528E02100A537B7 /* Color+.swift in Sources */,
 				8179B3472528E02100A537B7 /* WatchCommunicator.swift in Sources */,
 				81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */,
 				8179B3442528E02100A537B7 /* TimerView.swift in Sources */,
+				81FA6D4C25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift in Sources */,
 				8134BDDF25D6760900FF9106 /* StatisticsSectionHeaderView.swift in Sources */,
 				8179B35C2528E02100A537B7 /* Collection+average.swift in Sources */,
 				81FD9CBD25740E960049C6CE /* CTAStyle.swift in Sources */,
@@ -1184,7 +1202,7 @@
 				8134BDE725D6769100FF9106 /* StatisticsOvertimeView.swift in Sources */,
 				8179B3612528E02100A537B7 /* VisualEffectView.swift in Sources */,
 				8179B3572528E02100A537B7 /* StatisticsActions.swift in Sources */,
-				81CC768425D7BDD900600714 /* TimeEntryDetailView.swift in Sources */,
+				81CC768425D7BDD900600714 /* ListDetailView.swift in Sources */,
 				817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */,
 				81B5DE4825C5924400C12C62 /* Arc.swift in Sources */,
 				8179B3582528E02100A537B7 /* ExpansionHandler.swift in Sources */,

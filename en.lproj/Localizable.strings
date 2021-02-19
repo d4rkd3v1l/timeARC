@@ -13,6 +13,7 @@
 "stop" = "Stop";
 "start" = "Start";
 "addTimeEntry" = "Time entry";
+"addTimeEntryTitle" = "Add time entry";
 "addAbsenceEntry" = "Absence entry";
 "workingHours" = "Working hours";
 "weekDays" = "Week days";
@@ -61,3 +62,10 @@
 "absences" = "Absences";
 "averageHours" = "Average hours";
 "absenceDays" = "Absence days";
+"timeEntries" = "Time Entries";
+"from" = "From";
+"to" = "To";
+"alertDeleteAbsenceTitle" = "Delete absence entry";
+"alertDeleteAbsenceText" = "Do you want to delete the absence entry for this day only or completely?";
+"alertDeleteAbsenceCompletely" = "Completely";
+"alertDeleteAbsenceThisDay" = "This day";

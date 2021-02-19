@@ -126,12 +126,13 @@ private struct TimerArcView: View {
 
 // MARK: - Preview
 
+#if DEBUG
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        return Group {
-            TimerView()
-                .accentColor(.green)
-                .colorScheme(.dark)
-        }
+        TimerView()
+            .environmentObject(previewStore)
+            .accentColor(.green)
+            .colorScheme(.dark)
     }
 }
+#endif

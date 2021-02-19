@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimeEntryListView: View {
+struct ListRowView: View {
     let day: Day
     let timeEntries: [TimeEntry]
     let absenceEntries: [AbsenceEntry]

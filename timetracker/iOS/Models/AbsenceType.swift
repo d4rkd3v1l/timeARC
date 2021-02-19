@@ -20,6 +20,6 @@ struct AbsenceType: Identifiable, Equatable, Hashable, Codable {
 
 extension AbsenceType: SingleValueSelectable {
     var localizedTitle: String {
-        return "\(NSLocalizedString(self.title, comment: "")) \(self.icon)"
+        return " \(self.icon) \(NSLocalizedString(self.title, comment: ""))"
     }
 }

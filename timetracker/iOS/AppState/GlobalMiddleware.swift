@@ -80,6 +80,7 @@ private func requestWatchData() {
 
 // MARK: - Widget Sync
 
+// TODO: Don't use the whole state here!
 func updateWidgetData(_ state: AppState) {
     DispatchQueue.global().async {
         let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker")

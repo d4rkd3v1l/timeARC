@@ -13,7 +13,7 @@ struct ContentView: ConnectedView {
     @Environment(\.colorScheme) var colorScheme
 
     struct Props {
-        let state: AppState // TODO: Don't use the whole state here!
+        let state: AppState
         let isAppStateLoading: Bool
         let accentColor: CodableColor
     }
@@ -67,8 +67,11 @@ struct ContentView: ConnectedView {
 
 // MARK: - Preview
 
+#if DEBUG
 struct timetrackerApp_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(previewStore)
     }
 }
+#endif

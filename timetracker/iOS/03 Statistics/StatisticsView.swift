@@ -115,10 +115,15 @@ struct StatisticsView: ConnectedView {
     }
 }
 
+// MARK: - Preview
+
+#if DEBUG
 struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
         StatisticsView()
+            .environmentObject(previewStore)
             .accentColor(.green)
             .environment(\.colorScheme, .dark)
     }
 }
+#endif

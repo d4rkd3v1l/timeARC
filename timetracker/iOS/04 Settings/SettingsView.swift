@@ -113,15 +113,15 @@ struct AccentColorView: View {
 
 // MARK: - Preview
 
+#if DEBUG
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        return Group {
-            NavigationView {
-                SettingsView()
-                    .accentColor(.green)
-                    .colorScheme(.dark)
-            }
+        NavigationView {
+            SettingsView()
+                .environmentObject(previewStore)
+                .accentColor(.green)
+                .colorScheme(.dark)
         }
     }
 }
-
+#endif

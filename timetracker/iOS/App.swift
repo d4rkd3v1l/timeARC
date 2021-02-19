@@ -57,3 +57,17 @@ private func appStateReducer(state: AppState, action: Action) -> AppState {
     newState.statisticsState = statisticsReducer(appState: newState, action: action)
     return newState
 }
+
+#if DEBUG
+let previewStore = Store<AppState>(reducer: appStateReducer,
+                                   middleware: [globalMiddleware],
+                                   state: appState())
+
+private func appState() -> AppState {
+    let url = Bundle.main.url(forResource: "appState", withExtension: "json")!
+    let data = try! Data(contentsOf: url)
+    let decodedState = try! JSONDecoder().decode(AppState.self, from: data)
+    return decodedState
+}
+#endif
+
