@@ -22,15 +22,17 @@ struct ListDetailRowAbsenceEntryView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text(self.absenceEntry.type.localizedTitle)
-                Spacer()
+            NavigationLink(destination: ListAbsenceEntryUpdateView(absenceEntry: self.absenceEntry)) {
+                HStack {
+                    Text(self.absenceEntry.type.localizedTitle)
+                    Spacer()
 
-                let length = [self.absenceEntry].totalDurationInDays(for: self.workingDays)
-                if length != 1 {
-                    HStack(spacing: 0) {
-                        Text("\(self.format(value: length) ?? "") ")
-                        Text("days")
+                    let length = [self.absenceEntry].totalDurationInDays(for: self.workingDays)
+                    if length != 1 {
+                        HStack(spacing: 0) {
+                            Text("\(self.format(value: length) ?? "") ")
+                            Text("days")
+                        }
                     }
                 }
             }

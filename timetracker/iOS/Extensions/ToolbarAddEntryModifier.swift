@@ -32,13 +32,13 @@ struct ToolbarAddEntryModifier: ViewModifier {
                         Button(action: {
                             self.activeSheet = .addTimeEntry
                         }, label: {
-                            Label("addTimeEntry", systemImage: "clock.fill")
+                            Label("timeEntry", systemImage: "clock.fill")
                         })
 
                         Button(action: {
                             self.activeSheet = .addAbsenceEntry
                         }, label: {
-                            Label("addAbsenceEntry", systemImage: "calendar")
+                            Label("absenceEntry", systemImage: "calendar")
                         })
                     }
                     label: {
@@ -49,14 +49,18 @@ struct ToolbarAddEntryModifier: ViewModifier {
             .sheet(item: self.$activeSheet) { activeSheet in
                 switch activeSheet {
                 case .addTimeEntry:
-                    ListAddTimeEntryView(initialDay: self.initialDay)
-                        .environmentObject(self.store)
-                        .accentColor(self.accentColor)
+                    NavigationView {
+                        ListTimeEntryCreateView(initialDay: self.initialDay)
+                            .environmentObject(self.store)
+                            .accentColor(self.accentColor)
+                    }
 
                 case .addAbsenceEntry:
-                    ListAddAbsenceEntryView(initialDay: self.initialDay)
-                        .environmentObject(self.store)
-                        .accentColor(self.accentColor)
+                    NavigationView {
+                        ListAbsenceEntryCreateView(mode: .create(initialDay: self.initialDay))
+                            .environmentObject(self.store)
+                            .accentColor(self.accentColor)
+                    }
                 }
             }
     }
