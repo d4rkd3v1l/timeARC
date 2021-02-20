@@ -24,6 +24,7 @@ struct ListDetailView: ConnectedView {
 
     struct Props {
         let accentColor: CodableColor
+        let allWorkingDays: [Day]
         let timeEntries: [TimeEntry]
         let timeEntryBinding: (Int) -> Binding<TimeEntry>
         let absenceEntries: [AbsenceEntry]
@@ -33,14 +34,18 @@ struct ListDetailView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
+        let timeEntriesForDay = state.timeState.timeEntries.forDay(self.day)
+        let absenceEntriesForDay = state.timeState.absenceEntries.forDay(self.day, workingDays: state.settingsState.workingWeekDays.workingDays(startDate: self.day.date, endDate: self.day.date))
+
         return Props(accentColor: state.settingsState.accentColor,
-                     timeEntries: state.timeState.timeEntries.forDay(self.day),
+                     allWorkingDays: state.settingsState.workingWeekDays.relevantDays(for: state.timeState.timeEntries, absenceEntries: state.timeState.absenceEntries, considerTimeEntriesOnNonWorkingDays: false),
+                     timeEntries: timeEntriesForDay,
                      timeEntryBinding: { index in
                         Binding<TimeEntry>(get: { state.timeState.timeEntries.forDay(self.day)[index] },
                                            set: { dispatch(UpdateTimeEntry(timeEntry: $0)) }) },
-                     absenceEntries: state.timeState.absenceEntries.forDay(self.day),
+                     absenceEntries: absenceEntriesForDay,
                      absenceEntryBinding: { index in
-                        Binding<AbsenceEntry>(get: { state.timeState.absenceEntries.forDay(self.day)[index] },
+                        Binding<AbsenceEntry>(get: { absenceEntriesForDay[index] },
                                               set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0)) }) },
                      deleteTimeEntry: { dispatch(DeleteTimeEntry(timeEntry: $0)) },
                      deleteAbsenceEntry: { dispatch(DeleteAbsenceEntry(absenceEntry: $0, onlyForDay: $1)) })
@@ -85,7 +90,7 @@ struct ListDetailView: ConnectedView {
                     Section(header: OptionalText("absences", condition: !props.timeEntries.isEmpty)) {
                         ForEach(props.absenceEntries) { absenceEntry in
                             if let index = props.absenceEntries.firstIndex(where: { $0.id == absenceEntry.id }) {
-                                ListDetailRowAbsenceEntryView(absenceEntry: props.absenceEntries[index])
+                                ListDetailRowAbsenceEntryView(absenceEntry: props.absenceEntries[index], workingDays: props.allWorkingDays)
                             }
                         }
                         .onDelete(perform: { indexSet in

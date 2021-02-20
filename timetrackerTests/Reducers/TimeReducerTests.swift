@@ -91,9 +91,6 @@ class TimeReducerTests: XCTestCase {
         state = timeReducer(state: state, action: action)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
     }
 
     func testUpdateAbsenceEntry() throws {
@@ -118,9 +115,6 @@ class TimeReducerTests: XCTestCase {
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
 
         let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: nil)
         state = timeReducer(state: state, action: removeAction)
@@ -139,17 +133,11 @@ class TimeReducerTests: XCTestCase {
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
 
         let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day())
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries.count, 1)
-        XCTAssertFalse(state.timeEntries.keys.contains(Day()))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
     }
 
     func testRemoveAbsenceEntry_OnlyFor_MiddleDay() throws {
@@ -160,17 +148,11 @@ class TimeReducerTests: XCTestCase {
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
 
         let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1))
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries.count, 2)
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
-        XCTAssertFalse(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
     }
 
     func testRemoveAbsenceEntry_OnlyFor_LastDay() throws {
@@ -181,17 +163,11 @@ class TimeReducerTests: XCTestCase {
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(2)))
 
         let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(2))
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries.count, 1)
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
-        XCTAssertTrue(state.timeEntries.keys.contains(Day().addingDays(1)))
-        XCTAssertFalse(state.timeEntries.keys.contains(Day().addingDays(2)))
     }
 
     func testRemoveAbsenceEntry_OnlyFor_SingleDay() throws {
@@ -202,7 +178,6 @@ class TimeReducerTests: XCTestCase {
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
 
         let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day())
         state = timeReducer(state: state, action: removeAction)
@@ -219,13 +194,11 @@ class TimeReducerTests: XCTestCase {
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
 
         let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1))
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
-        XCTAssertTrue(state.timeEntries.keys.contains(Day()))
     }
 
     func testSyncTimeEntriesFromWatch_Update() throws {

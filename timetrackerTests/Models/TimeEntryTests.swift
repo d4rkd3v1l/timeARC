@@ -299,8 +299,10 @@ class TimeEntryTests: XCTestCase {
 
     func testTotalDuration() throws {
         let timeEntries = try self.timeEntries()
+        let workingDays = try self.workingDays()
 
-        let totalDuration = timeEntries.totalDuration(workingDuration: 28800,
+        let totalDuration = timeEntries.totalDuration(workingDays: workingDays,
+                                                      workingDuration: 28800,
                                                       absenceEntries: [])
         XCTAssertEqual(totalDuration, 69646)
     }

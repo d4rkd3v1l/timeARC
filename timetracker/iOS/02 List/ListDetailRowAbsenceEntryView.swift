@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ListDetailRowAbsenceEntryView: View {
     let absenceEntry: AbsenceEntry
+    let workingDays: [Day]
 
     func format(value: Float) -> String? {
         let formatter = NumberFormatter()
@@ -25,7 +26,7 @@ struct ListDetailRowAbsenceEntryView: View {
                 Text(self.absenceEntry.type.localizedTitle)
                 Spacer()
 
-                let length = [self.absenceEntry].totalDurationInDays()
+                let length = [self.absenceEntry].totalDurationInDays(for: self.workingDays)
                 if length != 1 {
                     HStack(spacing: 0) {
                         Text("\(self.format(value: length) ?? "") ")

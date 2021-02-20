@@ -122,12 +122,13 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
             .average()
     }
 
-    func totalDuration(workingDuration: Int,
+    func totalDuration(workingDays: [Day],
+                       workingDuration: Int,
                        absenceEntries: [AbsenceEntry]) -> Int {
         return self
             .map { day, entries -> Int in
                 let actualWorkingDuration = entries.totalDurationInSeconds
-                let absenceDuration = absenceEntries.forDay(day).totalDurationInSeconds(with: workingDuration)
+                let absenceDuration = absenceEntries.forDay(day, workingDays: workingDays).totalDurationInSeconds(for: workingDays, with: workingDuration)
                 return actualWorkingDuration + absenceDuration
             }
             .sum()
@@ -172,7 +173,8 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
     func totalOvertimeDuration(workingDays: [Day],
                                workingDuration: Int,
                                absenceEntries: [AbsenceEntry]) -> Int {
-        return self.totalDuration(workingDuration: workingDuration,
+        return self.totalDuration(workingDays: workingDays,
+                                  workingDuration: workingDuration,
                                   absenceEntries: absenceEntries) - (workingDuration * workingDays.filter { $0 < Day() }.count)
     }
 }

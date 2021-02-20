@@ -60,7 +60,7 @@
 "days" = "days";
 "absences" = "Absences";
 "averageHours" = "Average hours";
-"absenceDays" = "Absence days";
+"totalAbsenceDays" = "Total absence days";
 "timeEntries" = "Time Entries";
 "from" = "From";
 "to" = "To";

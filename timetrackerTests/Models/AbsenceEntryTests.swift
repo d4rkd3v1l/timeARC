@@ -89,10 +89,10 @@ class AbsenceEntryTests: XCTestCase {
 
         let dateBefore = try Date(year: 2020, month: 07, day: 19, hour: 22, minute: 32, second: 13)
 
-        XCTAssertTrue(absenceEntries.forDay(dateBefore.day).isEmpty)
-        XCTAssertEqual(absenceEntries.forDay(dateStart1.day).count, 1)
-        XCTAssertEqual(absenceEntries.forDay(dateEnd1.day).count, 2)
-        XCTAssertEqual(absenceEntries.forDay(dateEnd2.day).count, 1)
+        XCTAssertTrue(absenceEntries.forDay(dateBefore.day, workingDays: [dateBefore.day]).isEmpty)
+        XCTAssertEqual(absenceEntries.forDay(dateStart1.day, workingDays: [dateStart1.day]).count, 1)
+        XCTAssertEqual(absenceEntries.forDay(dateEnd1.day, workingDays: [dateEnd1.day]).count, 2)
+        XCTAssertEqual(absenceEntries.forDay(dateEnd2.day, workingDays: [dateEnd2.day]).count, 1)
     }
 
     func testTotalDurationInSeconds() throws {
@@ -106,7 +106,11 @@ class AbsenceEntryTests: XCTestCase {
 
         let absenceEntries = [absenceEntry1, absenceEntry2]
 
-        XCTAssertEqual(absenceEntries.totalDurationInSeconds(with: 8 * 60 * 60), 100800)
+        let workingDays = [Day(),
+                           Day().addingDays(1),
+                           Day().addingDays(3)]
+
+        XCTAssertEqual(absenceEntries.totalDurationInSeconds(for: workingDays, with: 8 * 60 * 60), 72000)
     }
 
     func testTotalDurationInDays() throws {
@@ -120,7 +124,11 @@ class AbsenceEntryTests: XCTestCase {
 
         let absenceEntries = [absenceEntry1, absenceEntry2]
 
-        XCTAssertEqual(absenceEntries.totalDurationInDays(), 3.5)
+        let workingDays = [Day(),
+                           Day().addingDays(1),
+                           Day().addingDays(3)]
+
+        XCTAssertEqual(absenceEntries.totalDurationInDays(for: workingDays), 2.5)
     }
 
     func testTotalDurationInDaysByType() throws {
@@ -133,9 +141,14 @@ class AbsenceEntryTests: XCTestCase {
                                         end: Day().addingDays(3))
 
         let absenceEntries = [absenceEntry1, absenceEntry2]
-        let totalDurationInDaysByType = absenceEntries.totalDurationInDaysByType()
 
-        XCTAssertEqual(totalDurationInDaysByType[self.absenceTypes[1]], 3)
+        let workingDays = [Day(),
+                           Day().addingDays(1),
+                           Day().addingDays(3)]
+
+        let totalDurationInDaysByType = absenceEntries.totalDurationInDaysByType(for: workingDays)
+
+        XCTAssertEqual(totalDurationInDaysByType[self.absenceTypes[1]], 2)
         XCTAssertEqual(totalDurationInDaysByType[self.absenceTypes[2]], 0.5)
     }
 }

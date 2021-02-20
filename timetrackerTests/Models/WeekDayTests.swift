@@ -121,4 +121,27 @@ class WeekDayTests: XCTestCase {
                                      try Date(year: 2020, month: 11, day: 10).day,
                                      try Date(year: 2020, month: 11, day: 11).day])
     }
+
+    func testRelevantDaysForTimeEntriesAndAbsenceEntries() throws {
+        let timeEntryStartDate = try Date(year: 2020, month: 11, day: 1, hour: 8, minute: 12, second: 42)
+        let timeEntryEndDate = try Date(year: 2020, month: 11, day: 1, hour: 15, minute: 34, second: 2)
+        let timeEntry = TimeEntry(start: timeEntryStartDate, end: timeEntryEndDate)
+
+        let absenceEntryStartDate = try Date(year: 2020, month: 11, day: 2)
+        let absenceEntryEndDate = try Date(year: 2020, month: 11, day: 3)
+        let absenceEntry = AbsenceEntry(type: .dummy, start: absenceEntryStartDate.day, end: absenceEntryEndDate.day)
+
+        let workingWeekDays: [WeekDay] = [.monday,
+                                          .tuesday,
+                                          .wednesday,
+                                          .thursday,
+                                          .friday]
+
+        let workingDays = workingWeekDays.relevantDays(for: [timeEntryStartDate.day: [timeEntry]],
+                                                       absenceEntries: [absenceEntry])
+
+        XCTAssertEqual(workingDays, [try Date(year: 2020, month: 11, day: 1).day, // Note: sunday
+                                     try Date(year: 2020, month: 11, day: 2).day,
+                                     try Date(year: 2020, month: 11, day: 3).day])
+    }
 }

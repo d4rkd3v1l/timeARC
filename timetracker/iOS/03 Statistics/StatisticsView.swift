@@ -34,18 +34,20 @@ struct StatisticsView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
+        let startDate = state.statisticsState.selectedStartDate
+        let endDate = state.statisticsState.selectedEndDate
+        let workingDays = state.settingsState.workingWeekDays.workingDays(startDate: startDate, endDate: endDate)
+
         return Props(timeFrame: state.statisticsState.selectedTimeFrame,
-                     startDate: state.statisticsState.selectedStartDate,
-                     endDate: state.statisticsState.selectedEndDate,
-                     timeEntries: state.timeState.timeEntries
-                        .timeEntries(from: state.statisticsState.selectedStartDate,
-                                     to: state.statisticsState.selectedEndDate),
-                     absenceEntries: state.timeState.absenceEntries
-                        .exactAbsenceEntries(from: state.statisticsState.selectedStartDate,
-                                             to: state.statisticsState.selectedEndDate),
-                     workingDays: state.settingsState.workingWeekDays
-                        .workingDays(startDate: state.statisticsState.selectedStartDate,
-                                     endDate: state.statisticsState.selectedEndDate),
+                     startDate: startDate,
+                     endDate: endDate,
+                     timeEntries: state.timeState.timeEntries.timeEntries(from: startDate,
+                                                                          to: endDate),
+                     absenceEntries: state.timeState.absenceEntries.exactAbsenceEntries(for: workingDays,
+                                                                                        from: startDate,
+                                                                                        to: endDate),
+                     workingDays: state.settingsState.workingWeekDays.workingDays(startDate: startDate,
+                                                                                  endDate: endDate),
                      workingDuration: state.settingsState.workingDuration)
     }
 

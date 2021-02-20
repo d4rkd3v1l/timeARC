@@ -92,14 +92,17 @@ func updateWidgetData(_ state: AppState) {
             .timeEntries(from: startDate,
                          to: endDate)
 
+        let workingDays = state.settingsState.workingWeekDays.workingDays(startDate: startDate,
+                                                                          endDate: endDate)
+        
         let relevantAbsenceEntries = state.timeState.absenceEntries
-            .exactAbsenceEntries(from: startDate,
+            .exactAbsenceEntries(for: workingDays,
+                                 from: startDate,
                                  to: endDate)
-
+        
         let widgetData = WidgetData(timeEntries: relevantTimeEntries,
                                     absenceEntries: relevantAbsenceEntries,
-                                    workingDays: state.settingsState.workingWeekDays.workingDays(startDate: startDate,
-                                                                                                 endDate: endDate),
+                                    workingDays: workingDays,
                                     workingDuration: state.settingsState.workingDuration,
                                     accentColor: state.settingsState.accentColor,
                                     displayMode: state.timeState.displayMode)

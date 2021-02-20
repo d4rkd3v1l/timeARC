@@ -27,13 +27,13 @@ func statisticsReducer(appState: AppState, action: Action) -> StatisticsState {
         case .year:
             state.selectedStartDate = Date().firstOfYear
             state.selectedEndDate = Date().lastOfYear
-
+            
         case .allTime:
-            let sortedTimeEntries = appState.timeState.timeEntries.sorted(by: { $0.key < $1.key })
-            let startDate = sortedTimeEntries.first?.value.first?.start ?? Date(timeIntervalSince1970: 0)
-            let endDate = sortedTimeEntries.last?.value.last?.actualEnd ?? Date()
-            state.selectedStartDate = startDate
-            state.selectedEndDate = endDate
+            let workingDays = appState.settingsState.workingWeekDays.relevantDays(for: appState.timeState.timeEntries,
+                                                                                  absenceEntries: appState.timeState.absenceEntries)
+            
+            state.selectedStartDate = workingDays.first?.date ?? Date(timeIntervalSince1970: 0)
+            state.selectedEndDate = workingDays.last?.date ?? Date()
         }
 
     case _ as StatisticsNextInterval:

@@ -16,52 +16,43 @@ struct StatisticsAbsencesView: View {
     let absenceEntries: [AbsenceEntry]
     let workingDays: [Day]
     
-    @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
-    
     var body: some View {
-        VStack {
-            StatisticsSectionHeaderView(imageName: "calendar",
-                                        title: "absences")
+        Group {
+            VStack {
+                StatisticsSectionHeaderView(imageName: "calendar",
+                                            title: "absences")
 
-            HStack {
-                ArcViewFull(duration: self.timeEntries.count,
-                            maxDuration: self.workingDays.count,
-                            color: .accentColor,
-                            allowedUnits: [.second],
-                            displayMode: .progress)
-                    .frame(width: 150, height: 150)
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("daysWorked")
+                HStack {
+                    ArcViewFull(duration: self.timeEntries.count,
+                                maxDuration: self.workingDays.count,
+                                color: .accentColor,
+                                allowedUnits: [.second],
+                                displayMode: .progress)
+                        .frame(width: 150, height: 150)
                     Spacer()
-                }
-            }
-            
-            DisclosureGroup(
-                isExpanded: self.expansionHandler.isExpanded(.absenceDays),
-                content: {
-                    ForEach(self.absenceEntries.totalDurationInDaysByType().sorted(by: { $0.value > $1.value }), id: \.key) { key, value in
-                        
-                        HStack {
-                            Text(key.localizedTitle)
-                            Spacer()
-                            Text(self.formattedAbsence(for: value))
-                        }
-                    }
-                },
-                label: {
-                    HStack {
-                        Text("absenceDays")
+                    VStack(alignment: .trailing) {
+                        Text("daysWorked")
                         Spacer()
-                        Text(self.formattedAbsence(for: self.absenceEntries.totalDurationInDays()))
                     }
                 }
-            )
-            .contentShape(Rectangle())
-            .onTapGesture {
-                withAnimation { self.expansionHandler.toggleExpanded(for: .absenceDays) }
             }
-            .disabled(self.absenceEntries.isEmpty)
+
+            let absenceDurationInDays = self.absenceEntries.totalDurationInDays(for: self.workingDays)
+            if absenceDurationInDays > 0 {
+                HStack {
+                    Text("totalAbsenceDays")
+                    Spacer()
+                    Text(self.formattedAbsence(for: absenceDurationInDays))
+                }
+
+                ForEach(self.absenceEntries.totalDurationInDaysByType(for: self.workingDays).sorted(by: { $0.value > $1.value }), id: \.key) { key, value in
+                    HStack {
+                        Text(key.localizedTitle)
+                        Spacer()
+                        Text(self.formattedAbsence(for: value))
+                    }
+                }
+            }
         }
         .padding(.vertical, 5)
     }

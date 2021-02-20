@@ -67,8 +67,8 @@ class StatisticsReducerTests: XCTestCase {
         let action = StatisticsChangeTimeFrame(timeFrame: .allTime)
         let state = statisticsReducer(appState: appState, action: action)
 
-        XCTAssertEqual(state.selectedStartDate, startDate1)
-        XCTAssertEqual(state.selectedEndDate, endDate2)
+        XCTAssertEqual(state.selectedStartDate, startDate1.startOfDay)
+        XCTAssertEqual(state.selectedEndDate, endDate2.startOfDay)
     }
 
     // MARK: - Next Interval

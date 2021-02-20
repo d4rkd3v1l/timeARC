@@ -92,8 +92,15 @@ class DateTests: XCTestCase {
     }
 
     func testFormatted() throws {
-        XCTAssertEqual(self.date.formatted("HH:mm:ss"), "13:37:42")
-        XCTAssertEqual(self.date.formatted("dd.MM.YYYY"), "20.07.2020")
+        if Locale.current.identifier == "de_DE" {
+            XCTAssertEqual(self.date.formatted("HH:mm:ss"), "13:37:42")
+            XCTAssertEqual(self.date.formatted("dd.MM.YYYY"), "20.07.2020")
+        } else if Locale.current.identifier == "en_US" {
+            XCTAssertEqual(self.date.formatted("HH:mm:ss"), "13:37:42")
+            XCTAssertEqual(self.date.formatted("dd.MM.YYYY"), "07/20/2020")
+        } else {
+            throw XCTSkip("Invalid locale for this test.")
+        }
     }
 
     func testFormattedTime() throws {

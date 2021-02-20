@@ -48,6 +48,14 @@ struct AbsenceEntry: Identifiable, Equatable, Codable {
             .map { $0.day }
     }
 
+    func relevantDays(for workingDays: [Day]) -> [Day] {
+        return stride(from: self.start.date,
+                      through: self.end.date,
+                      by: 86400)
+            .map { $0.day }
+            .filter { workingDays.contains($0) }
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
@@ -59,12 +67,13 @@ struct AbsenceEntry: Identifiable, Equatable, Codable {
 }
 
 extension Array where Element == AbsenceEntry {
-    func forDay(_ day: Day) -> [AbsenceEntry] {
-        return self.filter { $0.relevantDays.contains(day) }
+    func forDay(_ day: Day, workingDays: [Day]) -> [AbsenceEntry] {
+        return self.filter { $0.relevantDays(for: workingDays).contains(day) }
     }
 
     /// Will produce "new" `AbsenceEntry`s that exactly match the provided range of days
-    func exactAbsenceEntries(from startDate: Date,
+    func exactAbsenceEntries(for workingDays: [Day],
+                             from startDate: Date,
                              to endDate: Date) -> [AbsenceEntry] {
         let days = stride(from: startDate,
                           through: endDate,
@@ -73,7 +82,7 @@ extension Array where Element == AbsenceEntry {
         let daysSet = Set(days)
 
         let newAbsenceEntries: [AbsenceEntry] = self.compactMap { absenceEntry in
-            let absenceEntryRelevantDaysSet = Set<Day>(absenceEntry.relevantDays)
+            let absenceEntryRelevantDaysSet = Set<Day>(absenceEntry.relevantDays(for: workingDays))
             let intersection = [Day](absenceEntryRelevantDaysSet.intersection(daysSet)).sorted()
 
             guard let start = intersection.first,
@@ -87,22 +96,24 @@ extension Array where Element == AbsenceEntry {
         return newAbsenceEntries
     }
 
-    func totalDurationInSeconds(with workingDuration: Int) -> Int {
+    func totalDurationInSeconds(for workingDays: [Day], with workingDuration: Int) -> Int {
         return self.reduce(0) { total, current in
             let days = stride(from: current.start.date, through: current.end.date, by: 86400).map { $0 }
+                .filter { workingDays.contains($0.day) }
             return total + Int((current.type.offPercentage * Float(workingDuration) * Float(days.count)))
         }
     }
 
-    func totalDurationInDays() -> Float {
+    func totalDurationInDays(for workingDays: [Day]) -> Float {
         return self.reduce(0) { total, current in
             let days = stride(from: current.start.date, through: current.end.date, by: 86400).map { $0 }
+                .filter { workingDays.contains($0.day) }
             return total + (current.type.offPercentage * Float(days.count))
         }
     }
 
-    func totalDurationInDaysByType() -> [AbsenceType: Float] {
+    func totalDurationInDaysByType(for workingDays: [Day]) -> [AbsenceType: Float] {
         return Dictionary(grouping: self, by: { $0.type })
-            .mapValues { $0.totalDurationInDays() }
+            .mapValues { $0.totalDurationInDays(for: workingDays) }
     }
 }

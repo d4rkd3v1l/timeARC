@@ -97,20 +97,13 @@ private func removeTimeEntry(_ timeEntry: TimeEntry, _ state: inout TimeState) {
     let day = timeEntry.start.day
     state.timeEntries[day]?.removeAll(where: { $0.id == timeEntry.id })
 
-    if state.timeEntries[day]?.isEmpty ?? false &&
-        !state.absenceEntries.flatMap({ $0.relevantDays }).contains(day) {
+    if state.timeEntries[day]?.isEmpty ?? false {
         state.timeEntries.removeValue(forKey: day)
     }
 }
 
 private func insertAbsenceEntry(_ absenceEntry: AbsenceEntry, _ state: inout TimeState) {
     state.absenceEntries.append(absenceEntry)
-
-    absenceEntry.relevantDays.forEach { day in
-        if !state.timeEntries.keys.contains(day) {
-            state.timeEntries[day] = []
-        }
-    }
 }
 
 private func updateAbsenceEntry(_ absenceEntry: AbsenceEntry, _ state: inout TimeState) {
@@ -127,13 +120,6 @@ private func updateAbsenceEntry(_ absenceEntry: AbsenceEntry, _ state: inout Tim
 
 private func removeAbsenceEntry(_ absenceEntry: AbsenceEntry, onlyFor day: Day?, _ state: inout TimeState) {
     state.absenceEntries.removeAll(where: { $0.id == absenceEntry.id })
-
-    absenceEntry.relevantDays.forEach { day in
-        if let timeEntriesForDay = state.timeEntries[day],
-           timeEntriesForDay.isEmpty {
-            state.timeEntries.removeValue(forKey: day)
-        }
-    }
 
     if let day = day {
         let updatedEntries = absenceEntry.removed(day: day)

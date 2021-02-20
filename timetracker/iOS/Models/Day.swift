@@ -8,8 +8,12 @@
 import SwiftUI
 
 /// Date wrapper when only accuracy of days is needed, but still keep things like Equatable (on a day basis).
-struct Day: Equatable, Hashable, Comparable, Codable {
+struct Day: Identifiable, Equatable, Hashable, Comparable, Codable {
     var date: Date
+
+    var id: Date {
+        self.date
+    }
 
     init(_ date: Date) {
         self.date = date.startOfDay
