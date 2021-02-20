@@ -72,7 +72,7 @@ extension Date {
 
     func formatted(_ format: String) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = format
+        formatter.setLocalizedDateFormatFromTemplate(format)
         return formatter.string(from: self)
     }
 

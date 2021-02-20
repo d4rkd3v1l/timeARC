@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUIFlux
 
+// TODO: unhack!
 extension Int: Identifiable {
     public var id: String {
         String(self)
@@ -16,7 +17,8 @@ extension Int: Identifiable {
 
 struct ListDetailView: ConnectedView {
     let day: Day
-    
+
+    @Environment(\.presentationMode) var presentationMode
     @State private var columnWidths: [Int: CGFloat] = [:]
     @State private var absenceEntriesToDelete: Int?
 
@@ -33,73 +35,84 @@ struct ListDetailView: ConnectedView {
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(accentColor: state.settingsState.accentColor,
                      timeEntries: state.timeState.timeEntries.forDay(self.day),
-                     timeEntryBinding: { index in Binding<TimeEntry>(get: { state.timeState.timeEntries.forDay(self.day)[index] },
-                                                                     set: { dispatch(UpdateTimeEntry(timeEntry: $0)) }) },
+                     timeEntryBinding: { index in
+                        Binding<TimeEntry>(get: { state.timeState.timeEntries.forDay(self.day)[index] },
+                                           set: { dispatch(UpdateTimeEntry(timeEntry: $0)) }) },
                      absenceEntries: state.timeState.absenceEntries.forDay(self.day),
-                     absenceEntryBinding: { index in Binding<AbsenceEntry>(get: { state.timeState.absenceEntries.forDay(self.day)[index] },
-                                                                           set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0)) }) },
+                     absenceEntryBinding: { index in
+                        Binding<AbsenceEntry>(get: { state.timeState.absenceEntries.forDay(self.day)[index] },
+                                              set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0)) }) },
                      deleteTimeEntry: { dispatch(DeleteTimeEntry(timeEntry: $0)) },
                      deleteAbsenceEntry: { dispatch(DeleteAbsenceEntry(absenceEntry: $0, onlyForDay: $1)) })
     }
 
     func body(props: Props) -> some View {
-        VStack {
-            Spacer(minLength: 20)
+        if props.timeEntries.isEmpty && props.absenceEntries.isEmpty {
+            self.presentationMode.wrappedValue.dismiss()
+        }
 
-            ArcViewAverage(timeEntries: [self.day: props.timeEntries],
-                           workingDays: [self.day],
-                           color: .accentColor)
-                .frame(width: 250, height: 250)
-
+        return VStack {
             Form {
-                Section(header: Text("absences")) {
-                    ForEach(props.absenceEntries) { absenceEntry in
-                        if let index = props.absenceEntries.firstIndex(of: absenceEntry) {
-                            ListDetailRowAbsenceEntryView(absenceEntry: props.absenceEntryBinding(index))
+                if !props.timeEntries.isEmpty {
+                    Section(header: OptionalText("timeEntries", condition: !props.absenceEntries.isEmpty)) {
+                        HStack {
+                            Spacer()
+                            ArcViewAverage(timeEntries: props.timeEntries,
+                                           color: .accentColor)
+                                .frame(width: 250, height: 250)
+                            Spacer()
                         }
-                    }
-                    .onDelete(perform: { indexSet in
-                        indexSet.forEach { index in
-                            let absenceEntry = props.absenceEntries[index]
-                            if absenceEntry.start == absenceEntry.end {
-                                props.deleteAbsenceEntry(absenceEntry, nil)
-                            } else {
-                                self.absenceEntriesToDelete = index
+                        .padding(.top, 20)
+
+                        ForEach(props.timeEntries) { timeEntry in
+                            if let index = props.timeEntries.firstIndex(where: { $0.id == timeEntry.id }) {
+                                ListDetailRowTimeEntryView(timeEntry: props.timeEntryBinding(index),
+                                                           columnWidths: self.$columnWidths,
+                                                           breakDurationBefore: props.timeEntries.getBreak(between: index - 1, and: index),
+                                                           breakDurationAfter: props.timeEntries.getBreak(between: index, and: index + 1))
                             }
                         }
-                    })
-                }
-                .alert(item: self.$absenceEntriesToDelete) { index in
-                    Alert(title: Text("alertDeleteAbsenceTitle"),
-                          message: Text("alertDeleteAbsenceText"),
-                          primaryButton: .destructive(Text("alertDeleteAbsenceCompletely")) {
-                            let absenceEntry = props.absenceEntries[index]
-                            props.deleteAbsenceEntry(absenceEntry, nil)
-                          },
-                          secondaryButton: .default(Text("alertDeleteAbsenceThisDay")) {
-                            let absenceEntry = props.absenceEntries[index]
-                            props.deleteAbsenceEntry(absenceEntry, self.day)
-                          })
+                        .onDelete(perform: { indexSet in
+                            indexSet.forEach { index in
+                                let timeEntry = props.timeEntries[index]
+                                props.deleteTimeEntry(timeEntry)
+                            }
+                        })
+                    }
                 }
 
-                Section(header: Text("timeEntries")) {
-                    ForEach(props.timeEntries) { timeEntry in
-                        if let index = props.timeEntries.firstIndex(of: timeEntry) {
-                            ListDetailRowTimeEntryView(timeEntry: props.timeEntryBinding(index),
-                                                       columnWidths: self.$columnWidths,
-                                                       breakDurationBefore: props.timeEntries.getBreak(between: index - 1, and: index),
-                                                       breakDurationAfter: props.timeEntries.getBreak(between: index, and: index + 1))
+                if !props.absenceEntries.isEmpty {
+                    Section(header: OptionalText("absences", condition: !props.timeEntries.isEmpty)) {
+                        ForEach(props.absenceEntries) { absenceEntry in
+                            if let index = props.absenceEntries.firstIndex(where: { $0.id == absenceEntry.id }) {
+                                ListDetailRowAbsenceEntryView(absenceEntry: props.absenceEntries[index])
+                            }
                         }
+                        .onDelete(perform: { indexSet in
+                            indexSet.forEach { index in
+                                let absenceEntry = props.absenceEntries[index]
+                                if absenceEntry.start == absenceEntry.end {
+                                    props.deleteAbsenceEntry(absenceEntry, nil)
+                                } else {
+                                    self.absenceEntriesToDelete = index
+                                }
+                            }
+                        })
                     }
-                    .onDelete(perform: { indexSet in
-                        indexSet.forEach { index in
-                            let timeEntry = props.timeEntries[index]
-                            props.deleteTimeEntry(timeEntry)
-                        }
-                    })
+                    .alert(item: self.$absenceEntriesToDelete) { index in
+                        Alert(title: Text("alertDeleteAbsenceTitle"),
+                              message: Text("alertDeleteAbsenceText"),
+                              primaryButton: .destructive(Text("alertDeleteAbsenceCompletely")) {
+                                let absenceEntry = props.absenceEntries[index]
+                                props.deleteAbsenceEntry(absenceEntry, nil)
+                              },
+                              secondaryButton: .default(Text("alertDeleteAbsenceThisDay")) {
+                                let absenceEntry = props.absenceEntries[index]
+                                props.deleteAbsenceEntry(absenceEntry, self.day)
+                              })
+                    }
                 }
             }
-
         }
         .onPreferenceChange(WidthKey.self) { self.columnWidths = $0 }
         .navigationTitle(self.day.date.formatted("EE, MMM d"))
@@ -108,52 +121,21 @@ struct ListDetailView: ConnectedView {
     }
 }
 
-struct ListDetailRowAbsenceEntryView: View {
-    @Binding var absenceEntry: AbsenceEntry
+struct OptionalText: View {
+    let text: LocalizedStringKey
+    let condition: Bool
+
+    init(_ text: LocalizedStringKey, condition: Bool) {
+        self.text = text
+        self.condition = condition
+    }
 
     var body: some View {
-        VStack {
-            HStack {
-                Text(self.absenceEntry.type.localizedTitle)
-                Spacer()
-                Text("5d")
-            }
-//            HStack {
-//                DatePicker("", selection: self.$absenceEntry.start.date, displayedComponents: .date)
-//                    .labelsHidden()
-//
-//                Image(systemName: "arrow.right")
-//
-//                DatePicker("", selection: self.$absenceEntry.end.date, displayedComponents: .date)
-//                    .labelsHidden()
-//            }
+        if self.condition {
+            Text(self.text)
+        } else {
+            EmptyView()
         }
-    }
-}
-
-struct SetWidthKeyModifier: ViewModifier {
-    let index: Int
-
-    func body(content: Content) -> some View {
-        content
-            .background(GeometryReader { proxy in
-                Color.clear
-                    .preference(key: WidthKey.self, value: [self.index: proxy.size.width])
-            })
-    }
-}
-
-extension View {
-    func setWidthKey(index: Int) -> some View {
-        self.modifier(SetWidthKeyModifier(index: index))
-    }
-}
-
-struct WidthKey: PreferenceKey {
-    static var defaultValue: [Int: CGFloat] = [:]
-
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value.merge(nextValue(), uniquingKeysWith: max)
     }
 }
 

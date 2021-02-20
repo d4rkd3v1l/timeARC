@@ -114,7 +114,7 @@ private func insertAbsenceEntry(_ absenceEntry: AbsenceEntry, _ state: inout Tim
 }
 
 private func updateAbsenceEntry(_ absenceEntry: AbsenceEntry, _ state: inout TimeState) {
-    guard let oldAbsenceEntry = state.absenceEntries.first(where: { $0 == absenceEntry }) else { return }
+    guard let oldAbsenceEntry = state.absenceEntries.first(where: { $0.id == absenceEntry.id }) else { return }
 
     var newAbsenceEntry = oldAbsenceEntry
     newAbsenceEntry.update(type: absenceEntry.type,
@@ -126,7 +126,7 @@ private func updateAbsenceEntry(_ absenceEntry: AbsenceEntry, _ state: inout Tim
 }
 
 private func removeAbsenceEntry(_ absenceEntry: AbsenceEntry, onlyFor day: Day?, _ state: inout TimeState) {
-    state.absenceEntries.removeAll(where: { $0 == absenceEntry })
+    state.absenceEntries.removeAll(where: { $0.id == absenceEntry.id })
 
     absenceEntry.relevantDays.forEach { day in
         if let timeEntriesForDay = state.timeEntries[day],

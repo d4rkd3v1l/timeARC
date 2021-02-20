@@ -67,7 +67,7 @@ class TimeReducerTests: XCTestCase {
 
         let timeEntry = try XCTUnwrap(state.timeEntries[Day()]?.first)
 
-        XCTAssertEqual(timeEntry, updatedTimeEntry)
+        XCTAssertEqual(timeEntry.id, updatedTimeEntry.id)
     }
 
     func testDeleteTimeEntry() throws {
@@ -107,7 +107,7 @@ class TimeReducerTests: XCTestCase {
         let action = UpdateAbsenceEntry(absenceEntry: absenceEntry)
         state = timeReducer(state: state, action: action)
 
-        XCTAssertEqual(state.absenceEntries, [updatedAbsenceEntry])
+        XCTAssertEqual(state.absenceEntries.map { $0.id }, [updatedAbsenceEntry].map { $0.id })
     }
 
     func testRemoveAbsenceEntry() throws {

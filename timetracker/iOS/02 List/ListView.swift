@@ -11,14 +11,14 @@ import SwiftUIFlux
 struct ListView: ConnectedView {
     struct Props {
         let accentColor: CodableColor
-        let timeEntries: [Day: [TimeEntry]]
+        let timeEntries: [Date: [Dictionary<Date, [Dictionary<Day, [TimeEntry]>.Element]>.Element]]
         let absenceEntries: [AbsenceEntry]
         let absenceTypes: [AbsenceType]
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(accentColor: state.settingsState.accentColor,
-                     timeEntries: state.timeState.timeEntries,
+                     timeEntries: self.group(state.timeState.timeEntries),
                      absenceEntries: state.timeState.absenceEntries,
                      absenceTypes: state.settingsState.absenceTypes)
     }
@@ -33,11 +33,19 @@ struct ListView: ConnectedView {
                     Spacer()
                 } else {
                     List {
-                        ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
-                            NavigationLink(destination: ListDetailView(day: day)) {
-                                ListRowView(day: day,
-                                            timeEntries: timeEntries,
-                                            absenceEntries: props.absenceEntries.forDay(day))
+                        ForEach(props.timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { year, timeEntries in
+                            Section(header: Text(String(Calendar.current.dateComponents([.year], from: year).year ?? 0))) {
+                                ForEach(timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { week, timeEntries in
+                                    Section(header: Text("Week \(Calendar.current.dateComponents([.weekOfYear], from: week).weekOfYear ?? 0)")) {
+                                        ForEach(timeEntries.sorted(by: { $0.key > $1.key }), id: \.key) { day, timeEntries in
+                                            NavigationLink(destination: ListDetailView(day: day)) {
+                                                ListRowView(day: day,
+                                                            timeEntries: timeEntries,
+                                                            absenceEntries: props.absenceEntries.forDay(day))
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -48,6 +56,29 @@ struct ListView: ConnectedView {
                              accentColor: props.accentColor.color)
         }
     }
+
+
+    func group(_ timeEntries: [Day: [TimeEntry]]) -> [Date: [Dictionary<Date, [Dictionary<Day, [TimeEntry]>.Element]>.Element]] {
+        let byWeeks = Dictionary(grouping: timeEntries, by: {
+            $0.key.date.firstOfWeek
+        })
+
+        let byYears = Dictionary(grouping: byWeeks, by: {
+            $0.key.firstOfYear
+        })
+
+        return byYears
+    }
+}
+
+struct Year {
+    let year: Int
+    let entries: [Week]
+}
+
+struct Week {
+    let week: Int
+    let entries: [Day: [TimeEntry]]
 }
 
 // MARK: - Preview

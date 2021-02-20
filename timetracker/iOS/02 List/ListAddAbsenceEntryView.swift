@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftUIFlux
 
 struct ListAddAbsenceEntryView: ConnectedView {
+    let initialDay: Day
+
     @Environment(\.presentationMode) var presentationMode
-    @State private var absenceType: AbsenceType?
+    @State private var absenceType: AbsenceType = .dummy
     @State private var startDay: Day = Day()
     @State private var endDay: Day = Day()
-
-    let initialDay: Day
 
     struct Props {
         let absenceTypes: [AbsenceType]
@@ -43,8 +43,8 @@ struct ListAddAbsenceEntryView: ConnectedView {
                 }
 
                 Button("add", action: {
-                    guard let absenceType = self.absenceType else { return }
-                    props.addAbsenceEntry(AbsenceEntry(type: absenceType, start: self.startDay, end: self.endDay))
+                    guard self.absenceType != .dummy else { return }
+                    props.addAbsenceEntry(AbsenceEntry(type: self.absenceType, start: self.startDay, end: self.endDay))
                     self.presentationMode.wrappedValue.dismiss()
                 })
                 .buttonStyle(CTAStyle())

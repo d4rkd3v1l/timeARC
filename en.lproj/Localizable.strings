@@ -13,8 +13,7 @@
 "stop" = "Stop";
 "start" = "Start";
 "addTimeEntry" = "Time entry";
-"addTimeEntryTitle" = "Add time entry";
-"addAbsenceEntry" = "Absence entry";
+"addAbsenceEntry" = "Absence";
 "workingHours" = "Working hours";
 "weekDays" = "Week days";
 "weekDaysDescription" = "Choose your working days";
@@ -23,10 +22,10 @@
 "list" = "List";
 "noEntriesYet" = "There are no entries yet. Just start a timer or add entries manually.";
 "updateTimeEntryTitle" = "Update time entry";
-"updateAbsenceEntryTitle" = "Update absence entry";
+"updateAbsenceEntryTitle" = "Update absence";
 "update" = "Update";
 "addTimeEntryTitle" = "Add time entry";
-"addAbsenceEntryTitle" = "Add absence entry";
+"addAbsenceEntryTitle" = "Add absence";
 "add" = "Add";
 "timerCurrentlyRunning" = "This timer is currently running.";
 "noStatisticsForTimeFrameMessage" = "Unfortunately there are no statistics available for the selected time frame.";
@@ -65,7 +64,7 @@
 "timeEntries" = "Time Entries";
 "from" = "From";
 "to" = "To";
-"alertDeleteAbsenceTitle" = "Delete absence entry";
-"alertDeleteAbsenceText" = "Do you want to delete the absence entry for this day only or completely?";
+"alertDeleteAbsenceTitle" = "Remove absence";
+"alertDeleteAbsenceText" = "Do you want to remove the absence completely or only for this day?";
 "alertDeleteAbsenceCompletely" = "Completely";
 "alertDeleteAbsenceThisDay" = "This day";

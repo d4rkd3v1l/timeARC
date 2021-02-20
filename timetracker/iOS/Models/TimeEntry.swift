@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
+struct TimeEntry: Identifiable, Equatable, Codable {
     private (set) var id = UUID()
+    private (set) var lastModified: Date = Date()
 
     var start: Date {
         didSet {
@@ -22,15 +23,9 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
         }
     }
 
-    private (set) var lastModified: Date = Date()
-
     init(start: Date = Date(), end: Date? = nil) {
         self.start = start
         self.end = end
-    }
-
-    var isRunning: Bool {
-        return self.end == nil
     }
 
     mutating func stop() {
@@ -38,6 +33,10 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
     }
 
     // MARK: Helper
+
+    var isRunning: Bool {
+        return self.end == nil
+    }
 
     var actualEnd: Date {
         return self.end ?? Date()
@@ -79,10 +78,6 @@ struct TimeEntry: Identifiable, Equatable, Hashable, Codable {
             }
 
         return timeEntries
-    }
-
-    static func == (lhs: TimeEntry, rhs: TimeEntry) -> Bool {
-        return lhs.id == rhs.id
     }
 }
 
@@ -178,7 +173,7 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
                                workingDuration: Int,
                                absenceEntries: [AbsenceEntry]) -> Int {
         return self.totalDuration(workingDuration: workingDuration,
-                                  absenceEntries: absenceEntries) - (workingDuration * workingDays.count)
+                                  absenceEntries: absenceEntries) - (workingDuration * workingDays.filter { $0 < Day() }.count)
     }
 }
 
@@ -226,8 +221,8 @@ extension Array where Element == TimeEntry {
             let next = merged[index+1]
 
             if current.actualEnd >= next.start {
-                merged.removeAll(where: { $0 == current })
-                merged.removeAll(where: { $0 == next })
+                merged.removeAll(where: { $0.id == current.id })
+                merged.removeAll(where: { $0.id == next.id })
 
                 let end: Date?
                 if let currentEnd = current.end, let nextEnd = next.end {

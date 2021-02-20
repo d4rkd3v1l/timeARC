@@ -175,9 +175,11 @@
 		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81CC768425D7BDD900600714 /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CC768325D7BDD900600714 /* ListDetailView.swift */; };
+		81D442B425E020A500C133FE /* WidthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D442B325E020A500C133FE /* WidthKey.swift */; };
 		81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */; };
 		81FA6D4C25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */; };
 		81FA6D4E25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4D25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift */; };
+		81FA6D5025E0142E00DCE4A3 /* ListDetailRowAbsenceEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4F25E0142D00DCE4A3 /* ListDetailRowAbsenceEntryView.swift */; };
 		81FD95CC25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */; };
 		81FD9CBD25740E960049C6CE /* CTAStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CBC25740E960049C6CE /* CTAStyle.swift */; };
 		81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CCA25741D050049C6CE /* ContrastColor.swift */; };
@@ -404,9 +406,11 @@
 		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timetracker/timeARC.xctestplan; sourceTree = "<group>"; };
 		81CC768325D7BDD900600714 /* ListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
+		81D442B325E020A500C133FE /* WidthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthKey.swift; sourceTree = "<group>"; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
 		81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarAddEntryModifier.swift; sourceTree = "<group>"; };
 		81FA6D4D25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddAbsenceEntryView.swift; sourceTree = "<group>"; };
+		81FA6D4F25E0142D00DCE4A3 /* ListDetailRowAbsenceEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailRowAbsenceEntryView.swift; sourceTree = "<group>"; };
 		81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailRowTimeEntryView.swift; sourceTree = "<group>"; };
 		81FD9CBC25740E960049C6CE /* CTAStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTAStyle.swift; sourceTree = "<group>"; };
 		81FD9CCA25741D050049C6CE /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
@@ -647,12 +651,13 @@
 		8179B31B2528E02100A537B7 /* 02 List */ = {
 			isa = PBXGroup;
 			children = (
-				8179B31C2528E02100A537B7 /* ListView.swift */,
-				81A6D8F425DFB3B4004A31BC /* ListAddTimeEntryView.swift */,
 				81FA6D4D25DFF0C200DCE4A3 /* ListAddAbsenceEntryView.swift */,
-				817B42E82531F031005240C5 /* ListRowView.swift */,
-				81CC768325D7BDD900600714 /* ListDetailView.swift */,
+				81A6D8F425DFB3B4004A31BC /* ListAddTimeEntryView.swift */,
+				81FA6D4F25E0142D00DCE4A3 /* ListDetailRowAbsenceEntryView.swift */,
 				81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */,
+				81CC768325D7BDD900600714 /* ListDetailView.swift */,
+				817B42E82531F031005240C5 /* ListRowView.swift */,
+				8179B31C2528E02100A537B7 /* ListView.swift */,
 			);
 			path = "02 List";
 			sourceTree = "<group>";
@@ -662,6 +667,8 @@
 			children = (
 				817D61E42531CDDC009761DE /* AbsenceEntry.swift */,
 				817D61EC2531CDF3009761DE /* AbsenceType.swift */,
+				8179B3372528E02100A537B7 /* CodableColor.swift */,
+				81FD9CCA25741D050049C6CE /* ContrastColor.swift */,
 				817B42F62531FA00005240C5 /* Day.swift */,
 				8179B3242528E02100A537B7 /* TimeEntry.swift */,
 				8145115925D69A9B003AA5E0 /* TimeEntry+DataPoints.swift */,
@@ -684,10 +691,8 @@
 			children = (
 				8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */,
 				816883B025DD8A3900956F8F /* Binding+.swift */,
-				8179B3372528E02100A537B7 /* CodableColor.swift */,
 				8179B3362528E02100A537B7 /* Collection+average.swift */,
 				8179B3342528E02100A537B7 /* Color+.swift */,
-				81FD9CCA25741D050049C6CE /* ContrastColor.swift */,
 				81FD9CBC25740E960049C6CE /* CTAStyle.swift */,
 				8179B3382528E02100A537B7 /* Date+.swift */,
 				8179B3352528E02100A537B7 /* Date+Strideable.swift */,
@@ -696,6 +701,7 @@
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
 				81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */,
 				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
+				81D442B325E020A500C133FE /* WidthKey.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1168,9 +1174,11 @@
 				8179B34E2528E02100A537B7 /* StatisticsReducer.swift in Sources */,
 				817D61E52531CDDC009761DE /* AbsenceEntry.swift in Sources */,
 				8134BDE525D6767B00FF9106 /* StatisticsBreaksView.swift in Sources */,
+				81D442B425E020A500C133FE /* WidthKey.swift in Sources */,
 				8179B3532528E02100A537B7 /* TimeReducer.swift in Sources */,
 				8179B3402528E02100A537B7 /* SettingsView.swift in Sources */,
 				8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */,
+				81FA6D5025E0142E00DCE4A3 /* ListDetailRowAbsenceEntryView.swift in Sources */,
 				8179B35E2528E02100A537B7 /* Date+.swift in Sources */,
 				8134BDE125D6763700FF9106 /* StatisticsAverageHoursView.swift in Sources */,
 				81A6D8F525DFB3B4004A31BC /* ListAddTimeEntryView.swift in Sources */,

@@ -160,7 +160,7 @@ class TimeEntryTests: XCTestCase {
         timeEntry1.start = Date()
 
         let result = timeEntriesProvider.dict.find(timeEntry1)
-        XCTAssertEqual(result, timeEntry1)
+        XCTAssertEqual(result?.id, timeEntry1.id)
     }
 
     // MARK: Array extensions
@@ -353,32 +353,5 @@ class TimeEntryTests: XCTestCase {
 
     func testFormatted() throws {
         XCTAssertEqual(123456.formatted(), "34:17")
-    }
-
-    func testBla() throws {
-        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-
-        let startDate2 = try Date(year: 2020, month: 07, day: 21, hour: 11, minute: 0, second: 0)
-        let endDate2 = try Date(year: 2020, month: 07, day: 21, hour: 15, minute: 0, second: 0)
-
-        let startDate3 = try Date(year: 2020, month: 07, day: 21, hour: 16, minute: 30, second: 0)
-        let endDate3 = try Date(year: 2020, month: 07, day: 21, hour: 17, minute: 0, second: 0)
-
-        let timeEntry = TimeEntry(start: startDate1, end: endDate1)
-        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
-        let timeEntry3 = TimeEntry(start: startDate3, end: endDate3)
-
-        let timeEntries = [timeEntry,
-                           timeEntry2,
-                           timeEntry3]
-
-        let minSeconds: Double = 0
-        let maxSeconds: Double = 86400
-        
-        let startProgress = (Double(timeEntry.start.hoursAndMinutesInSeconds) - minSeconds) / (maxSeconds - minSeconds)
-        let startAngle: Angle = .degrees(min(maxSeconds * startProgress, maxSeconds))
-        let endProgress = (Double(timeEntry.actualEnd.hoursAndMinutesInSeconds) - minSeconds) / (maxSeconds - minSeconds)
-        let endAngle: Angle = .degrees(min(maxSeconds * endProgress, maxSeconds))
     }
 }

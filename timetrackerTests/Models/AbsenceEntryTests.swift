@@ -73,7 +73,7 @@ class AbsenceEntryTests: XCTestCase {
                              start: Day().addingDays(3),
                              end: Day().addingDays(8))
 
-        XCTAssertEqual(absenceEntry1, absenceEntry2)
+        XCTAssertEqual(absenceEntry1.id, absenceEntry2.id)
     }
 
     func testAbsenceEntriesForDay() throws {
@@ -89,10 +89,10 @@ class AbsenceEntryTests: XCTestCase {
 
         let dateBefore = try Date(year: 2020, month: 07, day: 19, hour: 22, minute: 32, second: 13)
 
-        XCTAssertTrue(absenceEntries.absenceEntries(for: dateBefore.day).isEmpty)
-        XCTAssertEqual(absenceEntries.absenceEntries(for: dateStart1.day).count, 1)
-        XCTAssertEqual(absenceEntries.absenceEntries(for: dateEnd1.day).count, 2)
-        XCTAssertEqual(absenceEntries.absenceEntries(for: dateEnd2.day).count, 1)
+        XCTAssertTrue(absenceEntries.forDay(dateBefore.day).isEmpty)
+        XCTAssertEqual(absenceEntries.forDay(dateStart1.day).count, 1)
+        XCTAssertEqual(absenceEntries.forDay(dateEnd1.day).count, 2)
+        XCTAssertEqual(absenceEntries.forDay(dateEnd2.day).count, 1)
     }
 
     func testTotalDurationInSeconds() throws {

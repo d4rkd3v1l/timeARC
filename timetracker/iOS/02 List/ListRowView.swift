@@ -17,19 +17,21 @@ struct ListRowView: View {
     var body: some View {
         HStack {
             ZStack(alignment: .leading) {
-                Text("0000").hidden()
+                Text("XXX").hidden()
                 Text(self.day.date.formatted("EE"))
             }
-            Text(self.day.date.formatted("dd.MM.YYYY"))
+
+            Text(self.day.date.formatted("MM dd"))
+
             Spacer()
-            ForEach(self.absenceEntries, id: \.self) { entry in
+
+            ForEach(self.absenceEntries) { entry in
                 Text(entry.type.icon)
             }
+
             Spacer()
-            ZStack {
-                Text("00:00").hidden()
-                Text(self.timeEntries.totalDurationInSeconds.formatted(allowedUnits: [.hour, .minute]) ?? "")
-            }
+
+            Text(self.timeEntries.totalDurationInSeconds.formatted(allowedUnits: [.hour, .minute]) ?? "")
         }
     }
 }

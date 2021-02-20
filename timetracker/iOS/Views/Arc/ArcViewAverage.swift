@@ -34,6 +34,19 @@ struct ArcViewAverage: View {
                 .max { $0 < $1 } ?? 86400)
     }
 
+    init?(timeEntries: [TimeEntry], color: Color) {
+        guard let day = timeEntries.first?.start.day else { return nil }
+        self.init(timeEntries: [day: timeEntries],
+                  workingDays: [day],
+                  color: color)
+    }
+
+    init(timeEntries: [Day: [TimeEntry]], workingDays: [Day], color: Color) {
+        self.timeEntries = timeEntries
+        self.workingDays = workingDays
+        self.color = color
+    }
+
     func angle(for seconds: Int) -> Angle {
         let progress = (Double(seconds) - self.minSeconds) / (self.maxSeconds - self.minSeconds)
         return .degrees(min(self.maxAngle * progress, self.maxAngle))

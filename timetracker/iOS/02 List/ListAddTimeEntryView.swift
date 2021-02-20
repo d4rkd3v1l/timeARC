@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftUIFlux
 
 struct ListAddTimeEntryView: ConnectedView {
+    let initialDay: Day
+
     @Environment(\.presentationMode) var presentationMode
     @State private var day: Day = Day()
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
-
-    let initialDay: Day
 
     struct Props {
         let addTimeEntry: (TimeEntry) -> Void

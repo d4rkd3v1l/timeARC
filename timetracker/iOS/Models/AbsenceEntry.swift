@@ -7,11 +7,27 @@
 
 import Foundation
 
-struct AbsenceEntry: Identifiable, Equatable, Hashable, Codable {
+struct AbsenceEntry: Identifiable, Equatable, Codable {
     private (set) var id = UUID()
-    var type: AbsenceType
-    var start: Day
-    var end: Day
+    private (set) var lastModified: Date = Date()
+
+    var type: AbsenceType {
+        didSet {
+            self.lastModified = Date()
+        }
+    }
+
+    var start: Day {
+        didSet {
+            self.lastModified = Date()
+        }
+    }
+
+    var end: Day {
+        didSet {
+            self.lastModified = Date()
+        }
+    }
 
     init(type: AbsenceType, start: Day, end: Day) {
         self.type = type
@@ -32,8 +48,13 @@ struct AbsenceEntry: Identifiable, Equatable, Hashable, Codable {
             .map { $0.day }
     }
 
-    static func == (lhs: AbsenceEntry, rhs: AbsenceEntry) -> Bool {
-        return lhs.id == rhs.id
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.lastModified = (try container.decodeIfPresent(Date.self, forKey: .lastModified)) ?? Date()
+        self.type = try container.decode(AbsenceType.self, forKey: .type)
+        self.start = try container.decode(Day.self, forKey: .start)
+        self.end = try container.decode(Day.self, forKey: .end)
     }
 }
 
