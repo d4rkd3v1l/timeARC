@@ -21,7 +21,7 @@ struct ListAbsenceEntryUpdateView: ConnectedView {
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(absenceTypes: state.settingsState.absenceTypes,
                      absenceEntryBinding: {
-                        Binding<AbsenceEntry>(get: { state.timeState.absenceEntries.first(where: { $0.id == self.absenceEntry.id })! },
+                        Binding<AbsenceEntry>(get: { state.timeState.absenceEntries.first(where: { $0.id == self.absenceEntry.id })! }, // TODO: Fix crash on delete
                                               set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0)) })
                      })
     }

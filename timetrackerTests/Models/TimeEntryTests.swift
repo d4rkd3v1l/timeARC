@@ -291,19 +291,15 @@ class TimeEntryTests: XCTestCase {
 
     func testAverageDuration() throws {
         let timeEntries = try self.timeEntries()
-        let workingDays = try self.workingDays()
 
-        let averageDuration = timeEntries.averageDuration(workingDays: workingDays)
+        let averageDuration = timeEntries.averageDuration()
         XCTAssertEqual(averageDuration, 23215)
     }
 
     func testTotalDuration() throws {
         let timeEntries = try self.timeEntries()
-        let workingDays = try self.workingDays()
 
-        let totalDuration = timeEntries.totalDuration(workingDays: workingDays,
-                                                      workingDuration: 28800,
-                                                      absenceEntries: [])
+        let totalDuration = timeEntries.totalDuration()
         XCTAssertEqual(totalDuration, 69646)
     }
 
@@ -337,9 +333,8 @@ class TimeEntryTests: XCTestCase {
 
     func testAverageOvertimeDuration() throws {
         let timeEntries = try self.timeEntries()
-        let workingDays = try self.workingDays()
 
-        let averageOvertimeDuration = timeEntries.averageOvertimeDuration(workingDays: workingDays, workingDuration: 28800)
+        let averageOvertimeDuration = timeEntries.averageOvertimeDuration(workingDuration: 28800)
         XCTAssertEqual(averageOvertimeDuration, -5585)
     }
 

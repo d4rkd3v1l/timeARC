@@ -89,7 +89,7 @@ struct ArcViewAverage: View {
                 HStack(alignment: .lastTextBaseline,
                        spacing: geometry.size.width * 0.01) {
 
-                    Text(self.timeEntries.averageDuration(workingDays: self.workingDays).formatted(allowedUnits: [.hour, .minute]) ?? "")
+                    Text(self.timeEntries.averageDuration().formatted(allowedUnits: [.hour, .minute]) ?? "")
                         .animatableSystemFont(size: geometry.size.width / 4.5, weight: .bold)
                         .padding(0)
                 }

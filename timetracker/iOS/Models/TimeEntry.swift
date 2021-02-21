@@ -112,25 +112,19 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
         return self.filter { range.contains($0.key.date) }
     }
 
-    func averageDuration(workingDays: [Day]) -> Int {
+    func averageDuration() -> Int {
         return self
-            .compactMap { day, entries in
-                let totalDuration = entries.totalDurationInSeconds
-                guard workingDays.contains(day) || totalDuration > 0  else { return nil }
-                return totalDuration
-            }
+            .mapValues { $0.totalDurationInSeconds }
+            .values
+            .compactMap { $0 }
             .average()
     }
 
-    func totalDuration(workingDays: [Day],
-                       workingDuration: Int,
-                       absenceEntries: [AbsenceEntry]) -> Int {
+    func totalDuration() -> Int {
         return self
-            .map { day, entries -> Int in
-                let actualWorkingDuration = entries.totalDurationInSeconds
-                let absenceDuration = absenceEntries.forDay(day, workingDays: workingDays).totalDurationInSeconds(for: workingDays, with: workingDuration)
-                return actualWorkingDuration + absenceDuration
-            }
+            .mapValues { $0.totalDurationInSeconds }
+            .values
+            .compactMap { $0 }
             .sum()
     }
 
@@ -165,17 +159,19 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
             .sum()
     }
 
-    func averageOvertimeDuration(workingDays: [Day],
-                                 workingDuration: Int) -> Int {
-        return self.averageDuration(workingDays: workingDays) - workingDuration
+    func averageOvertimeDuration(workingDuration: Int) -> Int {
+        return self.averageDuration() - workingDuration
     }
 
     func totalOvertimeDuration(workingDays: [Day],
                                workingDuration: Int,
                                absenceEntries: [AbsenceEntry]) -> Int {
-        return self.totalDuration(workingDays: workingDays,
-                                  workingDuration: workingDuration,
-                                  absenceEntries: absenceEntries) - (workingDuration * workingDays.filter { $0 < Day() }.count)
+        let absenceDuration = workingDays.map { day in
+            absenceEntries.forDay(day, workingDays: workingDays).reduce(0) { $0 + Int($1.type.offPercentage * Float(workingDuration)) }
+        }
+        .sum()
+
+        return self.totalDuration() + absenceDuration - (workingDuration * workingDays.count)
     }
 }
 

@@ -74,18 +74,39 @@ extension Array where Element == WeekDay {
     /// Note: A relevant day is any day that is a "working day" and any day that has a "time entry" (this is important in order to consider time entries on non-working days)
     func relevantDays(for timeEntries: [Day: [TimeEntry]],
                       absenceEntries: [AbsenceEntry],
-                      considerTimeEntriesOnNonWorkingDays: Bool = true) -> [Day] {
+                      considerTimeEntriesOnNonWorkingDays: Bool = true,
+                      limitStartDate: Date? = nil,
+                      limitEndDate: Date? = nil) -> [Day] {
         let sortedDays = timeEntries.keys.sorted()
-        let earliestTimeEntryDate = sortedDays.first?.date ?? .distantFuture
-        let latestTimeEntryDate = sortedDays.last?.date ?? .distantPast
-        let earliestAbsenceDate = absenceEntries.map { $0.start }.min()?.date ?? .distantFuture
-        let latestAbsenceDate = absenceEntries.map { $0.end }.max()?.date ?? .distantPast
+        let earliestTimeEntryDate = sortedDays.first?.date
+        let latestTimeEntryDate = sortedDays.last?.date
+        let earliestAbsenceDate = absenceEntries.map { $0.start }.min()?.date
+        let latestAbsenceDate = absenceEntries.map { $0.end }.max()?.date
 
-        let earliestRelevantDate = [earliestTimeEntryDate, earliestAbsenceDate].min()
-        let latestRelevantDate = [latestTimeEntryDate, latestAbsenceDate].max()
+        // Note: Earliest relevant date is the date of the start of very first entry (so basically "the start of the apps usage")
+        let earliestRelevantDay = [
+            earliestTimeEntryDate ?? .distantFuture,
+            earliestAbsenceDate ?? .distantFuture
+        ].min()
 
-        guard let startDate = earliestRelevantDate,
-              let endDate = latestRelevantDate else { return [] }
+        let earliestRelevantDayLimited = [
+            earliestRelevantDay ?? .distantPast,
+            limitStartDate ?? .distantPast
+        ].max()
+
+        // Note: Latest relevant date is the end of the very last entry, to consider entries in the future as well (e.g. absences like planned holidays)
+        let latestRelevantDay = [
+            latestTimeEntryDate ?? .distantPast,
+            latestAbsenceDate ?? .distantPast
+        ].max()
+
+        let latestRelevantDayLimited = [
+            latestRelevantDay ?? .distantFuture,
+            limitEndDate ?? .distantFuture,
+        ].min()
+
+        guard let startDate = earliestRelevantDayLimited,
+              let endDate = latestRelevantDayLimited else { return [] }
 
         let relevantDays = stride(from: startDate.startOfDay,
                                   through: endDate.endOfDay,

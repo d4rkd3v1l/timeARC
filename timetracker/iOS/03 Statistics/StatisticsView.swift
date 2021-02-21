@@ -29,25 +29,28 @@ struct StatisticsView: ConnectedView {
         let endDate: Date
         let timeEntries: [Day: [TimeEntry]]
         let absenceEntries: [AbsenceEntry]
-        let workingDays: [Day]
+        let relevantDays: [Day]
         let workingDuration: Int
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         let startDate = state.statisticsState.selectedStartDate
         let endDate = state.statisticsState.selectedEndDate
-        let workingDays = state.settingsState.workingWeekDays.workingDays(startDate: startDate, endDate: endDate)
+        let relevantDays = state.settingsState.workingWeekDays.relevantDays(for: state.timeState.timeEntries,
+                                                                            absenceEntries: state.timeState.absenceEntries,
+                                                                            considerTimeEntriesOnNonWorkingDays: true,
+                                                                            limitStartDate: startDate,
+                                                                            limitEndDate: [endDate, Date()].min())
 
         return Props(timeFrame: state.statisticsState.selectedTimeFrame,
                      startDate: startDate,
                      endDate: endDate,
                      timeEntries: state.timeState.timeEntries.timeEntries(from: startDate,
                                                                           to: endDate),
-                     absenceEntries: state.timeState.absenceEntries.exactAbsenceEntries(for: workingDays,
+                     absenceEntries: state.timeState.absenceEntries.exactAbsenceEntries(for: relevantDays,
                                                                                         from: startDate,
                                                                                         to: endDate),
-                     workingDays: state.settingsState.workingWeekDays.workingDays(startDate: startDate,
-                                                                                  endDate: endDate),
+                     relevantDays: relevantDays,
                      workingDuration: state.settingsState.workingDuration)
     }
 
@@ -65,7 +68,7 @@ struct StatisticsView: ConnectedView {
                     List {
                         Section {
                             StatisticsAverageHoursView(timeEntries: props.timeEntries,
-                                                       workingDays: props.workingDays)
+                                                       relevantDays: props.relevantDays)
                         }
 
                         Section {
@@ -73,7 +76,7 @@ struct StatisticsView: ConnectedView {
                                                        endDate: props.endDate,
                                                        timeEntries: props.timeEntries,
                                                        absenceEntries: props.absenceEntries,
-                                                       workingDays: props.workingDays,
+                                                       relevantDays: props.relevantDays,
                                                        workingDuration: props.workingDuration)
                         }
 
@@ -88,14 +91,14 @@ struct StatisticsView: ConnectedView {
                                                    endDate: props.endDate,
                                                    timeEntries: props.timeEntries,
                                                    absenceEntries: props.absenceEntries,
-                                                   workingDays: props.workingDays,
+                                                   relevantDays: props.relevantDays,
                                                    workingDuration: props.workingDuration)
                         }
 
                         Section {
                             StatisticsAbsencesView(timeEntries: props.timeEntries,
                                                    absenceEntries: props.absenceEntries,
-                                                   workingDays: props.workingDays)
+                                                   relevantDays: props.relevantDays)
                         }
                     }
                     .listStyle(InsetGroupedListStyle())

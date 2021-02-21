@@ -53,15 +53,12 @@ struct Provider: TimelineProvider {
         let todayDuration = timeEntries.forDay(Day()).totalDurationInSeconds
         let todayMaxDuration = widgetData.workingDuration
         let isTodayWorkingDay = widgetData.workingDays.contains(Day()) || !timeEntries.forDay(Day()).isEmpty
-        let weekDuration = timeEntries.totalDuration(workingDays: widgetData.workingDays,
-                                                     workingDuration: widgetData.workingDuration,
-                                                     absenceEntries: widgetData.absenceEntries)
+        let weekDuration = timeEntries.totalDuration()
         let weekMaxDuration = widgetData.workingDuration * widgetData.workingDays.count
-        let weekAverageDuration = timeEntries.averageDuration(workingDays: widgetData.workingDays)
+        let weekAverageDuration = timeEntries.averageDuration()
         let weekAverageBreaksDuration = timeEntries.averageBreaksDuration()
         let weekTotalBreaksDuration = timeEntries.totalBreaksDuration()
-        let weekAverageOvertimeDuration = timeEntries.averageOvertimeDuration(workingDays: widgetData.workingDays,
-                                                                              workingDuration: widgetData.workingDuration)
+        let weekAverageOvertimeDuration = timeEntries.averageOvertimeDuration(workingDuration: widgetData.workingDuration)
         let weekTotalOvertimeDuration = timeEntries.totalOvertimeDuration(workingDays: widgetData.workingDays,
                                                                           workingDuration: widgetData.workingDuration,
                                                                           absenceEntries: widgetData.absenceEntries)

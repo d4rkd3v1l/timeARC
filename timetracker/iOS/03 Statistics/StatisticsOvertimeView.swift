@@ -13,12 +13,12 @@ struct StatisticsOvertimeView: View {
     let endDate: Date
     let timeEntries: [Day: [TimeEntry]]
     let absenceEntries: [AbsenceEntry]
-    let workingDays: [Day]
+    let relevantDays: [Day]
     let workingDuration: Int
 
     var body: some View {
-        let average = self.timeEntries.averageOvertimeDuration(workingDays: self.workingDays, workingDuration: self.workingDuration)
-        let total = self.timeEntries.totalOvertimeDuration(workingDays: self.workingDays, workingDuration: self.workingDuration, absenceEntries: self.absenceEntries)
+        let average = self.timeEntries.averageOvertimeDuration(workingDuration: self.workingDuration)
+        let total = self.timeEntries.totalOvertimeDuration(workingDays: self.relevantDays, workingDuration: self.workingDuration, absenceEntries: self.absenceEntries)
 
         VStack {
             StatisticsSectionHeaderView(imageName: "hourglass.badge.plus",

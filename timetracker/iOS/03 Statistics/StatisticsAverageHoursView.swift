@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StatisticsAverageHoursView: View {
     let timeEntries: [Day: [TimeEntry]]
-    let workingDays: [Day]
+    let relevantDays: [Day]
 
     var body: some View {
         VStack {
@@ -17,7 +17,7 @@ struct StatisticsAverageHoursView: View {
                                         title: "averageHours")
 
             ArcViewAverage(timeEntries: self.timeEntries,
-                           workingDays: self.workingDays,
+                           workingDays: self.relevantDays,
                            color: .accentColor)
                 .frame(width: 170, height: 170)
 

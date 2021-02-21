@@ -14,30 +14,28 @@ struct StatisticsAbsencesView: View {
     
     let timeEntries: [Day: [TimeEntry]]
     let absenceEntries: [AbsenceEntry]
-    let workingDays: [Day]
+    let relevantDays: [Day]
     
     var body: some View {
         Group {
+            let absenceDurationInDays = self.absenceEntries.totalDurationInDays(for: self.relevantDays)
+
             VStack {
                 StatisticsSectionHeaderView(imageName: "calendar",
                                             title: "absences")
 
-                HStack {
-                    ArcViewFull(duration: self.timeEntries.count,
-                                maxDuration: self.workingDays.count,
-                                color: .accentColor,
-                                allowedUnits: [.second],
-                                displayMode: .progress)
-                        .frame(width: 150, height: 150)
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text("daysWorked")
-                        Spacer()
-                    }
-                }
+                ArcViewFull(duration: self.timeEntries.count,
+                            maxDuration: self.relevantDays.count,
+                            color: .accentColor,
+                            allowedUnits: [.second],
+                            displayMode: .progress)
+                    .frame(width: 150, height: 150)
+
+                Text("You've worked on \(self.timeEntries.count) of \(self.relevantDays.count) days and tracked absences for \(self.formattedAbsence(for: absenceDurationInDays)) days.")
+                    .font(.caption)
+                    .foregroundColor(.gray)
             }
 
-            let absenceDurationInDays = self.absenceEntries.totalDurationInDays(for: self.workingDays)
             if absenceDurationInDays > 0 {
                 HStack {
                     Text("totalAbsenceDays")
@@ -45,7 +43,7 @@ struct StatisticsAbsencesView: View {
                     Text(self.formattedAbsence(for: absenceDurationInDays))
                 }
 
-                ForEach(self.absenceEntries.totalDurationInDaysByType(for: self.workingDays).sorted(by: { $0.value > $1.value }), id: \.key) { key, value in
+                ForEach(self.absenceEntries.totalDurationInDaysByType(for: self.relevantDays).sorted(by: { $0.value > $1.value }), id: \.key) { key, value in
                     HStack {
                         Text(key.localizedTitle)
                         Spacer()

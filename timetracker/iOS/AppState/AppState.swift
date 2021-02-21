@@ -41,6 +41,7 @@ func loadAppState(_ completion: @escaping (AppState?) -> Void) {
 
         guard let data = userDefaults.data(forKey: "appState") else {
             DispatchQueue.main.async {
+                assertionFailure("Error loading AppState data from UserDefaults.")
                 completion(nil)
             }
             return
@@ -48,6 +49,9 @@ func loadAppState(_ completion: @escaping (AppState?) -> Void) {
 
         let decodedState = try? JSONDecoder().decode(AppState?.self, from: data)
         DispatchQueue.main.async {
+            if decodedState == nil {
+                assertionFailure("Error decoding AppState.")
+            }
             completion(decodedState)
         }
     }

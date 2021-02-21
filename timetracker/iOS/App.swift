@@ -13,6 +13,9 @@ struct app: App {
     let watchCommunicator = WatchCommunicator(dispatch: store.dispatch)
 
     init() {
+        #if DEBUG
+            print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        #endif
         store.dispatch(action: InitFlux())
 
         store.dispatch(action: AppStateLoadingInProgress())

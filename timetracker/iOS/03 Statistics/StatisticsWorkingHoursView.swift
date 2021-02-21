@@ -13,12 +13,12 @@ struct StatisticsWorkingHoursView: View {
     let endDate: Date
     let timeEntries: [Day: [TimeEntry]]
     let absenceEntries: [AbsenceEntry]
-    let workingDays: [Day]
+    let relevantDays: [Day]
     let workingDuration: Int
 
     var body: some View {
-        let average = timeEntries.averageDuration(workingDays: self.workingDays)
-        let total = timeEntries.totalDuration(workingDays: self.workingDays, workingDuration: self.workingDuration, absenceEntries: self.absenceEntries)
+        let average = timeEntries.averageDuration()
+        let total = timeEntries.totalDuration()
 
         VStack {
             StatisticsSectionHeaderView(imageName: "briefcase.fill",
