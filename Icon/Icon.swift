@@ -1,6 +1,6 @@
 //
 //  Icon.swift
-//  timetracker
+//  timeARC
 //
 //  Created by d4Rk on 12.12.20.
 //

@@ -1,6 +1,6 @@
 //
 //  Provider.swift
-//  timetracker
+//  widget
 //
 //  Created by d4Rk on 01.11.20.
 //
@@ -19,7 +19,7 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<WidgetEntry>) -> ()) {
-        guard let userDefaults = UserDefaults(suiteName: "group.com.d4Rk.timetracker"),
+        guard let userDefaults = UserDefaults(suiteName: "group.com.d4rk.timearc"),
               let decodedWidgetData = userDefaults.data(forKey: "widgetData"),
               let widgetData = try? JSONDecoder().decode(WidgetData.self, from: decodedWidgetData) else { return }
 

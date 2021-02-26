@@ -1,6 +1,6 @@
 //
 //  WidgetData.swift
-//  timetracker (iOS)
+//  widget
 //
 //  Created by d4Rk on 23.08.20.
 //

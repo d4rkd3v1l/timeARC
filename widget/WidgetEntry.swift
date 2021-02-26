@@ -1,6 +1,6 @@
 //
 //  WidgetEntry.swift
-//  timetracker
+//  widget
 //
 //  Created by d4Rk on 01.11.20.
 //

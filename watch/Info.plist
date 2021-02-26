@@ -26,7 +26,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.d4Rk.timetracker</string>
+	<string>com.d4rk.timearc</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

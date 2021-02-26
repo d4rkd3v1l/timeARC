@@ -1,5 +1,5 @@
 //
-//  timetrackerApp.swift
+//  WatchApp.swift
 //  watch Extension
 //
 //  Created by d4Rk on 23.08.20.
@@ -13,6 +13,10 @@ struct WatchApp: App {
     let appCommunicator = AppCommunicator()
 
     init() {
+        #if DEBUG
+            print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        #endif
+        
         store.dispatch(action: InitFlux())
 
         store.dispatch(action: WatchStateLoadingInProgress())

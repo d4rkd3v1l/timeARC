@@ -88,11 +88,10 @@
 		816BC54D254EC90F0015B905 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BC54B254EC90F0015B905 /* WidgetEntry.swift */; };
 		8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1702534EEED00C39CA4 /* WeekDayTests.swift */; };
 		8172E17A2534EFA500C39CA4 /* DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E1792534EFA500C39CA4 /* DayTests.swift */; };
-		8179B2912528DF7C00A537B7 /* timetrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B2902528DF7C00A537B7 /* timetrackerUITests.swift */; };
+		8179B2912528DF7C00A537B7 /* timeARCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B2902528DF7C00A537B7 /* timeARCUITests.swift */; };
 		8179B33F2528E02100A537B7 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3112528E02100A537B7 /* StatisticsView.swift */; };
 		8179B3402528E02100A537B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3132528E02100A537B7 /* SettingsView.swift */; };
 		8179B3442528E02100A537B7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3192528E02100A537B7 /* TimerView.swift */; };
-		8179B3452528E02100A537B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8179B31A2528E02100A537B7 /* Assets.xcassets */; };
 		8179B3462528E02100A537B7 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B31C2528E02100A537B7 /* ListView.swift */; };
 		8179B3472528E02100A537B7 /* WatchCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B31D2528E02100A537B7 /* WatchCommunicator.swift */; };
 		8179B3482528E02100A537B7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B31E2528E02100A537B7 /* App.swift */; };
@@ -176,6 +175,7 @@
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81CC768425D7BDD900600714 /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CC768325D7BDD900600714 /* ListDetailView.swift */; };
 		81D442B425E020A500C133FE /* WidthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D442B325E020A500C133FE /* WidthKey.swift */; };
+		81D4A25525E8EF70008C6FA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8179B31A2528E02100A537B7 /* Assets.xcassets */; };
 		81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */; };
 		81FA6D4C25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */; };
 		81FA6D4E25DFF0C200DCE4A3 /* ListAbsenceEntryCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4D25DFF0C200DCE4A3 /* ListAbsenceEntryCreateView.swift */; };
@@ -265,7 +265,6 @@
 		81130B042529A1C600CA0A69 /* Collection+averageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+averageTests.swift"; sourceTree = "<group>"; };
 		81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionHandlerTests.swift; sourceTree = "<group>"; };
 		81130B1A2529B7E000CA0A69 /* StatisticsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsReducerTests.swift; sourceTree = "<group>"; };
-		812D5228253C36F70008AFBA /* PartialSheet */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PartialSheet; path = timetracker/PartialSheet; sourceTree = "<group>"; };
 		81304C6C258627BE0030C42A /* icon_dark_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dark_red@2x.png"; sourceTree = "<group>"; };
 		81304C6D258627BE0030C42A /* icon_dark_green@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dark_green@3x.png"; sourceTree = "<group>"; };
 		81304C6E258627BE0030C42A /* icon_light_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_light_gray@2x.png"; sourceTree = "<group>"; };
@@ -319,7 +318,7 @@
 		814775212528E47700EDBE79 /* WidgetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
 		814775942528E75800EDBE79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8147759C2528E75D00EDBE79 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		814775C32528EAC600EDBE79 /* timetracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timetracker.entitlements; sourceTree = "<group>"; };
+		814775C32528EAC600EDBE79 /* timeARC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timeARC.entitlements; sourceTree = "<group>"; };
 		814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		814775ED2528F10C00EDBE79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8153D9CD2585487000137E43 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
@@ -334,7 +333,7 @@
 		8179B2812528DF7C00A537B7 /* timeARCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeARCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8179B2872528DF7C00A537B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8179B28C2528DF7C00A537B7 /* timeARCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeARCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8179B2902528DF7C00A537B7 /* timetrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timetrackerUITests.swift; sourceTree = "<group>"; };
+		8179B2902528DF7C00A537B7 /* timeARCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeARCUITests.swift; sourceTree = "<group>"; };
 		8179B2922528DF7C00A537B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8179B3112528E02100A537B7 /* StatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		8179B3132528E02100A537B7 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -404,7 +403,7 @@
 		81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewAverage.swift; sourceTree = "<group>"; };
 		81B5DE4725C5924400C12C62 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
 		81B5DE5725C5927300C12C62 /* ArcViewFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewFull.swift; sourceTree = "<group>"; };
-		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timetracker/timeARC.xctestplan; sourceTree = "<group>"; };
+		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timeARC/timeARC.xctestplan; sourceTree = "<group>"; };
 		81CC768325D7BDD900600714 /* ListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
 		81D442B325E020A500C133FE /* WidthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthKey.swift; sourceTree = "<group>"; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
@@ -536,11 +535,10 @@
 			children = (
 				8153D9C6258547DB00137E43 /* Icon */,
 				81BFE818254DF59800594425 /* timeARC.xctestplan */,
-				812D5228253C36F70008AFBA /* PartialSheet */,
 				814775952528E75800EDBE79 /* Localizable.strings */,
-				8179B2722528DF7B00A537B7 /* timetracker */,
-				8179B2842528DF7C00A537B7 /* timetrackerTests */,
-				8179B28F2528DF7C00A537B7 /* timetrackerUITests */,
+				8179B2722528DF7B00A537B7 /* timeARC */,
+				8179B2842528DF7C00A537B7 /* timeARCTests */,
+				8179B28F2528DF7C00A537B7 /* timeARCUITests */,
 				8179B37D2528E08B00A537B7 /* watch */,
 				8179B3892528E08C00A537B7 /* watch Extension */,
 				8147750B2528E46400EDBE79 /* widget */,
@@ -562,19 +560,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8179B2722528DF7B00A537B7 /* timetracker */ = {
+		8179B2722528DF7B00A537B7 /* timeARC */ = {
 			isa = PBXGroup;
 			children = (
-				814775C32528EAC600EDBE79 /* timetracker.entitlements */,
+				814775C32528EAC600EDBE79 /* timeARC.entitlements */,
 				8179B30F2528E02100A537B7 /* iOS */,
 				8179B31A2528E02100A537B7 /* Assets.xcassets */,
 				81A6AF7425D6FB8C000E3B4D /* appState.json */,
 				8179B27C2528DF7C00A537B7 /* Info.plist */,
 			);
-			path = timetracker;
+			path = timeARC;
 			sourceTree = "<group>";
 		};
-		8179B2842528DF7C00A537B7 /* timetrackerTests */ = {
+		8179B2842528DF7C00A537B7 /* timeARCTests */ = {
 			isa = PBXGroup;
 			children = (
 				8179B36B2528E03900A537B7 /* Extensions */,
@@ -583,16 +581,16 @@
 				8179B2872528DF7C00A537B7 /* Info.plist */,
 				8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */,
 			);
-			path = timetrackerTests;
+			path = timeARCTests;
 			sourceTree = "<group>";
 		};
-		8179B28F2528DF7C00A537B7 /* timetrackerUITests */ = {
+		8179B28F2528DF7C00A537B7 /* timeARCUITests */ = {
 			isa = PBXGroup;
 			children = (
-				8179B2902528DF7C00A537B7 /* timetrackerUITests.swift */,
+				8179B2902528DF7C00A537B7 /* timeARCUITests.swift */,
 				8179B2922528DF7C00A537B7 /* Info.plist */,
 			);
-			path = timetrackerUITests;
+			path = timeARCUITests;
 			sourceTree = "<group>";
 		};
 		8179B30F2528E02100A537B7 /* iOS */ = {
@@ -1064,10 +1062,10 @@
 				81304CAC258627C10030C42A /* icon_dark_yellow@3x.png in Resources */,
 				81304C9D258627C10030C42A /* icon_light_blue@3x.png in Resources */,
 				81304CB4258627C10030C42A /* icon_dark_purple@3x.png in Resources */,
+				81D4A25525E8EF70008C6FA5 /* Assets.xcassets in Resources */,
 				81304CB8258627C10030C42A /* icon_light_green@3x.png in Resources */,
 				81304C94258627C10030C42A /* icon_dark_red@2x.png in Resources */,
 				81304CB5258627C10030C42A /* icon_dark_white@3x.png in Resources */,
-				8179B3452528E02100A537B7 /* Assets.xcassets in Resources */,
 				81304CA9258627C10030C42A /* icon_light_green@2x.png in Resources */,
 				81304CAD258627C10030C42A /* icon_light_yellow@3x.png in Resources */,
 				81304CBB258627C10030C42A /* icon_dark_blue@2x.png in Resources */,
@@ -1242,7 +1240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8179B2912528DF7C00A537B7 /* timetrackerUITests.swift in Sources */,
+				8179B2912528DF7C00A537B7 /* timeARCUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1338,7 +1336,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1360,7 +1358,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1492,19 +1490,21 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = timetracker/timetracker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = timeARC/timeARC.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 455K6552B4;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = timetracker/Info.plist;
+				INFOPLIST_FILE = timeARC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1516,19 +1516,21 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = timetracker/timetracker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = timeARC/timeARC.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 455K6552B4;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = timetracker/Info.plist;
+				INFOPLIST_FILE = timeARC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1542,14 +1544,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 455K6552B4;
-				INFOPLIST_FILE = timetrackerTests/Info.plist;
+				INFOPLIST_FILE = timeARCTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetrackerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1566,14 +1568,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 455K6552B4;
-				INFOPLIST_FILE = timetrackerTests/Info.plist;
+				INFOPLIST_FILE = timeARCTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetrackerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1587,17 +1589,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 455K6552B4;
-				INFOPLIST_FILE = timetrackerUITests/Info.plist;
+				INFOPLIST_FILE = timeARCUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetrackerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = timetracker;
+				TEST_TARGET_NAME = timeARC;
 			};
 			name = Debug;
 		};
@@ -1607,17 +1609,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 455K6552B4;
-				INFOPLIST_FILE = timetrackerUITests/Info.plist;
+				INFOPLIST_FILE = timeARCUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetrackerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = timetracker;
+				TEST_TARGET_NAME = timeARC;
 			};
 			name = Release;
 		};
@@ -1636,7 +1638,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.watchos.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1662,7 +1664,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.watchos.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1682,7 +1684,7 @@
 				DEVELOPMENT_TEAM = 455K6552B4;
 				IBSC_MODULE = watch_Extension;
 				INFOPLIST_FILE = watch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1702,7 +1704,7 @@
 				DEVELOPMENT_TEAM = 455K6552B4;
 				IBSC_MODULE = watch_Extension;
 				INFOPLIST_FILE = watch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.d4Rk.timetracker.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
