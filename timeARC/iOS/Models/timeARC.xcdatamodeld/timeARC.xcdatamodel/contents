@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18153" systemVersion="20D74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AbsenceEntry" representedClassName="AbsenceEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="end" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="start" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AbsenceType" inverseName="entry" inverseEntity="AbsenceType"/>
+    </entity>
+    <entity name="AbsenceType" representedClassName="AbsenceType" syncable="YES" codeGenerationType="class">
+        <attribute name="icon" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="offPercentage" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="entry" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AbsenceEntry" inverseName="type" inverseEntity="AbsenceEntry"/>
+    </entity>
+    <entity name="TimeEntry" representedClassName="TimeEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="start" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="TimeEntry" positionX="-3739.022827148438" positionY="-2935.257629394531" width="128" height="88"/>
+        <element name="AbsenceEntry" positionX="-3543.832275390625" positionY="-2938.952453613281" width="135.283447265625" height="103"/>
+        <element name="AbsenceType" positionX="-3299.223999023438" positionY="-2954.337249755859" width="128" height="118"/>
+    </elements>
+</model>

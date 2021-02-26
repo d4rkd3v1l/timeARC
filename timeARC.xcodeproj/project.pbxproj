@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8106067F25E8D16E0042639E /* timeARC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8106067D25E8D16E0042639E /* timeARC.xcdatamodeld */; };
+		8106068025E8D16E0042639E /* timeARC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8106067D25E8D16E0042639E /* timeARC.xcdatamodeld */; };
 		81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130AFC2529A10400CA0A69 /* CodableColorTests.swift */; };
 		81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B042529A1C600CA0A69 /* Collection+averageTests.swift */; };
 		81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */; };
@@ -261,6 +263,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8106067E25E8D16E0042639E /* timeARC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = timeARC.xcdatamodel; sourceTree = "<group>"; };
 		81130AFC2529A10400CA0A69 /* CodableColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColorTests.swift; sourceTree = "<group>"; };
 		81130B042529A1C600CA0A69 /* Collection+averageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+averageTests.swift"; sourceTree = "<group>"; };
 		81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionHandlerTests.swift; sourceTree = "<group>"; };
@@ -672,6 +675,7 @@
 				8179B3242528E02100A537B7 /* TimeEntry.swift */,
 				8145115925D69A9B003AA5E0 /* TimeEntry+DataPoints.swift */,
 				8179B3232528E02100A537B7 /* WeekDay.swift */,
+				8106067D25E8D16E0042639E /* timeARC.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1125,6 +1129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				816BC52C254EB89A0015B905 /* WeekDay.swift in Sources */,
+				8106068025E8D16E0042639E /* timeARC.xcdatamodeld in Sources */,
 				816BC54D254EC90F0015B905 /* WidgetEntry.swift in Sources */,
 				8147757E2528E5E700EDBE79 /* Date+Strideable.swift in Sources */,
 				81B5DE4A25C5924400C12C62 /* Arc.swift in Sources */,
@@ -1165,6 +1170,7 @@
 				8179B3552528E02100A537B7 /* TimeState.swift in Sources */,
 				817B431925320440005240C5 /* Sequence+Unique.swift in Sources */,
 				8179B34C2528E02100A537B7 /* TimeEntry.swift in Sources */,
+				8106067F25E8D16E0042639E /* timeARC.xcdatamodeld in Sources */,
 				8134BDE325D6765F00FF9106 /* StatisticsWorkingHoursView.swift in Sources */,
 				8134BDEB25D6772600FF9106 /* StatisticsTimeFrameView.swift in Sources */,
 				81A6AF7625D70B07000E3B4D /* StatisticsSectionFooterView.swift in Sources */,
@@ -1818,6 +1824,19 @@
 			productName = SwiftUIFlux;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		8106067D25E8D16E0042639E /* timeARC.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8106067E25E8D16E0042639E /* timeARC.xcdatamodel */,
+			);
+			currentVersion = 8106067E25E8D16E0042639E /* timeARC.xcdatamodel */;
+			path = timeARC.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8179B2682528DF7B00A537B7 /* Project object */;
 }
