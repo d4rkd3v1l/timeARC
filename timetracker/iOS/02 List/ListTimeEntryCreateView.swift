@@ -9,12 +9,14 @@ import SwiftUI
 import SwiftUIFlux
 
 struct ListTimeEntryCreateView: ConnectedView {
-    let initialDay: Day
-
     @Environment(\.presentationMode) var presentationMode
-    @State private var day: Day = Day()
+    @State private var day: Day
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
+
+    init(initialDay: Day) {
+        _day = State(initialValue: initialDay)
+    }
 
     struct Props {
         let addTimeEntry: (TimeEntry) -> Void
@@ -57,9 +59,6 @@ struct ListTimeEntryCreateView: ConnectedView {
             .buttonStyle(CTAStyle())
         }
         .navigationBarTitle("createTimeEntryTitle")
-        .onAppear {
-            self.day = self.initialDay
-        }
     }
 }
 

@@ -57,7 +57,7 @@ struct ToolbarAddEntryModifier: ViewModifier {
 
                 case .addAbsenceEntry:
                     NavigationView {
-                        ListAbsenceEntryCreateView(mode: .create(initialDay: self.initialDay))
+                        ListAbsenceEntryCreateView(initialDay: self.initialDay)
                             .environmentObject(self.store)
                             .accentColor(self.accentColor)
                     }

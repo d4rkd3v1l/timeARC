@@ -12,8 +12,6 @@ struct ListRowView: View {
     let timeEntries: [TimeEntry]
     let absenceEntries: [AbsenceEntry]
 
-    @ObservedObject var updater = ViewUpdater(updateInterval: 60)
-
     var body: some View {
         HStack {
             ZStack(alignment: .leading) {

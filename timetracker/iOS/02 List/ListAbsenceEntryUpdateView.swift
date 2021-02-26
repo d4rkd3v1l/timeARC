@@ -11,7 +11,6 @@ import SwiftUIFlux
 struct ListAbsenceEntryUpdateView: ConnectedView {
     let absenceEntry: AbsenceEntry
 
-    @Environment(\.presentationMode) var presentationMode
 
     struct Props {
         let absenceTypes: [AbsenceType]

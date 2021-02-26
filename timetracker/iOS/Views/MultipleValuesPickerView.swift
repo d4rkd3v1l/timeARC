@@ -18,15 +18,13 @@ protocol SingleValueSelectable: Identifiable, Equatable {
 
 // Heavily inspired by https://www.pawelmadej.com/post/multi-select-picker-for-swiftui/
 struct MultipleValuesPickerView<Item: MultipleValuesSelectable>: View {
-    @Environment(\.presentationMode) var presentationMode
-
-    private let initial: [Item]
     private var selectionChanged: (([Item]) -> Void)?
 
-    @State private var selections: [Item] = []
+    @Environment(\.presentationMode) var presentationMode
+    @State private var selections: [Item]
 
     init(initial: [Item]) {
-        self.initial = initial
+        _selections = State(initialValue: initial)
     }
     
     var body: some View {
@@ -42,7 +40,6 @@ struct MultipleValuesPickerView<Item: MultipleValuesSelectable>: View {
                 }
             }
         }
-        .onAppear { self.selections = self.initial }
     }
     
     func onSelectionChange(perform action: (([Item]) -> Void)? = nil) -> some View {
@@ -53,29 +50,24 @@ struct MultipleValuesPickerView<Item: MultipleValuesSelectable>: View {
 }
 
 struct SingleValuePickerView<Item: SingleValueSelectable>: View {
-    @Environment(\.presentationMode) var presentationMode
-
     private let availableItems: [Item]
-    private let initialSelection: Item
     private var selectionChanged: ((Item) -> Void)?
 
-    @State private var selection: Item!
+    @Environment(\.presentationMode) var presentationMode
+    @State private var selection: Item
 
     init(availableItems: [Item], selection: Item) {
         self.availableItems = availableItems
-        self.initialSelection = selection
+        _selection = State(initialValue: selection)
     }
 
     var body: some View {
-//        List {
-            ForEach(self.availableItems) { item in
-                SelectableItemView(title: item.localizedTitle, isSelected: self.selection == item) {
-                    self.selection = item
-                    self.selectionChanged?(self.selection)
-                }
+        ForEach(self.availableItems) { item in
+            SelectableItemView(title: item.localizedTitle, isSelected: self.selection == item) {
+                self.selection = item
+                self.selectionChanged?(self.selection)
             }
-            .onAppear { self.selection = self.initialSelection }
-//        }
+        }
     }
 
     func onSelectionChange(perform action: ((Item) -> Void)? = nil) -> some View {
@@ -84,7 +76,6 @@ struct SingleValuePickerView<Item: SingleValueSelectable>: View {
         return copy
     }
 }
-
 
 struct SelectableItemView: View {
     var title: String

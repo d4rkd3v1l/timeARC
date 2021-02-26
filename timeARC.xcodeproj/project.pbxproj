@@ -173,7 +173,6 @@
 		81B5DE5825C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
 		81B5DE5925C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
 		81B5DE5A25C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
-		81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE8B19253058F9003F95F5 /* ViewUpdater.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81CC768425D7BDD900600714 /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CC768325D7BDD900600714 /* ListDetailView.swift */; };
 		81D442B425E020A500C133FE /* WidthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D442B325E020A500C133FE /* WidthKey.swift */; };
@@ -405,7 +404,6 @@
 		81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewAverage.swift; sourceTree = "<group>"; };
 		81B5DE4725C5924400C12C62 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
 		81B5DE5725C5927300C12C62 /* ArcViewFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewFull.swift; sourceTree = "<group>"; };
-		81BE8B19253058F9003F95F5 /* ViewUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUpdater.swift; sourceTree = "<group>"; };
 		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timetracker/timeARC.xctestplan; sourceTree = "<group>"; };
 		81CC768325D7BDD900600714 /* ListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
 		81D442B325E020A500C133FE /* WidthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthKey.swift; sourceTree = "<group>"; };
@@ -703,7 +701,6 @@
 				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
 				81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */,
-				81BE8B19253058F9003F95F5 /* ViewUpdater.swift */,
 				81D442B325E020A500C133FE /* WidthKey.swift */,
 			);
 			path = Extensions;
@@ -1172,7 +1169,6 @@
 				8179B34C2528E02100A537B7 /* TimeEntry.swift in Sources */,
 				8134BDE325D6765F00FF9106 /* StatisticsWorkingHoursView.swift in Sources */,
 				8134BDEB25D6772600FF9106 /* StatisticsTimeFrameView.swift in Sources */,
-				81BE8B1A253058F9003F95F5 /* ViewUpdater.swift in Sources */,
 				81A6AF7625D70B07000E3B4D /* StatisticsSectionFooterView.swift in Sources */,
 				8179B34D2528E02100A537B7 /* AppState.swift in Sources */,
 				8179B34E2528E02100A537B7 /* StatisticsReducer.swift in Sources */,
