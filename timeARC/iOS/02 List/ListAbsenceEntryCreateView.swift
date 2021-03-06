@@ -13,7 +13,7 @@ struct ListAbsenceEntryCreateView: ConnectedView {
     @State private var absenceEntry: AbsenceEntry
 
     init(initialDay: Day) {
-        _absenceEntry = State(initialValue: AbsenceEntry(type: .dummy, start: initialDay, end: initialDay))
+        self._absenceEntry = State(initialValue: AbsenceEntry(type: .dummy, start: initialDay, end: initialDay))
     }
 
     struct Props {
@@ -23,7 +23,7 @@ struct ListAbsenceEntryCreateView: ConnectedView {
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(absenceTypes: state.settingsState.absenceTypes,
-                     addAbsenceEntry: { dispatch(AddAbsenceEntry(absenceEntry: $0)) })
+                     addAbsenceEntry: { dispatch(AddAbsenceEntry(absenceEntry: $0, source: .local)) })
     }
 
     func body(props: Props) -> some View {

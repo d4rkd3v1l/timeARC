@@ -10,9 +10,7 @@ import SwiftUIFlux
 
 // MARK: - Store
 
-struct InitFlux: Action {}
-struct AppStateLoadingInProgress: Action {}
-struct AppStateLoadingSuccess: Action {
+struct InitAppState: Action {
     let state: AppState
 }
 

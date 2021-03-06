@@ -8,7 +8,7 @@
 import Foundation
 
 struct AbsenceEntry: Identifiable, Equatable, Codable {
-    private (set) var id = UUID()
+    let id: UUID
     private (set) var lastModified: Date = Date()
 
     var type: AbsenceType {
@@ -29,7 +29,8 @@ struct AbsenceEntry: Identifiable, Equatable, Codable {
         }
     }
 
-    init(type: AbsenceType, start: Day, end: Day) {
+    init(id: UUID = UUID(), type: AbsenceType, start: Day, end: Day) {
+        self.id = id
         self.type = type
         self.start = start
         self.end = end

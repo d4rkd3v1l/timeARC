@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftUIFlux
-import WidgetKit
+import Resolver
 
 struct ContentView: ConnectedView {
     @Environment(\.colorScheme) var colorScheme
@@ -56,7 +56,8 @@ struct ContentView: ConnectedView {
                         }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-                    updateWidgetData(props.state)
+                    let widgetService: WidgetUpdateService = Resolver.resolve()
+                    widgetService.updateWidgets(props.state)
                 }
                 .accentColor(props.accentColor.color)
                 .contrastColor(props.accentColor.contrastColor(for: self.colorScheme))

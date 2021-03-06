@@ -44,7 +44,7 @@ class TimeReducerTests: XCTestCase {
     func testAddTimeEntry() throws {
         var state = TimeState()
         let initialTimeEntry = TimeEntry(start: Date(timeIntervalSinceNow: -60), end: Date())
-        let action = AddTimeEntry(timeEntry: initialTimeEntry)
+        let action = AddTimeEntry(timeEntry: initialTimeEntry, source: .local)
         state = timeReducer(state: state, action: action)
 
         XCTAssertEqual(state.timeEntries.count, 1)
@@ -62,7 +62,7 @@ class TimeReducerTests: XCTestCase {
 
         var updatedTimeEntry = initialTimeEntry
         updatedTimeEntry.end = date
-        let action = UpdateTimeEntry(timeEntry: updatedTimeEntry)
+        let action = UpdateTimeEntry(timeEntry: updatedTimeEntry, source: .local)
         state = timeReducer(state: state, action: action)
 
         let timeEntry = try XCTUnwrap(state.timeEntries[Day()]?.first)
@@ -77,7 +77,7 @@ class TimeReducerTests: XCTestCase {
         state.timeEntries[date.day] = [initialTimeEntry]
         XCTAssertEqual(state.timeEntries.count, 1)
 
-        let action = DeleteTimeEntry(timeEntry: initialTimeEntry)
+        let action = DeleteTimeEntry(timeEntry: initialTimeEntry, source: .local)
         state = timeReducer(state: state, action: action)
 
         XCTAssertTrue(state.timeEntries.isEmpty)
@@ -87,7 +87,7 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
 
-        let action = AddAbsenceEntry(absenceEntry: absenceEntry)
+        let action = AddAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: action)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
@@ -101,7 +101,7 @@ class TimeReducerTests: XCTestCase {
         var updatedAbsenceEntry = absenceEntry
         updatedAbsenceEntry.update(type: .dummy, start: Day().addingDays(1), end: Day().addingDays(3))
 
-        let action = UpdateAbsenceEntry(absenceEntry: absenceEntry)
+        let action = UpdateAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: action)
 
         XCTAssertEqual(state.absenceEntries.map { $0.id }, [updatedAbsenceEntry].map { $0.id })
@@ -111,12 +111,12 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
 
-        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
 
-        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: nil)
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: nil, source: .local)
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertTrue(state.absenceEntries.isEmpty)
@@ -129,12 +129,12 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
 
-        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
 
-        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day())
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day(), source: .local)
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries.count, 1)
@@ -144,12 +144,12 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
 
-        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
 
-        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1))
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1), source: .local)
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries.count, 2)
@@ -159,12 +159,12 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day().addingDays(2))
 
-        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
 
-        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(2))
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(2), source: .local)
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries.count, 1)
@@ -174,12 +174,12 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day())
 
-        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
 
-        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day())
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day(), source: .local)
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertTrue(state.absenceEntries.isEmpty)
@@ -190,12 +190,12 @@ class TimeReducerTests: XCTestCase {
         var state = TimeState()
         let absenceEntry = AbsenceEntry(type: .dummy, start: Day(), end: Day())
 
-        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry)
+        let addAction = AddAbsenceEntry(absenceEntry: absenceEntry, source: .local)
         state = timeReducer(state: state, action: addAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])
 
-        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1))
+        let removeAction = DeleteAbsenceEntry(absenceEntry: absenceEntry, onlyForDay: Day().addingDays(1), source: .local)
         state = timeReducer(state: state, action: removeAction)
 
         XCTAssertEqual(state.absenceEntries, [absenceEntry])

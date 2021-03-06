@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum WeekDay: Int, Identifiable, Comparable, CaseIterable, Codable {
+enum WeekDay: Int, Identifiable, Comparable, CaseIterable, Codable, Hashable {
     var id: WeekDay { self }
 
     case sunday = 1

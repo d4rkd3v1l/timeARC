@@ -15,7 +15,7 @@ struct ListTimeEntryCreateView: ConnectedView {
     @State private var endDate: Date = Date()
 
     init(initialDay: Day) {
-        _day = State(initialValue: initialDay)
+        self._day = State(initialValue: initialDay)
     }
 
     struct Props {
@@ -23,7 +23,7 @@ struct ListTimeEntryCreateView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
-        return Props(addTimeEntry: { dispatch(AddTimeEntry(timeEntry: $0)) })
+        return Props(addTimeEntry: { dispatch(AddTimeEntry(timeEntry: $0, source: .local)) })
     }
 
     func body(props: Props) -> some View {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeEntry: Identifiable, Equatable, Codable {
-    private (set) var id = UUID()
+    private (set) var id: UUID
     private (set) var lastModified: Date = Date()
 
     var start: Date {
@@ -23,7 +23,8 @@ struct TimeEntry: Identifiable, Equatable, Codable {
         }
     }
 
-    init(start: Date = Date(), end: Date? = nil) {
+    init(id: UUID = UUID(), start: Date = Date(), end: Date? = nil) {
+        self.id = id
         self.start = start
         self.end = end
     }

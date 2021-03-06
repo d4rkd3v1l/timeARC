@@ -11,7 +11,6 @@ import SwiftUIFlux
 struct ListAbsenceEntryUpdateView: ConnectedView {
     let absenceEntry: AbsenceEntry
 
-
     struct Props {
         let absenceTypes: [AbsenceType]
         let absenceEntryBinding: () -> Binding<AbsenceEntry>
@@ -21,7 +20,7 @@ struct ListAbsenceEntryUpdateView: ConnectedView {
         return Props(absenceTypes: state.settingsState.absenceTypes,
                      absenceEntryBinding: {
                         Binding<AbsenceEntry>(get: { state.timeState.absenceEntries.first(where: { $0.id == self.absenceEntry.id })! }, // TODO: Fix crash on delete
-                                              set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0)) })
+                                              set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0, source: .local)) })
                      })
     }
 

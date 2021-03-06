@@ -34,6 +34,11 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
     case let action as DeleteTimeEntry:
         removeTimeEntry(action.timeEntry, &state)
 
+    case let action as DeleteTimeEntryById:
+        let fakeTimeEntry = TimeEntry(id: action.id, start: Date())
+        guard let timeEntry = state.timeEntries.find(fakeTimeEntry) else { break }
+        removeTimeEntry(timeEntry, &state)
+
     case let action as AddAbsenceEntry:
         insertAbsenceEntry(action.absenceEntry, &state)
 
@@ -42,6 +47,10 @@ func timeReducer(state: TimeState, action: Action) -> TimeState {
 
     case let action as DeleteAbsenceEntry:
         removeAbsenceEntry(action.absenceEntry, onlyFor: action.onlyForDay, &state)
+
+    case let action as DeleteAbsenceEntryById:
+        let fakeAbsenceEntry = AbsenceEntry(id: action.id, type: .dummy, start: Day(), end: Day())
+        removeAbsenceEntry(fakeAbsenceEntry, onlyFor: nil, &state)
 
     case let action as SyncTimeEntriesFromWatch:
         action.timeEntries.forEach { timeEntry in

@@ -8,31 +8,56 @@
 import Foundation
 import SwiftUIFlux
 
+enum Source {
+    case local
+    case remote
+}
+
+protocol ActionWithSource: Action {
+    var source: Source { get }
+}
+
 struct ToggleTimer: Action {}
 
-struct AddTimeEntry: Action {
+struct AddTimeEntry: ActionWithSource {
     let timeEntry: TimeEntry
+    let source: Source
 }
 
-struct UpdateTimeEntry: Action {
+struct UpdateTimeEntry: ActionWithSource {
     let timeEntry: TimeEntry
+    let source: Source
 }
 
-struct DeleteTimeEntry: Action {
+struct DeleteTimeEntry: ActionWithSource {
     let timeEntry: TimeEntry
+    let source: Source
 }
 
-struct AddAbsenceEntry: Action {
+struct DeleteTimeEntryById: ActionWithSource {
+    let id: UUID
+    let source: Source
+}
+
+struct AddAbsenceEntry: ActionWithSource {
     let absenceEntry: AbsenceEntry
+    let source: Source
 }
 
-struct UpdateAbsenceEntry: Action {
+struct UpdateAbsenceEntry: ActionWithSource {
     let absenceEntry: AbsenceEntry
+    let source: Source
 }
 
-struct DeleteAbsenceEntry: Action {
+struct DeleteAbsenceEntry: ActionWithSource {
     let absenceEntry: AbsenceEntry
     let onlyForDay: Day?
+    let source: Source
+}
+
+struct DeleteAbsenceEntryById: ActionWithSource {
+    let id: UUID
+    let source: Source
 }
 
 struct SyncTimeEntriesFromWatch: Action {

@@ -42,13 +42,13 @@ struct ListDetailView: ConnectedView {
                      timeEntries: timeEntriesForDay,
                      timeEntryBinding: { index in
                         Binding<TimeEntry>(get: { state.timeState.timeEntries.forDay(self.day)[index] },
-                                           set: { dispatch(UpdateTimeEntry(timeEntry: $0)) }) },
+                                           set: { dispatch(UpdateTimeEntry(timeEntry: $0, source: .local)) }) },
                      absenceEntries: absenceEntriesForDay,
                      absenceEntryBinding: { index in
                         Binding<AbsenceEntry>(get: { absenceEntriesForDay[index] },
-                                              set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0)) }) },
-                     deleteTimeEntry: { dispatch(DeleteTimeEntry(timeEntry: $0)) },
-                     deleteAbsenceEntry: { dispatch(DeleteAbsenceEntry(absenceEntry: $0, onlyForDay: $1)) })
+                                              set: { dispatch(UpdateAbsenceEntry(absenceEntry: $0, source: .local)) }) },
+                     deleteTimeEntry: { dispatch(DeleteTimeEntry(timeEntry: $0, source: .local)) },
+                     deleteAbsenceEntry: { dispatch(DeleteAbsenceEntry(absenceEntry: $0, onlyForDay: $1, source: .local)) })
     }
 
     func body(props: Props) -> some View {

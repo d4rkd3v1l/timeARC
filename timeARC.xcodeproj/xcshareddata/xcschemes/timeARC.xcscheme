@@ -30,7 +30,7 @@
       codeCoverageEnabled = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:timetracker/timeARC.xctestplan"
+            reference = "container:timeARC/timeARC.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -80,14 +80,6 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.CloudKitDebug 3"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.SQLDebug 3"
-            isEnabled = "NO">
-         </CommandLineArgument>
          <CommandLineArgument
             argument = "-com.apple.CoreData.CloudKitDebug 3"
             isEnabled = "NO">
