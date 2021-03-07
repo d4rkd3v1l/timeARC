@@ -1,13 +1,13 @@
 //
-//  Icon.swift
-//  timeARC
+//  ContentView.swift
+//  icongenerator
 //
-//  Created by d4Rk on 12.12.20.
+//  Created by d4Rk on 07.03.21.
 //
 
 import SwiftUI
 
-struct Icon: View {
+struct IconGenerator: View {
     let ms: UInt32 = 1000
     let deviceScale: CGFloat = 2
 
@@ -33,6 +33,7 @@ struct Icon: View {
     @State private var rect: CGRect = .zero
     @State private var color: Color = .green
     @State private var size: CGFloat = 512
+    @State private var cornerRadiusPercentage: CGFloat = 0.16
 
     var body: some View {
         VStack {
@@ -49,12 +50,16 @@ struct Icon: View {
                     .redacted(reason: .placeholder)
                     .gradientBackground()
                     .background(RectGetter(rect: $rect))
+                    .cornerRadius(self.size * self.cornerRadiusPercentage)
             }
 
             Spacer()
 
             Button("Store") {
                 DispatchQueue.global().async {
+
+                    // MARK: iOS
+                    self.cornerRadiusPercentage = 0
                     for size in self.sizes {
                         DispatchQueue.main.async {
                             self.size = CGFloat(size.key)/self.deviceScale
@@ -76,6 +81,8 @@ struct Icon: View {
                         }
                     }
 
+                    // MARK: watchOS
+                    self.cornerRadiusPercentage = 0
                     for size in self.watchSizes {
                         DispatchQueue.main.async {
                             self.size = CGFloat(size.key)/self.deviceScale
@@ -97,6 +104,20 @@ struct Icon: View {
                         }
                     }
 
+                    // MARK: App icon style
+                    self.size = CGFloat(1024)/self.deviceScale
+                    self.color = .green
+                    self.cornerRadiusPercentage = 0.16
+
+                    usleep(100 * ms)
+
+                    DispatchQueue.main.async {
+                        let image = UIApplication.shared.windows[0].rootViewController!.view.asImage(rect: self.rect)
+                        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                        let filename = path.appendingPathComponent("app_icon_\(colorScheme).png")
+                        try! image.pngData()!.write(to: filename)
+                    }
+
                     print("Done. All files stored in: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!)")
                 }
             }
@@ -110,16 +131,21 @@ struct Icon: View {
     }
 }
 
-struct Icon_Previews: PreviewProvider {
+// MARK: - Preview
+
+struct IconGenerator_Previews: PreviewProvider {
     static var previews: some View {
-        Icon()
+        IconGenerator()
     }
 }
+
+// MARK: - Extensions
 
 private extension UIView {
     func asImage(rect: CGRect) -> UIImage {
         let renderer = UIGraphicsImageRenderer(bounds: rect)
         return renderer.image { rendererContext in
+            layer.backgroundColor = UIColor.clear.cgColor
             layer.render(in: rendererContext.cgContext)
         }
     }

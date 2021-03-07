@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="https://raw.github.com/d4rkd3v1l/timeARC/develop/timeARC/iOS/Assets.xcassets/AppIcon.appiconset/icon_dark_green_1024.png" width="250" height="250" />
+<img src="https://raw.github.com/d4rkd3v1l/timeARC/develop/Assets/app_icon_dark.png" width="250" height="250" />
 
 <br />
 <br />
