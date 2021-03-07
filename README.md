@@ -1,5 +1,10 @@
 # timeARC - a SwiftUI time tracker app
 
+<img src="https://raw.github.com/d4rkd3v1l/timeARC/develop/timeARC/iOS/Assets.xcassets/AppIcon.appiconset/icon_dark_green_1024.png" width="250" height="250">
+
+[![Build Status](https://app.bitrise.io/app/005a877ee34f42d3/status.svg?token=6Ff82GaWAW8Fo_GPbgimDQ&branch=develop)](https://app.bitrise.io/app/005a877ee34f42d3)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=develop&project=timeARC&metric=alert_status)](https://sonarcloud.io/dashboard?id=timeARC&branch=develop)
+
 This is basically my "I'm learning SwiftUI project". :rocket:
 
 ## Roadmap
