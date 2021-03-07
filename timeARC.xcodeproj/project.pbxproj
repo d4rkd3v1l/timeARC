@@ -121,7 +121,7 @@
 		8179B3572528E02100A537B7 /* StatisticsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3302528E02100A537B7 /* StatisticsActions.swift */; };
 		8179B3582528E02100A537B7 /* ExpansionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3322528E02100A537B7 /* ExpansionHandler.swift */; };
 		8179B3592528E02100A537B7 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
-		8179B35A2528E02100A537B7 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3342528E02100A537B7 /* Color+.swift */; };
+		8179B35A2528E02100A537B7 /* Color+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3342528E02100A537B7 /* Color+UIKit.swift */; };
 		8179B35B2528E02100A537B7 /* Date+Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3352528E02100A537B7 /* Date+Strideable.swift */; };
 		8179B35C2528E02100A537B7 /* Collection+average.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3362528E02100A537B7 /* Collection+average.swift */; };
 		8179B35D2528E02100A537B7 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3372528E02100A537B7 /* CodableColor.swift */; };
@@ -174,7 +174,6 @@
 		819FA2A625EA26E20007BC46 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FA2A525EA26E20007BC46 /* CoreDataServiceTests.swift */; };
 		81A6AF7625D70B07000E3B4D /* StatisticsSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6AF7525D70B07000E3B4D /* StatisticsSectionFooterView.swift */; };
 		81A6AF7825D70B15000E3B4D /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */; };
-		81A6D8F125DFA2F9004A31BC /* appState.json in Resources */ = {isa = PBXBuildFile; fileRef = 81A6AF7425D6FB8C000E3B4D /* appState.json */; };
 		81A6D8F525DFB3B4004A31BC /* ListTimeEntryCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D8F425DFB3B4004A31BC /* ListTimeEntryCreateView.swift */; };
 		81B5DE3E25C5922900C12C62 /* ArcViewAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */; };
 		81B5DE3F25C5922900C12C62 /* ArcViewAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */; };
@@ -387,7 +386,7 @@
 		8179B3302528E02100A537B7 /* StatisticsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsActions.swift; sourceTree = "<group>"; };
 		8179B3322528E02100A537B7 /* ExpansionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpansionHandler.swift; sourceTree = "<group>"; };
 		8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSystemFontModifier.swift; sourceTree = "<group>"; };
-		8179B3342528E02100A537B7 /* Color+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		8179B3342528E02100A537B7 /* Color+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+UIKit.swift"; sourceTree = "<group>"; };
 		8179B3352528E02100A537B7 /* Date+Strideable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Strideable.swift"; sourceTree = "<group>"; };
 		8179B3362528E02100A537B7 /* Collection+average.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+average.swift"; sourceTree = "<group>"; };
 		8179B3372528E02100A537B7 /* CodableColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
@@ -427,7 +426,6 @@
 		817E753425E186E600FB926E /* ListAbsenceEntryUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAbsenceEntryUpdateView.swift; sourceTree = "<group>"; };
 		819FA29F25EA0F010007BC46 /* CoreDataMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMiddleware.swift; sourceTree = "<group>"; };
 		819FA2A525EA26E20007BC46 /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
-		81A6AF7425D6FB8C000E3B4D /* appState.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = appState.json; sourceTree = "<group>"; };
 		81A6AF7525D70B07000E3B4D /* StatisticsSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSectionFooterView.swift; sourceTree = "<group>"; };
 		81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		81A6D8F425DFB3B4004A31BC /* ListTimeEntryCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTimeEntryCreateView.swift; sourceTree = "<group>"; };
@@ -625,7 +623,6 @@
 				81468CE125EBAFFA00E4E98F /* App+Injection.swift */,
 				8179B31F2528E02100A537B7 /* ContentView.swift */,
 				8179B31A2528E02100A537B7 /* Assets.xcassets */,
-				81A6AF7425D6FB8C000E3B4D /* appState.json */,
 				8179B27C2528DF7C00A537B7 /* Info.plist */,
 			);
 			path = timeARC;
@@ -742,7 +739,7 @@
 				8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */,
 				816883B025DD8A3900956F8F /* Binding+.swift */,
 				8179B3362528E02100A537B7 /* Collection+average.swift */,
-				8179B3342528E02100A537B7 /* Color+.swift */,
+				8179B3342528E02100A537B7 /* Color+UIKit.swift */,
 				81FD9CBC25740E960049C6CE /* CTAStyle.swift */,
 				8179B3382528E02100A537B7 /* Date+.swift */,
 				8179B3352528E02100A537B7 /* Date+Strideable.swift */,
@@ -933,8 +930,8 @@
 				8133A7C825F2D96900B8EA70 /* Extensions */,
 				819FA29F25EA0F010007BC46 /* CoreDataMiddleware.swift */,
 				812FF13725E91EBB0031366F /* CoreDataService.swift */,
-				81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */,
 				81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */,
+				81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */,
 				81F5297C25E90C4B00C3EAA8 /* timeARC.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -1165,7 +1162,6 @@
 				81304C9A258627C10030C42A /* icon_light_yellow@2x.png in Resources */,
 				81304C9B258627C10030C42A /* icon_dark_gray@3x.png in Resources */,
 				81304C97258627C10030C42A /* icon_dark_red@3x.png in Resources */,
-				81A6D8F125DFA2F9004A31BC /* appState.json in Resources */,
 				81304CA5258627C10030C42A /* icon_light_black@3x.png in Resources */,
 				81304CAF258627C10030C42A /* icon_light_black@2x.png in Resources */,
 				81304CB9258627C10030C42A /* icon_dark_white@2x.png in Resources */,
@@ -1319,7 +1315,7 @@
 				81F174BD25EC09B900BC890B /* CoreDataToStateService.swift in Sources */,
 				81FD95CC25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift in Sources */,
 				8179B35D2528E02100A537B7 /* CodableColor.swift in Sources */,
-				8179B35A2528E02100A537B7 /* Color+.swift in Sources */,
+				8179B35A2528E02100A537B7 /* Color+UIKit.swift in Sources */,
 				8179B3472528E02100A537B7 /* WatchCommunicationService.swift in Sources */,
 				81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */,
 				8179B3442528E02100A537B7 /* TimerView.swift in Sources */,

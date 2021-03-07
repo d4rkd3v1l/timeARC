@@ -12,7 +12,9 @@ import DifferenceKit
 class StateToCoreDataService {
     @Injected private var coreDataService: CoreDataService
 
-    func applyChanges(oldTimeEntries: [TimeEntry], newTimeEntries: [TimeEntry]) {
+    // MARK: - TimeEntry
+
+    func updateTimeEntries(oldTimeEntries: [TimeEntry], newTimeEntries: [TimeEntry]) {
         let stagedChangeset = StagedChangeset(source: oldTimeEntries, target: newTimeEntries)
 
         for changeset in stagedChangeset {
@@ -33,7 +35,9 @@ class StateToCoreDataService {
         }
     }
 
-    func applyChanges(oldAbsenceEntries: [AbsenceEntry], newAbsenceEntries: [AbsenceEntry]) {
+    // MARK: - AbsenceEntry
+
+    func updateAbsenceEntries(oldAbsenceEntries: [AbsenceEntry], newAbsenceEntries: [AbsenceEntry]) {
         let stagedChangeset = StagedChangeset(source: oldAbsenceEntries, target: newAbsenceEntries)
 
         for changeset in stagedChangeset {
@@ -53,7 +57,23 @@ class StateToCoreDataService {
             }
         }
     }
+
+    // MARK: - Misc
+
+    func updateSettings(displayMode: TimerDisplayMode,
+                        workingWeekDays: [WeekDay],
+                        workingDuration: Int,
+                        accentColor: CodableColor) {
+        try! self.coreDataService.updateSettings { managedSettings in
+            managedSettings.timerDisplayMode = displayMode.rawValue
+            managedSettings.workingWeekDays = workingWeekDays.map { $0.rawValue }
+            managedSettings.workingDuration = Int64(workingDuration)
+            managedSettings.accentColor = accentColor.rawValue
+        }
+    }
 }
+
+// MARK: - Extensions
 
 extension TimeEntry: Differentiable {
     var differenceIdentifier: UUID {

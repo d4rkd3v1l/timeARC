@@ -22,7 +22,16 @@ class CoreDataService {
     @Injected private var coreDataToStateService: CoreDataToStateService
     @LazyInjected private var dispatch: DispatchFunction
 
+    // Note: Needed for deletions from iCloud, as we only receive the ManagedObjectID in that case
     private var idMapping: [NSManagedObjectID: UUID] = [:]
+
+
+    private var initialCloudKitEvents: Set<NSPersistentCloudKitContainer.EventType> = Set()
+    private var initialSyncCompleted: Bool {
+        return self.initialCloudKitEvents.contains(.setup)
+            && self.initialCloudKitEvents.contains(.import)
+            && self.initialCloudKitEvents.contains(.export)
+    }
 
     private var context: NSManagedObjectContext {
         return self.persistentContainer.viewContext
@@ -54,6 +63,11 @@ class CoreDataService {
         self.persistentContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
         NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.eventChangedNotification),
+                                               name: NSPersistentCloudKitContainer.eventChangedNotification,
+                                               object: self.persistentContainer)
+
+        NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.didSaveObjectsNotification),
                                                name: NSManagedObjectContext.didSaveObjectsNotification,
                                                object: self.persistentContainer.viewContext)
@@ -81,7 +95,6 @@ class CoreDataService {
                                   didSyncWatchData: false)
 
         let workingWeekDays = managedSettings.workingWeekDays!
-            .compactMap { $0 as? Int }
             .map(WeekDay.init)
 
         let workingDuration = Int(managedSettings.workingDuration)
@@ -175,6 +188,12 @@ class CoreDataService {
         try self.context.save()
     }
 
+    func updateSettings(_ performUpdate: ((ManagedSettings) -> Void)) throws {
+        guard let managedSettings: ManagedSettings = try self.fetchAll().first else { fatalError() }
+        performUpdate(managedSettings)
+        try self.context.save()
+    }
+
     // MARK: - Generics
 
     func fetch<ManagedObject: FetchableById>(id: UUID) throws -> ManagedObject {
@@ -210,6 +229,21 @@ class CoreDataService {
 
     // MARK: - Notifications
 
+    // Inspired by https://stackoverflow.com/a/63927190/2019384
+    @objc private func eventChangedNotification(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let eventNotification = userInfo[NSPersistentCloudKitContainer.eventNotificationUserInfoKey],
+              let cloudEvent = eventNotification as? NSPersistentCloudKitContainer.Event,
+              cloudEvent.endDate != nil else { return }
+
+        // TODO: Remove before release ;-)
+        if let error = cloudEvent.error {
+            fatalError(error.localizedDescription)
+        }
+
+        self.initialCloudKitEvents.insert(cloudEvent.type)
+    }
+
     @objc private func didSaveObjectsNotification(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
 
@@ -232,8 +266,28 @@ class CoreDataService {
     }
 
     @objc private func didMergeChangesObjectIDsNotification(notification: NSNotification) {
+        try? self.singletonifySettings(notification: notification)
         self.coreDataToStateService.updateState(notification: notification,
                                                 context: self.context,
                                                 idMapping: self.idMapping)
+    }
+
+    private func singletonifySettings(notification: NSNotification) throws {
+//        guard let userInfo = notification.userInfo,
+//              let insertedIds = userInfo[NSInsertedObjectIDsKey] as? Set<NSManagedObjectID>,
+//              !insertedIds.isEmpty else { return }
+//
+//        let newManagedSettingsInstances = insertedIds.compactMap { self.context.object(with: $0) as? ManagedSettings }
+//        guard !newManagedSettingsInstances.isEmpty else { return }
+
+        let localManagedSettingsInstances: [ManagedSettings] = try self.fetchAll()
+        guard localManagedSettingsInstances.count > 1 else { return }
+
+        // TODO: Improve "algorithm" -> delete the oldest/newest or least recently changed ones?
+        localManagedSettingsInstances.dropLast().forEach { instance in
+            self.context.delete(instance)
+        }
+
+        try self.context.save()
     }
 }

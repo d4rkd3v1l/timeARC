@@ -15,4 +15,3 @@ protocol FetchableById: NSManagedObject {
 extension ManagedTimeEntry: FetchableById {}
 extension ManagedAbsenceEntry: FetchableById {}
 extension ManagedAbsenceType: FetchableById {}
-

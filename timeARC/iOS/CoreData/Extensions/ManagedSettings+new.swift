@@ -20,14 +20,7 @@ extension ManagedSettings {
                                           .wednesday,
                                           .thursday,
                                           .friday]
-
-        let managedWorkingWeekDays: [ManagedWorkingWeekDay] = workingWeekDays.map { workingWeekDay in
-            let managedWorkingWeekDay = ManagedWorkingWeekDay(context: context)
-            managedWorkingWeekDay.name = Int64(workingWeekDay.rawValue)
-            return managedWorkingWeekDay
-        }
-
-        managedSettings.workingWeekDays = Set(managedWorkingWeekDays) as NSSet
+        managedSettings.workingWeekDays = workingWeekDays.map { $0.rawValue }
 
         let absenceTypes: [AbsenceType] = [AbsenceType(id: UUID(), title: "bankHoliday", icon: "🙌", offPercentage: 1),
                                            AbsenceType(id: UUID(), title: "holiday", icon: "🏝", offPercentage: 1),
