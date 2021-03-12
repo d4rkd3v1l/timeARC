@@ -103,7 +103,6 @@
 		8179B3402528E02100A537B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3132528E02100A537B7 /* SettingsView.swift */; };
 		8179B3442528E02100A537B7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3192528E02100A537B7 /* TimerView.swift */; };
 		8179B3462528E02100A537B7 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B31C2528E02100A537B7 /* ListView.swift */; };
-		8179B3472528E02100A537B7 /* WatchCommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B31D2528E02100A537B7 /* WatchCommunicationService.swift */; };
 		8179B3482528E02100A537B7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B31E2528E02100A537B7 /* App.swift */; };
 		8179B3492528E02100A537B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B31F2528E02100A537B7 /* ContentView.swift */; };
 		8179B34B2528E02100A537B7 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3232528E02100A537B7 /* WeekDay.swift */; };
@@ -184,10 +183,23 @@
 		81B5DE5825C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
 		81B5DE5925C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
 		81B5DE5A25C5927300C12C62 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
+		81BA077425F50AB700557BB6 /* IconGeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA077325F50AB700557BB6 /* IconGeneratorApp.swift */; };
+		81BA077625F50AB700557BB6 /* IconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA077525F50AB700557BB6 /* IconGenerator.swift */; };
+		81BA077B25F50AB900557BB6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81BA077A25F50AB900557BB6 /* Preview Assets.xcassets */; };
+		81BA078125F50BC500557BB6 /* ArcViewFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE5725C5927300C12C62 /* ArcViewFull.swift */; };
+		81BA078225F50BCB00557BB6 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5DE4725C5924400C12C62 /* Arc.swift */; };
+		81BA078325F50BDB00557BB6 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33B2528E02100A537B7 /* ArcView.swift */; };
+		81BA078425F50BEB00557BB6 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
+		81BA078625F50C1600557BB6 /* Int+formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA078525F50C1600557BB6 /* Int+formatted.swift */; };
+		81BA078725F50C1B00557BB6 /* Int+formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA078525F50C1600557BB6 /* Int+formatted.swift */; };
+		81BA078825F50C3300557BB6 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3382528E02100A537B7 /* Date+.swift */; };
+		81BA078925F50C4400557BB6 /* Collection+average.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3362528E02100A537B7 /* Collection+average.swift */; };
+		81BA078C25F50F3100557BB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8179B31A2528E02100A537B7 /* Assets.xcassets */; };
+		81BA078D25F5158D00557BB6 /* Int+formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA078525F50C1600557BB6 /* Int+formatted.swift */; };
+		81BA078E25F5158E00557BB6 /* Int+formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA078525F50C1600557BB6 /* Int+formatted.swift */; };
 		81BE8B272530DC8B003F95F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81CC768425D7BDD900600714 /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CC768325D7BDD900600714 /* ListDetailView.swift */; };
 		81CFB90C25ED5C4D0094537E /* NotificationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFB90B25ED5C4D0094537E /* NotificationMiddleware.swift */; };
-		81CFB90E25ED5CBC0094537E /* WatchCommunicationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFB90D25ED5CBC0094537E /* WatchCommunicationMiddleware.swift */; };
 		81CFB91325ED5DF10094537E /* WidgetUpdateMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFB91225ED5DF10094537E /* WidgetUpdateMiddleware.swift */; };
 		81D442B425E020A500C133FE /* WidthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D442B325E020A500C133FE /* WidthKey.swift */; };
 		81D4A25525E8EF70008C6FA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8179B31A2528E02100A537B7 /* Assets.xcassets */; };
@@ -196,6 +208,8 @@
 		81E026CF25FB5D990025BBEE /* AbsenceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026CE25FB5D990025BBEE /* AbsenceTypeTests.swift */; };
 		81E026D225FB6EBB0025BBEE /* NotificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D125FB6EBB0025BBEE /* NotificationServiceTests.swift */; };
 		81E026D425FBDD0E0025BBEE /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */; };
+		81E026D925FBE45A0025BBEE /* WatchCommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */; };
+		81E026DA25FBE45A0025BBEE /* WatchCommunicationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */; };
 		81F174BB25EC07A000BC890B /* StateToCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */; };
 		81F174BD25EC09B900BC890B /* CoreDataToStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */; };
 		81F5297E25E90C4B00C3EAA8 /* timeARC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81F5297C25E90C4B00C3EAA8 /* timeARC.xcdatamodeld */; };
@@ -352,7 +366,6 @@
 		814775C32528EAC600EDBE79 /* timeARC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = timeARC.entitlements; sourceTree = "<group>"; };
 		814775CA2528EAEB00EDBE79 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		814775ED2528F10C00EDBE79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8153D9CD2585487000137E43 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		816883B025DD8A3900956F8F /* Binding+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+.swift"; sourceTree = "<group>"; };
 		816BC539254EC8C20015B905 /* WidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryView.swift; sourceTree = "<group>"; };
 		816BC542254EC8EF0015B905 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
@@ -371,7 +384,6 @@
 		8179B3192528E02100A537B7 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8179B31A2528E02100A537B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = iOS/Assets.xcassets; sourceTree = "<group>"; };
 		8179B31C2528E02100A537B7 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		8179B31D2528E02100A537B7 /* WatchCommunicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCommunicationService.swift; sourceTree = "<group>"; };
 		8179B31E2528E02100A537B7 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		8179B31F2528E02100A537B7 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8179B3232528E02100A537B7 /* WeekDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
@@ -435,10 +447,15 @@
 		81B5DE3D25C5922900C12C62 /* ArcViewAverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewAverage.swift; sourceTree = "<group>"; };
 		81B5DE4725C5924400C12C62 /* Arc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
 		81B5DE5725C5927300C12C62 /* ArcViewFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcViewFull.swift; sourceTree = "<group>"; };
+		81BA077125F50AB700557BB6 /* IconGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IconGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81BA077325F50AB700557BB6 /* IconGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconGeneratorApp.swift; sourceTree = "<group>"; };
+		81BA077525F50AB700557BB6 /* IconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconGenerator.swift; sourceTree = "<group>"; };
+		81BA077A25F50AB900557BB6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		81BA077C25F50AB900557BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81BA078525F50C1600557BB6 /* Int+formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+formatted.swift"; sourceTree = "<group>"; };
 		81BFE818254DF59800594425 /* timeARC.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = timeARC.xctestplan; path = timeARC/timeARC.xctestplan; sourceTree = "<group>"; };
 		81CC768325D7BDD900600714 /* ListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
 		81CFB90B25ED5C4D0094537E /* NotificationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMiddleware.swift; sourceTree = "<group>"; };
-		81CFB90D25ED5CBC0094537E /* WatchCommunicationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCommunicationMiddleware.swift; sourceTree = "<group>"; };
 		81CFB91225ED5DF10094537E /* WidgetUpdateMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateMiddleware.swift; sourceTree = "<group>"; };
 		81D442B325E020A500C133FE /* WidthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthKey.swift; sourceTree = "<group>"; };
 		81D4A25625E9075D008C6FA5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -446,6 +463,8 @@
 		81E026CE25FB5D990025BBEE /* AbsenceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceTypeTests.swift; sourceTree = "<group>"; };
 		81E026D125FB6EBB0025BBEE /* NotificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceTests.swift; sourceTree = "<group>"; };
 		81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
+		81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCommunicationService.swift; sourceTree = "<group>"; };
+		81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCommunicationMiddleware.swift; sourceTree = "<group>"; };
 		81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToCoreDataService.swift; sourceTree = "<group>"; };
 		81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataToStateService.swift; sourceTree = "<group>"; };
 		81F5297D25E90C4B00C3EAA8 /* timeARC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = timeARC.xcdatamodel; sourceTree = "<group>"; };
@@ -499,6 +518,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8179B43D2528E25C00A537B7 /* SwiftUIFlux in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81BA076E25F50AB700557BB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,7 +597,6 @@
 				81304C86258627C00030C42A /* icon_light_red@3x.png */,
 				81304C72258627BF0030C42A /* icon_light_yellow@2x.png */,
 				81304C85258627C00030C42A /* icon_light_yellow@3x.png */,
-				8153D9CD2585487000137E43 /* Icon.swift */,
 			);
 			path = Icon;
 			sourceTree = "<group>";
@@ -600,9 +625,9 @@
 				8179B37D2528E08B00A537B7 /* watch */,
 				8179B3892528E08C00A537B7 /* watch Extension */,
 				8147750B2528E46400EDBE79 /* widget */,
+				81BA077225F50AB700557BB6 /* IconGenerator */,
 				8179B2712528DF7B00A537B7 /* Products */,
 				8179B43B2528E25C00A537B7 /* Frameworks */,
-				81FA788925E95DDE00D1C9D4 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -615,6 +640,7 @@
 				8179B37C2528E08B00A537B7 /* watch.app */,
 				8179B3852528E08C00A537B7 /* watch Extension.appex */,
 				814775062528E46300EDBE79 /* widgetExtension.appex */,
+				81BA077125F50AB700557BB6 /* IconGenerator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -669,8 +695,8 @@
 				8179B3312528E02100A537B7 /* Extensions */,
 				8179B3222528E02100A537B7 /* Models */,
 				81CFB90F25ED5D640094537E /* Notification */,
+				81E026D625FBE45A0025BBEE /* WatchCommunication */,
 				8179B3392528E02100A537B7 /* Views */,
-				81CFB91025ED5D860094537E /* WatchCommunication */,
 				81CFB91125ED5D950094537E /* WidgetUpdate */,
 			);
 			path = iOS;
@@ -756,6 +782,7 @@
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
 				81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */,
 				81D442B325E020A500C133FE /* WidthKey.swift */,
+				81BA078525F50C1600557BB6 /* Int+formatted.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -906,6 +933,25 @@
 			path = Arc;
 			sourceTree = "<group>";
 		};
+		81BA077225F50AB700557BB6 /* IconGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				81BA077325F50AB700557BB6 /* IconGeneratorApp.swift */,
+				81BA077525F50AB700557BB6 /* IconGenerator.swift */,
+				81BA077C25F50AB900557BB6 /* Info.plist */,
+				81BA077925F50AB900557BB6 /* Preview Content */,
+			);
+			path = IconGenerator;
+			sourceTree = "<group>";
+		};
+		81BA077925F50AB900557BB6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				81BA077A25F50AB900557BB6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		81CFB90F25ED5D640094537E /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,15 +959,6 @@
 				81468CE525EBDDF900E4E98F /* NotificationService.swift */,
 			);
 			path = Notification;
-			sourceTree = "<group>";
-		};
-		81CFB91025ED5D860094537E /* WatchCommunication */ = {
-			isa = PBXGroup;
-			children = (
-				81CFB90D25ED5CBC0094537E /* WatchCommunicationMiddleware.swift */,
-				8179B31D2528E02100A537B7 /* WatchCommunicationService.swift */,
-			);
-			path = WatchCommunication;
 			sourceTree = "<group>";
 		};
 		81CFB91125ED5D950094537E /* WidgetUpdate */ = {
@@ -941,6 +978,15 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		81E026D625FBE45A0025BBEE /* WatchCommunication */ = {
+			isa = PBXGroup;
+			children = (
+				81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */,
+				81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */,
+			);
+			path = WatchCommunication;
+			sourceTree = "<group>";
+		};
 		81F5298025E90C8000C3EAA8 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -952,13 +998,6 @@
 				81F5297C25E90C4B00C3EAA8 /* timeARC.xcdatamodeld */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		81FA788925E95DDE00D1C9D4 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		81FE88BE2529171E000375FF /* Reducers */ = {
@@ -1091,13 +1130,30 @@
 			productReference = 8179B3852528E08C00A537B7 /* watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		81BA077025F50AB700557BB6 /* IconGenerator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81BA077D25F50AB900557BB6 /* Build configuration list for PBXNativeTarget "IconGenerator" */;
+			buildPhases = (
+				81BA076D25F50AB700557BB6 /* Sources */,
+				81BA076E25F50AB700557BB6 /* Frameworks */,
+				81BA076F25F50AB700557BB6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IconGenerator;
+			productName = icongenerator;
+			productReference = 81BA077125F50AB700557BB6 /* IconGenerator.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8179B2682528DF7B00A537B7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					814775052528E46300EDBE79 = {
@@ -1119,7 +1175,9 @@
 						CreatedOnToolsVersion = 12.0;
 					};
 					8179B3842528E08C00A537B7 = {
-						CreatedOnToolsVersion = 12.0;
+						81BA077025F50AB700557BB6 = {
+						};
+						CreatedOnToolsVersion = 12.5;
 						LastSwiftMigration = 1200;
 					};
 				};
@@ -1150,6 +1208,7 @@
 				8179B37B2528E08B00A537B7 /* watch */,
 				8179B3842528E08C00A537B7 /* watch Extension */,
 				814775052528E46300EDBE79 /* widgetExtension */,
+				81BA077025F50AB700557BB6 /* IconGenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -1241,6 +1300,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81BA076F25F50AB700557BB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81BA078C25F50F3100557BB6 /* Assets.xcassets in Resources */,
+				81BA077B25F50AB900557BB6 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1248,6 +1316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81BA078D25F5158D00557BB6 /* Int+formatted.swift in Sources */,
 				816BC52C254EB89A0015B905 /* WeekDay.swift in Sources */,
 				816BC54D254EC90F0015B905 /* WidgetEntry.swift in Sources */,
 				8147757E2528E5E700EDBE79 /* Date+Strideable.swift in Sources */,
@@ -1280,6 +1349,7 @@
 				81B5DE5825C5927300C12C62 /* ArcViewFull.swift in Sources */,
 				8179B3502528E02100A537B7 /* SettingsState.swift in Sources */,
 				8179B3622528E02100A537B7 /* MultipleValuesPickerView.swift in Sources */,
+				81E026D925FBE45A0025BBEE /* WatchCommunicationService.swift in Sources */,
 				8179B3562528E02100A537B7 /* SettingsReducer.swift in Sources */,
 				817E753525E186E600FB926E /* ListAbsenceEntryUpdateView.swift in Sources */,
 				8179B3492528E02100A537B7 /* ContentView.swift in Sources */,
@@ -1323,17 +1393,17 @@
 				81A6AF7825D70B15000E3B4D /* EdgeBorder.swift in Sources */,
 				816883B125DD8A3900956F8F /* Binding+.swift in Sources */,
 				8179B33F2528E02100A537B7 /* StatisticsView.swift in Sources */,
+				81BA078625F50C1600557BB6 /* Int+formatted.swift in Sources */,
 				8179B3602528E02100A537B7 /* ArcView.swift in Sources */,
 				8179B34F2528E02100A537B7 /* SettingsActions.swift in Sources */,
-				81CFB90E25ED5CBC0094537E /* WatchCommunicationMiddleware.swift in Sources */,
 				81F174BB25EC07A000BC890B /* StateToCoreDataService.swift in Sources */,
 				8179B3592528E02100A537B7 /* AnimatableSystemFontModifier.swift in Sources */,
 				8179B3512528E02100A537B7 /* AppIconMiddleware.swift in Sources */,
+				81E026DA25FBE45A0025BBEE /* WatchCommunicationMiddleware.swift in Sources */,
 				81F174BD25EC09B900BC890B /* CoreDataToStateService.swift in Sources */,
 				81FD95CC25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift in Sources */,
 				8179B35D2528E02100A537B7 /* CodableColor.swift in Sources */,
 				8179B35A2528E02100A537B7 /* Color+UIKit.swift in Sources */,
-				8179B3472528E02100A537B7 /* WatchCommunicationService.swift in Sources */,
 				81FD9CCB25741D050049C6CE /* ContrastColor.swift in Sources */,
 				8179B3442528E02100A537B7 /* TimerView.swift in Sources */,
 				812FF13825E91EBB0031366F /* CoreDataService.swift in Sources */,
@@ -1418,8 +1488,25 @@
 				8179B4172528E19D00A537B7 /* Date+Strideable.swift in Sources */,
 				8179B3D32528E0BB00A537B7 /* ComplicationController.swift in Sources */,
 				8179B3FB2528E14A00A537B7 /* CodableColor.swift in Sources */,
+				81BA078E25F5158E00557BB6 /* Int+formatted.swift in Sources */,
 				8179B4232528E1B200A537B7 /* AnimatableSystemFontModifier.swift in Sources */,
 				8179B3D52528E0BB00A537B7 /* WatchSizeHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81BA076D25F50AB700557BB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81BA078125F50BC500557BB6 /* ArcViewFull.swift in Sources */,
+				81BA078925F50C4400557BB6 /* Collection+average.swift in Sources */,
+				81BA078325F50BDB00557BB6 /* ArcView.swift in Sources */,
+				81BA077625F50AB700557BB6 /* IconGenerator.swift in Sources */,
+				81BA078225F50BCB00557BB6 /* Arc.swift in Sources */,
+				81BA078725F50C1B00557BB6 /* Int+formatted.swift in Sources */,
+				81BA078425F50BEB00557BB6 /* AnimatableSystemFontModifier.swift in Sources */,
+				81BA077425F50AB700557BB6 /* IconGeneratorApp.swift in Sources */,
+				81BA078825F50C3300557BB6 /* Date+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1858,6 +1945,50 @@
 			};
 			name = Release;
 		};
+		81BA077E25F50AB900557BB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"icongenerator/Preview Content\"";
+				DEVELOPMENT_TEAM = 455K6552B4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = icongenerator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.icongenerator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81BA077F25F50AB900557BB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"icongenerator/Preview Content\"";
+				DEVELOPMENT_TEAM = 455K6552B4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = icongenerator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.d4rk.timearc.icongenerator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1920,6 +2051,15 @@
 			buildConfigurations = (
 				8179B3A32528E08D00A537B7 /* Debug */,
 				8179B3A42528E08D00A537B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81BA077D25F50AB900557BB6 /* Build configuration list for PBXNativeTarget "IconGenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81BA077E25F50AB900557BB6 /* Debug */,
+				81BA077F25F50AB900557BB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
