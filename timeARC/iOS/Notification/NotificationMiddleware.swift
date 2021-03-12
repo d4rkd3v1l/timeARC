@@ -25,8 +25,8 @@ let notificationMiddleware: Middleware<AppState> = { dispatch, getState in
                                                                          workingDuration: state.settingsState.workingDuration,
                                                                          workingWeekDays: state.settingsState.workingWeekDays)
             } else {
-                notificationService.removeNotifications(identifiers: [NotificationService.endOfWoringDayNotificationIdentifier,
-                                                                      NotificationService.endOfWoringWeekNotificationIdentifier])
+                notificationService.removeNotifications(identifiers: [NotificationService.endOfWorkingDayNotificationIdentifier,
+                                                                      NotificationService.endOfWorkingWeekNotificationIdentifier])
             }
         }
     }

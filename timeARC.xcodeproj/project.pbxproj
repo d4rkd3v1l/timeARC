@@ -171,7 +171,7 @@
 		817E753525E186E600FB926E /* ListAbsenceEntryUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E753425E186E600FB926E /* ListAbsenceEntryUpdateView.swift */; };
 		819FA2A025EA0F010007BC46 /* CoreDataMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FA29F25EA0F010007BC46 /* CoreDataMiddleware.swift */; };
 		819FA2A325EA14DA0007BC46 /* DifferenceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 819FA2A225EA14DA0007BC46 /* DifferenceKit */; };
-		819FA2A625EA26E20007BC46 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FA2A525EA26E20007BC46 /* CoreDataServiceTests.swift */; };
+		819FA2A625EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FA2A525EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift */; };
 		81A6AF7625D70B07000E3B4D /* StatisticsSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6AF7525D70B07000E3B4D /* StatisticsSectionFooterView.swift */; };
 		81A6AF7825D70B15000E3B4D /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */; };
 		81A6D8F525DFB3B4004A31BC /* ListTimeEntryCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D8F425DFB3B4004A31BC /* ListTimeEntryCreateView.swift */; };
@@ -193,6 +193,9 @@
 		81D4A25525E8EF70008C6FA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8179B31A2528E02100A537B7 /* Assets.xcassets */; };
 		81D4A25725E9075D008C6FA5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D4A25625E9075D008C6FA5 /* CloudKit.framework */; };
 		81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */; };
+		81E026CF25FB5D990025BBEE /* AbsenceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026CE25FB5D990025BBEE /* AbsenceTypeTests.swift */; };
+		81E026D225FB6EBB0025BBEE /* NotificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D125FB6EBB0025BBEE /* NotificationServiceTests.swift */; };
+		81E026D425FBDD0E0025BBEE /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */; };
 		81F174BB25EC07A000BC890B /* StateToCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */; };
 		81F174BD25EC09B900BC890B /* CoreDataToStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */; };
 		81F5297E25E90C4B00C3EAA8 /* timeARC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81F5297C25E90C4B00C3EAA8 /* timeARC.xcdatamodeld */; };
@@ -425,7 +428,7 @@
 		817D61EC2531CDF3009761DE /* AbsenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceType.swift; sourceTree = "<group>"; };
 		817E753425E186E600FB926E /* ListAbsenceEntryUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAbsenceEntryUpdateView.swift; sourceTree = "<group>"; };
 		819FA29F25EA0F010007BC46 /* CoreDataMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMiddleware.swift; sourceTree = "<group>"; };
-		819FA2A525EA26E20007BC46 /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
+		819FA2A525EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceLocalChangesTests.swift; sourceTree = "<group>"; };
 		81A6AF7525D70B07000E3B4D /* StatisticsSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSectionFooterView.swift; sourceTree = "<group>"; };
 		81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		81A6D8F425DFB3B4004A31BC /* ListTimeEntryCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTimeEntryCreateView.swift; sourceTree = "<group>"; };
@@ -440,6 +443,9 @@
 		81D442B325E020A500C133FE /* WidthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthKey.swift; sourceTree = "<group>"; };
 		81D4A25625E9075D008C6FA5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
+		81E026CE25FB5D990025BBEE /* AbsenceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceTypeTests.swift; sourceTree = "<group>"; };
+		81E026D125FB6EBB0025BBEE /* NotificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceTests.swift; sourceTree = "<group>"; };
+		81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
 		81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToCoreDataService.swift; sourceTree = "<group>"; };
 		81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataToStateService.swift; sourceTree = "<group>"; };
 		81F5297D25E90C4B00C3EAA8 /* timeARC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = timeARC.xcdatamodel; sourceTree = "<group>"; };
@@ -574,6 +580,7 @@
 			isa = PBXGroup;
 			children = (
 				817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */,
+				81E026CE25FB5D990025BBEE /* AbsenceTypeTests.swift */,
 				8172E1792534EFA500C39CA4 /* DayTests.swift */,
 				8179B36D2528E03900A537B7 /* TimeEntryTests.swift */,
 				8172E1702534EEED00C39CA4 /* WeekDayTests.swift */,
@@ -631,6 +638,7 @@
 		8179B2842528DF7C00A537B7 /* timeARCTests */ = {
 			isa = PBXGroup;
 			children = (
+				81E026D025FB6EAE0025BBEE /* Notification */,
 				819FA2A425EA26A10007BC46 /* CoreData */,
 				8179B36B2528E03900A537B7 /* Extensions */,
 				8172E1782534EF6200C39CA4 /* Models */,
@@ -851,7 +859,8 @@
 		819FA2A425EA26A10007BC46 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				819FA2A525EA26E20007BC46 /* CoreDataServiceTests.swift */,
+				819FA2A525EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift */,
+				81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -922,6 +931,14 @@
 				81468CE325EBDD5700E4E98F /* WidgetUpdateService.swift */,
 			);
 			path = WidgetUpdate;
+			sourceTree = "<group>";
+		};
+		81E026D025FB6EAE0025BBEE /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				81E026D125FB6EBB0025BBEE /* NotificationServiceTests.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		81F5298025E90C8000C3EAA8 /* CoreData */ = {
@@ -1347,12 +1364,15 @@
 				817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */,
 				81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */,
 				81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */,
+				81E026D225FB6EBB0025BBEE /* NotificationServiceTests.swift in Sources */,
 				81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */,
+				81E026CF25FB5D990025BBEE /* AbsenceTypeTests.swift in Sources */,
 				81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */,
 				8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */,
 				8179B3702528E03900A537B7 /* TimeEntryTests.swift in Sources */,
-				819FA2A625EA26E20007BC46 /* CoreDataServiceTests.swift in Sources */,
+				819FA2A625EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift in Sources */,
 				81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */,
+				81E026D425FBDD0E0025BBEE /* CoreDataServiceTests.swift in Sources */,
 				8179B36E2528E03900A537B7 /* TimeReducerTests.swift in Sources */,
 				8179B36F2528E03900A537B7 /* Date+Tests.swift in Sources */,
 				81130B1B2529B7E000CA0A69 /* StatisticsReducerTests.swift in Sources */,

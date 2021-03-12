@@ -8,18 +8,19 @@
 import SwiftUI
 
 class NotificationService {
-    static let endOfWoringDayNotificationIdentifier = "endOfWoringDayNotificationIdentifier"
-    static let endOfWoringWeekNotificationIdentifier = "endOfWoringWeekNotificationIdentifier"
+    static let endOfWorkingDayNotificationIdentifier = "endOfWorkingDayNotificationIdentifier"
+    static let endOfWorkingWeekNotificationIdentifier = "endOfWorkingWeekNotificationIdentifier"
 
     func scheduleEndOfWorkingDayNotification(for timeEntries: [Day: [TimeEntry]], workingDuration: Int) {
         let currentDuration = timeEntries.forDay(Day()).totalDurationInSeconds
         let endOfWorkingDayDate = Date().addingTimeInterval(TimeInterval(workingDuration - currentDuration))
+        let request = UNNotificationRequest(title: NSLocalizedString("endOfWorkingDayNotificationTitle", comment: ""),
+                                            body: NSLocalizedString("endOfWorkingDayNotificationBody", comment: ""),
+                                            identifier: Self.endOfWorkingDayNotificationIdentifier,
+                                            for: endOfWorkingDayDate)
 
-        removeNotifications(identifiers: [Self.endOfWoringDayNotificationIdentifier])
-        scheduleNotification(with: NSLocalizedString("endOfWoringDayNotificationTitle", comment: ""),
-                             body: NSLocalizedString("endOfWoringDayNotificationBody", comment: ""),
-                             identifier: Self.endOfWoringDayNotificationIdentifier,
-                             for: endOfWorkingDayDate)
+        self.removeNotifications(identifiers: [Self.endOfWorkingDayNotificationIdentifier])
+        self.scheduleNotification(for: request)
     }
 
     func scheduleEndOfWorkingWeekNotification(for timeEntries: [Day: [TimeEntry]], workingDuration: Int, workingWeekDays: [WeekDay]) {
@@ -30,38 +31,43 @@ class NotificationService {
 
         let maxDuration = workingDuration * workingWeekDays.count
         let endOfWorkingWeekDate = Date().addingTimeInterval(TimeInterval(maxDuration - duration))
+        let request = UNNotificationRequest(title: NSLocalizedString("endOfWorkingWeekNotificationTitle", comment: ""),
+                                            body: NSLocalizedString("endOfWorkingWeekNotificationBody", comment: ""),
+                                            identifier: Self.endOfWorkingWeekNotificationIdentifier,
+                                            for: endOfWorkingWeekDate)
 
-        removeNotifications(identifiers: [Self.endOfWoringWeekNotificationIdentifier])
-        scheduleNotification(with: NSLocalizedString("endOfWoringWeekNotificationTitle", comment: ""),
-                             body: NSLocalizedString("endOfWoringWeekNotificationBody", comment: ""),
-                             identifier: Self.endOfWoringWeekNotificationIdentifier,
-                             for: endOfWorkingWeekDate)
+        self.removeNotifications(identifiers: [Self.endOfWorkingWeekNotificationIdentifier])
+        self.scheduleNotification(for: request)
     }
 
-    private func scheduleNotification(with title: String, body: String, identifier: String, for date: Date) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
-            if success {
-                let content = UNMutableNotificationContent()
-                content.title = title
-                content.body = body
-                content.sound = UNNotificationSound.default
+    func removeNotifications(identifiers: [String]) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
 
-                let triggerDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],
-                                                                            from: date)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponents, repeats: false)
-
-                let request = UNNotificationRequest(identifier: identifier,
-                                                    content: content,
-                                                    trigger: trigger)
-
+    private func scheduleNotification(for request: UNNotificationRequest) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted {
                 UNUserNotificationCenter.current().add(request)
             } else if let error = error {
                 print(error.localizedDescription)
             }
         }
     }
+}
 
-    func removeNotifications(identifiers: [String]) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+private extension UNNotificationRequest {
+    convenience init(title: String, body: String, identifier: String, for date: Date) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+
+        let triggerDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],
+                                                                    from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponents, repeats: false)
+
+        self.init(identifier: identifier,
+                  content: content,
+                  trigger: trigger)
     }
 }

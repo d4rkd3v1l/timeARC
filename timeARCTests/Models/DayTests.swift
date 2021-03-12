@@ -14,6 +14,11 @@ class DayTests: XCTestCase {
         XCTAssertEqual(day.date, Date().startOfDay)
     }
 
+    func testId() throws {
+        let day = Day()
+        XCTAssertEqual(day.id, day.date)
+    }
+
     func testInitWithDate() throws {
         let date = Date()
         let day = Day(date)

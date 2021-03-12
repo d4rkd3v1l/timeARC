@@ -84,6 +84,7 @@ struct TimeEntry: Identifiable, Equatable, Codable {
 
 // MARK: - Extensions
 
+// MARK: Dictionary
 extension Dictionary where Key == Day, Value == [TimeEntry] {
     func forDay(_ day: Day) -> [TimeEntry] {
         return self[day] ?? []
@@ -176,6 +177,7 @@ extension Dictionary where Key == Day, Value == [TimeEntry] {
     }
 }
 
+// MARK: Array
 extension Array where Element == TimeEntry {
     var totalDurationInSeconds: Int {
         return self
@@ -247,6 +249,7 @@ extension Array where Element == TimeEntry {
     }
 }
 
+// MARK: Other
 extension Int {
     func formatted(allowedUnits: NSCalendar.Unit = [.hour, .minute], zeroFormattingBehavior: DateComponentsFormatter.ZeroFormattingBehavior = .pad) -> String? {
         let formatter = DateComponentsFormatter()

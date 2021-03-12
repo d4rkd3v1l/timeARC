@@ -82,7 +82,7 @@ class TimeEntryTests: XCTestCase {
     func testDurationInSeconds() throws {
         let timeEntry = TimeEntry(start: self.dateStart, end: self.dateEnd)
         let durationInSeconds = try XCTUnwrap(timeEntry.durationInSeconds)
-        XCTAssertEqual(durationInSeconds, 4938)
+        XCTAssertEqual(durationInSeconds, 4_938)
     }
 
     func testSplittedIntoSingleDays_SingleDay() throws {
@@ -136,7 +136,7 @@ class TimeEntryTests: XCTestCase {
 
     // MARK: Dictionary extensions
 
-    func testForDay() throws {
+    func testDictForDay() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
 
         let timeEntriesForDay = timeEntriesProvider.dict.forDay(timeEntriesProvider.entries[0].start.day)
@@ -146,14 +146,14 @@ class TimeEntryTests: XCTestCase {
         XCTAssertEqual(timeEntry, timeEntriesProvider.entries[0])
     }
 
-    func testFind() throws {
+    func testDictFind() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
 
         let result = timeEntriesProvider.dict.find(timeEntriesProvider.entries[1])
         XCTAssertEqual(result, timeEntriesProvider.entries[1])
     }
 
-    func testFind_Fallback() throws {
+    func testDictFind_Fallback() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
 
         var timeEntry1 = timeEntriesProvider.entries[0]
@@ -163,88 +163,17 @@ class TimeEntryTests: XCTestCase {
         XCTAssertEqual(result?.id, timeEntry1.id)
     }
 
-    // MARK: Array extensions
-
-    func testTotalDurationInSeconds() throws {
+    func testDictIsTimerRunning() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
-        XCTAssertEqual(timeEntriesProvider.entries.totalDurationInSeconds, 30600)
+        var dict = timeEntriesProvider.dict
+        dict[Day()] = [TimeEntry(start: Date(), end: nil)]
+
+        XCTAssertEqual(dict.isTimerRunning, true)
     }
 
-    func testTotalBreaksInSeconds() throws {
+    func testDictIsTimerRunning_Not() throws {
         let timeEntriesProvider = try self.timeEntriesProvider()
-        let timeEntriesOfDay = try XCTUnwrap(timeEntriesProvider.dict[timeEntriesProvider.entries[1].start.day])
-        XCTAssertEqual(timeEntriesOfDay.totalBreaksInSeconds, 5400)
-    }
-
-    func testIsTimerRunning() throws {
-        let timeEntriesProvider = try self.timeEntriesProvider()
-        var timeEntries = timeEntriesProvider.entries
-        XCTAssertFalse(timeEntries.isTimerRunning)
-
-        timeEntries[2].end = nil
-        XCTAssertTrue(timeEntries.isTimerRunning)
-    }
-
-    func testMergeOverlappingEntries_Simple() throws {
-        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-
-        let startDate2 = try Date(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
-        let endDate2 = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
-
-        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
-        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
-        let entries = [timeEntry1, timeEntry2]
-        let mergedEntry = try XCTUnwrap(entries.mergedOverlappingEntries().first)
-
-        XCTAssertEqual(mergedEntry.start, startDate1)
-        XCTAssertEqual(mergedEntry.end, endDate2)
-    }
-
-    func testMergeOverlappingEntries_Simple_IsRunning() throws {
-        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let startDate2 = try Date(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
-
-        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
-        let timeEntry2 = TimeEntry(start: startDate2, end: nil)
-        let entries = [timeEntry1, timeEntry2]
-        let mergedEntry = try XCTUnwrap(entries.mergedOverlappingEntries().first)
-
-        XCTAssertEqual(mergedEntry.start, startDate1)
-        XCTAssertEqual(mergedEntry.end, nil)
-    }
-
-    func testMergeOverlappingEntries_NoMerge() throws {
-        let date1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let date2 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let date3 = try Date(year: 2020, month: 07, day: 20, hour: 13, minute: 0, second: 0)
-        let date4 = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
-
-        let timeEntry1 = TimeEntry(start: date1, end: date2)
-        let timeEntry2 = TimeEntry(start: date3, end: date4)
-        let entries = [timeEntry1, timeEntry2]
-        let mergedEntries = entries.mergedOverlappingEntries()
-
-        XCTAssertEqual(mergedEntries[0], timeEntry1)
-        XCTAssertEqual(mergedEntries[1], timeEntry2)
-    }
-
-    func testMergeOverlappingEntries_Contains() throws {
-        let date1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
-        let date2 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
-        let date3 = try Date(year: 2020, month: 07, day: 20, hour: 09, minute: 0, second: 0)
-        let date4 = try Date(year: 2020, month: 07, day: 20, hour: 10, minute: 0, second: 0)
-
-        let timeEntry1 = TimeEntry(start: date1, end: date2)
-        let timeEntry2 = TimeEntry(start: date3, end: date4)
-        let entries = [timeEntry1, timeEntry2]
-        let mergedEntries = entries.mergedOverlappingEntries()
-        XCTAssertEqual(mergedEntries.count, 1)
-
-        let mergedEntry = try XCTUnwrap(mergedEntries.first)
-        XCTAssertEqual(mergedEntry.start, date1)
-        XCTAssertEqual(mergedEntry.end, date2)
+        XCTAssertEqual(timeEntriesProvider.dict.isTimerRunning, false)
     }
 
     // MARK: Statistics
@@ -289,66 +218,179 @@ class TimeEntryTests: XCTestCase {
         return workingWeekDays.workingDays(startDate: startDate, endDate: endDate)
     }
 
+    func testTimeEntries() throws {
+        let timeEntries = try self.timeEntries()
+        let fromDate = try Date(year: 2020, month: 10, day: 25)
+        let toDate = try Date(year: 2020, month: 10, day: 30)
+
+        let result = timeEntries.timeEntries(from: fromDate, to: toDate)
+
+        XCTAssertEqual(result.count, 2)
+        XCTAssertEqual(result.values.flatMap { $0 }.count, 4)
+    }
+
     func testAverageDuration() throws {
         let timeEntries = try self.timeEntries()
 
         let averageDuration = timeEntries.averageDuration()
-        XCTAssertEqual(averageDuration, 23215)
+        XCTAssertEqual(averageDuration, 23_215)
     }
 
     func testTotalDuration() throws {
         let timeEntries = try self.timeEntries()
 
         let totalDuration = timeEntries.totalDuration()
-        XCTAssertEqual(totalDuration, 69646)
+        XCTAssertEqual(totalDuration, 69_646)
     }
 
     func testAverageWorkingHoursStartDate() throws {
         let timeEntries = try self.timeEntries()
 
         let averageWorkingHoursStartDate = timeEntries.averageWorkingHoursStartDate()
-        XCTAssertEqual(averageWorkingHoursStartDate, Date(timeInterval: 33600, since: Date().startOfDay))
+        XCTAssertEqual(averageWorkingHoursStartDate, Date(timeInterval: 33_600, since: Date().startOfDay))
     }
 
     func testAverageWorkingHoursEndDate() throws {
         let timeEntries = try self.timeEntries()
 
         let averageWorkingHoursEndDate = timeEntries.averageWorkingHoursEndDate()
-        XCTAssertEqual(averageWorkingHoursEndDate, Date(timeInterval: 58686, since: Date().startOfDay))
+        XCTAssertEqual(averageWorkingHoursEndDate, Date(timeInterval: 58_686, since: Date().startOfDay))
     }
 
     func testAverageBreaksDuration() throws {
         let timeEntries = try self.timeEntries()
 
         let averageBreaksDuration = timeEntries.averageBreaksDuration()
-        XCTAssertEqual(averageBreaksDuration, 1870)
+        XCTAssertEqual(averageBreaksDuration, 1_870)
     }
 
     func testTotalBreaksDuration() throws {
         let timeEntries = try self.timeEntries()
 
         let totalBreaksDuration = timeEntries.totalBreaksDuration()
-        XCTAssertEqual(totalBreaksDuration, 5612)
+        XCTAssertEqual(totalBreaksDuration, 5_612)
     }
 
     func testAverageOvertimeDuration() throws {
         let timeEntries = try self.timeEntries()
 
-        let averageOvertimeDuration = timeEntries.averageOvertimeDuration(workingDuration: 28800)
-        XCTAssertEqual(averageOvertimeDuration, -5585)
+        let averageOvertimeDuration = timeEntries.averageOvertimeDuration(workingDuration: 28_800)
+        XCTAssertEqual(averageOvertimeDuration, -5_585)
     }
 
     func testTotalOvertimeDuration() throws {
         let timeEntries = try self.timeEntries()
         let workingDays = try self.workingDays()
 
-        let totalOvertimeDuration = timeEntries.totalOvertimeDuration(workingDays: workingDays, workingDuration: 28800, absenceEntries: [])
-        XCTAssertEqual(totalOvertimeDuration, -74354)
+        let totalOvertimeDuration = timeEntries.totalOvertimeDuration(workingDays: workingDays, workingDuration: 28_800, absenceEntries: [])
+        XCTAssertEqual(totalOvertimeDuration, -74_354)
+    }
+
+
+    // MARK: Array extensions
+
+    func testArrayTotalDurationInSeconds() throws {
+        let timeEntriesProvider = try self.timeEntriesProvider()
+        XCTAssertEqual(timeEntriesProvider.entries.totalDurationInSeconds, 30_600)
+    }
+
+    func testArrayTotalBreaksInSeconds() throws {
+        let timeEntriesProvider = try self.timeEntriesProvider()
+        let timeEntriesOfDay = try XCTUnwrap(timeEntriesProvider.dict[timeEntriesProvider.entries[1].start.day])
+        XCTAssertEqual(timeEntriesOfDay.totalBreaksInSeconds, 5_400)
+    }
+
+    func testArrayIsTimerRunning() throws {
+        let timeEntriesProvider = try self.timeEntriesProvider()
+        var timeEntries = timeEntriesProvider.entries
+        XCTAssertFalse(timeEntries.isTimerRunning)
+
+        timeEntries[2].end = nil
+        XCTAssertTrue(timeEntries.isTimerRunning)
+    }
+
+    func testArrayMergeOverlappingEntries_Simple() throws {
+        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+
+        let startDate2 = try Date(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
+        let endDate2 = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
+
+        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
+        let timeEntry2 = TimeEntry(start: startDate2, end: endDate2)
+        let entries = [timeEntry1, timeEntry2]
+        let mergedEntry = try XCTUnwrap(entries.mergedOverlappingEntries().first)
+
+        XCTAssertEqual(mergedEntry.start, startDate1)
+        XCTAssertEqual(mergedEntry.end, endDate2)
+    }
+
+    func testArrayMergeOverlappingEntries_Simple_IsRunning() throws {
+        let startDate1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let endDate1 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let startDate2 = try Date(year: 2020, month: 07, day: 20, hour: 11, minute: 0, second: 0)
+
+        let timeEntry1 = TimeEntry(start: startDate1, end: endDate1)
+        let timeEntry2 = TimeEntry(start: startDate2, end: nil)
+        let entries = [timeEntry1, timeEntry2]
+        let mergedEntry = try XCTUnwrap(entries.mergedOverlappingEntries().first)
+
+        XCTAssertEqual(mergedEntry.start, startDate1)
+        XCTAssertEqual(mergedEntry.end, nil)
+    }
+
+    func testArrayMergeOverlappingEntries_NoMerge() throws {
+        let date1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let date2 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let date3 = try Date(year: 2020, month: 07, day: 20, hour: 13, minute: 0, second: 0)
+        let date4 = try Date(year: 2020, month: 07, day: 20, hour: 15, minute: 0, second: 0)
+
+        let timeEntry1 = TimeEntry(start: date1, end: date2)
+        let timeEntry2 = TimeEntry(start: date3, end: date4)
+        let entries = [timeEntry1, timeEntry2]
+        let mergedEntries = entries.mergedOverlappingEntries()
+
+        XCTAssertEqual(mergedEntries[0], timeEntry1)
+        XCTAssertEqual(mergedEntries[1], timeEntry2)
+    }
+
+    func testArrayMergeOverlappingEntries_Contains() throws {
+        let date1 = try Date(year: 2020, month: 07, day: 20, hour: 08, minute: 0, second: 0)
+        let date2 = try Date(year: 2020, month: 07, day: 20, hour: 12, minute: 0, second: 0)
+        let date3 = try Date(year: 2020, month: 07, day: 20, hour: 09, minute: 0, second: 0)
+        let date4 = try Date(year: 2020, month: 07, day: 20, hour: 10, minute: 0, second: 0)
+
+        let timeEntry1 = TimeEntry(start: date1, end: date2)
+        let timeEntry2 = TimeEntry(start: date3, end: date4)
+        let entries = [timeEntry1, timeEntry2]
+        let mergedEntries = entries.mergedOverlappingEntries()
+        XCTAssertEqual(mergedEntries.count, 1)
+
+        let mergedEntry = try XCTUnwrap(mergedEntries.first)
+        XCTAssertEqual(mergedEntry.start, date1)
+        XCTAssertEqual(mergedEntry.end, date2)
+    }
+
+    func testArrayGetBreak() throws {
+        let timeEntriesProvider = try self.timeEntriesProvider()
+
+        let breakBetween1And2 = timeEntriesProvider.entries.getBreak(between: 1, and: 2)
+        XCTAssertEqual(breakBetween1And2, 5_400)
     }
 
     // MARK: Int extensions
 
     func testFormatted() throws {
-        XCTAssertEqual(123456.formatted(), "34:17")
+        XCTAssertEqual(123_456.formatted(), "34:17")
+    }
+
+    func testFormattedFull() throws {
+        if Locale.current.identifier == "de_DE" {
+            XCTAssertEqual(123_456.formattedFull(), "34 Stunden und 17 Minuten")
+        } else if Locale.current.identifier == "en_US" {
+            XCTAssertEqual(123_456.formattedFull(), "34 hours, 17 minutes")
+        } else {
+            throw XCTSkip("Invalid locale for this test.")
+        }
     }
 }

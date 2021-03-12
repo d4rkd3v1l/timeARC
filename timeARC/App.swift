@@ -35,7 +35,10 @@ struct TimeARCApp: View {
 
         do {
             let coreDataService: CoreDataService = Resolver.resolve()
-            try coreDataService.loadAppState()
+            let dispatch: DispatchFunction = Resolver.resolve()
+
+            let appState = try coreDataService.loadAppState()
+            dispatch(InitAppState(state: appState))
         } catch {
             fatalError("Error loading AppState: \(error.localizedDescription)")
         }

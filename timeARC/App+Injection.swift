@@ -24,5 +24,6 @@ extension Resolver {
         register { CoreDataService(inMemory: true) }.scope(.application)
         register { CoreDataToStateService() }
         register { StateToCoreDataService() }
+        register { NotificationService() }
     }
 }

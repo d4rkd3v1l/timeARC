@@ -14,6 +14,8 @@ enum CoreDataError: Error {
     case couldNotInsertManagedObject
     case couldNotUpdateManagedObject
     case couldNotDeleteManagedObject
+
+    case couldNotLoadAppData
 }
 
 class CoreDataService {
@@ -26,12 +28,12 @@ class CoreDataService {
     private var idMapping: [NSManagedObjectID: UUID] = [:]
 
 
-    private var initialCloudKitEvents: Set<NSPersistentCloudKitContainer.EventType> = Set()
-    private var initialSyncCompleted: Bool {
-        return self.initialCloudKitEvents.contains(.setup)
-            && self.initialCloudKitEvents.contains(.import)
-            && self.initialCloudKitEvents.contains(.export)
-    }
+//    private var initialCloudKitEvents: Set<NSPersistentCloudKitContainer.EventType> = Set()
+//    private var initialSyncCompleted: Bool {
+//        return self.initialCloudKitEvents.contains(.setup)
+//            && self.initialCloudKitEvents.contains(.import)
+//            && self.initialCloudKitEvents.contains(.export)
+//    }
 
     private var context: NSManagedObjectContext {
         return self.persistentContainer.viewContext
@@ -62,10 +64,10 @@ class CoreDataService {
         self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
         self.persistentContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.eventChangedNotification),
-                                               name: NSPersistentCloudKitContainer.eventChangedNotification,
-                                               object: self.persistentContainer)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(self.eventChangedNotification),
+//                                               name: NSPersistentCloudKitContainer.eventChangedNotification,
+//                                               object: self.persistentContainer)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.didSaveObjectsNotification),
@@ -80,25 +82,27 @@ class CoreDataService {
 
     // MARK: - Load App State
 
-    // TODO: Get rid of force unwraps?
-    func loadAppState() throws {
+    func loadAppState() throws -> AppState {
         let timeEntries = try self.loadTimeEntries()
         let absenceEntries = try self.loadAbsenceEntries()
 
         let managedSettings: ManagedSettings = try self.fetchAll().first ?? (try ManagedSettings.newSettings(with: self.context))
 
-        let timerDisplayMode = TimerDisplayMode(rawValue: managedSettings.timerDisplayMode!)!
+        guard let mangedTimerDisplayMode = managedSettings.timerDisplayMode,
+              let managedWorkingWeekDays = managedSettings.workingWeekDays,
+              let managedAccentColor = managedSettings.accentColor,
+              let timerDisplayMode = TimerDisplayMode(rawValue: mangedTimerDisplayMode),
+              let accentColor = CodableColor(rawValue: managedAccentColor) else { throw CoreDataError.couldNotLoadAppData }
 
         let timeState = TimeState(timeEntries: timeEntries,
                                   absenceEntries: absenceEntries,
                                   displayMode: timerDisplayMode,
                                   didSyncWatchData: false)
 
-        let workingWeekDays = managedSettings.workingWeekDays!
+        let workingWeekDays = managedWorkingWeekDays
             .map(WeekDay.init)
 
         let workingDuration = Int(managedSettings.workingDuration)
-        let accentColor = CodableColor(rawValue: managedSettings.accentColor!)!
 
         let absenceTypes = managedSettings.absenceTypes?
             .compactMap { $0 as? ManagedAbsenceType }
@@ -116,7 +120,7 @@ class CoreDataService {
                                 settingsState: settingsState,
                                 statisticsState: statisticsState)
 
-        self.dispatch(InitAppState(state: appState))
+        return appState
     }
 
     private func loadTimeEntries() throws -> [Day: [TimeEntry]] {
@@ -229,20 +233,20 @@ class CoreDataService {
 
     // MARK: - Notifications
 
-    // Inspired by https://stackoverflow.com/a/63927190/2019384
-    @objc private func eventChangedNotification(notification: NSNotification) {
-        guard let userInfo = notification.userInfo,
-              let eventNotification = userInfo[NSPersistentCloudKitContainer.eventNotificationUserInfoKey],
-              let cloudEvent = eventNotification as? NSPersistentCloudKitContainer.Event,
-              cloudEvent.endDate != nil else { return }
-
-        // TODO: Remove before release ;-)
-        if let error = cloudEvent.error {
-            fatalError(error.localizedDescription)
-        }
-
-        self.initialCloudKitEvents.insert(cloudEvent.type)
-    }
+//    // Inspired by https://stackoverflow.com/a/63927190/2019384
+//    @objc private func eventChangedNotification(notification: NSNotification) {
+//        guard let userInfo = notification.userInfo,
+//              let eventNotification = userInfo[NSPersistentCloudKitContainer.eventNotificationUserInfoKey],
+//              let cloudEvent = eventNotification as? NSPersistentCloudKitContainer.Event,
+//              cloudEvent.endDate != nil else { return }
+//
+//        // TODO: Remove before release ;-)
+//        if let error = cloudEvent.error {
+//            fatalError(error.localizedDescription)
+//        }
+//
+//        self.initialCloudKitEvents.insert(cloudEvent.type)
+//    }
 
     @objc private func didSaveObjectsNotification(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
@@ -273,13 +277,6 @@ class CoreDataService {
     }
 
     private func singletonifySettings(notification: NSNotification) throws {
-//        guard let userInfo = notification.userInfo,
-//              let insertedIds = userInfo[NSInsertedObjectIDsKey] as? Set<NSManagedObjectID>,
-//              !insertedIds.isEmpty else { return }
-//
-//        let newManagedSettingsInstances = insertedIds.compactMap { self.context.object(with: $0) as? ManagedSettings }
-//        guard !newManagedSettingsInstances.isEmpty else { return }
-
         let localManagedSettingsInstances: [ManagedSettings] = try self.fetchAll()
         guard localManagedSettingsInstances.count > 1 else { return }
 
