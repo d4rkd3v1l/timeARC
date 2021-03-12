@@ -29,7 +29,7 @@ class NotificationServiceTests: XCTestCase {
         let exp = expectation(description: "Notification should be scheduled.")
 
         // Note: Need to delay this a bit, as the notifications are added asynchronously internally, due to requesting authorization is async as well.
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
             UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
                 guard let request = requests.first,
                       let trigger = request.trigger as? UNCalendarNotificationTrigger,
@@ -56,7 +56,7 @@ class NotificationServiceTests: XCTestCase {
         let exp = expectation(description: "Notification should be scheduled.")
 
         // Note: Need to delay this a bit, as the notifications are added asynchronously internally, due to requesting authorization is async as well.
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
             UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
                 guard let request = requests.first,
                       let trigger = request.trigger as? UNCalendarNotificationTrigger,
