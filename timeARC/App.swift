@@ -87,6 +87,10 @@ private func appStateReducer(state: AppState, action: Action) -> AppState {
 }
 
 #if DEBUG
+let testStore = Store<AppState>(reducer: appStateReducer,
+                                middleware: [],
+                                state: AppState())
+
 let previewStore = Store<AppState>(reducer: appStateReducer,
                                    middleware: [],
                                    state: appState())
