@@ -41,10 +41,6 @@ class CoreDataServiceLocalChangesTests: XCTestCase {
         try self.coreDataService.insert(absenceEntry: self.initialAbsenceEntry)
     }
 
-    override func tearDownWithError() throws {
-//        Resolver.reset()
-    }
-
     func testInsertTimeEntry() throws {
         let newTimeEntry = TimeEntry(start: Date(), end: nil)
 

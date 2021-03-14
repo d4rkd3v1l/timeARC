@@ -19,8 +19,7 @@ enum CoreDataError: Error {
 }
 
 class CoreDataService {
-    private let persistentContainer = NSPersistentCloudKitContainer(name: "timeARC")
-
+    @Injected private var persistentContainer: NSPersistentContainer
     @Injected private var coreDataToStateService: CoreDataToStateService
     @LazyInjected private var dispatch: DispatchFunction
 
