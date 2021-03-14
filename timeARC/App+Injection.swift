@@ -9,7 +9,7 @@ import Resolver
 import SwiftUIFlux
 
 extension Resolver {
-    static func register() {
+    static func register(store: Store<AppState>) {
         register { store.dispatch }.scope(.application)
         register { CoreDataService() }.scope(.application)
         register { CoreDataToStateService() }

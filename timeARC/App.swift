@@ -31,7 +31,7 @@ struct TimeARCApp: View {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         #endif
 
-        Resolver.register()
+        Resolver.register(store: store)
 
         do {
             let coreDataService: CoreDataService = Resolver.resolve()
@@ -63,7 +63,7 @@ struct MockApp: View {
 
 // MARK: - Store
 
-let store = Store<AppState>(reducer: appStateReducer,
+private let store = Store<AppState>(reducer: appStateReducer,
                             middleware: [coreDataMiddleware,
                                          appIconMiddleware,
                                          notificationMiddleware,

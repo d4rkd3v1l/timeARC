@@ -664,12 +664,12 @@
 		8179B2842528DF7C00A537B7 /* timeARCTests */ = {
 			isa = PBXGroup;
 			children = (
-				81E026D025FB6EAE0025BBEE /* Notification */,
 				819FA2A425EA26A10007BC46 /* CoreData */,
 				8179B36B2528E03900A537B7 /* Extensions */,
-				8172E1782534EF6200C39CA4 /* Models */,
-				81FE88BE2529171E000375FF /* Reducers */,
 				8179B2872528DF7C00A537B7 /* Info.plist */,
+				8172E1782534EF6200C39CA4 /* Models */,
+				81E026D025FB6EAE0025BBEE /* Notification */,
+				81FE88BE2529171E000375FF /* Reducers */,
 				8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */,
 			);
 			path = timeARCTests;
