@@ -18,7 +18,7 @@ class TimerViewTests: XCTestCase {
         var sut = TimerView()
         
         let exp = sut.on(\.didAppear) { view in
-            try view.find(button: "Start")
+            try view.find(button: "start")
         }
         ViewHosting.host(view: sut.environmentObject(testStore))
         wait(for: [exp], timeout: 0.5)
