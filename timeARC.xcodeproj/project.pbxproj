@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810C6A8325FCE69000185BC6 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 810C6A8225FCE69000185BC6 /* ViewInspector */; };
 		81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130AFC2529A10400CA0A69 /* CodableColorTests.swift */; };
 		81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B042529A1C600CA0A69 /* Collection+averageTests.swift */; };
 		81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */; };
@@ -210,6 +211,8 @@
 		81E026D425FBDD0E0025BBEE /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */; };
 		81E026D925FBE45A0025BBEE /* WatchCommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */; };
 		81E026DA25FBE45A0025BBEE /* WatchCommunicationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */; };
+		81ED197A25FCC53E00FBF24F /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 81ED197925FCC53E00FBF24F /* ViewInspector */; };
+		81ED197C25FCC57200FBF24F /* TimerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ED197B25FCC57200FBF24F /* TimerViewTests.swift */; };
 		81F174BB25EC07A000BC890B /* StateToCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */; };
 		81F174BD25EC09B900BC890B /* CoreDataToStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */; };
 		81F5297E25E90C4B00C3EAA8 /* timeARC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81F5297C25E90C4B00C3EAA8 /* timeARC.xcdatamodeld */; };
@@ -465,6 +468,7 @@
 		81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
 		81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCommunicationService.swift; sourceTree = "<group>"; };
 		81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCommunicationMiddleware.swift; sourceTree = "<group>"; };
+		81ED197B25FCC57200FBF24F /* TimerViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewTests.swift; sourceTree = "<group>"; };
 		81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToCoreDataService.swift; sourceTree = "<group>"; };
 		81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataToStateService.swift; sourceTree = "<group>"; };
 		81F5297D25E90C4B00C3EAA8 /* timeARC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = timeARC.xcdatamodel; sourceTree = "<group>"; };
@@ -503,6 +507,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81ED197A25FCC53E00FBF24F /* ViewInspector in Frameworks */,
+				810C6A8325FCE69000185BC6 /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +677,7 @@
 				81E026D025FB6EAE0025BBEE /* Notification */,
 				81FE88BE2529171E000375FF /* Reducers */,
 				8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */,
+				81ED197B25FCC57200FBF24F /* TimerViewTests.swift */,
 			);
 			path = timeARCTests;
 			sourceTree = "<group>";
@@ -1071,6 +1078,10 @@
 				8179B2832528DF7C00A537B7 /* PBXTargetDependency */,
 			);
 			name = timeARCTests;
+			packageProductDependencies = (
+				81ED197925FCC53E00FBF24F /* ViewInspector */,
+				810C6A8225FCE69000185BC6 /* ViewInspector */,
+			);
 			productName = timetrackerTests;
 			productReference = 8179B2812528DF7C00A537B7 /* timeARCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1197,6 +1208,7 @@
 				811F404625CDB055009761E8 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 				819FA2A125EA14DA0007BC46 /* XCRemoteSwiftPackageReference "DifferenceKit" */,
 				81468CDE25EBAE4A00E4E98F /* XCRemoteSwiftPackageReference "Resolver" */,
+				810C6A8125FCE69000185BC6 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = 8179B2712528DF7B00A537B7 /* Products */;
 			projectDirPath = "";
@@ -1442,6 +1454,7 @@
 				8179B3702528E03900A537B7 /* TimeEntryTests.swift in Sources */,
 				819FA2A625EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift in Sources */,
 				81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */,
+				81ED197C25FCC57200FBF24F /* TimerViewTests.swift in Sources */,
 				81E026D425FBDD0E0025BBEE /* CoreDataServiceTests.swift in Sources */,
 				8179B36E2528E03900A537B7 /* TimeReducerTests.swift in Sources */,
 				8179B36F2528E03900A537B7 /* Date+Tests.swift in Sources */,
@@ -2067,6 +2080,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		810C6A8125FCE69000185BC6 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.0;
+			};
+		};
 		811F404625CDB055009761E8 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mecid/SwiftUICharts";
@@ -2102,6 +2123,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		810C6A8225FCE69000185BC6 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 810C6A8125FCE69000185BC6 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
 		811F404725CDB055009761E8 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 811F404625CDB055009761E8 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
@@ -2126,6 +2152,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 819FA2A125EA14DA0007BC46 /* XCRemoteSwiftPackageReference "DifferenceKit" */;
 			productName = DifferenceKit;
+		};
+		81ED197925FCC53E00FBF24F /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */
 

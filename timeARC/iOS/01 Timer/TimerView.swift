@@ -22,6 +22,7 @@ struct TimerView: ConnectedView {
         }
     }
 
+    var didAppear: ((Self) -> Void)?
     private let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect().share()
 
     @State private var mode: Tab = .today
@@ -95,6 +96,7 @@ struct TimerView: ConnectedView {
                 .navigationBarTitle(self.mode.title)
             }
         }
+        .onAppear { self.didAppear?(self) }
     }
 }
 
