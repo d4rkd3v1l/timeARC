@@ -24,9 +24,11 @@ class CoreDataService {
     @Injected private var coreDataToStateService: CoreDataToStateService
     @LazyInjected private var dispatch: DispatchFunction
 
-    // Note: Needed for deletions from iCloud, as we only receive the ManagedObjectID in that case
+    /// Mapping of "managed" core data ids and "internal" ids
+    ///
+    /// Deletions being merged from other managed context (iCloud) only contain managed ids
+    /// For synchronizing the current AppState,  we need to know the appropriate "internal" ids
     private var idMapping: [NSManagedObjectID: UUID] = [:]
-
 
 //    private var initialCloudKitEvents: Set<NSPersistentCloudKitContainer.EventType> = Set()
 //    private var initialSyncCompleted: Bool {
@@ -86,7 +88,7 @@ class CoreDataService {
         let timeEntries = try self.loadTimeEntries()
         let absenceEntries = try self.loadAbsenceEntries()
 
-        let managedSettings: ManagedSettings = try self.fetchAll().first ?? (try ManagedSettings.newSettings(with: self.context))
+        let managedSettings: ManagedSettings = try self.fetchAll().first ?? (try ManagedSettings.createInitialSettings(with: self.context))
 
         guard let mangedTimerDisplayMode = managedSettings.timerDisplayMode,
               let managedWorkingWeekDays = managedSettings.workingWeekDays,
@@ -104,9 +106,14 @@ class CoreDataService {
 
         let workingDuration = Int(managedSettings.workingDuration)
 
-        let absenceTypes = managedSettings.absenceTypes?
-            .compactMap { $0 as? ManagedAbsenceType }
-            .compactMap(AbsenceType.init) ?? []
+
+        var managedAbsenceTypes: [ManagedAbsenceType] = try self.fetchAll()
+        if managedAbsenceTypes.isEmpty {
+            managedAbsenceTypes = try ManagedAbsenceType.createInitialAbsenceTypes(with: self.context)
+        }
+
+        let absenceTypes = managedAbsenceTypes
+            .compactMap(AbsenceType.init)
 
         let settingsState = SettingsState(workingWeekDays: workingWeekDays,
                                           workingDuration: workingDuration,
@@ -270,19 +277,34 @@ class CoreDataService {
     }
 
     @objc private func didMergeChangesObjectIDsNotification(notification: NSNotification) {
-        try? self.singletonifySettings(notification: notification)
+        try? self.singletonifySettings()
+        try? self.singletonifyInitialAbsenceTypes()
+
         self.coreDataToStateService.updateState(notification: notification,
                                                 context: self.context,
                                                 idMapping: self.idMapping)
     }
 
-    private func singletonifySettings(notification: NSNotification) throws {
-        let localManagedSettingsInstances: [ManagedSettings] = try self.fetchAll()
-        guard localManagedSettingsInstances.count > 1 else { return }
+    private func singletonifySettings() throws {
+        // TODO: Think about, which to actually keep? Sort by modified?!
+        let duplicatedManagedSettingsInstances: [ManagedSettings] = try self.fetchAll()
+            .dropLast()
 
-        // TODO: Improve "algorithm" -> delete the oldest/newest or least recently changed ones?
-        localManagedSettingsInstances.dropLast().forEach { instance in
+        duplicatedManagedSettingsInstances.forEach { instance in
             self.context.delete(instance)
+        }
+
+        try self.context.save()
+    }
+
+    private func singletonifyInitialAbsenceTypes() throws {
+        let duplicateManagedAbsenceTypeInstances: [ManagedAbsenceType] = try self.fetchAll()
+            .filter { AbsenceType.reservedUUIDs.contains($0.id!) }
+            // TODO: Keep most recents? -> Sort by modified
+            .duplicates(by: { $0.id })
+
+        duplicateManagedAbsenceTypeInstances.forEach { duplicate in
+            self.context.delete(duplicate)
         }
 
         try self.context.save()

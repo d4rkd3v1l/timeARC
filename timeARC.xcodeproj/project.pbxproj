@@ -210,6 +210,9 @@
 		81E026D425FBDD0E0025BBEE /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */; };
 		81E026D925FBE45A0025BBEE /* WatchCommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */; };
 		81E026DA25FBE45A0025BBEE /* WatchCommunicationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */; };
+		81F0EDA225FE145D00308D8E /* ManagedAbsenceType+initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F0EDA125FE145D00308D8E /* ManagedAbsenceType+initial.swift */; };
+		81F0EDA425FE299700308D8E /* Sequence+Duplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F0EDA325FE299700308D8E /* Sequence+Duplicates.swift */; };
+		81F0EDA625FE29B700308D8E /* Sequence+DuplicatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F0EDA525FE29B700308D8E /* Sequence+DuplicatesTests.swift */; };
 		81F174BB25EC07A000BC890B /* StateToCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */; };
 		81F174BD25EC09B900BC890B /* CoreDataToStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */; };
 		81F5297E25E90C4B00C3EAA8 /* timeARC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81F5297C25E90C4B00C3EAA8 /* timeARC.xcdatamodeld */; };
@@ -465,6 +468,9 @@
 		81E026D325FBDD0E0025BBEE /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
 		81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCommunicationService.swift; sourceTree = "<group>"; };
 		81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCommunicationMiddleware.swift; sourceTree = "<group>"; };
+		81F0EDA125FE145D00308D8E /* ManagedAbsenceType+initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedAbsenceType+initial.swift"; sourceTree = "<group>"; };
+		81F0EDA325FE299700308D8E /* Sequence+Duplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Duplicates.swift"; sourceTree = "<group>"; };
+		81F0EDA525FE29B700308D8E /* Sequence+DuplicatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+DuplicatesTests.swift"; sourceTree = "<group>"; };
 		81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToCoreDataService.swift; sourceTree = "<group>"; };
 		81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataToStateService.swift; sourceTree = "<group>"; };
 		81F5297D25E90C4B00C3EAA8 /* timeARC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = timeARC.xcdatamodel; sourceTree = "<group>"; };
@@ -536,6 +542,7 @@
 			children = (
 				8133A7CB25F2D98300B8EA70 /* AbsenceEntry+CoreData.swift */,
 				8133A7C925F2D97600B8EA70 /* AbsenceType+CoreData.swift */,
+				81F0EDA125FE145D00308D8E /* ManagedAbsenceType+initial.swift */,
 				8133A7CD25F2D9AF00B8EA70 /* FetchableById.swift */,
 				8133A7CF25F2D9DA00B8EA70 /* ManagedSettings+new.swift */,
 				8133A7C625F2D95A00B8EA70 /* TimeEntry+CoreData.swift */,
@@ -780,6 +787,7 @@
 				81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */,
 				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
+				81F0EDA325FE299700308D8E /* Sequence+Duplicates.swift */,
 				81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */,
 				81D442B325E020A500C133FE /* WidthKey.swift */,
 				81BA078525F50C1600557BB6 /* Int+formatted.swift */,
@@ -804,6 +812,7 @@
 				81130B042529A1C600CA0A69 /* Collection+averageTests.swift */,
 				8179B36C2528E03900A537B7 /* Date+Tests.swift */,
 				81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */,
+				81F0EDA525FE29B700308D8E /* Sequence+DuplicatesTests.swift */,
 				81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */,
 			);
 			path = Extensions;
@@ -1367,6 +1376,7 @@
 				81F5297E25E90C4B00C3EAA8 /* timeARC.xcdatamodeld in Sources */,
 				8134BDE325D6765F00FF9106 /* StatisticsWorkingHoursView.swift in Sources */,
 				8134BDEB25D6772600FF9106 /* StatisticsTimeFrameView.swift in Sources */,
+				81F0EDA425FE299700308D8E /* Sequence+Duplicates.swift in Sources */,
 				81CFB90C25ED5C4D0094537E /* NotificationMiddleware.swift in Sources */,
 				81A6AF7625D70B07000E3B4D /* StatisticsSectionFooterView.swift in Sources */,
 				8179B34D2528E02100A537B7 /* AppState.swift in Sources */,
@@ -1420,6 +1430,7 @@
 				81CC768425D7BDD900600714 /* ListDetailView.swift in Sources */,
 				817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */,
 				81B5DE4825C5924400C12C62 /* Arc.swift in Sources */,
+				81F0EDA225FE145D00308D8E /* ManagedAbsenceType+initial.swift in Sources */,
 				8179B3582528E02100A537B7 /* ExpansionHandler.swift in Sources */,
 				8179B3462528E02100A537B7 /* ListView.swift in Sources */,
 				8133A7D025F2D9DA00B8EA70 /* ManagedSettings+new.swift in Sources */,
@@ -1437,6 +1448,7 @@
 				81E026D225FB6EBB0025BBEE /* NotificationServiceTests.swift in Sources */,
 				81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */,
 				81E026CF25FB5D990025BBEE /* AbsenceTypeTests.swift in Sources */,
+				81F0EDA625FE29B700308D8E /* Sequence+DuplicatesTests.swift in Sources */,
 				81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */,
 				8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */,
 				8179B3702528E03900A537B7 /* TimeEntryTests.swift in Sources */,

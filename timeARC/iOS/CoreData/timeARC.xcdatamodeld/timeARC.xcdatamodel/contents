@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D80" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="ManagedAbsenceEntry" representedClassName="ManagedAbsenceEntry" syncable="YES" codeGenerationType="class">
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -12,14 +12,12 @@
         <attribute name="offPercentage" optional="YES" attributeType="Float" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ManagedAbsenceEntry" inverseName="type" inverseEntity="ManagedAbsenceEntry"/>
-        <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedSettings" inverseName="absenceTypes" inverseEntity="ManagedSettings"/>
     </entity>
     <entity name="ManagedSettings" representedClassName="ManagedSettings" syncable="YES" codeGenerationType="class">
         <attribute name="accentColor" optional="YES" attributeType="String"/>
         <attribute name="timerDisplayMode" optional="YES" attributeType="String"/>
         <attribute name="workingDuration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="workingWeekDays" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[Int]"/>
-        <relationship name="absenceTypes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ManagedAbsenceType" inverseName="settings" inverseEntity="ManagedAbsenceType"/>
     </entity>
     <entity name="ManagedTimeEntry" representedClassName="ManagedTimeEntry" syncable="YES" codeGenerationType="class">
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -28,8 +26,8 @@
     </entity>
     <elements>
         <element name="ManagedAbsenceEntry" positionX="-3546.029663085938" positionY="-2935.906616210937" width="135.283447265625" height="103"/>
-        <element name="ManagedAbsenceType" positionX="-3299.223999023438" positionY="-2954.337249755859" width="128" height="133"/>
-        <element name="ManagedSettings" positionX="-3554.252075195312" positionY="-3085.141754150391" width="128" height="104"/>
+        <element name="ManagedAbsenceType" positionX="-3299.223999023438" positionY="-2954.337249755859" width="128" height="104"/>
+        <element name="ManagedSettings" positionX="-3554.252075195312" positionY="-3085.141754150391" width="128" height="89"/>
         <element name="ManagedTimeEntry" positionX="-3754.008178710938" positionY="-3004.874542236328" width="128" height="74"/>
     </elements>
 </model>
