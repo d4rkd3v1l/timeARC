@@ -9,6 +9,19 @@ import SwiftUI
 import SwiftUIFlux
 import Combine
 
+// TODO: Move somewhere it actually belongs
+internal final class Inspection<V> where V: View {
+
+    let notice = PassthroughSubject<UInt, Never>()
+    var callbacks = [UInt: (V) -> Void]()
+
+    func visit(_ view: V, _ line: UInt) {
+        if let callback = callbacks.removeValue(forKey: line) {
+            callback(view)
+        }
+    }
+}
+
 struct TimerView: ConnectedView {
     enum Tab: Equatable {
         case today
@@ -22,7 +35,7 @@ struct TimerView: ConnectedView {
         }
     }
 
-    var didAppear: ((Self) -> Void)?
+    internal let inspection = Inspection<Self>()
     private let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect().share()
 
     @State private var mode: Tab = .today
@@ -39,6 +52,7 @@ struct TimerView: ConnectedView {
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
+        print(state.timeState.timeEntries.forDay(Day()).count)
         return Props(timeEntries: state.timeState.timeEntries.forDay(Day()),
                      timeEntriesWeek: state.timeState.timeEntries
                         .timeEntries(from: Date().firstOfWeek,
@@ -96,11 +110,11 @@ struct TimerView: ConnectedView {
                 .navigationBarTitle(self.mode.title)
             }
         }
-        .onAppear { self.didAppear?(self) }
+        .onReceive(self.inspection.notice) { self.inspection.visit(self, $0) }
     }
 }
 
-private struct TimerArcView: View {
+struct TimerArcView: View {
     let timeEntries: [TimeEntry]
     let workingDuration: Int
     let displayMode: TimerDisplayMode

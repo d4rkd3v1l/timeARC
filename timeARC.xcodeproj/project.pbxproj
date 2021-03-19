@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		810C6A8325FCE69000185BC6 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 810C6A8225FCE69000185BC6 /* ViewInspector */; };
+		8110B87D26049F9D00AAD9BA /* TimerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ED197B25FCC57200FBF24F /* TimerViewTests.swift */; };
 		81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130AFC2529A10400CA0A69 /* CodableColorTests.swift */; };
 		81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B042529A1C600CA0A69 /* Collection+averageTests.swift */; };
 		81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */; };
@@ -212,7 +213,6 @@
 		81E026D925FBE45A0025BBEE /* WatchCommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D725FBE45A0025BBEE /* WatchCommunicationService.swift */; };
 		81E026DA25FBE45A0025BBEE /* WatchCommunicationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */; };
 		81ED197A25FCC53E00FBF24F /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 81ED197925FCC53E00FBF24F /* ViewInspector */; };
-		81ED197C25FCC57200FBF24F /* TimerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ED197B25FCC57200FBF24F /* TimerViewTests.swift */; };
 		81F0EDA225FE145D00308D8E /* ManagedAbsenceType+initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F0EDA125FE145D00308D8E /* ManagedAbsenceType+initial.swift */; };
 		81F0EDA425FE299700308D8E /* Sequence+Duplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F0EDA325FE299700308D8E /* Sequence+Duplicates.swift */; };
 		81F0EDA625FE29B700308D8E /* Sequence+DuplicatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F0EDA525FE29B700308D8E /* Sequence+DuplicatesTests.swift */; };
@@ -677,6 +677,7 @@
 		8179B2842528DF7C00A537B7 /* timeARCTests */ = {
 			isa = PBXGroup;
 			children = (
+				81F0EDA725FE5CAA00308D8E /* Views */,
 				819FA2A425EA26A10007BC46 /* CoreData */,
 				8179B36B2528E03900A537B7 /* Extensions */,
 				8179B2872528DF7C00A537B7 /* Info.plist */,
@@ -684,7 +685,6 @@
 				81E026D025FB6EAE0025BBEE /* Notification */,
 				81FE88BE2529171E000375FF /* Reducers */,
 				8137EAF0254BEA2200FE9AE7 /* TestHelpers.swift */,
-				81ED197B25FCC57200FBF24F /* TimerViewTests.swift */,
 			);
 			path = timeARCTests;
 			sourceTree = "<group>";
@@ -1001,6 +1001,14 @@
 				81E026D825FBE45A0025BBEE /* WatchCommunicationMiddleware.swift */,
 			);
 			path = WatchCommunication;
+			sourceTree = "<group>";
+		};
+		81F0EDA725FE5CAA00308D8E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81ED197B25FCC57200FBF24F /* TimerViewTests.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		81F5298025E90C8000C3EAA8 /* CoreData */ = {
@@ -1463,10 +1471,10 @@
 				81F0EDA625FE29B700308D8E /* Sequence+DuplicatesTests.swift in Sources */,
 				81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */,
 				8172E1712534EEED00C39CA4 /* WeekDayTests.swift in Sources */,
+				8110B87D26049F9D00AAD9BA /* TimerViewTests.swift in Sources */,
 				8179B3702528E03900A537B7 /* TimeEntryTests.swift in Sources */,
 				819FA2A625EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift in Sources */,
 				81FE88AB25291501000375FF /* SettingsReducerTests.swift in Sources */,
-				81ED197C25FCC57200FBF24F /* TimerViewTests.swift in Sources */,
 				81E026D425FBDD0E0025BBEE /* CoreDataServiceTests.swift in Sources */,
 				8179B36E2528E03900A537B7 /* TimeReducerTests.swift in Sources */,
 				8179B36F2528E03900A537B7 /* Date+Tests.swift in Sources */,
