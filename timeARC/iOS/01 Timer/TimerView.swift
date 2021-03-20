@@ -90,6 +90,7 @@ struct TimerView: ConnectedView {
                         props.toggleTimer()
                     }
                     .buttonStyle(CTAStyle())
+                    .accessibility(identifier: "Timer.timer")
 
                     Spacer()
                 }

@@ -40,10 +40,7 @@ class CoreDataService {
         return self.persistentContainer.viewContext
     }
 
-    init(inMemory: Bool = false) {
-        if inMemory {
-            self.persistentContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
+    init() {
         self.persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

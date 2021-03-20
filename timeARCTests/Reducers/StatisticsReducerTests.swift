@@ -82,15 +82,11 @@ class StatisticsReducerTests: XCTestCase {
         let action = StatisticsNextInterval()
         let state = statisticsReducer(appState: appState, action: action)
 
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 11, day: 2))
-            XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 11, day: 8))
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 11, day: 1))
-            XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 11, day: 7))
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(state.selectedStartDate, try .localized(en: try Date(year: 2020, month: 11, day: 1),
+                                                               de: try Date(year: 2020, month: 11, day: 2)))
+
+        XCTAssertEqual(state.selectedEndDate, try .localized(en: try Date(year: 2020, month: 11, day: 7),
+                                                             de: try Date(year: 2020, month: 11, day: 8)))
     }
 
     func testNextInterval_month() throws {
@@ -143,15 +139,11 @@ class StatisticsReducerTests: XCTestCase {
         let action = StatisticsPreviousInterval()
         let state = statisticsReducer(appState: appState, action: action)
 
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 10, day: 19))
-            XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 10, day: 25))
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(state.selectedStartDate, try Date(year: 2020, month: 10, day: 18))
-            XCTAssertEqual(state.selectedEndDate, try Date(year: 2020, month: 10, day: 24))
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(state.selectedStartDate, try .localized(en: try Date(year: 2020, month: 10, day: 18),
+                                                               de: try Date(year: 2020, month: 10, day: 19)))
+
+        XCTAssertEqual(state.selectedEndDate, try .localized(en: try Date(year: 2020, month: 10, day: 24),
+                                                             de: try Date(year: 2020, month: 10, day: 25)))
     }
 
     func testPreviousInterval_month() throws {

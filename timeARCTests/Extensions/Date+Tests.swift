@@ -72,47 +72,26 @@ class DateTests: XCTestCase {
     }
 
     func testFirstOfWeek() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(self.date.firstOfWeek, try Date(year: 2020, month: 7, day: 20))
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(self.date.firstOfWeek, try Date(year: 2020, month: 7, day: 19))
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(self.date.firstOfWeek, try .localized(en: try Date(year: 2020, month: 7, day: 19),
+                                                             de: try Date(year: 2020, month: 7, day: 20)))
     }
 
     func testLastOfWeek() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(self.date.lastOfWeek, try Date(year: 2020, month: 7, day: 26))
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(self.date.lastOfWeek, try Date(year: 2020, month: 7, day: 25))
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(self.date.lastOfWeek, try .localized(en: try Date(year: 2020, month: 7, day: 25),
+                                                            de: try Date(year: 2020, month: 7, day: 26)))
     }
 
     func testFormatted() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(self.date.formatted("HH:mm:ss"), "13:37:42")
-            XCTAssertEqual(self.date.formatted("dd.MM.YYYY"), "20.07.2020")
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(self.date.formatted("HH:mm:ss"), "13:37:42")
-            XCTAssertEqual(self.date.formatted("dd.MM.YYYY"), "07/20/2020")
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(self.date.formatted("HH:mm:ss"), "13:37:42")
+        XCTAssertEqual(self.date.formatted("dd.MM.YYYY"), try .localized(en: "07/20/2020",
+                                                                         de: "20.07.2020"))
     }
-
+    
     func testFormattedTime() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(self.date.formattedTime(), "13:37")
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(self.date.formattedTime(), "1:37 PM")
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(self.date.formattedTime(), try .localized(en: "1:37 PM",
+                                                                 de: "13:37"))
     }
-
+    
     func testHours() throws {
         XCTAssertEqual(self.date.hours, 13)
     }

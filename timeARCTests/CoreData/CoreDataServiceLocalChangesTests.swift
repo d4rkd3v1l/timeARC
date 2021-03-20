@@ -24,7 +24,7 @@ class CoreDataServiceLocalChangesTests: XCTestCase {
             exp.fulfill()
         }
 
-        Resolver.registerMock()
+        Resolver.registerUnitTestMocks()
         Resolver.register { dispatch }
 
         self.initialTimeEntry = TimeEntry(start: Date(), end: Date())

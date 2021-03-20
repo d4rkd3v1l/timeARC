@@ -8,6 +8,8 @@
 import XCTest
 @testable import timeARC
 
+extension WeekDay: Localized {}
+
 class WeekDayTests: XCTestCase {
     func testId() throws {
         let weekDay: WeekDay = .friday
@@ -23,25 +25,13 @@ class WeekDayTests: XCTestCase {
     }
 
     func testSortIndex() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(WeekDay.sunday.sortIndex, 6)
-            XCTAssertEqual(WeekDay.monday.sortIndex, 0)
-            XCTAssertEqual(WeekDay.tuesday.sortIndex, 1)
-            XCTAssertEqual(WeekDay.wednesday.sortIndex, 2)
-            XCTAssertEqual(WeekDay.thursday.sortIndex, 3)
-            XCTAssertEqual(WeekDay.friday.sortIndex, 4)
-            XCTAssertEqual(WeekDay.saturday.sortIndex, 5)
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(WeekDay.sunday.sortIndex, 0)
-            XCTAssertEqual(WeekDay.monday.sortIndex, 1)
-            XCTAssertEqual(WeekDay.tuesday.sortIndex, 2)
-            XCTAssertEqual(WeekDay.wednesday.sortIndex, 3)
-            XCTAssertEqual(WeekDay.thursday.sortIndex, 4)
-            XCTAssertEqual(WeekDay.friday.sortIndex, 5)
-            XCTAssertEqual(WeekDay.saturday.sortIndex, 6)
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(WeekDay.sunday.sortIndex, try .localized(en: 0, de: 6))
+        XCTAssertEqual(WeekDay.monday.sortIndex, try .localized(en: 1, de: 0))
+        XCTAssertEqual(WeekDay.tuesday.sortIndex, try .localized(en: 2, de: 1))
+        XCTAssertEqual(WeekDay.wednesday.sortIndex, try .localized(en: 3, de: 2))
+        XCTAssertEqual(WeekDay.thursday.sortIndex, try .localized(en: 4, de: 3))
+        XCTAssertEqual(WeekDay.friday.sortIndex, try .localized(en: 5, de: 4))
+        XCTAssertEqual(WeekDay.saturday.sortIndex, try .localized(en: 6, de: 5))
     }
 
     func testComparable() throws {
@@ -49,56 +39,35 @@ class WeekDayTests: XCTestCase {
     }
 
     func testSymbol() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(WeekDay.monday.symbol, "Montag")
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(WeekDay.monday.symbol, "Monday")
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(WeekDay.monday.symbol, try .localized(en: "Monday",
+                                                             de: "Montag"))
     }
 
     func testShortSymbol() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(WeekDay.monday.shortSymbol, "Mo.")
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(WeekDay.monday.shortSymbol, "Mon")
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(WeekDay.monday.shortSymbol, try .localized(en: "Mon",
+                                                                  de: "Mo."))
     }
 
     func testAvailableItems() throws {
-
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(WeekDay.availableItems, [.monday,
-                                                    .tuesday,
-                                                    .wednesday,
-                                                    .thursday,
-                                                    .friday,
-                                                    .saturday,
-                                                    .sunday])
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(WeekDay.availableItems, [.sunday,
-                                                    .monday,
-                                                    .tuesday,
-                                                    .wednesday,
-                                                    .thursday,
-                                                    .friday,
-                                                    .saturday])
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(WeekDay.availableItems, try .localized(en: [.sunday,
+                                                                   .monday,
+                                                                   .tuesday,
+                                                                   .wednesday,
+                                                                   .thursday,
+                                                                   .friday,
+                                                                   .saturday],
+                                                              de: [.monday,
+                                                                   .tuesday,
+                                                                   .wednesday,
+                                                                   .thursday,
+                                                                   .friday,
+                                                                   .saturday,
+                                                                   .sunday]))
     }
 
     func testTitle() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(WeekDay.monday.title, "Montag")
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(WeekDay.monday.title, "Monday")
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(WeekDay.monday.title, try .localized(en: "Monday",
+                                                            de: "Montag"))
     }
 
     func testWorkingDays() throws {

@@ -27,18 +27,11 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:timeARC.xcodeproj",
         "identifier" : "8179B2802528DF7C00A537B7",
-        "name" : "timeARCTests"
-      }
-    },
-    {
-      "enabled" : false,
-      "target" : {
-        "containerPath" : "container:timeARC.xcodeproj",
-        "identifier" : "8179B28B2528DF7C00A537B7",
-        "name" : "timeARCUITests"
+        "name" : "timeARCUnitTests"
       }
     }
   ],

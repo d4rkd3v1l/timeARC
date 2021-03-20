@@ -39,16 +39,19 @@ struct ContentView: ConnectedView {
                             Image(systemName: "clock.fill") // timer
                             Text("timer")
                         }
+
                     ListView()
                         .tabItem {
                             Image(systemName: "tray.full.fill") // equal.square.fill
                             Text("list")
                         }
+
                     StatisticsView()
                         .tabItem {
                             Image(systemName: "chart.bar.fill")
                             Text("statistics")
                         }
+
                     SettingsView()
                         .tabItem {
                             Image(systemName: "wrench.fill") // gear

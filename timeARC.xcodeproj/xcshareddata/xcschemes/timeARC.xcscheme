@@ -30,7 +30,10 @@
       codeCoverageEnabled = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:timeARC/timeARC.xctestplan"
+            reference = "container:timeARC/UnitTests.xctestplan">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:FullTests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -42,8 +45,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8179B2802528DF7C00A537B7"
-               BuildableName = "timeARCTests.xctest"
-               BlueprintName = "timeARCTests"
+               BuildableName = "timeARCUnitTests.xctest"
+               BlueprintName = "timeARCUnitTests"
                ReferencedContainer = "container:timeARC.xcodeproj">
             </BuildableReference>
          </TestableReference>

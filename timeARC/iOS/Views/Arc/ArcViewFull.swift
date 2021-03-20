@@ -34,10 +34,12 @@ struct ArcViewFull: View {
                     Text("\(Int(Double(self.duration) / Double(max(self.maxDuration, 1)) * 100.0))")
                         .animatableSystemFont(size: geometry.size.width / 3.5, weight: .bold)
                         .padding(0)
+                        .accessibility(identifier: "ArcViewFull.value")
 
                     Text("%")
                         .animatableSystemFont(size: geometry.size.width / 4.5, weight: .bold)
                         .padding(0)
+                        .accessibility(identifier: "ArcViewFull.percentage")
                 }
 
                 VStack {
@@ -47,6 +49,7 @@ struct ArcViewFull: View {
                         .animatableSystemFont(size: self.timeFontSize(for: geometry), weight: .bold)
                         .minimumScaleFactor(0.1)
                         .lineLimit(1)
+                        .accessibility(identifier: "ArcViewFull.timer")
 
                     if let secondLine = self.displayMode.text(for: self.duration,
                                                               maxDuration: self.maxDuration,
@@ -55,6 +58,7 @@ struct ArcViewFull: View {
                             .animatableSystemFont(size: self.timeFontSize(for: geometry) * 0.5)
                             .minimumScaleFactor(0.1)
                             .lineLimit(1)
+                            .accessibility(identifier: "ArcViewFull.timer.secondLine")
                     }
                 }
                 .frame(width: geometry.size.width * 0.65)

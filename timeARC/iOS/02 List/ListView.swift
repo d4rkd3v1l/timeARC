@@ -34,6 +34,7 @@ struct ListView: ConnectedView {
                     Text("noEntriesYet")
                         .padding(.all, 50)
                         .multilineTextAlignment(.center)
+                        .accessibility(identifier: "List.noEntriesYet")
                     Spacer()
                 } else {
                     List {
@@ -68,7 +69,8 @@ private struct YearView: View {
     let absenceEntries: [AbsenceEntry]
 
     var body: some View {
-        Section(header: Text(String(Calendar.current.dateComponents([.year], from: self.year).year ?? 0))) {
+        let year = Calendar.current.dateComponents([.year], from: self.year).year ?? 0
+        Section(header: Text(String(year))) {
             let weeks = self.relevantDays.sorted(by: { $0.key > $1.key })
                 .filter { week in
                     !Set(self.timeEntries.map { $0.key }).isDisjoint(with: Set(week.value))
@@ -83,6 +85,7 @@ private struct YearView: View {
                          absenceEntries: absenceEntries)
             }
         }
+        .accessibility(identifier: "List.year.\(year)")
     }
 }
 
@@ -94,7 +97,8 @@ private struct WeekView: View {
     let absenceEntries: [AbsenceEntry]
 
     var body: some View {
-        Section(header: Text("Week \(Calendar.current.dateComponents([.weekOfYear], from: self.week).weekOfYear ?? 0)")) {
+        let week = Calendar.current.dateComponents([.weekOfYear], from: self.week).weekOfYear ?? 0
+        Section(header: Text("Week \(week)")) {
             let days = self.relevantDays.sorted(by: { $0 > $1 })
                 .filter {
                     !self.timeEntries.forDay($0).isEmpty
@@ -109,6 +113,7 @@ private struct WeekView: View {
                         absenceEntries: self.absenceEntries.forDay(day, workingDays: self.relevantDays))
             }
         }
+        .accessibility(identifier: "List.week.\(week)")
     }
 }
 
@@ -128,6 +133,7 @@ private struct DayView: View {
                         timeEntries: self.timeEntries,
                         absenceEntries: showAbsenceEntries ? self.absenceEntries : [])
         }
+        .accessibility(identifier: "List.day")
     }
 }
 

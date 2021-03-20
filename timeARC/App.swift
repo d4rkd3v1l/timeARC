@@ -12,16 +12,33 @@ import CoreData
 
 @main
 struct Main: App {
-    let isTesting = NSClassFromString("XCTestCase") != nil
+    let isRunningUnitTests = NSClassFromString("XCTestCase") != nil
+    let isRunningUITests = ProcessInfo().arguments.contains("--UITests")
+
+    init() {
+        if self.isRunningUnitTests {
+            Resolver.registerUnitTestMocks()
+        } else if self.isRunningUITests {
+            Resolver.registerUITestMocks(store: store)
+        } else {
+            Resolver.register(store: store)
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
-            if self.isTesting {
-                MockApp()
+            if self.isRunningUnitTests {
+                UnitTestApp()
             } else {
                 TimeARCApp()
             }
         }
+    }
+}
+
+struct UnitTestApp: View {
+    var body: some View {
+        Text("Running unit tests...")
     }
 }
 
@@ -30,8 +47,6 @@ struct TimeARCApp: View {
         #if DEBUG
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         #endif
-
-        Resolver.register(store: store)
 
         do {
             let coreDataService: CoreDataService = Resolver.resolve()
@@ -48,16 +63,6 @@ struct TimeARCApp: View {
         StoreProvider(store: store) {
             ContentView()
         }
-    }
-}
-
-struct MockApp: View {
-    init() {
-        Resolver.registerMock()
-    }
-
-    var body: some View {
-        Text("Testing...")
     }
 }
 

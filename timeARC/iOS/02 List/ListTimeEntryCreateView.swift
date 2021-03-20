@@ -36,6 +36,7 @@ struct ListTimeEntryCreateView: ConnectedView {
 
                     DatePicker("", selection: self.$day.date, displayedComponents: .date)
                         .labelsHidden()
+                        .accessibility(identifier: "ListTimeEntryCreate.date")
                 }
                 HStack {
                     Text("time")
@@ -44,9 +45,13 @@ struct ListTimeEntryCreateView: ConnectedView {
 
                     DatePicker("", selection: self.$startDate, displayedComponents: .hourAndMinute)
                         .labelsHidden()
+                        .accessibility(identifier: "ListTimeEntryCreate.start")
+
                     Image(systemName: "arrow.right")
+                    
                     DatePicker("", selection: self.$endDate, displayedComponents: .hourAndMinute)
                         .labelsHidden()
+                        .accessibility(identifier: "ListTimeEntryCreate.end")
                 }
             }
 
@@ -57,6 +62,7 @@ struct ListTimeEntryCreateView: ConnectedView {
                 self.presentationMode.wrappedValue.dismiss()
             })
             .buttonStyle(CTAStyle())
+            .accessibility(identifier: "ListTimeEntryCreate.add")
         }
         .navigationBarTitle("createTimeEntryTitle")
     }

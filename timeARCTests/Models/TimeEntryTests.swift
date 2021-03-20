@@ -385,12 +385,7 @@ class TimeEntryTests: XCTestCase {
     }
 
     func testFormattedFull() throws {
-        if Locale.current.identifier == "de_DE" {
-            XCTAssertEqual(123_456.formattedFull(), "34 Stunden und 17 Minuten")
-        } else if Locale.current.identifier == "en_US" {
-            XCTAssertEqual(123_456.formattedFull(), "34 hours, 17 minutes")
-        } else {
-            throw XCTSkip("Invalid locale for this test.")
-        }
+        XCTAssertEqual(123_456.formattedFull(), try .localized(en: "34 hours, 17 minutes",
+                                                               de: "34 Stunden und 17 Minuten"))
     }
 }

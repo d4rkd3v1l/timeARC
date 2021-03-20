@@ -33,10 +33,20 @@ struct ListAbsenceEntryCreateView: ConnectedView {
                     ForEach(props.absenceTypes) { absenceType in
                         Text(absenceType.localizedTitle)
                             .tag(absenceType)
+                            .accessibility(identifier: "ListAbsenceEntryCreate.type.\(absenceType.title)")
                     }
                 }
-                DatePicker("from", selection: self.$absenceEntry.start.date, displayedComponents: .date)
-                DatePicker("to", selection: self.$absenceEntry.end.date, displayedComponents: .date)
+                .accessibility(identifier: "ListAbsenceEntryCreate.type")
+
+                DatePicker("from",
+                           selection: self.$absenceEntry.start.date,
+                           displayedComponents: .date)
+                    .accessibility(identifier: "ListAbsenceEntryCreate.start")
+
+                DatePicker("to",
+                           selection: self.$absenceEntry.end.date,
+                           displayedComponents: .date)
+                    .accessibility(identifier: "ListAbsenceEntryCreate.end")
             }
 
             Button("create", action: {
@@ -45,6 +55,7 @@ struct ListAbsenceEntryCreateView: ConnectedView {
                 self.presentationMode.wrappedValue.dismiss()
             })
             .buttonStyle(CTAStyle())
+            .accessibility(identifier: "ListAbsenceEntryCreate.add")
         }
         .navigationBarTitle("createAbsenceEntryTitle")
     }

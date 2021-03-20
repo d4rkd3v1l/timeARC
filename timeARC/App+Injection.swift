@@ -21,7 +21,7 @@ extension Resolver {
         register { NotificationService() }
     }
 
-    static func registerMock() {
+    static func registerUnitTestMocks() {
         register { { _ in } as DispatchFunction }.scope(.application)
         register { _ -> NSPersistentContainer in
             let mockContainer = NSPersistentContainer(name: "timeARC")
@@ -31,6 +31,21 @@ extension Resolver {
         register { CoreDataService() }.scope(.application)
         register { CoreDataToStateService() }
         register { StateToCoreDataService() }
+        register { NotificationService() }
+    }
+
+    static func registerUITestMocks(store: Store<AppState>) {
+        register { store.dispatch }.scope(.application)
+        register { _ -> NSPersistentContainer in
+            let mockContainer = NSPersistentContainer(name: "timeARC")
+            mockContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+            return mockContainer
+        }.scope(.application)
+        register { CoreDataService() }.scope(.application)
+        register { CoreDataToStateService() }
+        register { StateToCoreDataService() }
+        register { WatchCommunicationService() }.scope(.application)
+        register { WidgetUpdateService() }
         register { NotificationService() }
     }
 }

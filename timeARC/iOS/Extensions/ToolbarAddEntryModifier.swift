@@ -43,6 +43,7 @@ struct ToolbarAddEntryModifier: ViewModifier {
                     }
                     label: {
                         Image(systemName: "plus")
+                            .accessibility(identifier: "ToolbarAddEntry.add")
                     }
                 }
             })
