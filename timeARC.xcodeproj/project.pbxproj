@@ -91,8 +91,6 @@
 		816BC502254EAAFE0015B905 /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
 		816BC509254EAE6F0015B905 /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
 		816BC510254EAE700015B905 /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
-		816BC517254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */; };
-		816BC51E254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */; };
 		816BC52C254EB89A0015B905 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3232528E02100A537B7 /* WeekDay.swift */; };
 		816BC53B254EC8C20015B905 /* WidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BC539254EC8C20015B905 /* WidgetEntryView.swift */; };
 		816BC544254EC8EF0015B905 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BC542254EC8EF0015B905 /* Provider.swift */; };
@@ -127,7 +125,6 @@
 		8179B35E2528E02100A537B7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3382528E02100A537B7 /* Date+.swift */; };
 		8179B3602528E02100A537B7 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33B2528E02100A537B7 /* ArcView.swift */; };
 		8179B3612528E02100A537B7 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33C2528E02100A537B7 /* VisualEffectView.swift */; };
-		8179B3622528E02100A537B7 /* MultipleValuesPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */; };
 		8179B36E2528E03900A537B7 /* TimeReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B36A2528E03900A537B7 /* TimeReducerTests.swift */; };
 		8179B36F2528E03900A537B7 /* Date+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B36C2528E03900A537B7 /* Date+Tests.swift */; };
 		8179B3702528E03900A537B7 /* TimeEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B36D2528E03900A537B7 /* TimeEntryTests.swift */; };
@@ -159,7 +156,6 @@
 		8179B4352528E25300A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B4342528E25300A537B7 /* SwiftUIFlux */; };
 		8179B43D2528E25C00A537B7 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 8179B43C2528E25C00A537B7 /* SwiftUIFlux */; };
 		8179B45A2528E32400A537B7 /* AppToWatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3C12528E0BA00A537B7 /* AppToWatchData.swift */; };
-		817B42E92531F031005240C5 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42E82531F031005240C5 /* ListRowView.swift */; };
 		817B42F72531FA00005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B42FE2531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
 		817B43052531FA0A005240C5 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42F62531FA00005240C5 /* Day.swift */; };
@@ -167,12 +163,15 @@
 		817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */; };
 		817D61E52531CDDC009761DE /* AbsenceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61E42531CDDC009761DE /* AbsenceEntry.swift */; };
 		817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D61EC2531CDF3009761DE /* AbsenceType.swift */; };
+		817E226C2607BC90001D1F8D /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817B42E82531F031005240C5 /* ListRowView.swift */; };
+		817E226E2607C299001D1F8D /* ListDetailUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E226D2607C299001D1F8D /* ListDetailUITests.swift */; };
+		817E22702607C7CF001D1F8D /* XCUIApplication+selectDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E226F2607C7CF001D1F8D /* XCUIApplication+selectDate.swift */; };
 		817E753525E186E600FB926E /* ListAbsenceEntryUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E753425E186E600FB926E /* ListAbsenceEntryUpdateView.swift */; };
 		81834AD42604AAE900C30BB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81834AD52604AAE900C30BB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 814775952528E75800EDBE79 /* Localizable.strings */; };
 		81834AD72604AE1100C30BB3 /* XCTestCase+localizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81834AD62604AE1100C30BB3 /* XCTestCase+localizedString.swift */; };
 		81834AD92604AEA000C30BB3 /* ListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81834AD82604AEA000C30BB3 /* ListUITests.swift */; };
-		81834ADB2604AF3C00C30BB3 /* TimeARCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81834ADA2604AF3C00C30BB3 /* TimeARCTestCase.swift */; };
+		81834ADB2604AF3C00C30BB3 /* XCTestCase+createApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81834ADA2604AF3C00C30BB3 /* XCTestCase+createApp.swift */; };
 		819FA2A025EA0F010007BC46 /* CoreDataMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FA29F25EA0F010007BC46 /* CoreDataMiddleware.swift */; };
 		819FA2A325EA14DA0007BC46 /* DifferenceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 819FA2A225EA14DA0007BC46 /* DifferenceKit */; };
 		819FA2A625EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819FA2A525EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift */; };
@@ -207,7 +206,7 @@
 		81CFB90C25ED5C4D0094537E /* NotificationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFB90B25ED5C4D0094537E /* NotificationMiddleware.swift */; };
 		81CFB91325ED5DF10094537E /* WidgetUpdateMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFB91225ED5DF10094537E /* WidgetUpdateMiddleware.swift */; };
 		81D233572605DCFE002A4CB8 /* XCUIApplication+typeOnKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D233562605DCFE002A4CB8 /* XCUIApplication+typeOnKeyboard.swift */; };
-		81D233592605DE4F002A4CB8 /* XCTestCase+adjustDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D233582605DE4F002A4CB8 /* XCTestCase+adjustDatePicker.swift */; };
+		81D233592605DE4F002A4CB8 /* XCUIElement+adjustDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D233582605DE4F002A4CB8 /* XCUIElement+adjustDatePicker.swift */; };
 		81D442B425E020A500C133FE /* WidthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D442B325E020A500C133FE /* WidthKey.swift */; };
 		81D4A25525E8EF70008C6FA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8179B31A2528E02100A537B7 /* Assets.xcassets */; };
 		81D4A25725E9075D008C6FA5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D4A25625E9075D008C6FA5 /* CloudKit.framework */; };
@@ -421,7 +420,6 @@
 		8179B3382528E02100A537B7 /* Date+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		8179B33B2528E02100A537B7 /* ArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcView.swift; sourceTree = "<group>"; };
 		8179B33C2528E02100A537B7 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
-		8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleValuesPickerView.swift; sourceTree = "<group>"; };
 		8179B36A2528E03900A537B7 /* TimeReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeReducerTests.swift; sourceTree = "<group>"; };
 		8179B36C2528E03900A537B7 /* Date+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Tests.swift"; sourceTree = "<group>"; };
 		8179B36D2528E03900A537B7 /* TimeEntryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEntryTests.swift; sourceTree = "<group>"; };
@@ -451,10 +449,12 @@
 		817D61D02531C7AF009761DE /* AbsenceEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntryTests.swift; sourceTree = "<group>"; };
 		817D61E42531CDDC009761DE /* AbsenceEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceEntry.swift; sourceTree = "<group>"; };
 		817D61EC2531CDF3009761DE /* AbsenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceType.swift; sourceTree = "<group>"; };
+		817E226D2607C299001D1F8D /* ListDetailUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailUITests.swift; sourceTree = "<group>"; };
+		817E226F2607C7CF001D1F8D /* XCUIApplication+selectDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+selectDate.swift"; sourceTree = "<group>"; };
 		817E753425E186E600FB926E /* ListAbsenceEntryUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAbsenceEntryUpdateView.swift; sourceTree = "<group>"; };
 		81834AD62604AE1100C30BB3 /* XCTestCase+localizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+localizedString.swift"; sourceTree = "<group>"; };
 		81834AD82604AEA000C30BB3 /* ListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUITests.swift; sourceTree = "<group>"; };
-		81834ADA2604AF3C00C30BB3 /* TimeARCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeARCTestCase.swift; sourceTree = "<group>"; };
+		81834ADA2604AF3C00C30BB3 /* XCTestCase+createApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createApp.swift"; sourceTree = "<group>"; };
 		819FA29F25EA0F010007BC46 /* CoreDataMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMiddleware.swift; sourceTree = "<group>"; };
 		819FA2A525EA26E20007BC46 /* CoreDataServiceLocalChangesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceLocalChangesTests.swift; sourceTree = "<group>"; };
 		81A6AF7525D70B07000E3B4D /* StatisticsSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSectionFooterView.swift; sourceTree = "<group>"; };
@@ -474,7 +474,7 @@
 		81CFB90B25ED5C4D0094537E /* NotificationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMiddleware.swift; sourceTree = "<group>"; };
 		81CFB91225ED5DF10094537E /* WidgetUpdateMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateMiddleware.swift; sourceTree = "<group>"; };
 		81D233562605DCFE002A4CB8 /* XCUIApplication+typeOnKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+typeOnKeyboard.swift"; sourceTree = "<group>"; };
-		81D233582605DE4F002A4CB8 /* XCTestCase+adjustDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+adjustDatePicker.swift"; sourceTree = "<group>"; };
+		81D233582605DE4F002A4CB8 /* XCUIElement+adjustDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+adjustDatePicker.swift"; sourceTree = "<group>"; };
 		81D442B325E020A500C133FE /* WidthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthKey.swift; sourceTree = "<group>"; };
 		81D4A25625E9075D008C6FA5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UniqueTests.swift"; sourceTree = "<group>"; };
@@ -711,7 +711,7 @@
 				81B6FA8826061A17003F9CDB /* 04 Settings */,
 				81D2335A2605DE6B002A4CB8 /* Extensions */,
 				8179B2922528DF7C00A537B7 /* Info.plist */,
-				81834ADA2604AF3C00C30BB3 /* TimeARCTestCase.swift */,
+				81834ADA2604AF3C00C30BB3 /* XCTestCase+createApp.swift */,
 			);
 			path = timeARCUITests;
 			sourceTree = "<group>";
@@ -755,7 +755,6 @@
 			isa = PBXGroup;
 			children = (
 				81A6AF7A25D714B8000E3B4D /* State */,
-				81F3840626073B3100EDD391 /* AccentColorView.swift */,
 				8179B3132528E02100A537B7 /* SettingsView.swift */,
 				81F3840426073ADB00EDD391 /* SettingsWeekDaysPicker.swift */,
 			);
@@ -774,13 +773,10 @@
 		8179B31B2528E02100A537B7 /* 02 List */ = {
 			isa = PBXGroup;
 			children = (
-				81FA6D4D25DFF0C200DCE4A3 /* ListAbsenceEntryCreateView.swift */,
-				817E753425E186E600FB926E /* ListAbsenceEntryUpdateView.swift */,
-				81FA6D4F25E0142D00DCE4A3 /* ListDetailRowAbsenceEntryView.swift */,
-				81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */,
+				817E22662607A6F4001D1F8D /* AbsenceEntry */,
+				817E22672607A70C001D1F8D /* TimeEntry */,
 				81CC768325D7BDD900600714 /* ListDetailView.swift */,
 				817B42E82531F031005240C5 /* ListRowView.swift */,
-				81A6D8F425DFB3B4004A31BC /* ListTimeEntryCreateView.swift */,
 				8179B31C2528E02100A537B7 /* ListView.swift */,
 			);
 			path = "02 List";
@@ -825,7 +821,7 @@
 			isa = PBXGroup;
 			children = (
 				81B5DE3C25C5920D00C12C62 /* Arc */,
-				8179B33D2528E02100A537B7 /* MultipleValuesPickerView.swift */,
+				81F3840626073B3100EDD391 /* AccentColorView.swift */,
 				8179B33C2528E02100A537B7 /* VisualEffectView.swift */,
 			);
 			path = Views;
@@ -917,6 +913,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		817E22662607A6F4001D1F8D /* AbsenceEntry */ = {
+			isa = PBXGroup;
+			children = (
+				81FA6D4D25DFF0C200DCE4A3 /* ListAbsenceEntryCreateView.swift */,
+				817E753425E186E600FB926E /* ListAbsenceEntryUpdateView.swift */,
+				81FA6D4F25E0142D00DCE4A3 /* ListDetailRowAbsenceEntryView.swift */,
+			);
+			path = AbsenceEntry;
+			sourceTree = "<group>";
+		};
+		817E22672607A70C001D1F8D /* TimeEntry */ = {
+			isa = PBXGroup;
+			children = (
+				81FD95CB25DF9A7800DBB158 /* ListDetailRowTimeEntryView.swift */,
+				81A6D8F425DFB3B4004A31BC /* ListTimeEntryCreateView.swift */,
+			);
+			path = TimeEntry;
+			sourceTree = "<group>";
+		};
 		819FA2A425EA26A10007BC46 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -978,6 +993,7 @@
 		81B6FA8626061A08003F9CDB /* 02 List */ = {
 			isa = PBXGroup;
 			children = (
+				817E226D2607C299001D1F8D /* ListDetailUITests.swift */,
 				81834AD82604AEA000C30BB3 /* ListUITests.swift */,
 			);
 			path = "02 List";
@@ -1038,9 +1054,10 @@
 		81D2335A2605DE6B002A4CB8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				81D233582605DE4F002A4CB8 /* XCTestCase+adjustDatePicker.swift */,
+				81D233582605DE4F002A4CB8 /* XCUIElement+adjustDatePicker.swift */,
 				81834AD62604AE1100C30BB3 /* XCTestCase+localizedString.swift */,
 				81D233562605DCFE002A4CB8 /* XCUIApplication+typeOnKeyboard.swift */,
+				817E226F2607C7CF001D1F8D /* XCUIApplication+selectDate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1437,7 +1454,6 @@
 				814775772528E5D800EDBE79 /* ArcView.swift in Sources */,
 				817B43052531FA0A005240C5 /* Day.swift in Sources */,
 				814775472528E4B900EDBE79 /* TimeEntry.swift in Sources */,
-				816BC51E254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */,
 				816BC510254EAE700015B905 /* AbsenceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1449,7 +1465,6 @@
 				8133A7CC25F2D98300B8EA70 /* AbsenceEntry+CoreData.swift in Sources */,
 				81B5DE5825C5927300C12C62 /* ArcViewFull.swift in Sources */,
 				8179B3502528E02100A537B7 /* SettingsState.swift in Sources */,
-				8179B3622528E02100A537B7 /* MultipleValuesPickerView.swift in Sources */,
 				81E026D925FBE45A0025BBEE /* WatchCommunicationService.swift in Sources */,
 				8179B3562528E02100A537B7 /* SettingsReducer.swift in Sources */,
 				817E753525E186E600FB926E /* ListAbsenceEntryUpdateView.swift in Sources */,
@@ -1474,6 +1489,7 @@
 				8179B34D2528E02100A537B7 /* AppState.swift in Sources */,
 				8179B34E2528E02100A537B7 /* StatisticsReducer.swift in Sources */,
 				817D61E52531CDDC009761DE /* AbsenceEntry.swift in Sources */,
+				817E226C2607BC90001D1F8D /* ListRowView.swift in Sources */,
 				8134BDE525D6767B00FF9106 /* StatisticsBreaksView.swift in Sources */,
 				81D442B425E020A500C133FE /* WidthKey.swift in Sources */,
 				8179B3532528E02100A537B7 /* TimeReducer.swift in Sources */,
@@ -1485,7 +1501,6 @@
 				8134BDE125D6763700FF9106 /* StatisticsAverageHoursView.swift in Sources */,
 				81A6D8F525DFB3B4004A31BC /* ListTimeEntryCreateView.swift in Sources */,
 				8179B34B2528E02100A537B7 /* WeekDay.swift in Sources */,
-				817B42E92531F031005240C5 /* ListRowView.swift in Sources */,
 				8134BDE925D676B000FF9106 /* StatisticsAbsencesView.swift in Sources */,
 				8179B35B2528E02100A537B7 /* Date+Strideable.swift in Sources */,
 				8179B3522528E02100A537B7 /* TimeActions.swift in Sources */,
@@ -1560,13 +1575,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				81449EB72605CC9C00ED5E08 /* Localized.swift in Sources */,
+				817E226E2607C299001D1F8D /* ListDetailUITests.swift in Sources */,
+				817E22702607C7CF001D1F8D /* XCUIApplication+selectDate.swift in Sources */,
 				81D233572605DCFE002A4CB8 /* XCUIApplication+typeOnKeyboard.swift in Sources */,
 				81F3840926073DFD00EDD391 /* SettingsUITests.swift in Sources */,
 				81834AD92604AEA000C30BB3 /* ListUITests.swift in Sources */,
-				81834ADB2604AF3C00C30BB3 /* TimeARCTestCase.swift in Sources */,
+				81834ADB2604AF3C00C30BB3 /* XCTestCase+createApp.swift in Sources */,
 				81834AD72604AE1100C30BB3 /* XCTestCase+localizedString.swift in Sources */,
 				8179B2912528DF7C00A537B7 /* TimerUITests.swift in Sources */,
-				81D233592605DE4F002A4CB8 /* XCTestCase+adjustDatePicker.swift in Sources */,
+				81D233592605DE4F002A4CB8 /* XCUIElement+adjustDatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1592,7 +1609,6 @@
 				8179B3D82528E0BB00A537B7 /* ContentView.swift in Sources */,
 				8179B3D42528E0BB00A537B7 /* ComplicationView.swift in Sources */,
 				8179B4112528E19200A537B7 /* Date+.swift in Sources */,
-				816BC517254EAE790015B905 /* MultipleValuesPickerView.swift in Sources */,
 				816BC509254EAE6F0015B905 /* AbsenceType.swift in Sources */,
 				817B42FE2531FA0A005240C5 /* Day.swift in Sources */,
 				8179B3E22528E0BB00A537B7 /* WatchActions.swift in Sources */,

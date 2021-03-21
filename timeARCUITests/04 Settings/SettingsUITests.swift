@@ -7,11 +7,16 @@
 
 import XCTest
 
-class SettingsUITests: TimeARCTestCase {
+class SettingsUITests: XCTestCase {
+    private var app: XCUIApplication!
+
     override func setUpWithError() throws {
         try super.setUpWithError()
 
-        self.app.tabBars.buttons.element(boundBy: 3).tap()
+        self.app = self.createApp()
+
+        let settingsTab = self.app.tabBars.buttons.element(boundBy: 3)
+        settingsTab.tap()
     }
 
     func testTitle() throws {
@@ -39,6 +44,10 @@ class SettingsUITests: TimeARCTestCase {
         XCTAssertEqual(weekDaysButton.label, "\(weekDays), 5")
 
         weekDaysButton.tap()
+
+        for weekdaySymbol in Calendar.current.weekdaySymbols {
+            XCTAssertTrue(self.app.buttons[weekdaySymbol].exists)
+        }
 
         let friday = Calendar.current.weekdaySymbols[5]
         self.app.buttons[friday].tap()
@@ -75,3 +84,4 @@ class SettingsUITests: TimeARCTestCase {
         XCTAssertEqual(self.app.buttons["pink"].label, selected)
     }
 }
+ 

@@ -13,8 +13,8 @@ struct SettingsWeekDaysPicker: View {
     var body: some View {
         Form {
             List {
-                ForEach(WeekDay.allCases) { weekDay in
-                    MultipleSelectionRow(title: weekDay.title, isSelected: self.selections.contains(weekDay)) {
+                ForEach(WeekDay.allCases.sorted()) { weekDay in
+                    MultipleSelectionRow(title: weekDay.symbol, isSelected: self.selections.contains(weekDay)) {
                         if self.selections.contains(weekDay) {
                             self.selections.removeAll(where: { $0 == weekDay })
                         }
@@ -38,9 +38,9 @@ private struct MultipleSelectionRow: View {
             HStack {
                 Text(self.title)
                     .foregroundColor(.primary)
+                Spacer()
 
                 if self.isSelected {
-                    Spacer()
                     Image(systemName: "checkmark")
                         .foregroundColor(.accentColor)
                 }

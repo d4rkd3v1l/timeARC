@@ -13,6 +13,10 @@ struct AbsenceType: Identifiable, Equatable, Hashable, Codable {
     var icon: String
     var offPercentage: Float
 
+    var localizedTitle: String {
+        "\(self.icon) \(NSLocalizedString(self.title, comment: ""))"
+    }
+
     static var dummy: AbsenceType {
         AbsenceType(id: UUID(uuidString: "13371337-1337-1337-1337-133713371337")!, title: "Dummy", icon: "😈", offPercentage: 0.42)
     }
@@ -28,11 +32,5 @@ struct AbsenceType: Identifiable, Equatable, Hashable, Codable {
             UUID(uuidString: "00000000-0000-0000-0000-000000000007")!,
             UUID(uuidString: "00000000-0000-0000-0000-000000000008")!
         ]
-    }
-}
-
-extension AbsenceType: SingleValueSelectable {
-    var localizedTitle: String {
-        "\(self.icon) \(NSLocalizedString(self.title, comment: ""))"
     }
 }

@@ -15,6 +15,12 @@ struct Day: Identifiable, Equatable, Hashable, Comparable, Codable {
         self.date
     }
 
+    var description: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        return dateFormatter.string(from: self.date)
+    }
+
     init(_ date: Date) {
         self.date = date.startOfDay
     }

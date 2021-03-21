@@ -14,6 +14,7 @@ import CoreData
 struct Main: App {
     let isRunningUnitTests = NSClassFromString("XCTestCase") != nil
     let isRunningUITests = ProcessInfo().arguments.contains("--UITests")
+    let shouldUseMockData = ProcessInfo().arguments.contains("--MockData")
 
     init() {
         if self.isRunningUnitTests {
@@ -22,6 +23,19 @@ struct Main: App {
             Resolver.registerUITestMocks(store: store)
         } else {
             Resolver.register(store: store)
+        }
+
+        if self.shouldUseMockData {
+            let timeEntry = TimeEntry(start: Date(timeIntervalSinceReferenceDate: 638002800),
+                                      end: Date(timeIntervalSinceReferenceDate: 638010000))
+
+            let absenceEntry = AbsenceEntry(type: .dummy,
+                                            start: Date(timeIntervalSinceReferenceDate: 638002800).day,
+                                            end: Date(timeIntervalSinceReferenceDate: 638002800).day)
+
+            let coreDataService: CoreDataService = Resolver.resolve()
+            try? coreDataService.insert(timeEntry: timeEntry)
+            try? coreDataService.insert(absenceEntry: absenceEntry)
         }
     }
 

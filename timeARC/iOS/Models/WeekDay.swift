@@ -46,16 +46,6 @@ enum WeekDay: Int, Identifiable, Comparable, CaseIterable, Codable, Hashable {
     }
 }
 
-extension WeekDay: MultipleValuesSelectable {
-    static var availableItems: [WeekDay] {
-        return self.allCases.sorted()
-    }
-
-    var title: String {
-        return self.symbol
-    }
-}
-
 extension Array where Element == WeekDay {
     func workingDays(startDate: Date,
                      endDate: Date) -> [Day] {

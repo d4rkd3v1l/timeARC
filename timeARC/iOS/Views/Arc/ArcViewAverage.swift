@@ -92,6 +92,7 @@ struct ArcViewAverage: View {
                     Text(self.timeEntries.averageDuration().formatted(allowedUnits: [.hour, .minute]) ?? "")
                         .animatableSystemFont(size: geometry.size.width / 4.5, weight: .bold)
                         .padding(0)
+                        .accessibility(identifier: "ArcViewAverage.value")
                 }
 
                 HStack {
@@ -99,6 +100,7 @@ struct ArcViewAverage: View {
                         .animatableSystemFont(size: geometry.size.width / 7.5, weight: .bold)
                         .minimumScaleFactor(0.1)
                         .lineLimit(1)
+                        .accessibility(identifier: "ArcViewAverage.start")
 
                     Spacer()
 
@@ -106,6 +108,7 @@ struct ArcViewAverage: View {
                         .animatableSystemFont(size: geometry.size.width / 7.5, weight: .bold)
                         .minimumScaleFactor(0.1)
                         .lineLimit(1)
+                        .accessibility(identifier: "ArcViewAverage.end")
                 }
                 .frame(width: geometry.size.width * 0.65)
                 .offset(x: 0, y: geometry.size.height / 3)

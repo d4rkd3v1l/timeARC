@@ -7,7 +7,15 @@
 
 import XCTest
 
-class TimerUITests: TimeARCTestCase {
+class TimerUITests: XCTestCase {
+    private var app: XCUIApplication!
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+
+        self.app = self.createApp()
+    }
+
     func testArcView() throws {
         XCTAssertEqual(self.app.staticTexts["ArcViewFull.value"].label, "0")
         XCTAssertEqual(self.app.staticTexts["ArcViewFull.percentage"].label, "%")

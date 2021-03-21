@@ -7,11 +7,16 @@
 
 import XCTest
 
-class ListUITests: TimeARCTestCase {
+class ListUITests: XCTestCase {
+    private var app: XCUIApplication!
+
     override func setUpWithError() throws {
         try super.setUpWithError()
 
-        self.app.tabBars.buttons.element(boundBy: 1).tap()
+        self.app = self.createApp()
+
+        let listTab = self.app.tabBars.buttons.element(boundBy: 1)
+        listTab.tap()
     }
 
     func testEmpty() throws {
@@ -21,7 +26,7 @@ class ListUITests: TimeARCTestCase {
         XCTAssertEqual(self.app.staticTexts["List.noEntriesYet"].label, self.localizedString("noEntriesYet"))
     }
 
-    func testAddTimeEntry() throws {
+    func testCreateTimeEntry() throws {
         self.app.buttons["ToolbarAddEntry.add"].tap()
 
         let timeEntry = self.localizedString("timeEntry")
@@ -33,8 +38,8 @@ class ListUITests: TimeARCTestCase {
         // Select date
         XCTAssertEqual(self.app.staticTexts["ListTimeEntryCreate.dateLabel"].label, self.localizedString("date"))
 
-        let picker = self.app.datePickers["ListTimeEntryCreate.date"]
-        try self.select(year: 2020, month: 7, day: 25, picker: picker)
+        self.app.datePickers["ListTimeEntryCreate.date"].tap()
+        try self.app.selectDate(year: 2020, month: 7, day: 25)
 
         // Select time
         XCTAssertEqual(self.app.staticTexts["ListTimeEntryCreate.timeLabel"].label, self.localizedString("time"))
@@ -61,12 +66,12 @@ class ListUITests: TimeARCTestCase {
         XCTAssertTrue(self.app.buttons[entry].exists)
     }
 
-    func testAddAbsenceEntry() throws {
+    func testCreateAbsenceEntry() throws {
         self.app.buttons["ToolbarAddEntry.add"].tap()
 
         let timeEntry = self.localizedString("absenceEntry")
         self.app.buttons[timeEntry].tap()
-        
+
         let title = self.localizedString("createAbsenceEntryTitle")
         XCTAssertTrue(self.app.staticTexts[title].exists)
 
@@ -79,42 +84,16 @@ class ListUITests: TimeARCTestCase {
                                                            de: "🏝 Urlaub"))
 
         // Select dates
-        let startPicker = self.app.datePickers["ListAbsenceEntryCreate.start"]
-        try self.select(year: 2020, month: 07, day: 25, picker: startPicker)
+        self.app.datePickers["ListAbsenceEntryCreate.start"].tap()
+        try self.app.selectDate(year: 2020, month: 07, day: 25)
 
-        let endPicker = self.app.datePickers["ListAbsenceEntryCreate.end"]
-        try self.select(year: 2020, month: 07, day: 29, picker: endPicker)
+        self.app.datePickers["ListAbsenceEntryCreate.end"].tap()
+        try self.app.selectDate(year: 2020, month: 07, day: 29)
 
         self.app.buttons["ListAbsenceEntryCreate.add"].tap()
 
         let entry: String = try .localized(en: "Sat, 07/25, 00:00",
                                            de: "Sa, 25.07., 00:00")
         XCTAssertTrue(self.app.buttons[entry].exists)
-    }
-
-    // MARK: - Helper
-
-    private func select(year: Int, month: Int, day: Int, picker: XCUIElement) throws {
-        let monthLabel: String = try .localized(en: "Month",
-                                                de: "Monat")
-
-        picker.tap()
-        self.app.buttons[monthLabel].tap()
-
-        let yearPicker = self.app.pickerWheels.element(boundBy: 1)
-        self.adjust(picker: yearPicker, to: String(year))
-
-        let monthPicker = self.app.pickerWheels.element(boundBy: 0)
-        self.adjust(picker: monthPicker, to: DateFormatter().monthSymbols[month - 1])
-
-        self.app.buttons[monthLabel].tap()
-
-        self.app.buttons
-            .matching(NSPredicate(format: "label CONTAINS '\(day)'"))
-            .element(boundBy: 0)
-            .tap()
-
-        let background = self.app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
-        background.tap()
     }
 }

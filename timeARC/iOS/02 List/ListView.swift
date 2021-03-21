@@ -85,7 +85,6 @@ private struct YearView: View {
                          absenceEntries: absenceEntries)
             }
         }
-        .accessibility(identifier: "List.year.\(year)")
     }
 }
 
@@ -113,7 +112,6 @@ private struct WeekView: View {
                         absenceEntries: self.absenceEntries.forDay(day, workingDays: self.relevantDays))
             }
         }
-        .accessibility(identifier: "List.week.\(week)")
     }
 }
 
@@ -133,7 +131,7 @@ private struct DayView: View {
                         timeEntries: self.timeEntries,
                         absenceEntries: showAbsenceEntries ? self.absenceEntries : [])
         }
-        .accessibility(identifier: "List.day")
+        .accessibility(identifier: "List.day.\(self.day.description)")
     }
 }
 

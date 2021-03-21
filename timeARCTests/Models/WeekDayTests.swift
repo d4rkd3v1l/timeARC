@@ -48,28 +48,6 @@ class WeekDayTests: XCTestCase {
                                                                   de: "Mo."))
     }
 
-    func testAvailableItems() throws {
-        XCTAssertEqual(WeekDay.availableItems, try .localized(en: [.sunday,
-                                                                   .monday,
-                                                                   .tuesday,
-                                                                   .wednesday,
-                                                                   .thursday,
-                                                                   .friday,
-                                                                   .saturday],
-                                                              de: [.monday,
-                                                                   .tuesday,
-                                                                   .wednesday,
-                                                                   .thursday,
-                                                                   .friday,
-                                                                   .saturday,
-                                                                   .sunday]))
-    }
-
-    func testTitle() throws {
-        XCTAssertEqual(WeekDay.monday.title, try .localized(en: "Monday",
-                                                            de: "Montag"))
-    }
-
     func testWorkingDays() throws {
         let startDate = try Date(year: 2020, month: 11, day: 1)
         let endDate = try Date(year: 2020, month: 11, day: 11)
