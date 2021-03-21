@@ -31,10 +31,14 @@ class ListUITests: TimeARCTestCase {
         XCTAssertTrue(self.app.staticTexts[title].exists)
 
         // Select date
+        XCTAssertEqual(self.app.staticTexts["ListTimeEntryCreate.dateLabel"].label, self.localizedString("date"))
+
         let picker = self.app.datePickers["ListTimeEntryCreate.date"]
         try self.select(year: 2020, month: 7, day: 25, picker: picker)
 
         // Select time
+        XCTAssertEqual(self.app.staticTexts["ListTimeEntryCreate.timeLabel"].label, self.localizedString("time"))
+
         let background = self.app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
 
         let time: String = try .localized(en: "Time",

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// TODO: Make `SettingsWeekDaysPicker` generic and use it instead of this?!
 protocol MultipleValuesSelectable: Identifiable, Equatable {
     static var availableItems: [Self] { get }
     var title: String { get }

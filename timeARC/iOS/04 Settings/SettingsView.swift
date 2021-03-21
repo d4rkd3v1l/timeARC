@@ -9,33 +9,31 @@ import SwiftUI
 import SwiftUIFlux
 
 struct SettingsView: ConnectedView {
-    enum ExpandableSection: Equatable {
-        case workingHours
-        case weekDays
-    }
-
-    private let colors: [CodableColor] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
-
     @Environment(\.colorScheme) var colorScheme
-    @State private var workingHours: Date = Date().startOfDay.addingTimeInterval(28800)
-    @StateObject private var expansionHandler = ExpansionHandler<ExpandableSection>()
+
+    // TODO: Use .allCases (maybe sorted)
+    private let colors: [CodableColor] = [.primary, .blue, .gray, .green, .orange, .pink, .purple, .red, .yellow]
 
     struct Props {
         let workingWeekDays: [WeekDay]
-        let workingDuration: Int
-        let accentColor: CodableColor
-        let updateWorkingDuration: (Int) -> Void
+        let workingDurationBinding: Binding<Date>
+        let workingWeekDaysBinding: Binding<[WeekDay]>
+        let accentColorBinding: Binding<CodableColor>
         let updateWorkingWeekDays: ([WeekDay]) -> Void
-        let updateAccentColor: (CodableColor) -> Void
     }
 
     func map(state: AppState, dispatch: @escaping DispatchFunction) -> Props {
         return Props(workingWeekDays: state.settingsState.workingWeekDays,
-                     workingDuration: state.settingsState.workingDuration,
-                     accentColor: state.settingsState.accentColor,
-                     updateWorkingDuration: { dispatch(UpdateWorkingDuration(workingDuration: $0)) },
-                     updateWorkingWeekDays: { dispatch(UpdateWorkingWeekDays(workingWeekDays: $0)) },
-                     updateAccentColor: { dispatch(UpdateAccentColor(color: $0, colorScheme: self.colorScheme)) })
+                     workingDurationBinding:
+                        Binding<Date>(get: { state.settingsState.workingDuration.hoursAndMinutes },
+                                      set: { dispatch(UpdateWorkingDuration(workingDuration: $0.hoursAndMinutesInSeconds)) }),
+                     workingWeekDaysBinding:
+                        Binding<[WeekDay]>(get: { state.settingsState.workingWeekDays },
+                                           set: { dispatch(UpdateWorkingWeekDays(workingWeekDays: $0)) }),
+                     accentColorBinding:
+                        Binding<CodableColor>(get: { state.settingsState.accentColor },
+                                              set: { dispatch(UpdateAccentColor(color: $0, colorScheme: self.colorScheme)) }),
+                     updateWorkingWeekDays: { dispatch(UpdateWorkingWeekDays(workingWeekDays: $0)) })
     }
 
     func body(props: Props) -> some View {
@@ -43,45 +41,36 @@ struct SettingsView: ConnectedView {
             Form {
                 HStack {
                     Text("workingHours")
-                    DatePicker("", selection: self.$workingHours, displayedComponents: .hourAndMinute)
-                        .onChange(of: self.workingHours) { time in
-                            props.updateWorkingDuration(time.hoursAndMinutesInSeconds)
-                        }
+                        .accessibility(identifier: "Settings.workingHoursLabel")
+
+                    DatePicker("", selection: props.workingDurationBinding, displayedComponents: .hourAndMinute)
                         .environment(\.locale, Locale(identifier: "de"))
-                        .onAppear { self.workingHours = props.workingDuration.hoursAndMinutes }
+                        .accessibility(identifier: "Settings.workingHours")
                 }
 
-                DisclosureGroup(
-                    isExpanded: self.expansionHandler.isExpanded(.weekDays),
-                    content: {
-                        MultipleValuesPickerView(initial: props.workingWeekDays)
-                            .onSelectionChange { newSelections in
-                                props.updateWorkingWeekDays(newSelections)
-                            }
-                    },
-                    label: {
-                        HStack {
-                            Text("weekDays")
-                            Spacer()
-                            Text("\(props.workingWeekDays.count)")
-                        }
+                NavigationLink(destination: SettingsWeekDaysPicker(selections: props.workingWeekDaysBinding)) {
+                    HStack {
+                        Text("weekDays")
+                        Spacer()
+                        Text("\(props.workingWeekDaysBinding.wrappedValue.count)")
                     }
-                )
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation { self.expansionHandler.toggleExpanded(for: .weekDays) }
                 }
+                .accessibility(identifier: "Settings.weekDays")
 
                 VStack(alignment: .leading) {
                     Text("accentColor")
+                        .accessibility(identifier: "Settings.accentColorLabel")
+
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: [GridItem(.fixed(40))], alignment: .center, spacing: 10) {
                             ForEach(self.colors, id: \.self) { color in
-                                AccentColorView(color: color,
-                                                isSelected: color == props.accentColor)
-                                    .onTapGesture {
-                                        props.updateAccentColor(color)
-                                    }
+                                Button(action: {
+                                    props.accentColorBinding.wrappedValue = color
+                                }, label: {
+                                    AccentColorView(color: color,
+                                                    isSelected: color == props.accentColorBinding.wrappedValue)
+                                })
+                                .accessibility(identifier: color.rawValue)
                             }
                         }
                         .padding(.horizontal, 20)
@@ -91,23 +80,6 @@ struct SettingsView: ConnectedView {
             }
             .navigationBarTitle("settings")
         }
-    }
-}
-
-struct AccentColorView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
-    let color: CodableColor
-    let isSelected: Bool
-
-    var body: some View {
-        self.color.color
-            .frame(width: 40, height: 40)
-            .cornerRadius(10)
-            .overlay(
-                Image(systemName: self.isSelected ? "checkmark" : "")
-                    .foregroundColor(self.color.contrastColor(for: self.colorScheme))
-            )
     }
 }
 

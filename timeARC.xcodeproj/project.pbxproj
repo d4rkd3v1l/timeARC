@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		81130AFD2529A10400CA0A69 /* CodableColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130AFC2529A10400CA0A69 /* CodableColorTests.swift */; };
 		81130B052529A1C600CA0A69 /* Collection+averageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B042529A1C600CA0A69 /* Collection+averageTests.swift */; };
-		81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */; };
 		81130B1B2529B7E000CA0A69 /* StatisticsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81130B1A2529B7E000CA0A69 /* StatisticsReducerTests.swift */; };
 		811F404425CDAECD009761E8 /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CCA25741D050049C6CE /* ContrastColor.swift */; };
 		811F404525CDAECE009761E8 /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD9CCA25741D050049C6CE /* ContrastColor.swift */; };
@@ -120,7 +119,6 @@
 		8179B3552528E02100A537B7 /* TimeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B32E2528E02100A537B7 /* TimeState.swift */; };
 		8179B3562528E02100A537B7 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B32F2528E02100A537B7 /* SettingsReducer.swift */; };
 		8179B3572528E02100A537B7 /* StatisticsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3302528E02100A537B7 /* StatisticsActions.swift */; };
-		8179B3582528E02100A537B7 /* ExpansionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3322528E02100A537B7 /* ExpansionHandler.swift */; };
 		8179B3592528E02100A537B7 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */; };
 		8179B35A2528E02100A537B7 /* Color+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3342528E02100A537B7 /* Color+UIKit.swift */; };
 		8179B35B2528E02100A537B7 /* Date+Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179B3352528E02100A537B7 /* Date+Strideable.swift */; };
@@ -224,6 +222,9 @@
 		81F0EDA625FE29B700308D8E /* Sequence+DuplicatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F0EDA525FE29B700308D8E /* Sequence+DuplicatesTests.swift */; };
 		81F174BB25EC07A000BC890B /* StateToCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */; };
 		81F174BD25EC09B900BC890B /* CoreDataToStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */; };
+		81F3840526073ADB00EDD391 /* SettingsWeekDaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3840426073ADB00EDD391 /* SettingsWeekDaysPicker.swift */; };
+		81F3840726073B3100EDD391 /* AccentColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3840626073B3100EDD391 /* AccentColorView.swift */; };
+		81F3840926073DFD00EDD391 /* SettingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3840826073DFD00EDD391 /* SettingsUITests.swift */; };
 		81F5297E25E90C4B00C3EAA8 /* timeARC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81F5297C25E90C4B00C3EAA8 /* timeARC.xcdatamodeld */; };
 		81FA6D4C25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */; };
 		81FA6D4E25DFF0C200DCE4A3 /* ListAbsenceEntryCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FA6D4D25DFF0C200DCE4A3 /* ListAbsenceEntryCreateView.swift */; };
@@ -312,7 +313,6 @@
 		8110B87E2604A46E00AAD9BA /* FullTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FullTests.xctestplan; sourceTree = "<group>"; };
 		81130AFC2529A10400CA0A69 /* CodableColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColorTests.swift; sourceTree = "<group>"; };
 		81130B042529A1C600CA0A69 /* Collection+averageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+averageTests.swift"; sourceTree = "<group>"; };
-		81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionHandlerTests.swift; sourceTree = "<group>"; };
 		81130B1A2529B7E000CA0A69 /* StatisticsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsReducerTests.swift; sourceTree = "<group>"; };
 		812FF13725E91EBB0031366F /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		81304C6C258627BE0030C42A /* icon_dark_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dark_red@2x.png"; sourceTree = "<group>"; };
@@ -413,7 +413,6 @@
 		8179B32E2528E02100A537B7 /* TimeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeState.swift; sourceTree = "<group>"; };
 		8179B32F2528E02100A537B7 /* SettingsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
 		8179B3302528E02100A537B7 /* StatisticsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsActions.swift; sourceTree = "<group>"; };
-		8179B3322528E02100A537B7 /* ExpansionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpansionHandler.swift; sourceTree = "<group>"; };
 		8179B3332528E02100A537B7 /* AnimatableSystemFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSystemFontModifier.swift; sourceTree = "<group>"; };
 		8179B3342528E02100A537B7 /* Color+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+UIKit.swift"; sourceTree = "<group>"; };
 		8179B3352528E02100A537B7 /* Date+Strideable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Strideable.swift"; sourceTree = "<group>"; };
@@ -489,6 +488,9 @@
 		81F0EDA525FE29B700308D8E /* Sequence+DuplicatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+DuplicatesTests.swift"; sourceTree = "<group>"; };
 		81F174BA25EC07A000BC890B /* StateToCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateToCoreDataService.swift; sourceTree = "<group>"; };
 		81F174BC25EC09B900BC890B /* CoreDataToStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataToStateService.swift; sourceTree = "<group>"; };
+		81F3840426073ADB00EDD391 /* SettingsWeekDaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWeekDaysPicker.swift; sourceTree = "<group>"; };
+		81F3840626073B3100EDD391 /* AccentColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentColorView.swift; sourceTree = "<group>"; };
+		81F3840826073DFD00EDD391 /* SettingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUITests.swift; sourceTree = "<group>"; };
 		81F5297D25E90C4B00C3EAA8 /* timeARC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = timeARC.xcdatamodel; sourceTree = "<group>"; };
 		81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarAddEntryModifier.swift; sourceTree = "<group>"; };
 		81FA6D4D25DFF0C200DCE4A3 /* ListAbsenceEntryCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAbsenceEntryCreateView.swift; sourceTree = "<group>"; };
@@ -708,8 +710,8 @@
 				81B6FA8726061A0E003F9CDB /* 03 Statistics */,
 				81B6FA8826061A17003F9CDB /* 04 Settings */,
 				81D2335A2605DE6B002A4CB8 /* Extensions */,
-				8179B2902528DF7C00A537B7 /* TimerUITests.swift */,
 				8179B2922528DF7C00A537B7 /* Info.plist */,
+				81834ADA2604AF3C00C30BB3 /* TimeARCTestCase.swift */,
 			);
 			path = timeARCUITests;
 			sourceTree = "<group>";
@@ -753,7 +755,9 @@
 			isa = PBXGroup;
 			children = (
 				81A6AF7A25D714B8000E3B4D /* State */,
+				81F3840626073B3100EDD391 /* AccentColorView.swift */,
 				8179B3132528E02100A537B7 /* SettingsView.swift */,
+				81F3840426073ADB00EDD391 /* SettingsWeekDaysPicker.swift */,
 			);
 			path = "04 Settings";
 			sourceTree = "<group>";
@@ -808,7 +812,6 @@
 				8179B3382528E02100A537B7 /* Date+.swift */,
 				8179B3352528E02100A537B7 /* Date+Strideable.swift */,
 				81A6AF7725D70B15000E3B4D /* EdgeBorder.swift */,
-				8179B3322528E02100A537B7 /* ExpansionHandler.swift */,
 				817B431825320440005240C5 /* Sequence+Unique.swift */,
 				81F0EDA325FE299700308D8E /* Sequence+Duplicates.swift */,
 				81FA6D4B25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift */,
@@ -834,7 +837,6 @@
 				81130AFC2529A10400CA0A69 /* CodableColorTests.swift */,
 				81130B042529A1C600CA0A69 /* Collection+averageTests.swift */,
 				8179B36C2528E03900A537B7 /* Date+Tests.swift */,
-				81130B0C2529A3A200CA0A69 /* ExpansionHandlerTests.swift */,
 				81F0EDA525FE29B700308D8E /* Sequence+DuplicatesTests.swift */,
 				81D84A822561328300B02F84 /* Sequence+UniqueTests.swift */,
 			);
@@ -968,7 +970,7 @@
 		81B6FA85260619FC003F9CDB /* 01 Timer */ = {
 			isa = PBXGroup;
 			children = (
-				81834ADA2604AF3C00C30BB3 /* TimeARCTestCase.swift */,
+				8179B2902528DF7C00A537B7 /* TimerUITests.swift */,
 			);
 			path = "01 Timer";
 			sourceTree = "<group>";
@@ -991,6 +993,7 @@
 		81B6FA8826061A17003F9CDB /* 04 Settings */ = {
 			isa = PBXGroup;
 			children = (
+				81F3840826073DFD00EDD391 /* SettingsUITests.swift */,
 			);
 			path = "04 Settings";
 			sourceTree = "<group>";
@@ -1507,6 +1510,7 @@
 				8179B3442528E02100A537B7 /* TimerView.swift in Sources */,
 				812FF13825E91EBB0031366F /* CoreDataService.swift in Sources */,
 				81FA6D4C25DFEE1800DCE4A3 /* ToolbarAddEntryModifier.swift in Sources */,
+				81F3840726073B3100EDD391 /* AccentColorView.swift in Sources */,
 				8134BDDF25D6760900FF9106 /* StatisticsSectionHeaderView.swift in Sources */,
 				819FA2A025EA0F010007BC46 /* CoreDataMiddleware.swift in Sources */,
 				8179B35C2528E02100A537B7 /* Collection+average.swift in Sources */,
@@ -1520,9 +1524,9 @@
 				817D61ED2531CDF3009761DE /* AbsenceType.swift in Sources */,
 				81B5DE4825C5924400C12C62 /* Arc.swift in Sources */,
 				81F0EDA225FE145D00308D8E /* ManagedAbsenceType+initial.swift in Sources */,
-				8179B3582528E02100A537B7 /* ExpansionHandler.swift in Sources */,
 				8179B3462528E02100A537B7 /* ListView.swift in Sources */,
 				8133A7D025F2D9DA00B8EA70 /* ManagedSettings+new.swift in Sources */,
+				81F3840526073ADB00EDD391 /* SettingsWeekDaysPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1532,7 +1536,6 @@
 			files = (
 				8172E17A2534EFA500C39CA4 /* DayTests.swift in Sources */,
 				817D61D12531C7AF009761DE /* AbsenceEntryTests.swift in Sources */,
-				81130B0D2529A3A200CA0A69 /* ExpansionHandlerTests.swift in Sources */,
 				81D84A832561328300B02F84 /* Sequence+UniqueTests.swift in Sources */,
 				81E026D225FB6EBB0025BBEE /* NotificationServiceTests.swift in Sources */,
 				81449EB62605CC9C00ED5E08 /* Localized.swift in Sources */,
@@ -1558,6 +1561,7 @@
 			files = (
 				81449EB72605CC9C00ED5E08 /* Localized.swift in Sources */,
 				81D233572605DCFE002A4CB8 /* XCUIApplication+typeOnKeyboard.swift in Sources */,
+				81F3840926073DFD00EDD391 /* SettingsUITests.swift in Sources */,
 				81834AD92604AEA000C30BB3 /* ListUITests.swift in Sources */,
 				81834ADB2604AF3C00C30BB3 /* TimeARCTestCase.swift in Sources */,
 				81834AD72604AE1100C30BB3 /* XCTestCase+localizedString.swift in Sources */,

@@ -31,6 +31,7 @@ struct ListTimeEntryCreateView: ConnectedView {
             Form {
                 HStack {
                     Text("date")
+                        .accessibility(identifier: "ListTimeEntryCreate.dateLabel")
 
                     Spacer()
 
@@ -40,6 +41,7 @@ struct ListTimeEntryCreateView: ConnectedView {
                 }
                 HStack {
                     Text("time")
+                        .accessibility(identifier: "ListTimeEntryCreate.timeLabel")
 
                     Spacer()
 
